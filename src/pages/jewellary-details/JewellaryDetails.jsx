@@ -27,6 +27,7 @@ const getImageUrl = (img) => {
   if (!img) return fallback;
   return `${import.meta.env.VITE_BACKEND_URL}/storage/variation_images/${img}`;
 };
+const getShapeImageUrl = (img) => `${import.meta.env.VITE_BACKEND_URL}${img}`;
 
 const JewelryDetailsPage = () => {
   const { addToCart } = useCart();
@@ -198,26 +199,7 @@ const JewelryDetailsPage = () => {
           </p>
 
           <p className="mb-1">METAL COLOR</p>
-          {/* <div className="d-flex mb-3">
-            {Object.entries(product.metal_variations).map(
-              ([metalId, variations]) => {
-                const metal = variations[0].metal_color;
-                return (
-                  <div
-                    key={metalId}
-                    className={`option-circle ${
-                      selectedMetalId === metalId ? "active" : ""
-                    }`}
-                    onClick={() => handleMetalChange(metalId)}
-                    title={metal.name}
-                    style={{ background: metal.hex }}
-                  >
-                    {metal.quality}
-                  </div>
-                );
-              }
-            )}
-          </div> */}
+
           <div className="d-flex mb-3">
             {Object.entries(product.metal_variations).map(
               ([metalId, group]) => {
@@ -246,20 +228,41 @@ const JewelryDetailsPage = () => {
           {/* Shape switch (only build) */}
           {isBuild && selectedMetalId && (
             <div className="product-variation__shape-group mb-3">
-              <small className="product-variation__shape-title">Shape</small>
-              <div className="d-flex flex-wrap gap-2 mt-1">
+              <small className="product-variation__shape-title">
+                Shape:&nbsp;
+                <span className="shape-name">
+                  {product.metal_variations[selectedMetalId]?.[
+                    selectedShapeId
+                  ]?.[0]?.shape?.name || "N/A"}
+                </span>
+              </small>
+              <div className="d-flex flex-wrap gap-3 mt-1">
                 {Object.keys(product.metal_variations[selectedMetalId]).map(
-                  (shapeId) => (
-                    <button
-                      key={shapeId}
-                      className={`product-variation__shape-pill ${
-                        selectedShapeId === shapeId ? "active" : ""
-                      }`}
-                      onClick={() => handleShapeChange(shapeId)}
-                    >
-                      {`Shape ${shapeId}`}
-                    </button>
-                  )
+                  (shapeId) => {
+                    const firstVar =
+                      product.metal_variations[selectedMetalId][shapeId][0] ||
+                      {};
+                    const shape = firstVar.shape || {};
+                    const img = getShapeImageUrl(shape.image);
+
+                    return (
+                      <button
+                        key={shapeId}
+                        type="button"
+                        className={`shape-option ${
+                          selectedShapeId === shapeId ? "active" : ""
+                        }`}
+                        onClick={() => handleShapeChange(shapeId)}
+                      >
+                        <span className="shape-circle">
+                          <img
+                            src={img}
+                            alt={shape.name || `Shape ${shapeId}`}
+                          />
+                        </span>
+                      </button>
+                    );
+                  }
                 )}
               </div>
             </div>
@@ -303,7 +306,7 @@ const JewelryDetailsPage = () => {
           <div className="bg-light p-2" style={{ whiteSpace: "pre-wrap" }}>
             {description}
           </div>
-          
+
           {/* Protection plan */}
           <div className="section-title">
             ADD CLARITY COMMITMENT PROTECTION PLAN
