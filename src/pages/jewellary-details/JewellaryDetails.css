@@ -1,19 +1,20 @@
 
  
   .thumbs img {
-    width: 60px;
-    height: 60px;
+    width: 120px !important;
+    height: 120px !important;
     object-fit: cover;
     margin-bottom: 10px;
     cursor: pointer;
     border: 1px solid #ddd;
     border-radius: 4px;
+    margin-right: 30px;
   }
 
   .thumbs img:hover {
   border-color: #000;
 }
-
+ 
 
   .main-image img {
     width: 100%;
@@ -54,9 +55,9 @@
     font-size: 14px;
   }
 
-  .section-title {
-    font-weight: bold;
-    margin-top: 25px;
+  .plan-title {
+    /* font-weight: bold; */
+    margin-top: 20px;
     margin-bottom: 10px;
   }
 
@@ -244,3 +245,22 @@
   white-space: nowrap;
 }
 
+.common-btn{
+    display: flex;
+    gap: 10px;
+    flex-direction: column-reverse;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.share{
+  color:#000;
+  font-weight: bold;
+}
+
+.hr-line {
+  border: none;
+  height: 1px;
+  background-color: #979797;
+  margin: 20px 0;
+}

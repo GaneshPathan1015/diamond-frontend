@@ -27,6 +27,10 @@ import OrderDetails from "./pages/order_details/OrderDetails";
 import JewelryList from "./pages/jewellary_list/JewelryList";
 import JewelryDetailsPage from "./pages/jewellary-details/JewellaryDetails";
 import MegaMenu from "./pages/mega-menu/megaMenu";
+import Luxe from "./pages/Luxe/luxe";
+import Reserve from "./pages/reserve-collections/reserve";
+import Signature from "./pages/w-signature/signature";
+
 
 export default function App() {
   return (
@@ -65,6 +69,10 @@ export default function App() {
             element={<JewelryDetailsPage />}
           />
           <Route path="/megamenu" element={<MegaMenu />} />
+
+          <Route path="/luxe" element={<Luxe />} />
+          <Route path="/reserve" element={<Reserve /> } />
+          <Route path="/signature" element={<Signature /> } />
         </Routes>
       </main>
       <Footer />

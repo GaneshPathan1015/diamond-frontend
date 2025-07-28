@@ -181,7 +181,7 @@ const JewelryDetailsPage = () => {
               <img
                 src={mainImage}
                 alt="Main Product"
-                className="img-fluid w-100 zoomable-image"
+                className="img-fluid  zoomable-image"
               />
             </Zoom>
           </div>
@@ -191,13 +191,14 @@ const JewelryDetailsPage = () => {
         </div>
 
         {/* Right panel */}
-        <div className="col-md-5">
-          <h5 className="text-muted">{name}</h5>
+        <div className="col-md-5" >
+          <h5 className="text-muted"style={{fontSize:"32px", bold:"600"}}>{name}</h5>
           <p>
-            <strong>₹{price}</strong>{" "}
+            
             <span className="text-muted">• SKU: {variationSku}</span>
+           
           </p>
-
+<p>price:  <strong>₹{price}</strong>{" "}</p>
           <p className="mb-1">METAL COLOR</p>
 
           <div className="d-flex mb-3">
@@ -293,6 +294,8 @@ const JewelryDetailsPage = () => {
               ))}
             </div>
           </div>
+          
+<hr className="hr-line" />
 
           {selectedVariation && (
             <p>
@@ -307,8 +310,9 @@ const JewelryDetailsPage = () => {
             {description}
           </div>
 
+<hr className="hr-line" />
           {/* Protection plan */}
-          <div className="section-title">
+          <div className="plan-title ">
             ADD CLARITY COMMITMENT PROTECTION PLAN
           </div>
           <p className="protection-plan">
@@ -329,6 +333,8 @@ const JewelryDetailsPage = () => {
             ))}
           </div>
 
+
+<hr className="hr-line" />
           <div className="container py-4">
             <div className="mb-4">
               <button
@@ -365,7 +371,12 @@ const JewelryDetailsPage = () => {
               <p className="mb-2">
                 Free Insured Shipping. <a href="#">30 Day Returns.</a>
               </p>
-              <div className="d-flex flex-wrap gap-2">
+
+<hr className="hr-line" />
+
+
+
+              <div className="common-btn">
                 <button className="btn btn-light">
                   <i className="bi bi-envelope"></i> DROP A HINT
                 </button>
@@ -380,7 +391,7 @@ const JewelryDetailsPage = () => {
                 </button>
               </div>
               <div className="mt-2">
-                <span className="me-2">SHARE</span>
+                <span className="me-2  share">SHARE :-</span>
                 <i className="bi bi-pinterest"></i>
                 <i className="bi bi-facebook"></i>
                 <i className="bi bi-x"></i>
