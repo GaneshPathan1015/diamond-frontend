@@ -191,18 +191,20 @@ const JewelryDetailsPage = () => {
         </div>
 
         {/* Right panel */}
-        <div className="col-md-5" >
-          <h5 className="text-muted"style={{fontSize:"32px", bold:"600"}}>{name}</h5>
+        <div className="col-md-5">
+          <h5 className="text-muted" style={{ fontSize: "32px", bold: "600" }}>
+            {name}
+          </h5>
           <p>
-            
             <span className="text-muted">• SKU: {variationSku}</span>
-           
           </p>
-<p>price:  <strong>₹{price}</strong>{" "}</p>
+          <p>
+            price: <strong>₹{price}</strong>{" "}
+          </p>
           <p className="mb-1">METAL COLOR</p>
 
           <div className="d-flex mb-3">
-            {Object.entries(product.metal_variations).map(
+            {/* {Object.entries(product.metal_variations).map(
               ([metalId, group]) => {
                 // CHANGE: pick one variation to render metal_color (different for build)
                 const metal = isBuild
@@ -223,7 +225,42 @@ const JewelryDetailsPage = () => {
                   </div>
                 );
               }
-            )}
+            )} */}
+            {Object.entries(product.metal_variations)
+              .sort(([aKey, aGroup], [bKey, bGroup]) => {
+                const aMetal = isBuild
+                  ? aGroup[Object.keys(aGroup)[0]][0].metal_color
+                  : aGroup[0].metal_color;
+
+                const bMetal = isBuild
+                  ? bGroup[Object.keys(bGroup)[0]][0].metal_color
+                  : bGroup[0].metal_color;
+
+                const order = ["14k", "18k", "PL"]; // Customize the order here
+                return (
+                  order.indexOf(aMetal?.quality) -
+                  order.indexOf(bMetal?.quality)
+                );
+              })
+              .map(([metalId, group]) => {
+                const metal = isBuild
+                  ? group[Object.keys(group)[0]][0].metal_color
+                  : group[0].metal_color;
+
+                return (
+                  <div
+                    key={metalId}
+                    className={`option-circle ${
+                      selectedMetalId === metalId ? "active" : ""
+                    }`}
+                    onClick={() => handleMetalChange(metalId)}
+                    title={metal?.name}
+                    style={{ background: metal?.hex }}
+                  >
+                    {metal?.quality}
+                  </div>
+                );
+              })}
           </div>
 
           {/* Shape switch (only build) */}
@@ -294,8 +331,8 @@ const JewelryDetailsPage = () => {
               ))}
             </div>
           </div>
-          
-<hr className="hr-line" />
+
+          <hr className="hr-line" />
 
           {selectedVariation && (
             <p>
@@ -310,7 +347,7 @@ const JewelryDetailsPage = () => {
             {description}
           </div>
 
-<hr className="hr-line" />
+          <hr className="hr-line" />
           {/* Protection plan */}
           <div className="plan-title ">
             ADD CLARITY COMMITMENT PROTECTION PLAN
@@ -333,8 +370,7 @@ const JewelryDetailsPage = () => {
             ))}
           </div>
 
-
-<hr className="hr-line" />
+          <hr className="hr-line" />
           <div className="container py-4">
             <div className="mb-4">
               <button
@@ -372,9 +408,7 @@ const JewelryDetailsPage = () => {
                 Free Insured Shipping. <a href="#">30 Day Returns.</a>
               </p>
 
-<hr className="hr-line" />
-
-
+              <hr className="hr-line" />
 
               <div className="common-btn">
                 <button className="btn btn-light">
