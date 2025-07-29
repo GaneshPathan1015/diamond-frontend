@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 import "../../jewellary-details/JewellaryDetails.css";
+import Logosec from "../../w-signature/logosec";
+import NoDealbreakers from "../../diamond-detail/diamondDetails/nobrokrage/NoDealbreakers";
+
+
 
 const protectionPlans = [
   { id: "1-year", label: "1 Year - $79" },
@@ -48,6 +52,7 @@ const selectedShapeLabel = selectedShape.toUpperCase();
 
 
   return (
+    <>
     <div className="container py-5">
       <div className="row">
         {/* Thumbnails */}
@@ -154,11 +159,12 @@ const selectedShapeLabel = selectedShape.toUpperCase();
 
           <div className="container py-4">
             <div className="mb-4">
-              <button className="btn btn-dark w-100">Choose this setting</button>
+              <button className="btn choose-btn w-100">Choose this setting</button>
               <button className="btn btn-outline-dark w-100 mt-2">VIRTUAL / SHOWROOM APPOINTMENT</button>
 
               <p className="mt-2 mb-0">Ships by <strong>Thurs, June 12</strong></p>
-              <p className="mb-1"><span className="text-primary">0% APR</span> with affirm.</p>
+              <p className="mb-1"><span className="text-primary">Track in real time before it ships
+</span> 0% APRor as low as $51/mo with Affirm. See if you qualify</p>
               <p className="mb-2">Free Insured Shipping. <a href="#">30 Day Returns</a></p>
 
               <hr className="hr-line" />
@@ -186,53 +192,68 @@ const selectedShapeLabel = selectedShape.toUpperCase();
       </div>
 
       {/* Reviews */}
-      <div className="reviews mt-5">
-        <h4>Customer Reviews</h4>
-        <h5 className="mb-0">4.9 ★★★★★</h5>
-        <small>Based on 17 Reviews</small>
+       <div className="customer-reviews-container">
+      <div className="reviews-header">
+        <h2>CUSTOMER REVIEWS</h2>
+        <button className="write-review-btn">
+          <i className="bi bi-pencil-square"></i> Write a Review
+        </button>
+      </div>
 
-        {[90, 8, 2, 0, 0].map((percent, i) => (
-          <div className="d-flex align-items-center" key={i}>
-            <span className="me-2">{5 - i} Star</span>
-            <div className="progress flex-grow-1">
-              <div className="progress-bar" style={{ width: `${percent}%` }}></div>
+      <div className="reviews-overview">
+        <div className="review-score">
+          <div className="score">5.0 ★★★★★</div>
+          <div className="score-text">Based on 1 Reviews</div>
+        </div>
+
+        <div className="rating-bars">
+          {[5, 4, 3, 2, 1].map((star, idx) => (
+            <div key={star} className="rating-bar">
+              <span>{`${star} stars`}</span>
+              <div className="progress">
+                <div
+                  className="progress-bar"
+                  style={{ width: star === 5 ? "100%" : "0%" }}
+                >
+                  {star === 5 && "(1)"}
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
-
-        <div className="review-item mt-3">
-          <strong>James R.</strong> <span className="text-success">Verified Buyer</span><br />
-          ★★★★★<br />
-          Love these earrings! The studs are absolutely stunning and catch the light perfectly.
+          ))}
         </div>
       </div>
 
-      {/* Features */}
-      <div className="features-section row align-items-center mt-5">
-        <div className="col-md-6">
-          <div className="feature-item">
-            <h5>Gemologist Consultation</h5>
-            <p>Our dedicated gemologists offer comprehensive support...</p>
+      <ul className="review-tabs">
+        <li className="active">Reviews <span>1</span></li>
+      </ul>
+
+      <div className="single-review">
+        <div className="reviewer-avatar">ST</div>
+        <div className="review-content">
+          <div className="reviewer-info">
+            <strong>Steven T.</strong>{" "}
+            <span className="verified">Verified Buyer</span>
+            <span className="review-date">06/29/2025</span>
           </div>
-          <div className="feature-item">
-            <h5>Conflict Free Diamonds</h5>
-            <p>We are committed to sourcing diamonds from conflict-free regions...</p>
+          <div className="review-title">★★★★★ She was speechless!</div>
+          <p className="review-text">
+            It’s everything she ever wanted. It was also the perfect diamond size without breaking the bank and focusing
+            more on the quality of diamond itself. I chose the best one WC had of that size and you can definitely tell
+            in person. The craftsmanship is great, the packaging was well put together, and the communication throughout
+            the process was also nice. I would definitely recommend WC to anyone looking for a ring you can customize in
+            many ways. The quality is incredible. This ring leaves you in shock and lures you in to look even closer!
+          </p>
+          <div className="review-product-name">
+            Fine Vela Classic Pave Diamond Engagement Ring
           </div>
-          <div className="feature-item">
-            <h5>Home Preview</h5>
-            <p>Try your favorite designs from the comfort of your home...</p>
-          </div>
-        </div>
-        <div className="col-md-6">
-          <div className="ratio ratio-4x3">
-            <iframe
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-              title="Feature Video"
-              allowFullScreen
-            ></iframe>
-          </div>
+          <a href="#" className="review-share">🔗 Share</a>
         </div>
       </div>
+    </div> 
+
+    <Logosec />
+
+     
 
       {/* Related Products */}
       <div className="related-products mt-5">
@@ -244,6 +265,11 @@ const selectedShapeLabel = selectedShape.toUpperCase();
         </div>
       </div>
     </div>
+
+<NoDealbreakers />
+
+</>
+
   );
 };
 
