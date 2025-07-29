@@ -264,3 +264,41 @@
   background-color: #979797;
   margin: 20px 0;
 }
+
+/* engagement details css */
+
+.shape-section {
+  margin-top: 20px;
+}
+
+.shape-title {
+  font-size: 16px;
+  color: #2a2e3b;
+  margin-bottom: 10px;
+}
+
+.shape-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.shape-item {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  padding: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.shape-item img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.shape-item.active {
+  border: 2px solid #2a2e3b;
+}
