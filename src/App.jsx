@@ -30,6 +30,7 @@ import MegaMenu from "./pages/mega-menu/megaMenu";
 import Luxe from "./pages/Luxe/luxe";
 import Reserve from "./pages/reserve-collections/reserve";
 import Signature from "./pages/w-signature/signature";
+import EngagementDetails from "./pages/engagement-details/engDetails";
 
 
 export default function App() {
@@ -73,6 +74,8 @@ export default function App() {
           <Route path="/luxe" element={<Luxe />} />
           <Route path="/reserve" element={<Reserve /> } />
           <Route path="/signature" element={<Signature /> } />
+          <Route path="/engagment-details" element={<EngagementDetails /> } />
+
         </Routes>
       </main>
       <Footer />

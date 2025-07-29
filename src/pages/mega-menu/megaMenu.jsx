@@ -391,14 +391,31 @@ const MegaMenu = ({ type = "engagement", closeMegaMenu = () => {} }) => {
     navigate(`/jewelry-list?${params.toString()}`);
   };
 
-  const handleCollectionClick = (collection) => {
-    const slug = `${slugify(collection.name)}-${collection.id}`;
+ const handleCollectionClick = (collection) => {
+  const rawName = collection.name || "";
+  const normalizedName = rawName.trim().toLowerCase();
+
+  // Define exact static collection routes
+  const staticCollectionRoutes = {
+    "luxe": "/luxe",
+    "the reserve": "/reserve",
+    "w signature": "/signature",
+  };
+
+  // Check for static route
+  if (staticCollectionRoutes[normalizedName]) {
+    closeMegaMenu();
+    navigate(staticCollectionRoutes[normalizedName]);
+  } else {
+    // Fallback: dynamic logic
+    const slug = `${slugify(rawName)}-${collection.id}`;
     const params = new URLSearchParams();
     params.set("menucollection", slug);
 
     closeMegaMenu();
     navigate(`/jewelry-list?${params.toString()}`);
-  };
+  }
+};
 
   const handleStartEngagement = (startType) => {
     closeMegaMenu();
