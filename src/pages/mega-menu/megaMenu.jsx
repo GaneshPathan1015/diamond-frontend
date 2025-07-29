@@ -419,7 +419,7 @@ const MegaMenu = ({ type = "engagement", closeMegaMenu = () => {} }) => {
 
   const handleStartEngagement = (startType) => {
     closeMegaMenu();
-    navigate(`/jewelry-list/${startType}`);
+    navigate(`/engagement-rings/shape-${startType}`);
   };
 
   return (

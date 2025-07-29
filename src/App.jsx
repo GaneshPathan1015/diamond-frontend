@@ -31,6 +31,8 @@ import Luxe from "./pages/Luxe/luxe";
 import Reserve from "./pages/reserve-collections/reserve";
 import Signature from "./pages/w-signature/signature";
 import EngagementDetails from "./pages/engagement-details/engDetails";
+import EngagementList from "./pages/engagement-list/engagementList";
+
 
 
 export default function App() {
@@ -64,7 +66,9 @@ export default function App() {
           <Route path="/paymnet-failed" element={<PaymentFailed />} />
           <Route path="/order-details/:orderId" element={<OrderDetails />} />
           <Route path="/jewelry-list" element={<JewelryList />} />
-          <Route path="/jewelry-list/:slug" element={<JewelryList />} />
+          {/* <Route path="/jewelry-list/:slug" element={<JewelryList />} /> */}
+          <Route path="/engagement-rings/:slug" element={<EngagementList />} />
+
           <Route
             path="/jewellary-details/:id"
             element={<JewelryDetailsPage />}
