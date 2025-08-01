@@ -78,7 +78,7 @@ export default function App() {
           <Route path="/luxe" element={<Luxe />} />
           <Route path="/reserve" element={<Reserve /> } />
           <Route path="/signature" element={<Signature /> } />
-          <Route path="/engagment-details" element={<EngagementDetails /> } />
+          <Route path="/engagment-details/:id" element={<EngagementDetails /> } />
 
         </Routes>
       </main>
