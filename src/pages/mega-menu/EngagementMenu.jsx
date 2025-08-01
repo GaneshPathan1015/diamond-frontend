@@ -8,6 +8,8 @@ const EngagementMenu = ({
   setHoveredOption,
   closeMegaMenu,
   handleStartEngagement,
+  handleShapeClick,
+  handleStyleClick,
   navigate,
   slugify,
 }) => {
@@ -29,7 +31,7 @@ const EngagementMenu = ({
               href="#"
               onClick={(e) => {
                 e.preventDefault();
-                handleStartEngagement("engagement-rings");
+                handleStartEngagement("rings");
               }}
             >
               Start With A Setting &gt;
@@ -67,8 +69,7 @@ const EngagementMenu = ({
                     href="#"
                     onClick={(e) => {
                       e.preventDefault();
-                      const slug = `${slugify(style.psc_name)}-${style.psc_id}`;
-                      navigate(`/engagement-rings?style=${slug}`);
+                      handleStyleClick(style);
                       closeMegaMenu();
                     }}
                   >
@@ -88,8 +89,7 @@ const EngagementMenu = ({
                     href="#"
                     onClick={(e) => {
                       e.preventDefault();
-                      const slug = `${slugify(shape.name)}-${shape.id}`;
-                      navigate(`/engagement-rings?shape=${slug}`);
+                      handleShapeClick(shape);
                       closeMegaMenu();
                     }}
                   >
