@@ -1,7 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import axiosClient from "../../api/axios";
 import debounce from "lodash/debounce";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import Loader from "../diamond/loader";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
@@ -41,10 +47,10 @@ const EngagementList = () => {
   const [bannerVideo, setBannerVideo] = useState(null);
   const [styleData, setStyleData] = useState([]);
   const [styleNameToIdMap, setStyleNameToIdMap] = useState({});
-  // const [collectionData, setCollectionData] = useState([]);
-   const [shapeData, setShapeData] = useState([]);
+  const [shapeData, setShapeData] = useState([]);
+  const [shapeNameToIdMap, setShapeNameToIdMap] = useState({});
+  const [shapeMapReady, setShapeMapReady] = useState(false);
   const [metalTypes, setMetalTypes] = useState([]);
-  // const [collectionNameToIdMap, setCollectionNameToIdMap] = useState({});
   const [activeFilterSection, setActiveFilterSection] = useState("style");
   const [readyToShip, setReadyToShip] = useState(false);
   const [metalNameToId, setMetalNameToId] = useState({});
@@ -61,17 +67,12 @@ const EngagementList = () => {
 
   const updateURLFromFilters = (filters) => {
     const params = new URLSearchParams();
-    // if (filters.category)
-    //   params.set("category", `category-${filters.category}`);
-    // if (filters.subcategory)
-    //   params.set("subcategory", `subcategory-${filters.subcategory}`);
-    // if (filters.menucollection)
-    //   params.set("menucollection", `menucollection-${filters.menucollection}`);
     if (filters.price && priceSlugReverseMap[filters.price]) {
       params.set("price", priceSlugReverseMap[filters.price]);
     }
-    // if (filters.collection)
-    //   params.set("collection", `collection-${filters.collection}`);
+    if (filters.shape) {
+      params.set("shape", `shape-${filters.shape}`);
+    }
     if (filters.style) params.set("style", `style-${filters.style}`);
     if (filters.ready_to_ship) {
       params.set("ready_to_ship", "true"); // keep it "true"
@@ -96,25 +97,19 @@ const EngagementList = () => {
       } else {
         updatedFilters.price = value; // Select new price
       }
-    } /* else if (value.startsWith("category-")) {
-      updatedFilters.category = value.split("-")[1];
-    } else if (value.startsWith("subcategory-")) {
-      updatedFilters.subcategory = value.split("-")[1];
-    } else if (value.startsWith("menucollection-")) {
-      updatedFilters.menucollection = value.split("-")[1];
-    } */ else if (styleNameToIdMap[value]) {
+    } else if (styleNameToIdMap[value]) {
       if (updatedFilters.style === value) {
         delete updatedFilters.style; // Deselect style if clicked again
       } else {
         updatedFilters.style = value;
       }
-    } /* else if (collectionNameToIdMap[value]) {
-      if (appliedFilters.collection === value) {
-        delete updatedFilters.collection; // Deselect collection if clicked again
+    } else if (shapeNameToIdMap[value]) {
+      if (updatedFilters.shape === value) {
+        delete updatedFilters.shape; // Deselect shape if clicked again
       } else {
-        updatedFilters.collection = value;
+        updatedFilters.shape = value;
       }
-    } */ else {
+    } else {
       updatedFilters[value] = true;
     }
 
@@ -165,26 +160,12 @@ const EngagementList = () => {
   };
 
   const clearAllFilters = () => {
-    // Preserve category and subcategory if they exist
-    // const { category, subcategory, menucollection } = appliedFilters;
-
-    // const preservedFilters = {};
-    // if (category) preservedFilters.category = category;
-    // if (subcategory) preservedFilters.subcategory = subcategory;
-    // if (menucollection) preservedFilters.menucollection = menucollection;
-
-    // setAppliedFilters(preservedFilters); // Reset others, keep category/subcategory
     setAppliedFilters({});
     setReadyToShip(false);
-    // Update URL with preserved filters
-    /* const params = new URLSearchParams();
-    if (category) params.set("category", `category-${category}`);
-    if (subcategory) params.set("subcategory", `subcategory-${subcategory}`);
-    if (menucollection) {
-      params.set("menucollection", `menucollection-${menucollection}`);
-    } */
-
-    navigate({ search: params.toString() });
+    navigate({
+      pathname: `/engagement-rings/${slug || ""}`, // keeps slug if exists
+      search: "", // removes filters
+    });
   };
 
   const removeFilterByKey = (key) => {
@@ -209,16 +190,15 @@ const EngagementList = () => {
       apiFilters.style = styleNameToIdMap[filters.style];
     }
 
-    // Convert collection name to ID
-    /* if (filters.collection && collectionNameToIdMap[filters.collection]) {
-      apiFilters.collection = collectionNameToIdMap[filters.collection];
-    } */
+    if (filters.shape && shapeNameToIdMap[filters.shape]) {
+      apiFilters.shape = shapeNameToIdMap[filters.shape];
+    }
 
     // Convert price label to slug
     if (filters.price && priceSlugReverseMap[filters.price]) {
       apiFilters.price = priceSlugReverseMap[filters.price];
     }
-    // Convert metal name to metal_color_id
+
     if (filters.metal && metalNameToId[filters.metal]) {
       apiFilters.metal_color_id = metalNameToId[filters.metal];
     }
@@ -238,8 +218,7 @@ const EngagementList = () => {
       setBannerImage(response.data.banner_image || null);
       setBannerVideo(response.data.banner_video || null);
       setStyleData(response.data.style_data || []);
-      // setCollectionData(response.data.collection_data || []);
-      setShapeData(response.data.shapes || []);
+      // setShapeData(response.data.shapes || []);
       setMetalTypes(response.data.metal_types || []);
 
       const nameToId = {};
@@ -251,20 +230,19 @@ const EngagementList = () => {
       setMetalNameToId(nameToId);
       setMetalIdToName(idToName);
 
-      // Build style and collection maps for name-to-ID conversion
+      // Build style maps for name-to-ID conversion
       const styleMap = {};
       response.data.style_data?.forEach((style) => {
         styleMap[style.psc_name] = style.psc_id;
       });
       setStyleNameToIdMap(styleMap);
 
-      // const collectionMap = {};
-      // response.data.collection_data?.forEach((collection) => {
-      //   collectionMap[collection.name] = collection.id;
+      // const shapeMap = {};
+      // response.data.shapes?.forEach((shape) => {
+      //   shapeMap[shape.name] = shape.id;
       // });
-      // setCollectionNameToIdMap(collectionMap);
+      // setShapeNameToIdMap(shapeMap);
 
-      // Manage metal selection and default variation
       const newSelections = { ...(isInitialLoad ? {} : selectedVariations) };
       const newActiveMetals = { ...(isInitialLoad ? {} : activeMetal) };
 
@@ -327,44 +305,34 @@ const EngagementList = () => {
   //  Read filters from URL on mount
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const categoryParam = params.get("category");
-    const subcategoryParam = params.get("subcategory");
-    const collectionParam = params.get("collection");
     const styleParam = params.get("style");
+    const shapeParam = params.get("shape");
+    const menuShapeParam = params.get("menushape");
     const priceParam = params.get("price");
     const sortParam = params.get("sort");
     const metalParam = params.get("metal");
-    const menucollectionParam = params.get("menucollection");
 
     const filters = {};
-
-    if (categoryParam) {
-      const id = parseInt(categoryParam.split("-").pop());
-      if (!isNaN(id)) filters.category = id;
-    }
-
-    if (subcategoryParam) {
-      const id = parseInt(subcategoryParam.split("-").pop());
-      if (!isNaN(id)) filters.subcategory = id;
-    }
-
-    if (menucollectionParam) {
-      const id = parseInt(menucollectionParam.split("-").pop());
-      if (!isNaN(id)) filters.menucollection = id;
-    }
 
     if (priceParam && priceSlugMap[priceParam]) {
       filters.price = priceSlugMap[priceParam]; // Reverse lookup: "0-500" → "$0 - $500"
     }
 
-    if (collectionParam) {
-      const collectionName = collectionParam.split("-").slice(1).join("-");
-      filters.collection = collectionName;
-    }
-
     if (styleParam) {
       const styleName = styleParam.split("-").slice(1).join("-");
       filters.style = styleName;
+    }
+
+    if (menuShapeParam) {
+      const formattedShape = menuShapeParam
+        .split("-")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+      filters.shape = formattedShape;
+    }
+    if (shapeParam) {
+      const shapeName = shapeParam.split("-").slice(1).join("-");
+      filters.shape = shapeName;
     }
 
     if (params.get("ready_to_ship") === "true") {
@@ -379,18 +347,44 @@ const EngagementList = () => {
 
     setAppliedFilters(filters);
     setFiltersInitialized(true); //  Mark filters ready
-  }, [location.search, slug]);
+  }, [location.search]);
+
+  useEffect(() => {
+    const fetchShapeMap = async () => {
+      try {
+        const res = await axiosClient.get("/api/get-all-shapeData");
+        setShapeData(res.data.shapes || []);
+
+        const shapeMap = {};
+        res.data.shapes?.forEach((shape) => {
+          shapeMap[shape.name] = shape.id;
+        });
+        setShapeNameToIdMap(shapeMap);
+        setShapeMapReady(true);
+      } catch (err) {
+        console.error("Shape fetch failed", err);
+      }
+    };
+
+    fetchShapeMap();
+  }, []);
 
   useEffect(() => {
     setReadyToShip(!!appliedFilters.ready_to_ship);
   }, [appliedFilters.ready_to_ship]);
 
   //  Fetch products when filters are ready
+  // useEffect(() => {
+  //   if (!filtersInitialized) return;
+  //   setPage(1);
+  //   fetchProducts({ page: 1, filters: appliedFilters });
+  // }, [appliedFilters, filtersInitialized]);
+  
   useEffect(() => {
-    if (!filtersInitialized) return;
+    if (!filtersInitialized || !shapeMapReady) return;
     setPage(1);
     fetchProducts({ page: 1, filters: appliedFilters });
-  }, [appliedFilters, filtersInitialized]);
+  }, [appliedFilters, filtersInitialized, shapeMapReady]);
 
   //  Infinite scroll fetch
   useEffect(() => {
@@ -427,28 +421,9 @@ const EngagementList = () => {
 
   const visibleFilters = Object.entries(appliedFilters).filter(
     ([key]) =>
-      key !== "category" && key !== "subcategory" && key !== "menucollection"
+      key !==
+      "category" /* && key !== "subcategory" && key !== "menucollection" */
   );
-
-  // this function support both
-  //   function normalizeVariations(group) {
-  //     const normalized = {};
-  //     const isBuild = group.product?.is_build;
-  //     const metalVariations = group.metal_variations || {};
-
-  //     Object.entries(metalVariations).forEach(([metalId, variations]) => {
-  //       if (isBuild === 1) {
-  //         // metalVariations[metalId][shapeId] = [variation, ...]
-  //         const flat = Object.values(variations).flat();
-  //         normalized[metalId] = flat;
-  //       } else {
-  //         // metalVariations[metalId] = [variation, ...]
-  //         normalized[metalId] = variations;
-  //       }
-  //     });
-
-  //     return normalized;
-  //   }
 
   return (
     <>
@@ -506,7 +481,6 @@ const EngagementList = () => {
             <strong>FILTERS</strong>
             <span className="filter-divider">|</span>
 
-
             {/* Style */}
             <div
               onClick={() => toggleFilterSection("style")}
@@ -526,7 +500,6 @@ const EngagementList = () => {
 
             <span className="filter-divider">|</span>
 
-            
             {/* shape*/}
             <div
               onClick={() => toggleFilterSection("shape")}
@@ -633,14 +606,12 @@ const EngagementList = () => {
                 <div
                   key={shape.id}
                   className={`shape-item ${
-                    appliedFilters.shape === shape.name
-                      ? "active-style"
-                      : ""
+                    appliedFilters.shape === shape.name ? "active-style" : ""
                   }`}
                   onClick={() => addFilter(shape.name)}
                 >
                   <img
-                    src={`${import.meta.env.VITE_BACKEND_URL}/storage/${
+                    src={`${import.meta.env.VITE_BACKEND_URL}/storage/shapes/${
                       shape.image
                     }`}
                     alt={shape.name}
@@ -771,147 +742,6 @@ const EngagementList = () => {
         <div className="row row-cols-1 row-cols-md-4 g-4">
           {loading && <Loader />}
 
-          {/*{products.map((group) => {
-            const normalizedVariations = normalizeVariations(group);
-
-            const metalKeys = Object.keys(normalizedVariations).sort((a, b) => {
-              const qualityA =
-                normalizedVariations[a][0]?.metal_color?.quality || "";
-              const qualityB =
-                normalizedVariations[b][0]?.metal_color?.quality || "";
-              const numA = parseInt(qualityA);
-              const numB = parseInt(qualityB);
-              if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
-              if (!isNaN(numA)) return -1;
-              if (!isNaN(numB)) return 1;
-              return qualityA.localeCompare(qualityB);
-            });
-
-            const currentMetalId = String(
-              activeMetal[group.id] ?? metalKeys[0]
-            );
-            const metalOptions = normalizedVariations[currentMetalId] || [];
-            const selectedIndex = selectedVariations[group.id] || 0;
-            const selectedVariation = metalOptions[selectedIndex];
-
-            const image =
-              Array.isArray(selectedVariation?.images) &&
-              selectedVariation.images.length > 0
-                ? `${
-                    import.meta.env.VITE_BACKEND_URL
-                  }/storage/variation_images${selectedVariation.images[0]}`
-                : `${
-                    import.meta.env.VITE_BACKEND_URL
-                  }/storage/variation_images/No_Image_Available.jpg`;
-
-            const price = selectedVariation?.price || "NA";
-            const originalPrice = selectedVariation?.original_price || "";
-            const sku = selectedVariation?.sku || "NA";
-            const discount = selectedVariation?.discount || "";
-
-            return (
-              <div className="col" key={group.id}>
-                <div
-                  className="h-100 d-flex flex-column"
-                  style={{ width: "95%" }}
-                >
-                  <Link
-                    to={`/jewellary-details/${group.product?.id}`}
-                    className="text-decoration-none text-dark mt-2"
-                  >
-                    <div className="product-image-container position-relative shadow">
-                      <img
-                        src={image}
-                        alt="Product"
-                        className="product-image-full"
-                      />
-                      <div className="overlay-text d-flex justify-content-between px-2">
-                        <span className="ready-to-ship">
-                          {group.product?.ready_to_ship ? "READY TO SHIP" : ""}
-                        </span>
-                        <span className="discount">{discount}</span>
-                      </div>
-                    </div>
-                    <p className="fw-semibold mb-1 product-variation__title">
-                      {group.product?.name || "NA"}
-                    </p>
-                  </Link>
-
-                  <p className="mb-2">{sku}</p>
-
-                  <div className="product-metal__buttons mb-2 d-flex gap-1 flex-wrap">
-                    {metalKeys.map((metalId) => {
-                      const metal =
-                        normalizedVariations[metalId][0]?.metal_color;
-                      return (
-                        <button
-                          key={metalId}
-                          className="product-variation__btn"
-                          style={{
-                            background: metal?.hex,
-                            border: `1px solid ${
-                              String(activeMetal[group.id]) === String(metalId)
-                                ? "#000"
-                                : "#ccc"
-                            }`,
-                            color: "#000",
-                          }}
-                          onClick={() => {
-                            setActiveMetal((prev) => ({
-                              ...prev,
-                              [group.id]: metalId,
-                            }));
-                            setSelectedVariations((prev) => ({
-                              ...prev,
-                              [group.id]: 0,
-                            }));
-                          }}
-                        >
-                          {metal?.quality}
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  <div className="product-variation__carat-group">
-                    <small className="product-variation__carat-title">
-                      Total Carat Weight
-                    </small>
-
-                    {metalOptions.length > 0 ? (
-                      metalOptions.map((variation, index) => (
-                        <button
-                          key={index}
-                          className={`product-variation__carat-pill ${
-                            selectedIndex === index ? "active" : ""
-                          }`}
-                          onClick={() =>
-                            setSelectedVariations((prev) => ({
-                              ...prev,
-                              [group.id]: index,
-                            }))
-                          }
-                        >
-                          {variation.weight || "NA"}
-                        </button>
-                      ))
-                    ) : (
-                      <p>No metal variations available</p>
-                    )}
-                  </div>
-
-                  <p className="mt-1">
-                    <span className="fw-bold">${price}</span>
-                    {originalPrice && (
-                      <span className="original-price text-muted text-decoration-line-through ms-2">
-                        ${originalPrice}
-                      </span>
-                    )}
-                  </p>
-                </div>
-              </div>
-            );
-          })} */}
           {products.map((group) => {
             const metalVariations = group.metal_variations || {};
 

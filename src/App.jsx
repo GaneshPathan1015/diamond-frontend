@@ -66,7 +66,6 @@ export default function App() {
           <Route path="/paymnet-failed" element={<PaymentFailed />} />
           <Route path="/order-details/:orderId" element={<OrderDetails />} />
           <Route path="/jewelry-list" element={<JewelryList />} />
-          {/* <Route path="/jewelry-list/:slug" element={<JewelryList />} /> */}
           <Route path="/engagement-rings/:slug" element={<EngagementList />} />
 
           <Route
