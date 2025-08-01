@@ -32,6 +32,12 @@ const priceSlugReverseMap = Object.entries(priceSlugMap).reduce(
 const priceRanges = Object.values(priceSlugMap);
 
 const EngagementList = () => {
+
+
+  // const handleProductClick = (product) => {
+  //   navigate(`/engagement-details/${product.id}`, { state: { product } });
+  // };
+
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
@@ -796,7 +802,7 @@ const EngagementList = () => {
                   style={{ width: "95%" }}
                 >
                   <Link
-                    to={`/jewellary-details/${group.product?.id}`}
+            to={`/engagment-details/${group.product?.id}`}
                     className="text-decoration-none text-dark mt-2"
                   >
                     <div className="product-image-container position-relative shadow">
