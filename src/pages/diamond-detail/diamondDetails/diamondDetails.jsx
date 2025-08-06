@@ -1,10 +1,11 @@
-import React, { useState, useRef } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState, useRef, useEffect } from "react";
+import { useLocation, useNavigate,useParams } from "react-router-dom";
 import "./DiamondDetails.css";
 import { useCart } from "../../../cart/CartContext";
 import NoDealbreakers from "./nobrokrage/NoDealbreakers";
 import Help from "../../contact/help";
 import RingWrapper from "../../diamond/ringWrapper/ringWrapper";
+import axiosClient from "../../../api/axios";
 
 const steps = [
   { id: 1, label: "CHOOSE A DIAMOND" },
@@ -15,8 +16,7 @@ const steps = [
 export default function DiamondDetails() {
   const detailsRef = useRef(null);
   const [selectedView, setSelectedView] = useState("image");
-  const { state } = useLocation();
-  const diamond = state?.diamond;
+ 
   const [currentStep, setCurrentStep] = useState(1);
   const { addToCart } = useCart();
   const [openSection, setOpenSection] = useState(null);
@@ -24,6 +24,31 @@ export default function DiamondDetails() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: "", text: "" });
   const [alreadyExists, setAlreadyExists] = useState(false);
+
+const { state } = useLocation();
+const { id } = useParams(); // certified_no
+const [diamond, setDiamond] = useState(state?.diamond || null);
+
+useEffect(() => {
+  if (!diamond && id) {
+    // Fetch diamond by certified_no if not passed via state
+    axiosClient.get(`/diamonds/${id}`)
+      .then((res) => {
+        if (res.data) {
+          setDiamond(res.data);
+
+          // Optional: store in localStorage for RingWrapper usage
+          localStorage.setItem("selectedDiamond", JSON.stringify(res.data));
+        }
+      })
+      .catch((err) => {
+        console.error("Error fetching diamond:", err);
+      });
+  }
+}, [diamond, id]);
+
+
+
 
   const toggleSection = (section) => {
     setOpenSection(openSection === section ? null : section);
