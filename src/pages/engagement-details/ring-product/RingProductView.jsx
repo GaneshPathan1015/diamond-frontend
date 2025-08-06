@@ -1,10 +1,15 @@
+
+
 import React, { useState, useEffect } from "react";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 import { useNavigate, useParams } from "react-router-dom";
-import axiosClient from "../../api/axios";
-import "./JewellaryDetails.css";
-import { useCart } from "../../cart/CartContext";
+import "../../jewellary-details/JewellaryDetails.css";
+import axiosClient from "../../../api/axios";
+import { useCart } from "../../../cart/CartContext";
+import Logosec from "../../w-signature/logosec";
+import NoDealbreakers from "../../diamond-detail/diamondDetails/nobrokrage/NoDealbreakers";
+
 
 const protectionPlans = [
   { id: "1-year", label: "1 Year - $79" },
@@ -29,8 +34,7 @@ const getImageUrl = (img) => {
 };
 const getShapeImageUrl = (img) => `${import.meta.env.VITE_BACKEND_URL}${img}`;
 
-const JewelryDetailsPage = () => {
-  const { addToCart } = useCart();
+const RingProductView = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [mainImage, setMainImage] = useState("");
@@ -373,25 +377,40 @@ const JewelryDetailsPage = () => {
           <hr className="hr-line" />
           <div className="container py-4">
             <div className="mb-4">
-              <button
-                className="btn btn-dark w-100"
-                onClick={() => {
-                  const cartItem = {
-                    sku: variationSku,
-                    name: name,
-                    price: price,
-                    image: mainImage,
-                    weight: weight,
-                    type: "jewelry",
-                    selectedMetal: selectedMetalId,
-                    selectedPlan: selectedPlan,
-                  };
-                  addToCart(cartItem);
-                  navigate("/cart");
-                }}
-              >
-                ADD TO CART
-              </button>
+                  <button
+  className="btn btn-dark w-100 mt-2"
+  onClick={() => {
+    if (!selectedVariation) {
+      alert("Please select a variation first.");
+      return;
+    }
+
+    const diamond = {
+      carat_weight: selectedVariation.weight,
+      shape: { name: "Round", image: "round.png" }, // use actual shape data
+      price: selectedVariation.price,
+      certificate_number: selectedVariation.sku,
+      certificate_company: { dl_name: "GIA" },
+      cut: { full_name: "Ideal" },
+      color: { name: "D" },
+      clarity: { name: "VVS1" },
+      polish: { name: "-" },
+      symmetry: { name: "-" },
+      fluorescence: { name: "-" },
+      table_diamond: "-",
+      depth: "-",
+      measurements: "-",
+      image_link: mainImage,
+    };
+
+    navigate(`/diamond-details/${selectedVariation.sku}`, {
+      state: { diamond },
+    });
+  }}
+>
+  CHOOSE THIS SETTING
+</button>
+
 
               <button className="btn btn-outline-dark w-100 mt-2">
                 VIRTUAL / SHOWROOM APPOINTMENT
@@ -438,90 +457,69 @@ const JewelryDetailsPage = () => {
           </div>
         </div>
 
-        <div className="reviews">
-          <h4>Customer Reviews</h4>
-          <div className="mb-3">
-            <h5 className="mb-0">
-              4.9 <span className="rating-stars">★★★★★</span>
-            </h5>
-            <small>Based on 17 Reviews</small>
-          </div>
-          {[90, 8, 2, 0, 0].map((percent, i) => (
-            <div className="d-flex align-items-center" key={i}>
-              <span className="me-2">{5 - i} Star</span>
-              <div className="progress flex-grow-1">
+        <div className="customer-reviews-container">
+      <div className="reviews-header">
+        <h2>CUSTOMER REVIEWS</h2>
+        <button className="write-review-btn">
+          <i className="bi bi-pencil-square"></i> Write a Review
+        </button>
+      </div>
+
+      <div className="reviews-overview">
+        <div className="review-score">
+          <div className="score">5.0 ★★★★★</div>
+          <div className="score-text">Based on 1 Reviews</div>
+        </div>
+
+        <div className="rating-bars">
+          {[5, 4, 3, 2, 1].map((star, idx) => (
+            <div key={star} className="rating-bar">
+              <span>{`${star} stars`}</span>
+              <div className="progress">
                 <div
                   className="progress-bar"
-                  style={{ width: `${percent}%` }}
-                ></div>
-              </div>
-            </div>
-          ))}
-
-          {["James R.", "Chloe T.", "Daniel S."].map((name, i) => (
-            <div className="review-item" key={i}>
-              <strong>{name}</strong>{" "}
-              <span className="text-success">Verified Buyer</span>
-              <br />
-              ★★★★★
-              <br />
-              {
-                [
-                  "Love these earrings! The studs are absolutely stunning and catch the light perfectly.",
-                  "Great sparkle and fit. My second purchase from this site. Love it!",
-                  "Amazing quality and craftsmanship. Highly recommended.",
-                ][i]
-              }
-            </div>
-          ))}
-          <div className="text-center mt-3">
-            <button className="btn btn-outline-dark">Load More Reviews</button>
-          </div>
-        </div>
-
-        <div className="features-section row align-items-center mt-5">
-          <div className="col-md-6">
-            {[
-              {
-                title: "Gemologist Consultation",
-                content:
-                  "Our dedicated gemologists offer comprehensive support throughout your diamond selection process...",
-              },
-              {
-                title: "Conflict Free Diamonds",
-                content:
-                  "We are committed to sourcing diamonds from conflict-free regions...",
-              },
-              {
-                title: "Home Preview",
-                content:
-                  "Try your favorite designs from the comfort of your home...",
-              },
-            ].map((feature, i) => (
-              <div className="feature-item" key={i}>
-                <h5 onClick={() => toggleFeature(i)}>
-                  {feature.title} <i className="bi bi-chevron-down"></i>
-                </h5>
-                <div
-                  className={`feature-content ${
-                    activeFeature === i ? "active" : ""
-                  }`}
+                  style={{ width: star === 5 ? "100%" : "0%" }}
                 >
-                  <p>{feature.content}</p>
+                  {star === 5 && "(1)"}
                 </div>
               </div>
-            ))}
-          </div>
-          <div className="col-md-6">
-            <div className="ratio ratio-4x3">
-              <iframe
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                title="Feature Video"
-                allowFullScreen
-              ></iframe>
             </div>
-          </div>
+          ))}
         </div>
+      </div>
+
+      <ul className="review-tabs">
+        <li className="active">Reviews <span>1</span></li>
+      </ul>
+
+      <div className="single-review">
+        <div className="reviewer-avatar">ST</div>
+        <div className="review-content">
+          <div className="reviewer-info">
+            <strong>Steven T.</strong>{" "}
+            <span className="verified">Verified Buyer</span>
+            <span className="review-date">06/29/2025</span>
+          </div>
+          <div className="review-title">★★★★★ She was speechless!</div>
+          <p className="review-text">
+            It’s everything she ever wanted. It was also the perfect diamond size without breaking the bank and focusing
+            more on the quality of diamond itself. I chose the best one WC had of that size and you can definitely tell
+            in person. The craftsmanship is great, the packaging was well put together, and the communication throughout
+            the process was also nice. I would definitely recommend WC to anyone looking for a ring you can customize in
+            many ways. The quality is incredible. This ring leaves you in shock and lures you in to look even closer!
+          </p>
+          <div className="review-product-name">
+            Fine Vela Classic Pave Diamond Engagement Ring
+          </div>
+          <a href="#" className="review-share">🔗 Share</a>
+        </div>
+      </div>
+    </div> 
+
+
+       
+
+   <Logosec />
 
         <div className="container py-4">
           <div className="related-products">
@@ -567,8 +565,12 @@ const JewelryDetailsPage = () => {
           </div>
         </div>
       </div>
+
+<NoDealbreakers />
+
     </div>
   );
 };
 
-export default JewelryDetailsPage;
+export default RingProductView;
+
