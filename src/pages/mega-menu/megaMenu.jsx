@@ -41,44 +41,39 @@ const MegaMenu = ({ type = "engagement", closeMegaMenu = () => {} }) => {
     navigate(`/jewelry-list?${params.toString()}`);
   };
 
- const handleCollectionClick = (collection) => {
-  const rawName = collection.name || "";
-  const normalizedName = rawName.trim().toLowerCase();
+  const handleCollectionClick = (collection) => {
+    const rawName = collection.name || "";
+    const normalizedName = rawName.trim().toLowerCase();
 
-  // Define exact static collection routes
-  const staticCollectionRoutes = {
-    "luxe": "/luxe",
-    "the reserve": "/reserve",
-    "w signature": "/signature",
+    // Define exact static collection routes
+    const staticCollectionRoutes = {
+      luxe: "/luxe",
+      "the reserve": "/reserve",
+      "w signature": "/signature",
+    };
+
+    // Check for static route
+    if (staticCollectionRoutes[normalizedName]) {
+      closeMegaMenu();
+      navigate(staticCollectionRoutes[normalizedName]);
+    } else {
+      // Fallback: dynamic logic
+      const slug = `${slugify(rawName)}-${collection.id}`;
+      const params = new URLSearchParams();
+      params.set("menucollection", slug);
+
+      closeMegaMenu();
+      navigate(`/jewelry-list?${params.toString()}`);
+    }
   };
-
-  // Check for static route
-  if (staticCollectionRoutes[normalizedName]) {
-    closeMegaMenu();
-    navigate(staticCollectionRoutes[normalizedName]);
-  } else {
-    // Fallback: dynamic logic
-    const slug = `${slugify(rawName)}-${collection.id}`;
-    const params = new URLSearchParams();
-    params.set("menucollection", slug);
-
-    closeMegaMenu();
-    navigate(`/jewelry-list?${params.toString()}`);
-  }
-};
 
   const handleStartEngagement = (startType) => {
     closeMegaMenu();
     navigate(`/engagement-rings/${startType}`);
   };
 
-  // const handleShapeClick = (shape) => {
-  //   const slug = shape.name.toLowerCase().replace(/\s+/g, "-");
-  //   navigate(`/engagement-rings/${slug}`);
-  // };
-
   const handleShapeClick = (shape) => {
-    const slug = "shapes"
+    const slug = "shapes";
     const shapeSlug = shape.name.toLowerCase().replace(/\s+/g, "-");
     const params = new URLSearchParams();
     params.set("menushape", shapeSlug);
@@ -90,8 +85,38 @@ const MegaMenu = ({ type = "engagement", closeMegaMenu = () => {} }) => {
   };
 
   const handleStyleClick = (style) => {
-    const slug = style.psc_name.toLowerCase().replace(/\s+/g, "-");
-    navigate(`/engagement-rings/${slug}`);
+    const slug = "style";
+    const styleSlug = style.psc_name.toLowerCase().replace(/\s+/g, "-");
+    const params = new URLSearchParams();
+    params.set("menustyle", styleSlug);
+    navigate({
+      pathname: `/engagement-rings/${slug}`,
+      search: params.toString(),
+    });
+  };
+
+  const handleItemClick = (item) => {
+    const slug = "";
+    const itemSlug = item.label.toLowerCase().replace(/\s+/g, "-");
+    const params = new URLSearchParams();
+    // params.set("status", itemSlug);
+    if (item.label.toLowerCase() === "ready to ship") {
+      params.set("ready_to_ship", "true");
+    }
+    navigate({
+      pathname: slug ? `/engagement-rings/${slug}` : `/engagement-rings`,
+      search: params.toString(),
+    });
+  };
+
+  const handleDiamondClick = (item) => {
+    const itemSlug = item.name.toLowerCase().replace(/\s+/g, "-");
+    const params = new URLSearchParams();
+    params.set("menudiamond", itemSlug);
+    navigate({
+      pathname:`/diamond`,
+      search: params.toString(),
+    });
   };
 
   return (
@@ -120,6 +145,8 @@ const MegaMenu = ({ type = "engagement", closeMegaMenu = () => {} }) => {
           handleStartEngagement={handleStartEngagement}
           handleShapeClick={handleShapeClick}
           handleStyleClick={handleStyleClick}
+          handleItemClick={handleItemClick}
+          handleDiamondClick={handleDiamondClick}          
           navigate={navigate}
           slugify={slugify}
         />

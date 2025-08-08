@@ -10,6 +10,8 @@ const EngagementMenu = ({
   handleStartEngagement,
   handleShapeClick,
   handleStyleClick,
+  handleItemClick,
+  handleDiamondClick,
   navigate,
   slugify,
 }) => {
@@ -43,13 +45,19 @@ const EngagementMenu = ({
           >
             <span>Start With A Diamond &gt;</span>
           </li>
-          <li>
+          <li
+            onMouseEnter={() => setHoveredOption("preset-rings")}
+            className="clickable"
+            style={{
+              fontWeight:
+                hoveredOption === "preset-engagement-rings" ? 600 : 400,
+            }}
+          >
             <a
               href="#"
               onClick={(e) => {
                 e.preventDefault();
-                navigate("/preset-engagement-rings");
-                closeMegaMenu();
+                handleStartEngagement("preset-rings");
               }}
             >
               Preset Engagement Rings &gt;
@@ -58,13 +66,13 @@ const EngagementMenu = ({
         </ul>
       </div>
 
-      {hoveredOption === "setting" && (
+      {(hoveredOption === "setting" || hoveredOption === "preset-rings") && (
         <>
           <div className="jwl-mega-col">
             <h6 className="jwl-menu-title">STYLE</h6>
             <ul className="jwl-list">
-              {styles.map((style) => (
-                <li key={style.psc_id}>
+              {styles.map((style, index) => (
+                <li key={index}>
                   <a
                     href="#"
                     onClick={(e) => {
@@ -83,8 +91,8 @@ const EngagementMenu = ({
           <div className="jwl-mega-col">
             <h6 className="jwl-menu-title">SHAPE</h6>
             <ul className="jwl-list">
-              {shapes.map((shape) => (
-                <li key={shape.id}>
+              {shapes.map((shape, index) => (
+                <li key={index}>
                   <a
                     href="#"
                     onClick={(e) => {
@@ -106,18 +114,18 @@ const EngagementMenu = ({
         <div className="jwl-mega-col">
           <ul className="jwl-list">
             {[
-              { name: "Lab Diamond", path: "/lab-diamonds" },
-              { name: "Natural Diamond", path: "/natural-diamonds" },
-              { name: "Colored Lab Diamond", path: "/colored-lab-diamonds" },
-              { name: "Featured Deals", path: "/featured-deals" },
-            ].map((item) => (
-              <li key={item.name}>
+              { name: "Lab Diamond" },
+              { name: "Natural Diamond" },
+              { name: "Colored Lab Diamond" },
+              { name: "Featured Deals" },
+            ].map((item, index) => (
+              <li key={index}>
                 <a
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
+                    handleDiamondClick(item);
                     closeMegaMenu();
-                    navigate(item.path);
                   }}
                 >
                   {item.name}
@@ -132,21 +140,21 @@ const EngagementMenu = ({
         <h6 className="jwl-menu-title">FEATURED</h6>
         <ul className="jwl-list">
           {[
-            { label: "Wave", path: "/engagement-wave" },
-            { label: "W Signature", path: "/engagement-signature" },
-            { label: "Fully Custom", path: "/fully-custom" },
-            { label: "New Arrivals", path: "/new-arrivals" },
-            { label: "Best Sellers", path: "/best-sellers" },
-            { label: "Ready To Ship", path: "/ready-to-ship" },
-            { label: "Home Preview", path: "/home-preview" },
+            { label: "Wave" },
+            { label: "W Signature" },
+            { label: "Fully Custom" },
+            { label: "New Arrivals" },
+            { label: "Best Sellers" },
+            { label: "Ready To Ship" },
+            { label: "Home Preview" },
           ].map((item) => (
             <li key={item.label}>
               <a
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();
+                  handleItemClick(item);
                   closeMegaMenu();
-                  navigate(item.path);
                 }}
               >
                 {item.label}
