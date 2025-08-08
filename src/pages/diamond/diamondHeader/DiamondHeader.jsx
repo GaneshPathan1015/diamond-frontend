@@ -86,11 +86,11 @@ const DiamondHeader = ({
       <div className="diamond-header-wrapper">
         <hr className="top-line" />
         <h2 className="main-heading">
-        {activeTab === "lab"
-          ? "Showing Lab Diamonds"
-          : activeTab === "natural"
-          ? "Showing Natural Diamonds"
-          : "Showing Color Diamonds"}
+          {activeTab === "lab"
+            ? "Showing Lab Diamonds"
+            : activeTab === "natural"
+            ? "Showing Natural Diamonds"
+            : "Showing Color Diamonds"}
 
           {/* Showing Natural Diamonds */}
           <span className="sub-count">
@@ -121,7 +121,25 @@ const DiamondHeader = ({
             <input
               type="checkbox"
               checked={featuredDealChecked}
-              onChange={(e) => setFeaturedDealChecked(e.target.checked)}
+              // onChange={(e) => setFeaturedDealChecked(e.target.checked)}
+              onChange={(e) => {
+                const isChecked = e.target.checked;
+                setFeaturedDealChecked(isChecked);
+
+                const newParams = new URLSearchParams(location.search);
+                const currentMenuDiamond = newParams.get("menudiamond");
+
+                if (!isChecked && currentMenuDiamond === "featured-deals") {
+                  newParams.delete("menudiamond");
+
+                  const newSearch = newParams.toString();
+                  const newUrl = newSearch
+                    ? `${location.pathname}?${newSearch}`
+                    : location.pathname;
+
+                  window.history.replaceState({}, "", newUrl);
+                }
+              }}
             />
             <span>
               <strong>Featured Deal Diamonds</strong>

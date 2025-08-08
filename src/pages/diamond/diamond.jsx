@@ -14,11 +14,9 @@ import DiamondHeader from "./diamondHeader/DiamondHeader";
 import DiamondTable from "./diamondTable/DiamondTable";
 import DiamondTabFilter from "./diamondTabFilter/DiamondTabFilter";
 import RingWrapper from "./ringWrapper/ringWrapper";
-
-
+import { useLocation } from "react-router-dom";
 
 export default function Diamond() {
-
   const [selectedShapes, setSelectedShapes] = useState([]); // select single as well as mutltiple shape
   const [diamonds, setDiamonds] = useState([]); // insert api data
   const [activeTab, setActiveTab] = useState("lab");
@@ -28,6 +26,9 @@ export default function Diamond() {
   const [perPage, setPerPage] = useState(20);
   const [total, setTotal] = useState(0);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const menuDiamondParam = searchParams.get("menudiamond");
 
   // diamond filter 2nd component
   const [price, setPrice] = useState([0, 10000]);
@@ -121,8 +122,6 @@ export default function Diamond() {
     setCheckedDiamonds([]);
     setShowOnlyChecked(false);
   };
-
- 
 
   const typeMap = {
     natural: 1,
@@ -276,6 +275,21 @@ export default function Diamond() {
       if (currentLoader) observer.unobserve(currentLoader);
     };
   }, [isFetchingMore, totalPages]);
+
+  useEffect(() => {
+    if (menuDiamondParam) {
+      if (menuDiamondParam === "lab-diamond") {
+        setActiveTab("lab");
+      } else if (menuDiamondParam === "natural-diamond") {
+        setActiveTab("natural");
+      } else if (menuDiamondParam === "colored-lab-diamond") {
+        setActiveTab("color");
+      } else if (menuDiamondParam === "featured-deals") {
+        setFeaturedDeal(true); // special case
+        setActiveTab("lab"); // or whichever applies
+      }
+    }
+  }, [menuDiamondParam]);
 
   const sortedDiamonds = [...diamonds].sort((a, b) => {
     switch (sortBy) {

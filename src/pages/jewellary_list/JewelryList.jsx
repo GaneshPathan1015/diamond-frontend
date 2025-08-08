@@ -762,7 +762,7 @@ const JewelryList = () => {
         <div className="row row-cols-1 row-cols-md-4 g-4">
           {loading && <Loader />}
 
-        
+
           {products.map((group) => {
             const metalKeys = Object.keys(group.metal_variations).sort(
               (a, b) => {
@@ -798,7 +798,7 @@ const JewelryList = () => {
                   }/storage/variation_images/No_Image_Available.jpg`;
 
             const price = selectedVariation?.price || "NA";
-            const originalPrice = selectedVariation?.original_price || "";
+            const originalPrice = selectedVariation?.original_price || "NA";
             const sku = selectedVariation?.sku || "NA";
             const discount = selectedVariation?.discount || "";
 

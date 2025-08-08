@@ -29,6 +29,19 @@ const DiamondTabFilter = ({ activeTab, onTabChange, onShapeChange }) => {
 
   const handleTabClick = (key) => {
     onTabChange(key);
+    const newParams = new URLSearchParams(location.search);
+    const currentMenuDiamond = newParams.get("menudiamond");
+
+    if (currentMenuDiamond) {
+      newParams.delete("menudiamond");
+
+      const newSearch = newParams.toString();
+      const newUrl = newSearch
+        ? `${location.pathname}?${newSearch}`
+        : location.pathname;
+
+      window.history.replaceState({}, "", newUrl);
+    }
     setSelectedShapes([]); // Clear shape selection on tab change
     onShapeChange([]); // Send empty array to parent
   };

@@ -33,11 +33,6 @@ const priceRanges = Object.values(priceSlugMap);
 
 const EngagementList = () => {
 
-
-  // const handleProductClick = (product) => {
-  //   navigate(`/engagement-details/${product.id}`, { state: { product } });
-  // };
-
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
@@ -223,8 +218,6 @@ const EngagementList = () => {
 
       setBannerImage(response.data.banner_image || null);
       setBannerVideo(response.data.banner_video || null);
-      setStyleData(response.data.style_data || []);
-      // setShapeData(response.data.shapes || []);
       setMetalTypes(response.data.metal_types || []);
 
       const nameToId = {};
@@ -235,19 +228,6 @@ const EngagementList = () => {
       });
       setMetalNameToId(nameToId);
       setMetalIdToName(idToName);
-
-      // Build style maps for name-to-ID conversion
-      const styleMap = {};
-      response.data.style_data?.forEach((style) => {
-        styleMap[style.psc_name] = style.psc_id;
-      });
-      setStyleNameToIdMap(styleMap);
-
-      // const shapeMap = {};
-      // response.data.shapes?.forEach((shape) => {
-      //   shapeMap[shape.name] = shape.id;
-      // });
-      // setShapeNameToIdMap(shapeMap);
 
       const newSelections = { ...(isInitialLoad ? {} : selectedVariations) };
       const newActiveMetals = { ...(isInitialLoad ? {} : activeMetal) };
@@ -314,6 +294,7 @@ const EngagementList = () => {
     const styleParam = params.get("style");
     const shapeParam = params.get("shape");
     const menuShapeParam = params.get("menushape");
+    const menuStyleParam = params.get("menustyle");
     const priceParam = params.get("price");
     const sortParam = params.get("sort");
     const metalParam = params.get("metal");
@@ -322,6 +303,14 @@ const EngagementList = () => {
 
     if (priceParam && priceSlugMap[priceParam]) {
       filters.price = priceSlugMap[priceParam]; // Reverse lookup: "0-500" → "$0 - $500"
+    }
+
+    if (menuStyleParam) {
+      const formattedStyle = menuStyleParam
+        .split("-")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+      filters.style = formattedStyle;
     }
 
     if (styleParam) {
@@ -356,10 +345,17 @@ const EngagementList = () => {
   }, [location.search]);
 
   useEffect(() => {
-    const fetchShapeMap = async () => {
+    const fetchStyleShapeMap = async () => {
       try {
-        const res = await axiosClient.get("/api/get-all-shapeData");
+        const res = await axiosClient.get("/api/get-all-styleShapeData");
         setShapeData(res.data.shapes || []);
+        setStyleData(res.data.styles || []);
+
+        const styleMap = {};
+        res.data.styles?.forEach((style) => {
+          styleMap[style.psc_name] = style.psc_id;
+        });
+        setStyleNameToIdMap(styleMap);
 
         const shapeMap = {};
         res.data.shapes?.forEach((shape) => {
@@ -372,7 +368,7 @@ const EngagementList = () => {
       }
     };
 
-    fetchShapeMap();
+    fetchStyleShapeMap();
   }, []);
 
   useEffect(() => {
@@ -380,12 +376,6 @@ const EngagementList = () => {
   }, [appliedFilters.ready_to_ship]);
 
   //  Fetch products when filters are ready
-  // useEffect(() => {
-  //   if (!filtersInitialized) return;
-  //   setPage(1);
-  //   fetchProducts({ page: 1, filters: appliedFilters });
-  // }, [appliedFilters, filtersInitialized]);
-  
   useEffect(() => {
     if (!filtersInitialized || !shapeMapReady) return;
     setPage(1);
@@ -791,7 +781,7 @@ const EngagementList = () => {
                   }/storage/variation_images/No_Image_Available.jpg`;
 
             const price = selectedVariation?.price || "NA";
-            const originalPrice = selectedVariation?.original_price || "";
+            const originalPrice = selectedVariation?.original_price || "NA";
             const sku = selectedVariation?.sku || "NA";
             const discount = selectedVariation?.discount || "";
 
@@ -802,7 +792,7 @@ const EngagementList = () => {
                   style={{ width: "95%" }}
                 >
                   <Link
-            to={`/engagment-details/${group.product?.id}`}
+                    to={`/engagment-details/${group.product?.id}`}
                     className="text-decoration-none text-dark mt-2"
                   >
                     <div className="product-image-container position-relative shadow">

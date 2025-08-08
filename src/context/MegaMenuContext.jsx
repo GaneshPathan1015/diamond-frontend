@@ -28,7 +28,7 @@ export const MegaMenuProvider = ({ children }) => {
 
   useEffect(() => {
     axiosClient
-      .get("api/engagement")
+      .get("api/get-all-styleShapeData")
       .then((res) => {
         setStyles(res.data.styles);
         setShapes(res.data.shapes);
