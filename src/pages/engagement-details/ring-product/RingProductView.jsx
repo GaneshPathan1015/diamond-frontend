@@ -1,229 +1,3 @@
-// import React, { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
-// import Zoom from "react-medium-image-zoom";
-// import "react-medium-image-zoom/dist/styles.css";
-// import "../../jewellary-details/JewellaryDetails.css";
-// import Logosec from "../../w-signature/logosec";
-// import NoDealbreakers from "../../diamond-detail/diamondDetails/nobrokrage/NoDealbreakers";
-// import axiosClient from "../../../api/axios";
-
-
-// axiosClient
-
-// const protectionPlans = [
-//   { id: "1-year", label: "1 Year - $79" },
-//   { id: "2-year", label: "2 Year - $99" },
-//   {
-//     id: "3-year",
-//     label: (
-//       <>
-//         3 Year - $159 <br />
-//         <small className="text-muted">MOST POPULAR</small>
-//       </>
-//     ),
-//   },
-// ];
-
-// const shapes = [
-//   { name: "Round", image: "/shapes/round.png" },
-//   { name: "Oval", image: "/shapes/oval.png" },
-//   { name: "Emerald", image: "/shapes/emerald.png" },
-//   { name: "Cushion", image: "/shapes/cushion.png" },
-//   { name: "Princess", image: "/shapes/princess.png" },
-//   { name: "Radiant", image: "/shapes/radiant.png" },
-//   { name: "Heart", image: "/shapes/heart.png" },
-//   { name: "Pear", image: "/shapes/pear.png" },
-// ];
-
-// const RingProductView = () => {
-  
-//   const { id } = useParams();
-//   const [product, setProduct] = useState(null);
-//   const [loading, setLoading] = useState(true);
-//   const [selectedShape, setSelectedShape] = useState("Princess");
-
-//   useEffect(() => {
-//     const fetchProduct = async () => {
-//       try {
-//         const res = await axiosClient.get(`/api/product-by-id/${id}`);
-//         const data = res.data;
-//         setProduct(data);
-//       } catch (err) {
-//         console.error("Error fetching product:", err);
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     if (id) fetchProduct();
-//   }, [id]);
-
-//   if (loading) {
-//     return <div className="container py-5 text-center">Loading product details...</div>;
-//   }
-
-//   if (!product) {
-//     return (
-//       <div className="container text-center mt-5">
-//         <h4>Product not found.</h4>
-//         <p>The product with ID <strong>{id}</strong> does not exist or couldn't be loaded.</p>
-//       </div>
-//     );
-//   }
-
-//   const selectedShapeLabel = selectedShape.toUpperCase();
-//   const thumbnails = [product.image, "/assets/images/thumb1.png", "/assets/images/thumb2.png"];
-
-//   return (
-//     <>
-//       <div className="container py-5">
-//         <div className="row">
-//           {/* Thumbnail Images */}
-//           <div className="col-md-1 d-flex flex-column align-items-center gap-2 thumbs">
-//             {thumbnails.map((src, i) => (
-//               <img
-//                 key={i}
-//                 src={src}
-//                 alt={`Thumb ${i + 1}`}
-//                 className="thumb-image"
-//                 style={{
-//                   width: "60px",
-//                   height: "60px",
-//                   objectFit: "cover",
-//                   border: "1px solid #ccc",
-//                   padding: "2px",
-//                   borderRadius: "4px",
-//                 }}
-//               />
-//             ))}
-//           </div>
-
-//           {/* Main Product Image */}
-//           <div className="col-md-6 main-image">
-//             <div className="zoom-container">
-//               <Zoom>
-//                 <img src={product.image} alt="Main Product" className="img-fluid zoomable-image" />
-//               </Zoom>
-//             </div>
-//             <button className="btn btn-outline-dark mt-2">📷 VIRTUAL TRY ON</button>
-//           </div>
-
-//           {/* Product Info */}
-//           <div className="col-md-5">
-//             <h5 className="text-muted" style={{ fontSize: "32px", fontWeight: 600 }}>
-//               {product.product_name}
-//             </h5>
-//             <p><span className="text-muted">• SKU: {product.product_code || "N/A"}</span></p>
-//             <p>Price: <strong>₹{product.price}</strong></p>
-
-//             {/* Shape Selection */}
-//             <div className="shape-section">
-//               <p className="shape-title">
-//                 <strong>SHAPE :</strong> <span>{selectedShapeLabel}</span>
-//               </p>
-//               <div className="shape-options">
-//                 {shapes.map((shape, index) => (
-//                   <div
-//                     key={index}
-//                     className={`shape-item ${selectedShape === shape.name ? "active" : ""}`}
-//                     onClick={() => setSelectedShape(shape.name)}
-//                   >
-//                     <img src={shape.image} alt={shape.name} />
-//                   </div>
-//                 ))}
-//               </div>
-//             </div>
-
-//             {/* Metal Color */}
-//             <p className="mb-1">METAL COLOR</p>
-//             <div className="d-flex mb-3">
-//               <div className="option-circle" style={{ background: "#d4af37" }} title="Gold">18K</div>
-//               <div className="option-circle" style={{ background: "#aaa" }} title="White Gold">WG</div>
-//             </div>
-
-//             {/* Carat */}
-//             <div className="product-variation__carat-group mb-3">
-//               <small>Total Carat Weight</small>
-//               <div className="d-flex flex-wrap gap-2 mt-1">
-//                 <button className="product-variation__carat-pill active">0.50</button>
-//                 <button className="product-variation__carat-pill">1.00</button>
-//                 <button className="product-variation__carat-pill">1.50</button>
-//               </div>
-//             </div>
-
-//             <hr className="hr-line" />
-
-//             <p><strong>Weight:</strong> 4.5g</p>
-//             <p><strong>Description:</strong></p>
-//             <div className="bg-light p-2">{product.description || "A beautifully handcrafted diamond ring."}</div>
-
-//             <hr className="hr-line" />
-
-//             {/* Protection Plan */}
-//             <div className="plan-title">ADD CLARITY COMMITMENT PROTECTION PLAN</div>
-//             <p className="protection-plan">Ensure your jewelry lasts a lifetime. <span title="More Info">ℹ️</span></p>
-//             <div className="d-flex gap-2">
-//               {protectionPlans.map((plan) => (
-//                 <div key={plan.id} className="option-btn">{plan.label}</div>
-//               ))}
-//             </div>
-
-//             <hr className="hr-line" />
-
-//             {/* CTA Buttons */}
-//             <div className="container py-4">
-//               <button className="btn choose-btn w-100">Choose this setting</button>
-//               <button className="btn btn-outline-dark w-100 mt-2">VIRTUAL / SHOWROOM APPOINTMENT</button>
-//               <p className="mt-2 mb-0">Ships by <strong>Thurs, June 12</strong></p>
-//               <p className="mb-1"><span className="text-primary">Track in real time before it ships</span> 0% APR or as low as $51/mo with Affirm.</p>
-//               <p className="mb-2">Free Insured Shipping. <a href="#">30 Day Returns</a></p>
-
-//               <hr className="hr-line" />
-
-//               {/* Utility Buttons */}
-//               <div className="common-btn">
-//                 <button className="btn btn-light"><i className="bi bi-envelope"></i> DROP A HINT</button>
-//                 <button className="btn btn-light"><i className="bi bi-telephone"></i> CONTACT US</button>
-//                 <button className="btn btn-light"><i className="bi bi-heart"></i> ADD TO WISHLIST</button>
-//                 <button className="btn btn-light"><i className="bi bi-calendar-event"></i> SCHEDULE APPOINTMENT</button>
-//               </div>
-
-//               {/* Share + Rewards */}
-//               <div className="mt-2">
-//                 <span className="me-2 share">SHARE :-</span>
-//                 <i className="bi bi-pinterest"></i>
-//                 <i className="bi bi-facebook"></i>
-//                 <i className="bi bi-x"></i>
-//               </div>
-//               <div className="bg-light p-2 mt-3">
-//                 <i className="bi bi-gift"></i> Earn 847 Points when you buy this item.
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-
-//         {/* Customer Reviews */}
-//         {/* ...Keep as-is or fetch reviews dynamically in the future... */}
-
-//         <Logosec />
-//         <div className="related-products mt-5">
-//           <h4>Related Products</h4>
-//           <div className="d-flex flex-wrap">
-//             {[...Array(4)].map((_, i) => (
-//               <img key={i} src="/assets/images/main.png" className="product-thumb" alt="Related Product" />
-//             ))}
-//           </div>
-//         </div>
-//       </div>
-
-//       <NoDealbreakers />
-//     </>
-//   );
-// };
-
-// export default RingProductView;
-
-
 import React, { useState, useEffect } from "react";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
@@ -233,21 +7,8 @@ import axiosClient from "../../../api/axios";
 import { useCart } from "../../../cart/CartContext";
 import Logosec from "../../w-signature/logosec";
 import NoDealbreakers from "../../diamond-detail/diamondDetails/nobrokrage/NoDealbreakers";
-
-
-const protectionPlans = [
-  { id: "1-year", label: "1 Year - $79" },
-  { id: "2-year", label: "2 Year - $99" },
-  {
-    id: "3-year",
-    label: (
-      <>
-        3 Year - $159 <br />
-        <small className="text-muted">MOST POPULAR</small>
-      </>
-    ),
-  },
-];
+import DiamondSelectionModal from "./DiamondSelectionModal";
+import RingSettingModal from "./RingSettingModal";
 
 const getImageUrl = (img) => {
   const fallback = `${
@@ -266,14 +27,16 @@ const RingProductView = () => {
   const [selectedShapeId, setSelectedShapeId] = useState(null);
   const [selectedVariationIndex, setSelectedVariationIndex] = useState(0);
   const [thumbnails, setThumbnails] = useState([]);
-  const [selectedPlan, setSelectedPlan] = useState("1-year");
-  const [activeFeature, setActiveFeature] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [showSettingModal, setShowSettingModal] = useState(false);
+  const [modalProductData, setModalProductData] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axiosClient.get(`/api/product-by-id/${id}`);
+        const res = await axiosClient.get(`/api/engagement-buildproduct/${id}`);
         const data = res.data;
 
         const metalVariationKeys = Object.keys(data.metal_variations);
@@ -326,10 +89,6 @@ const RingProductView = () => {
     fetchProduct();
   }, [id]);
 
-  const toggleFeature = (index) => {
-    setActiveFeature(activeFeature === index ? null : index);
-  };
-
   const handleMetalChange = (metalId) => {
     setSelectedMetalId(metalId);
     setSelectedVariationIndex(0);
@@ -380,38 +139,47 @@ const RingProductView = () => {
 
   const { name, description } = product.product;
   const { price, weight, sku: variationSku } = selectedVariation || {};
+  const selectedShapeName = isBuild
+    ? product.metal_variations?.[selectedMetalId]?.[selectedShapeId]?.[0]?.shape
+        ?.name
+    : null;
+
+  // Get selected carat weight
+  const selectedCaratWeight = selectedVariation?.weight || null;
+  const handleOpenSettingModal = () => {
+    const cartItem = {
+      sku: variationSku,
+      name: name,
+      price: price,
+      image: mainImage,
+      weight: weight,
+      type: "build",
+      selectedMetal: selectedMetalId,
+      shape: selectedShapeName || "",
+      caratWeight: selectedCaratWeight || "",
+    };
+    setModalProductData(cartItem);
+    setShowSettingModal(true);
+  };
+
   return (
     <div className="container py-5">
       <div className="row">
         <div className="col-md-1 d-flex flex-column align-items-center gap-2 thumbs">
-          {thumbnails.map((src, i) => (
+          {mainImage && (
             <img
-              key={i}
-              src={src}
-              alt={`Thumb ${i + 1}`}
-              onClick={() => setMainImage(src)}
+              src={mainImage}
+              alt="Selected Product"
               style={{
-                cursor: "pointer",
-                border: mainImage === src ? "2px solid #000" : "1px solid #ccc",
-                padding: "2px",
-                width: "60px",
-                height: "60px",
-                objectFit: "cover",
-                borderRadius: "4px",
+                objectFit: "scale-down",
               }}
             />
-          ))}
+          )}
         </div>
         {/* Main image */}
-        <div className="col-md-6 main-image">
+        <div className="col-md-7">
           <div className="zoom-container">
-            <Zoom>
-              <img
-                src={mainImage}
-                alt="Main Product"
-                className="img-fluid  zoomable-image"
-              />
-            </Zoom>
+            <img src={mainImage} alt="Main Product" />
           </div>
           <button className="btn btn-outline-dark mt-2">
             📷 VIRTUAL TRY ON
@@ -419,83 +187,20 @@ const RingProductView = () => {
         </div>
 
         {/* Right panel */}
-        <div className="col-md-5">
-          <h5 className="text-muted" style={{ fontSize: "32px", bold: "600" }}>
-            {name}
-          </h5>
+        <div className="col-md-4">
+          <h5 style={{ fontSize: "32px", bold: "600" }}>{name}</h5>
           <p>
-            <span className="text-muted">• SKU: {variationSku}</span>
+            <span className="text-muted">SKU#: {variationSku}</span>
           </p>
-          <p>
-            price: <strong>₹{price}</strong>{" "}
-          </p>
-          <p className="mb-1">METAL COLOR</p>
-
-          <div className="d-flex mb-3">
-            {/* {Object.entries(product.metal_variations).map(
-              ([metalId, group]) => {
-                // CHANGE: pick one variation to render metal_color (different for build)
-                const metal = isBuild
-                  ? group[Object.keys(group)[0]][0].metal_color
-                  : group[0].metal_color;
-
-                return (
-                  <div
-                    key={metalId}
-                    className={`option-circle ${
-                      selectedMetalId === metalId ? "active" : ""
-                    }`}
-                    onClick={() => handleMetalChange(metalId)}
-                    title={metal?.name}
-                    style={{ background: metal?.hex }}
-                  >
-                    {metal?.quality}
-                  </div>
-                );
-              }
-            )} */}
-            {Object.entries(product.metal_variations)
-              .sort(([aKey, aGroup], [bKey, bGroup]) => {
-                const aMetal = isBuild
-                  ? aGroup[Object.keys(aGroup)[0]][0].metal_color
-                  : aGroup[0].metal_color;
-
-                const bMetal = isBuild
-                  ? bGroup[Object.keys(bGroup)[0]][0].metal_color
-                  : bGroup[0].metal_color;
-
-                const order = ["14k", "18k", "PL"]; // Customize the order here
-                return (
-                  order.indexOf(aMetal?.quality) -
-                  order.indexOf(bMetal?.quality)
-                );
-              })
-              .map(([metalId, group]) => {
-                const metal = isBuild
-                  ? group[Object.keys(group)[0]][0].metal_color
-                  : group[0].metal_color;
-
-                return (
-                  <div
-                    key={metalId}
-                    className={`option-circle ${
-                      selectedMetalId === metalId ? "active" : ""
-                    }`}
-                    onClick={() => handleMetalChange(metalId)}
-                    title={metal?.name}
-                    style={{ background: metal?.hex }}
-                  >
-                    {metal?.quality}
-                  </div>
-                );
-              })}
-          </div>
-
+          <h3>
+            <strong>${price}</strong>{" "}
+            <span style={{ fontSize: "15px" }}>(Setting Only)</span>
+          </h3>
           {/* Shape switch (only build) */}
           {isBuild && selectedMetalId && (
             <div className="product-variation__shape-group mb-3">
               <small className="product-variation__shape-title">
-                Shape:&nbsp;
+                SHAPE:&nbsp;
                 <span className="shape-name">
                   {product.metal_variations[selectedMetalId]?.[
                     selectedShapeId
@@ -533,6 +238,38 @@ const RingProductView = () => {
               </div>
             </div>
           )}
+          <p className="mb-1">METAL COLOR</p>
+          <div className="d-flex mb-3">
+            {Object.entries(product.metal_variations)
+              .sort(([aKey, aGroup], [bKey, bGroup]) => {
+                // For build products: pick first shape → first variation
+                const aMetal = aGroup[Object.keys(aGroup)[0]][0].metal_color;
+                const bMetal = bGroup[Object.keys(bGroup)[0]][0].metal_color;
+
+                const order = ["14k", "18k", "PL"]; // customize order
+                return (
+                  order.indexOf(aMetal?.quality) -
+                  order.indexOf(bMetal?.quality)
+                );
+              })
+              .map(([metalId, group]) => {
+                const metal = group[Object.keys(group)[0]][0].metal_color;
+
+                return (
+                  <div
+                    key={metalId}
+                    className={`option-circle ${
+                      selectedMetalId === metalId ? "active" : ""
+                    }`}
+                    onClick={() => handleMetalChange(metalId)}
+                    title={metal?.name}
+                    style={{ background: metal?.hex }}
+                  >
+                    {metal?.quality}
+                  </div>
+                );
+              })}
+          </div>
 
           {/* Carat (weight) pills */}
           <div className="product-variation__carat-group mb-3">
@@ -560,85 +297,54 @@ const RingProductView = () => {
             </div>
           </div>
 
-          <hr className="hr-line" />
+          <button
+            className="custom-btn outlined"
+            style={{ width: "100%", height: "50px", marginBottom: "15px" }}
+            onClick={() => setShowModal(true)}
+          >
+            CHOOSE THIS SETTING
+          </button>
 
-          {selectedVariation && (
-            <p>
-              <strong>Weight:</strong> {weight}g
-            </p>
+          {showModal && (
+            <DiamondSelectionModal
+              onClose={() => setShowModal(false)}
+              ringCartItem={{
+                sku: variationSku,
+                name: name,
+                price: price,
+                image: mainImage,
+                weight: weight,
+                type: "build",
+                selectedMetal: selectedMetalId,
+                shape: selectedShapeName || "",
+                caratWeight: selectedCaratWeight || "",
+              }}
+            />
           )}
+          <button
+            className="custom-btn outlined"
+            style={{ width: "100%", height: "50px", marginBottom: "15px" }}
+            // onClick={() => setShowSettingModal(true)}
+            onClick={handleOpenSettingModal}
+          >
+            BUY SETTING ONLY
+          </button>
 
-          <p>
-            <strong>Description:</strong>
-          </p>
-          <div className="bg-light p-2" style={{ whiteSpace: "pre-wrap" }}>
-            {description}
-          </div>
+          {showSettingModal && (
+            <RingSettingModal
+              onClose={() => setShowSettingModal(false)}
+              modalProductData={modalProductData}
+            />
+          )}
+          <button
+            className="custom-btn outlined"
+            style={{ width: "100%", height: "50px", marginBottom: "15px" }}
+          >
+            VIRTUAL / SHOWROOM APPOINTMENT
+          </button>
 
-          <hr className="hr-line" />
-          {/* Protection plan */}
-          <div className="plan-title ">
-            ADD CLARITY COMMITMENT PROTECTION PLAN
-          </div>
-          <p className="protection-plan">
-            Ensure your jewelry lasts a lifetime.{" "}
-            <span title="More Info">ℹ️</span>
-          </p>
-          <div className="d-flex gap-2">
-            {protectionPlans.map((plan) => (
-              <div
-                key={plan.id}
-                className={`option-btn ${
-                  selectedPlan === plan.id ? "active" : ""
-                }`}
-                onClick={() => setSelectedPlan(plan.id)}
-              >
-                {plan.label}
-              </div>
-            ))}
-          </div>
-
-          <hr className="hr-line" />
-          <div className="container py-4">
+          <div className="container">
             <div className="mb-4">
-                  <button
-  className="btn btn-dark w-100 mt-2"
-  onClick={() => {
-    if (!selectedVariation) {
-      alert("Please select a variation first.");
-      return;
-    }
-
-    const diamond = {
-      carat_weight: selectedVariation.weight,
-      shape: { name: "Round", image: "round.png" }, // use actual shape data
-      price: selectedVariation.price,
-      certificate_number: selectedVariation.sku,
-      certificate_company: { dl_name: "GIA" },
-      cut: { full_name: "Ideal" },
-      color: { name: "D" },
-      clarity: { name: "VVS1" },
-      polish: { name: "-" },
-      symmetry: { name: "-" },
-      fluorescence: { name: "-" },
-      table_diamond: "-",
-      depth: "-",
-      measurements: "-",
-      image_link: mainImage,
-    };
-
-    navigate(`/diamond-details/${selectedVariation.sku}`, {
-      state: { diamond },
-    });
-  }}
->
-  CHOOSE THIS SETTING
-</button>
-
-
-              <button className="btn btn-outline-dark w-100 mt-2">
-                VIRTUAL / SHOWROOM APPOINTMENT
-              </button>
               <p className="mt-2 mb-0">
                 Ships by <strong>Thurs, June 12</strong> | Track in real time
                 before it ships
@@ -682,68 +388,73 @@ const RingProductView = () => {
         </div>
 
         <div className="customer-reviews-container">
-      <div className="reviews-header">
-        <h2>CUSTOMER REVIEWS</h2>
-        <button className="write-review-btn">
-          <i className="bi bi-pencil-square"></i> Write a Review
-        </button>
-      </div>
+          <div className="reviews-header">
+            <h2>CUSTOMER REVIEWS</h2>
+            <button className="write-review-btn">
+              <i className="bi bi-pencil-square"></i> Write a Review
+            </button>
+          </div>
 
-      <div className="reviews-overview">
-        <div className="review-score">
-          <div className="score">5.0 ★★★★★</div>
-          <div className="score-text">Based on 1 Reviews</div>
-        </div>
-
-        <div className="rating-bars">
-          {[5, 4, 3, 2, 1].map((star, idx) => (
-            <div key={star} className="rating-bar">
-              <span>{`${star} stars`}</span>
-              <div className="progress">
-                <div
-                  className="progress-bar"
-                  style={{ width: star === 5 ? "100%" : "0%" }}
-                >
-                  {star === 5 && "(1)"}
-                </div>
-              </div>
+          <div className="reviews-overview">
+            <div className="review-score">
+              <div className="score">5.0 ★★★★★</div>
+              <div className="score-text">Based on 1 Reviews</div>
             </div>
-          ))}
-        </div>
-      </div>
 
-      <ul className="review-tabs">
-        <li className="active">Reviews <span>1</span></li>
-      </ul>
-
-      <div className="single-review">
-        <div className="reviewer-avatar">ST</div>
-        <div className="review-content">
-          <div className="reviewer-info">
-            <strong>Steven T.</strong>{" "}
-            <span className="verified">Verified Buyer</span>
-            <span className="review-date">06/29/2025</span>
+            <div className="rating-bars">
+              {[5, 4, 3, 2, 1].map((star, idx) => (
+                <div key={star} className="rating-bar">
+                  <span>{`${star} stars`}</span>
+                  <div className="progress">
+                    <div
+                      className="progress-bar"
+                      style={{ width: star === 5 ? "100%" : "0%" }}
+                    >
+                      {star === 5 && "(1)"}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="review-title">★★★★★ She was speechless!</div>
-          <p className="review-text">
-            It’s everything she ever wanted. It was also the perfect diamond size without breaking the bank and focusing
-            more on the quality of diamond itself. I chose the best one WC had of that size and you can definitely tell
-            in person. The craftsmanship is great, the packaging was well put together, and the communication throughout
-            the process was also nice. I would definitely recommend WC to anyone looking for a ring you can customize in
-            many ways. The quality is incredible. This ring leaves you in shock and lures you in to look even closer!
-          </p>
-          <div className="review-product-name">
-            Fine Vela Classic Pave Diamond Engagement Ring
+
+          <ul className="review-tabs">
+            <li className="active">
+              Reviews <span>1</span>
+            </li>
+          </ul>
+
+          <div className="single-review">
+            <div className="reviewer-avatar">ST</div>
+            <div className="review-content">
+              <div className="reviewer-info">
+                <strong>Steven T.</strong>{" "}
+                <span className="verified">Verified Buyer</span>
+                <span className="review-date">06/29/2025</span>
+              </div>
+              <div className="review-title">★★★★★ She was speechless!</div>
+              <p className="review-text">
+                It’s everything she ever wanted. It was also the perfect diamond
+                size without breaking the bank and focusing more on the quality
+                of diamond itself. I chose the best one WC had of that size and
+                you can definitely tell in person. The craftsmanship is great,
+                the packaging was well put together, and the communication
+                throughout the process was also nice. I would definitely
+                recommend WC to anyone looking for a ring you can customize in
+                many ways. The quality is incredible. This ring leaves you in
+                shock and lures you in to look even closer!
+              </p>
+              <div className="review-product-name">
+                Fine Vela Classic Pave Diamond Engagement Ring
+              </div>
+              <a href="#" className="review-share">
+                🔗 Share
+              </a>
+            </div>
           </div>
-          <a href="#" className="review-share">🔗 Share</a>
         </div>
-      </div>
-    </div> 
 
-
-       
-
-   <Logosec />
+        <Logosec />
 
         <div className="container py-4">
           <div className="related-products">
@@ -790,11 +501,9 @@ const RingProductView = () => {
         </div>
       </div>
 
-<NoDealbreakers />
-
+      <NoDealbreakers />
     </div>
   );
 };
 
 export default RingProductView;
-

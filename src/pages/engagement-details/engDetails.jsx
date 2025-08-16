@@ -1,16 +1,15 @@
-import React from 'react'
-import RingWrapper from '../diamond/ringWrapper/ringWrapper'
-import RingProductView from './ring-product/RingProductView'
+import React from "react";
+// import RingWrapper from "../diamond/ringWrapper/ringWrapper";
+import RingProductView from "./ring-product/RingProductView";
+import EngagementTabs from "./ring-product/EngagementTabs";
 
 const EngagementDetails = () => {
   return (
     <>
-<RingWrapper  />
-<RingProductView />
-
-
+      {<EngagementTabs />}
+      {<RingProductView />}
     </>
-  )
-}
+  );
+};
 
-export default EngagementDetails
+export default EngagementDetails;

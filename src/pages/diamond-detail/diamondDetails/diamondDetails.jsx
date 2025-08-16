@@ -53,7 +53,7 @@ export default function DiamondDetails() {
       try {
         const diamondWithType = {
           ...diamond,
-          type: "diamond", //  Important for backend processing     
+          type: "diamond", //  Important for backend processing
         };
         const updatedCart = [...existingCart, diamondWithType];
         localStorage.setItem(cartKey, JSON.stringify(updatedCart));
@@ -73,7 +73,7 @@ export default function DiamondDetails() {
 
   return (
     <>
-      <section className="hero_section_wrapper">
+      {/* <section className="hero_section_wrapper">
         <div className="container-fluid p-0 position-relative">
           <img
             src="/images/Header_Banner.jpg"
@@ -81,21 +81,20 @@ export default function DiamondDetails() {
             className="img-fluid w-100"
           />
         </div>
-      </section>
+      </section> */}
 
       <RingWrapper />
 
       <div
         style={{
           display: "flex",
-          gap: "80px",
           alignItems: "flex-start",
           flexWrap: "wrap",
-          justifyContent: "end",
+          justifyContent: "center",
         }}
       >
         {/* Section 1: Diamond Viewer */}
-        <div className="diamond-viewer">
+        <div className="diamond-viewer col-12 col-lg-8">
           <div className="diamond-main-display">
             {selectedView === "image" && (
               <img
@@ -189,7 +188,7 @@ export default function DiamondDetails() {
         </div>
 
         {/* Section 2: Diamond Details */}
-        <div style={{ maxWidth: "600px" }}>
+        <div className="col-12 col-md-8 offset-md-2 col-lg-4 offset-lg-0">
           <h1 style={{ fontSize: "24px", fontWeight: "bold" }}>
             {diamond.carat_weight} Carat {diamond.shape.name} Natural Diamond
           </h1>
@@ -271,6 +270,13 @@ export default function DiamondDetails() {
             <span>Track in real time before it ships</span>
           </div>
 
+          <button
+            className="custom-btn outlined"
+            style={{ width: "95%", height: "50px", marginBottom: "15px" }}
+          >
+            {/* loading ? "Processing..." : */ "ADD TO RING"}
+          </button>
+
           {loading && (
             <div className="overlay">
               <div className="spinner"></div>
@@ -278,11 +284,12 @@ export default function DiamondDetails() {
           )}
 
           <button
-            className="add-to-cart-btn"
+            className="custom-btn outlined"
+            style={{ width: "95%", height: "50px", marginBottom: "15px" }}
             onClick={handleAddToCart}
             disabled={loading}
           >
-            {loading ? "Processing..." : "Add to Cart"}
+            {loading ? "Processing..." : "BUY LOOSE"}
           </button>
 
           {alreadyExists && (

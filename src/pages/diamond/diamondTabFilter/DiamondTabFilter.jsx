@@ -2,39 +2,32 @@ import React, { useState, useEffect } from "react";
 import axiosClient from "../../../api/axios"; // Ensure path is correct
 import "./DiamondTabFilter.css";
 
-const DiamondTabFilter = ({ activeTab, onTabChange, onShapeChange }) => {
+const DiamondTabFilter = ({ activeTab, onTabChange, onShapeChange, shapes, selectedShapes, setSelectedShapes}) => {
   const tabs = [
     { label: "LAB DIAMONDS", key: "lab" },
     { label: "NATURAL DIAMONDS", key: "natural" },
     { label: "COLOR DIAMONDS", key: "color" },
   ];
-
-  const [selectedShapes, setSelectedShapes] = useState([]);
-  const [shapes, setShapes] = useState([]);
   const [error, setError] = useState("");
-
-  useEffect(() => {
-    const fetchShapes = async () => {
-      try {
-        const response = await axiosClient.get("/api/diamond-shapes");
-        setShapes(response.data.data); // array of strings
-      } catch (err) {
-        setError("Failed to fetch diamond shapes");
-        console.error(err);
-      }
-    };
-
-    fetchShapes();
-  }, []);
 
   const handleTabClick = (key) => {
     onTabChange(key);
     const newParams = new URLSearchParams(location.search);
     const currentMenuDiamond = newParams.get("menudiamond");
+    const selectedDiamond = newParams.get("selecteddiamond");
 
     if (currentMenuDiamond) {
       newParams.delete("menudiamond");
 
+      const newSearch = newParams.toString();
+      const newUrl = newSearch
+        ? `${location.pathname}?${newSearch}`
+        : location.pathname;
+
+      window.history.replaceState({}, "", newUrl);
+    }
+    if (selectedDiamond) {
+      newParams.delete("selecteddiamond");
       const newSearch = newParams.toString();
       const newUrl = newSearch
         ? `${location.pathname}?${newSearch}`

@@ -32,7 +32,7 @@
   transition: transform 0.3s ease;
 }
 
-.arrow {
+.arrowSignature {
   background: none;
   border: none;
   font-size: 2rem;
@@ -42,7 +42,7 @@
   transition: color 0.3s;
 }
 
-.arrow:hover {
+.arrowSignature:hover {
   color: #333;
 }
 

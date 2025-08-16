@@ -60,7 +60,7 @@ const SecondHeader = ({ onHoverChange }) => {
           </div>
         </div>
 
-        <div className="container py-2">
+        {/* <div className="container py-2">
           <div className="d-flex align-items-center justify-content-between">
             <div className="left-side-logo-wrapper">
               <button
@@ -101,39 +101,18 @@ const SecondHeader = ({ onHoverChange }) => {
                 +1 (816) 888-1111
               </a>
 
-              <div className="search-box">
-                <i className="fa fa-search text-black-custom"></i>
-              </div>
-
               <button
                 className="text-white bg-transparent border-0 d-flex align-items-center"
                 onClick={handleRedirect}
               >
-                <svg className="icon icon-login" viewBox="0 0 28.33 37.68">
-                  <path
-                    d="M14.17 14.9a7.45 7.45 0 1 0-7.5-7.45 7.46 7.46 0 0 0 7.5 7.45zm0-10.91a3.45 3.45 0 1 1-3.5 3.46A3.46 3.46 0 0 1 14.17 4zM14.17 16.47A14.18 14.18 0 0 0 0 30.68c0 1.41.66 4 5.11 5.66a27.17 27.17 0 0 0 9.06 1.34c6.54 0 14.17-1.84 14.17-7a14.18 14.18 0 0 0-14.17-14.21zm0 17.21c-6.3 0-10.17-1.77-10.17-3a10.17 10.17 0 1 1 20.33 0c.01 1.23-3.86 3-10.16 3z"
-                    style={{ fill: "black" }}
-                  />
-                </svg>
+                <span class="material-symbols-outlined text-black">person</span>
                 <span className="ms-2 text-black">
                   {user ? `Hi, ${user.name || "User"}` : "SIGN IN / UP"}
                 </span>
               </button>
 
-              <Link to="#" className="text-black-custom text-decoration-none">
-                <i className="fa fa-heart"></i>
-              </Link>
-
-              <Link
-                to="/cart"
-                className="text-black text-decoration-none position-relative"
-              >
-                <svg className="icon icon-cart" viewBox="0 0 37 40">
-                  <path
-                    d="M36.5 34.8L33.3 8h-5.9C26.7 3.9 23 .8 18.5.8S10.3 3.9 9.6 8H3.7L.5 34.8c-.2 1.5.4 2.4.9 3 .5.5 1.4 1.2 3.1 1.2h28c1.3 0 2.4-.4 3.1-1.3.7-.7 1-1.8.9-2.9zm-18-30c2.2 0 4.1 1.4 4.7 3.2h-9.5c.7-1.9 2.6-3.2 4.8-3.2zM4.5 35l2.8-23h2.2v3c0 1.1.9 2 2 2s2-.9 2-2v-3h10v3c0 1.1.9 2 2 2s2-.9 2-2v-3h2.2l2.8 23h-28z"
-                    style={{ fill: "black" }}
-                  />
-                </svg>
+              <Link to="/cart" className="text-black  position-relative">
+                <span class="material-symbols-outlined">local_mall</span>
                 {cartItems.length > 0 && (
                   <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                     {cartItems.length}
@@ -212,6 +191,157 @@ const SecondHeader = ({ onHoverChange }) => {
               </div>
             </div>
           </nav>
+        </div> */}
+
+        <div className="container py-2">
+          <div className="row align-items-center">
+            {/* Left side */}
+            <div className="col-6 col-md-4 d-flex align-items-center">
+              <button
+                type="button"
+                className="border-0 bg-transparent text-black p-1 border-bottom d-flex gap-2 align-items-center"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                <img
+                  src="./svg/book-appoinment.svg"
+                  height={20}
+                  width={20}
+                  style={{ filter: "invert(100%)" }}
+                />
+                <span className="d-none d-sm-inline">Book an Appointment</span>
+              </button>
+            </div>
+
+            {/* Logo center */}
+            <div className="col-6 col-md-4 text-center">
+              <a className="navbar-brand text-black" href="/">
+                <img
+                  src="./images/logo-23.png"
+                  className="img-fluid"
+                  alt="Logo"
+                  style={{ maxHeight: "50px" }}
+                />
+              </a>
+            </div>
+
+            {/* Right side */}
+            <div className="col-12 col-md-4 mt-3 mt-md-0 d-flex justify-content-end align-items-center gap-3">
+              <a
+                href="tel:+18168881111"
+                className="text-black text-decoration-none d-inline-flex align-items-center"
+              >
+                <i
+                  className="fa-solid fa-phone me-2"
+                  style={{ color: "#fff" }}
+                ></i>
+                <span className="d-none d-sm-inline">+1 (816) 888-1111</span>
+              </a>
+
+              <button
+                className="text-white bg-transparent border-0 d-flex align-items-center"
+                onClick={handleRedirect}
+              >
+                <span className="material-symbols-outlined text-black">
+                  person
+                </span>
+                <span className="ms-2 text-black d-none d-sm-inline">
+                  {user ? `Hi, ${user.name || "User"}` : "SIGN IN / UP"}
+                </span>
+              </button>
+
+              <Link to="/cart" className="text-black position-relative">
+                <span className="material-symbols-outlined">local_mall</span>
+                {cartItems.length > 0 && (
+                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {cartItems.length}
+                  </span>
+                )}
+              </Link>
+            </div>
+          </div>
+
+          {/* Navbar */}
+          <nav className="navbar navbar-expand-lg py-2">
+            <div className="container-fluid justify-content-center">
+              <button
+                className="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNavbar"
+              >
+                <span className="navbar-toggler-icon"></span>
+              </button>
+
+              <div
+                className="collapse navbar-collapse justify-content-center"
+                id="mainNavbar"
+              >
+                <ul className="navbar-nav text-center gap-4 align-items-center">
+                  <li
+                    className="nav-item"
+                    onMouseEnter={() => handleMegaEnter("engagement")}
+                    onMouseLeave={handleMegaLeave}
+                  >
+                    <button
+                      className="btn text-uppercase"
+                      onClick={() => {
+                        setShowMegaMenu(false);
+                        onHoverChange && onHoverChange(false);
+                        navigate("/engagement");
+                      }}
+                    >
+                      Engagement
+                    </button>
+                  </li>
+                  <li className="nav-item">
+                    <button
+                      className="btn text-uppercase"
+                      onClick={() => navigate("/wedding-brands")}
+                    >
+                      Wedding
+                    </button>
+                  </li>
+                  <li className="nav-item">
+                    <button
+                      className="btn text-uppercase"
+                      onClick={() => navigate("/diamond")}
+                    >
+                      Diamonds
+                    </button>
+                  </li>
+                  <li className="nav-item">
+                    <button className="btn text-uppercase">High Jewelry</button>
+                  </li>
+                  <li
+                    className="nav-item"
+                    onMouseEnter={() => handleMegaEnter("jewelry")}
+                    onMouseLeave={handleMegaLeave}
+                  >
+                    <button
+                      className="btn text-uppercase"
+                      onClick={() => {
+                        setShowMegaMenu(false);
+                        onHoverChange && onHoverChange(false);
+                        navigate("/jewelry-list");
+                      }}
+                    >
+                      Jewelry
+                    </button>
+                  </li>
+                  <li className="nav-item">
+                    <button className="btn text-uppercase">Collections</button>
+                  </li>
+                  <li className="nav-item">
+                    <button className="btn text-uppercase">Gifts</button>
+                  </li>
+                  <li className="nav-item">
+                    <button className="btn text-uppercase">Sale</button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
         </div>
 
         {/* Mega Menu (outside of container, full-width) */}
@@ -221,7 +351,10 @@ const SecondHeader = ({ onHoverChange }) => {
             onMouseEnter={() => handleMegaEnter(megaMenuType)}
             onMouseLeave={handleMegaLeave}
           >
-            <MegaMenu type={megaMenuType} closeMegaMenu={() => setShowMegaMenu(false)} />
+            <MegaMenu
+              type={megaMenuType}
+              closeMegaMenu={() => setShowMegaMenu(false)}
+            />
           </div>
         )}
       </header>

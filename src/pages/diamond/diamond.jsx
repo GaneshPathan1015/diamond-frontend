@@ -17,6 +17,7 @@ import RingWrapper from "./ringWrapper/ringWrapper";
 import { useLocation } from "react-router-dom";
 
 export default function Diamond() {
+  const [shapes, setShapes] = useState([]);
   const [selectedShapes, setSelectedShapes] = useState([]); // select single as well as mutltiple shape
   const [diamonds, setDiamonds] = useState([]); // insert api data
   const [activeTab, setActiveTab] = useState("lab");
@@ -29,6 +30,8 @@ export default function Diamond() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const menuDiamondParam = searchParams.get("menudiamond");
+  const selectedDiamondParam = searchParams.get("selecteddiamond");
+  const ringCartItem = location.state?.ringCartItem;
 
   // diamond filter 2nd component
   const [price, setPrice] = useState([0, 10000]);
@@ -118,7 +121,6 @@ export default function Diamond() {
     setRatio([0.9, 2.75]);
     setTable([40, 90]);
     setDepth([40, 90]);
-
     setCheckedDiamonds([]);
     setShowOnlyChecked(false);
   };
@@ -144,7 +146,6 @@ export default function Diamond() {
   };
 
   const totalPages = Math.ceil(total / perPage);
-
   const loaderRef = useRef(null);
   const debouncedFilterRef = useRef(null);
 
@@ -291,6 +292,59 @@ export default function Diamond() {
     }
   }, [menuDiamondParam]);
 
+  useEffect(() => {
+    const fetchShapes = async () => {
+      try {
+        const response = await axiosClient.get("/api/diamond-shapes");
+        /* setShapes(response.data.data); // array of strings */
+        const shapeList = response.data.data; // array of objects
+        setShapes(shapeList);
+        if (ringCartItem?.shape) {
+          const matchedShape = shapeList.find(
+            (s) => s.name.toLowerCase() === ringCartItem.shape.toLowerCase()
+          );
+          if (matchedShape) {
+            handleShapeChange([matchedShape]);
+          }
+        }
+      } catch (err) {
+        setError("Failed to fetch diamond shapes");
+        console.error(err);
+      }
+    };
+
+    fetchShapes();
+  }, [ringCartItem]);
+  useEffect(() => {
+    if (
+      selectedShapes.length === 0 &&
+      ringCartItem?.shape &&
+      shapes.length > 0
+    ) {
+      const matchedShape = shapes.find(
+        (s) => s.name.toLowerCase() === ringCartItem.shape.toLowerCase()
+      );
+      if (matchedShape) {
+        handleShapeChange([matchedShape]);
+      }
+    }
+  }, [selectedShapes, ringCartItem, shapes]);
+
+  useEffect(() => {
+    if (selectedDiamondParam) {
+      if (selectedDiamondParam === "lab-diamond") {
+        setActiveTab("lab");
+      } else if (selectedDiamondParam === "natural-diamond") {
+        setActiveTab("natural");
+      } else if (selectedDiamondParam === "colored-lab-diamond") {
+        setActiveTab("color");
+      } else if (selectedDiamondParam === "featured-deals") {
+        setFeaturedDeal(true); // special case
+        setActiveTab("lab"); // or whichever applies
+      }
+    }
+  }, [selectedDiamondParam]);
+
   const sortedDiamonds = [...diamonds].sort((a, b) => {
     switch (sortBy) {
       case "Price (Low to High)":
@@ -330,11 +384,14 @@ export default function Diamond() {
         </div>
       </section>
 
-      <RingWrapper />
+      <RingWrapper ringCartItem={ringCartItem} />
 
       <DiamondTabFilter
         activeTab={activeTab}
         onTabChange={setActiveTab}
+        selectedShapes={selectedShapes}
+        setSelectedShapes={setSelectedShapes}
+        shapes={shapes}
         onShapeChange={handleShapeChange}
       />
 

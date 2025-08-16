@@ -50,7 +50,7 @@ const EngagementRings = () => {
       <h2 className="carousel-title">Engagement Rings</h2>
 
       <div className="carousel-container">
-        <button className="arrow left" onClick={handlePrev}>
+        <button className="arrow left arrowSignature" onClick={handlePrev}>
           &#10094;
         </button>
 
@@ -60,7 +60,7 @@ const EngagementRings = () => {
           ))}
         </div>
 
-        <button className="arrow right" onClick={handleNext}>
+        <button className="arrow right arrowSignature" onClick={handleNext}>
           &#10095;
         </button>
       </div>

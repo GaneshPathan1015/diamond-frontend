@@ -45,7 +45,7 @@ const JewelryDetailsPage = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axiosClient.get(`/api/product-by-id/${id}`);
+        const res = await axiosClient.get(`/api/jewelry-product/${id}`);
         const data = res.data;
 
         const metalVariationKeys = Object.keys(data.metal_variations);
@@ -386,6 +386,7 @@ const JewelryDetailsPage = () => {
                     selectedMetal: selectedMetalId,
                     selectedPlan: selectedPlan,
                   };
+
                   addToCart(cartItem);
                   navigate("/cart");
                 }}

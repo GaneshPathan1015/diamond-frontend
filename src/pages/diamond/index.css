@@ -28,8 +28,8 @@
 }
 
 .step-number {
-  font-size: 14px;
-  margin-right: 6px;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .step-label {
@@ -39,21 +39,38 @@
   letter-spacing: 0.4px;
 }
 
-.diamond-ring-wrapper .step-divider {
+.step-divider {
+  display: inline-block;
+  margin: 0 15px;
+  height: 24px;
+  border-left: 2px solid;
+  vertical-align: middle
+}
+
+.ring-preview {
+  text-align: center;
+  opacity: 0.7; /* dull effect */
+}
+
+.ring-preview-img {
+  max-width: 80px;
+  height: auto;
+  filter: grayscale(40%); /* makes it muted */
   margin-left: 20px;
-  margin-right: -10px;
+}
+
+.diamond-ring-wrapper .step-divider {
   color: #ccc;
   font-size: 16px;
 }
-
-
 
 .step.active {
   color: #000;
 }
 
 .step.active .step-label,
-.step.active .step-number {
+.step.active .step-number,
+.step.active .step-divider {
   color: #000;
 }
 
@@ -226,6 +243,7 @@
 
 /* When open, expand to accommodate content */
 .advanced-container.open {
-  max-height: 1000px; /* Reasonable limit for content */
+  max-height: 1000px;
+  /* Reasonable limit for content */
   opacity: 1;
 }

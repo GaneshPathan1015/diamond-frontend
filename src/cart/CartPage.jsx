@@ -8,11 +8,12 @@ export default function CartPage() {
   const navigate = useNavigate();
   const { cartItems, removeFromCart, clearCart, updateCartItem } = useCart();
 
-  // Helper function to determine item unique ID
+  // Unique ID helper
   const getItemId = (item) => item.certificate_number || item.sku || item.id;
 
   // Quantity state
   const [quantities, setQuantities] = useState({});
+
 
   useEffect(() => {
     const initialQuantities = {};
@@ -22,27 +23,25 @@ export default function CartPage() {
     setQuantities(initialQuantities);
   }, [cartItems]);
 
-  const handleQuantityChange = (itemId, delta) => {
-    setQuantities((prev) => {
-      const newQuantity = Math.max(1, (prev[itemId] || 1) + delta);
-      updateCartItem(itemId, newQuantity);
-      return { ...prev, [itemId]: newQuantity };
-    });
-  };
+ const handleQuantityChange = (itemId, delta) => {
+  const currentQty = quantities[itemId] || 1;
+  const newQty = Math.max(1, currentQty + delta);
 
-  const handleCheckout = () => {
-    navigate("/checkout", {
-      state: {
-        cartItems,
-        subtotal,
-      },
-    });
-  };
+  // First update local quantity state
+  setQuantities((prev) => ({ ...prev, [itemId]: newQty }));
+
+  // Then update the cart context state safely
+  updateCartItem(itemId, newQty);
+};
 
   const subtotal = cartItems.reduce((total, item) => {
     const qty = quantities[getItemId(item)] || 1;
     return total + parseFloat(item.price || 0) * qty;
   }, 0);
+
+  const handleCheckout = () => {
+    navigate("/checkout", { state: { cartItems, subtotal } });
+  };
 
   if (cartItems.length === 0) {
     return (
@@ -50,12 +49,22 @@ export default function CartPage() {
         className="d-flex flex-column justify-content-center align-items-center text-center"
         style={{ padding: "100px 20px", minHeight: "60vh" }}
       >
-        <h2 style={{ fontWeight: "500", color: "#1d3c45" }}>Shopping Cart is Empty</h2>
+        <h2 style={{ fontWeight: "500", color: "#1d3c45" }}>
+          Shopping Cart is Empty
+        </h2>
         <p className="mt-2" style={{ fontSize: "16px", color: "#555" }}>
           You have no items in your shopping cart.
         </p>
-        <a href="/diamond" style={{ marginTop: "10px", color: "#0056b3", textDecoration: "none" }}>
-          Click <span style={{ textDecoration: "underline" }}>here</span> to continue shopping.
+        <a
+          href="/diamond"
+          style={{
+            marginTop: "10px",
+            color: "#0056b3",
+            textDecoration: "none",
+          }}
+        >
+          Click <span style={{ textDecoration: "underline" }}>here</span> to
+          continue shopping.
         </a>
       </div>
     );
@@ -72,12 +81,14 @@ export default function CartPage() {
             <div>
               <p className="almost-there">YOU'RE ALMOST THERE!</p>
               <p>
-                You are <strong>${460 - subtotal > 0 ? 460 - subtotal : 0}</strong> away from FREE{" "}
-                <strong>Diamond Necklace</strong>.
+                You are{" "}
+                <strong>${460 - subtotal > 0 ? 460 - subtotal : 0}</strong> away
+                from FREE <strong>Diamond Necklace</strong>.
               </p>
               <p>
-                You are <strong>${2460 - subtotal > 0 ? 2460 - subtotal : 0}</strong> away from FREE{" "}
-                <strong>Diamond Bracelet</strong>.
+                You are{" "}
+                <strong>${2460 - subtotal > 0 ? 2460 - subtotal : 0}</strong>{" "}
+                away from FREE <strong>Diamond Bracelet</strong>.
               </p>
             </div>
           </div>
@@ -85,27 +96,24 @@ export default function CartPage() {
           {cartItems.map((item, index) => {
             const itemId = getItemId(item);
             const quantity = quantities[itemId] || 1;
-            const totalItemPrice = parseFloat(item.price || 0) * quantity;
-
             const isDiamond = !!item.certificate_number;
 
             return (
               <div key={index} className="product-card">
                 <div className="product-top">
-                <img
-  src={
-    isDiamond
-      ? `/images/shapes/${item.shape?.image}`
-      : item.image || "/images/placeholder.png"
-  }
-  alt={isDiamond ? item.shape?.name : item.name}
-  className="product-img"
-  onError={(e) => {
-    e.target.onerror = null;
-    e.target.src = "/images/placeholder.png";
-  }}
-/>
-
+                  <img
+                    src={
+                      isDiamond
+                        ? `/images/shapes/${item.shape?.image}`
+                        : item.image || "/images/placeholder.png"
+                    }
+                    alt={isDiamond ? item.shape?.name : item.name}
+                    className="product-img"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = "/images/placeholder.png";
+                    }}
+                  />
 
                   <div className="product-details">
                     <p>
@@ -125,24 +133,50 @@ export default function CartPage() {
                       </>
                     ) : (
                       <>
+                        {item.diamondtype && (
+                          <p className="product-type">
+                            Type: {item.diamondtype}
+                          </p>
+                        )}
+                        {item.shape && (
+                          <p className="product-shape">Shape: {item.shape}</p>
+                        )}
                         <p>Weight: {item.weight}g</p>
-                        <p>Protection Plan: {item.selectedPlan?.toUpperCase()}</p>
+                        {item.size && (
+                          <p className="product-size">Ring Size: {item.size}</p>
+                        )}
+                        {item.dimensions && (
+                          <p>Dimensions: {item.dimensions}</p>
+                        )}
+                        {item.engraving && <p>Engraving: {item.engraving}</p>}
+                        {/* ✅ Only show if selectedPlan exists */}
+                        {item.selectedPlan && (
+                          <p>
+                            Protection Plan:{" "}
+                            {item.selectedPlan?.toUpperCase()}
+                          </p>
+                        )}
                       </>
                     )}
 
                     <p>SHIP BY: Wednesday, May 21</p>
-                    <p className="shipping-note">Track your order in real time before it ships</p>
+                    <p className="shipping-note">
+                      Track your order in real time before it ships
+                    </p>
 
                     <div className="quantity-control">
-                      <button onClick={() => handleQuantityChange(itemId, -1)}>-</button>
+                      <button onClick={() => handleQuantityChange(itemId, -1)}>
+                        -
+                      </button>
                       <span>{quantity}</span>
-                      <button onClick={() => handleQuantityChange(itemId, 1)}>+</button>
+                      <button onClick={() => handleQuantityChange(itemId, 1)}>
+                        +
+                      </button>
                     </div>
 
                     <button
                       onClick={() => removeFromCart(itemId)}
                       className="remove-btn"
-                      aria-label="Remove item"
                     >
                       ×
                     </button>
@@ -156,7 +190,9 @@ export default function CartPage() {
         <div className="cart-right">
           <div className="summary-card">
             <p className="subtotal">Subtotal : ${subtotal.toFixed(2)}</p>
-            <p className="tax-info">Taxes and shipping calculated at checkout</p>
+            <p className="tax-info">
+              Taxes and shipping calculated at checkout
+            </p>
             <button className="checkout-btn" onClick={handleCheckout}>
               CHECKOUT
             </button>
@@ -176,8 +212,8 @@ export default function CartPage() {
             <h4>GET $100 OFF</h4>
             <p>on orders of $2000 and above</p>
             <p className="verify-text">
-              Military, Nurses, and First Responders receive an exclusive ID.me discount. Verify your
-              eligibility before ordering.
+              Military, Nurses, and First Responders receive an exclusive ID.me
+              discount. Verify your eligibility before ordering.
             </p>
             <button className="verify-btn">
               ✔ Verify with <strong>ID.me</strong>
@@ -185,7 +221,6 @@ export default function CartPage() {
           </div>
         </div>
       </div>
-
       <Help />
     </>
   );

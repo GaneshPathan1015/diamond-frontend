@@ -12,6 +12,7 @@ import Loader from "../diamond/loader";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 import "./EngagementList.css";
+import EngagementTabs from "../engagement-details/ring-product/EngagementTabs";
 
 const priceSlugMap = {
   "0-500": "$0 - $500",
@@ -471,6 +472,8 @@ const EngagementList = () => {
         </div>
       </section>
       <div className="container my-4">
+
+        <EngagementTabs/>
         {/* Filters Top Bar */}
         <div className="d-flex justify-content-between filters-bar">
           <div className="d-flex align-items-center flex-wrap gap-3">
