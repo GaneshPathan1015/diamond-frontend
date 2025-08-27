@@ -1,13 +1,16 @@
 import React from "react";
-// import RingWrapper from "../diamond/ringWrapper/ringWrapper";
 import RingProductView from "./ring-product/RingProductView";
 import EngagementTabs from "./ring-product/EngagementTabs";
+import { useLocation } from "react-router-dom";
 
 const EngagementDetails = () => {
+  const location = useLocation();
+  const diamond = location.state?.diamond;
+
   return (
     <>
-      {<EngagementTabs />}
-      {<RingProductView />}
+      {<EngagementTabs diamond={diamond} />}
+      {<RingProductView diamond={diamond} />}
     </>
   );
 };

@@ -89,7 +89,7 @@ const DiamondTable = ({
             <div>{diamond.color?.name || "NA"}</div>
             <div>{diamond.clarity?.name || "NA"}</div>
             <div>{diamond.cut?.full_name || "NA"}</div>
-            <div>{diamond.certificate_company.dl_name}</div>
+            <div>{diamond.certificate_company.dl_name  || "NA"}</div>
 
             {showAdvanced && (
               <>

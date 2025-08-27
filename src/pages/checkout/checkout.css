@@ -119,8 +119,8 @@
       color: #6c757d;
     }
     .pay-button {
-      background-color: #1678c2;
-      color: #fff;
+      background-color: #fff;
+      color: #011b2f;
       font-weight: 500;
       border-radius: 8px;
       padding: 12px;
@@ -129,7 +129,8 @@
       margin-top: 20px;
     }
     .pay-button:hover {
-      background-color: #125f9e;
+      background-color: #011b2f;
+      color: #fff;
     }
     .shop-logo {
       float: right;
@@ -155,7 +156,7 @@
     .product-img {
       width: 60px;
       height: 60px;
-      object-fit: cover;
+      object-fit: unset;
       border-radius: 6px;
     }
     .product-info small {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "../../jewellary-details/JewellaryDetails.css";
 import axiosClient from "../../../api/axios";
 import { useCart } from "../../../cart/CartContext";
@@ -19,14 +19,14 @@ const getImageUrl = (img) => {
 };
 const getShapeImageUrl = (img) => `${import.meta.env.VITE_BACKEND_URL}${img}`;
 
-const RingProductView = () => {
+const RingProductView = ({ diamond }) => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [mainImage, setMainImage] = useState("");
   const [selectedMetalId, setSelectedMetalId] = useState(null);
   const [selectedShapeId, setSelectedShapeId] = useState(null);
   const [selectedVariationIndex, setSelectedVariationIndex] = useState(0);
-  const [thumbnails, setThumbnails] = useState([]);
+  // const [thumbnails, setThumbnails] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [showSettingModal, setShowSettingModal] = useState(false);
   const [modalProductData, setModalProductData] = useState(null);
@@ -38,7 +38,6 @@ const RingProductView = () => {
       try {
         const res = await axiosClient.get(`/api/engagement-buildproduct/${id}`);
         const data = res.data;
-
         const metalVariationKeys = Object.keys(data.metal_variations);
         const defaultMetalId = metalVariationKeys[0];
         // CHANGE: detect build type
@@ -57,29 +56,10 @@ const RingProductView = () => {
             data.metal_variations[defaultMetalId][defaultShapeId][0];
 
           setMainImage(getImageUrl(defaultVariation?.images?.[0]));
-
-          const allImages = metalVariationKeys.flatMap((metalId) =>
-            Object.values(data.metal_variations[metalId]).flatMap(
-              (shapeArray) =>
-                shapeArray.flatMap((variation) =>
-                  (variation.images || []).map((img) => getImageUrl(img))
-                )
-            )
-          );
-
-          setThumbnails([...new Set(allImages)]);
         } else {
           // CHANGE: keep your old (non-build) logic
           const defaultVariation = data.metal_variations[defaultMetalId][0];
           setMainImage(getImageUrl(defaultVariation?.images?.[0]));
-
-          const allImages = metalVariationKeys.flatMap((metalId) =>
-            data.metal_variations[metalId].flatMap((variation) =>
-              (variation.images || []).map((img) => getImageUrl(img))
-            )
-          );
-
-          setThumbnails([...new Set(allImages)]);
         }
       } catch (err) {
         console.error("Failed to fetch product", err);
@@ -146,35 +126,75 @@ const RingProductView = () => {
 
   // Get selected carat weight
   const selectedCaratWeight = selectedVariation?.weight || null;
+
+  // Create ringCartItem here
+  const ringCartItem = {
+    ...selectedVariation,
+    sku: variationSku,
+    name: name,
+    price: price,
+    image: mainImage,
+    weight: weight,
+    selectedMetal: selectedMetalId,
+    shape: selectedShapeName || "",
+    caratWeight: selectedCaratWeight || "",
+  };
   const handleOpenSettingModal = () => {
     const cartItem = {
+      ...selectedVariation,
       sku: variationSku,
       name: name,
       price: price,
       image: mainImage,
       weight: weight,
-      type: "build",
       selectedMetal: selectedMetalId,
       shape: selectedShapeName || "",
       caratWeight: selectedCaratWeight || "",
+      productType: "build",
+      itemQuantity: 1,
     };
     setModalProductData(cartItem);
     setShowSettingModal(true);
+  };
+
+  const handleChooseSetting = () => {
+    if (diamond) {
+      //  If diamond exists
+      const productSlug = "buildProduct";
+      navigate(`/product/${productSlug}`, {
+        state: { diamond, ringCartItem, fromChooseSetting: false },
+      });
+    } else {
+      //  If no diamond → redirect user to diamond selection
+      setShowModal(true);
+    }
   };
 
   return (
     <div className="container py-5">
       <div className="row">
         <div className="col-md-1 d-flex flex-column align-items-center gap-2 thumbs">
-          {mainImage && (
-            <img
-              src={mainImage}
-              alt="Selected Product"
-              style={{
-                objectFit: "scale-down",
-              }}
-            />
-          )}
+          {selectedVariation?.images?.map((img, i) => {
+            const src = getImageUrl(img);
+            return (
+              <img
+                key={i}
+                src={src}
+                alt={`Thumb ${i + 1}`}
+                onClick={() => setMainImage(src)}
+                style={{
+                  cursor: "pointer",
+                  border:
+                    mainImage === src ? "2px solid #000" : "1px solid #ccc",
+                  padding: "2px",
+                  width: "60px",
+                  height: "60px",
+                  objectFit: "scale-down",
+                  borderRadius: "4px",
+                }}
+              />
+            );
+          })}
         </div>
         {/* Main image */}
         <div className="col-md-7">
@@ -300,7 +320,8 @@ const RingProductView = () => {
           <button
             className="custom-btn outlined"
             style={{ width: "100%", height: "50px", marginBottom: "15px" }}
-            onClick={() => setShowModal(true)}
+            // onClick={() => setShowModal(true)}
+            onClick={handleChooseSetting}
           >
             CHOOSE THIS SETTING
           </button>
@@ -308,23 +329,13 @@ const RingProductView = () => {
           {showModal && (
             <DiamondSelectionModal
               onClose={() => setShowModal(false)}
-              ringCartItem={{
-                sku: variationSku,
-                name: name,
-                price: price,
-                image: mainImage,
-                weight: weight,
-                type: "build",
-                selectedMetal: selectedMetalId,
-                shape: selectedShapeName || "",
-                caratWeight: selectedCaratWeight || "",
-              }}
+              ringCartItem={ringCartItem}
             />
           )}
+
           <button
             className="custom-btn outlined"
             style={{ width: "100%", height: "50px", marginBottom: "15px" }}
-            // onClick={() => setShowSettingModal(true)}
             onClick={handleOpenSettingModal}
           >
             BUY SETTING ONLY

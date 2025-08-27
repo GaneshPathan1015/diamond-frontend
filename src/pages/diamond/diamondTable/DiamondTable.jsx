@@ -9,11 +9,14 @@ const DiamondTable = ({
   showAdvanced,
   checkedDiamonds,
   onToggleCheck,
+  ringCartItem,
 }) => {
   const navigate = useNavigate();
 
   const handleSelect = (diamond) => {
-    navigate(`/diamond-details/${diamond.diamondid}`, { state: { diamond } });
+    navigate(`/diamond-details/${diamond.diamondid}`, {
+      state: { diamond, ringCartItem: ringCartItem },
+    });
   };
 
   const imageBaseUrl = "images/shapes/";
@@ -76,7 +79,7 @@ const DiamondTable = ({
               )}
               <img
                 src={`${imageBaseUrl}${diamond.shape.image}`} // Constructing the full image URL
-                alt={diamond.shape.name|| "NA"}
+                alt={diamond.shape.name || "NA"}
                 className="diamond-img"
               />
             </div>
@@ -89,7 +92,7 @@ const DiamondTable = ({
             <div>{diamond.color?.name || "NA"}</div>
             <div>{diamond.clarity?.name || "NA"}</div>
             <div>{diamond.cut?.full_name || "NA"}</div>
-            <div>{diamond.certificate_company.dl_name}</div>
+            <div>{diamond.certificate_company?.dl_name || "NA"}</div>
 
             {showAdvanced && (
               <>
@@ -110,7 +113,7 @@ const DiamondTable = ({
             <div>
               <button
                 className="select-btn"
-                onClick={() => handleSelect(diamond)}
+                onClick={() => handleSelect(diamond, ringCartItem)}
               >
                 SELECT
               </button>

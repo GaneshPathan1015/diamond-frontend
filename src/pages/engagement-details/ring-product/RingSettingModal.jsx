@@ -121,7 +121,7 @@ const RingSettingModal = ({ onClose, modalProductData }) => {
                 <option value="Lab Diamond">Lab Diamond</option>
                 <option value="Natural Diamond">Natural Diamond</option>
               </select>
-              {errors.type && (
+              {errors.diamondtype && (
                 <span className="error-text-seting">{errors.diamondtype}</span>
               )}
             </div>

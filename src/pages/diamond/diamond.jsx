@@ -296,12 +296,15 @@ export default function Diamond() {
     const fetchShapes = async () => {
       try {
         const response = await axiosClient.get("/api/diamond-shapes");
-        /* setShapes(response.data.data); // array of strings */
+
         const shapeList = response.data.data; // array of objects
         setShapes(shapeList);
-        if (ringCartItem?.shape) {
+
+        if (ringCartItem?.ringCartItem?.shape) {
           const matchedShape = shapeList.find(
-            (s) => s.name.toLowerCase() === ringCartItem.shape.toLowerCase()
+            (s) =>
+              s.name.toLowerCase() ===
+              ringCartItem.ringCartItem.shape.toLowerCase()
           );
           if (matchedShape) {
             handleShapeChange([matchedShape]);
@@ -315,6 +318,7 @@ export default function Diamond() {
 
     fetchShapes();
   }, [ringCartItem]);
+
   useEffect(() => {
     if (
       selectedShapes.length === 0 &&
@@ -456,6 +460,7 @@ export default function Diamond() {
         showAdvanced={showAdvanced}
         checkedDiamonds={checkedDiamonds}
         onToggleCheck={toggleDiamondCheck}
+        ringCartItem={ringCartItem}
       />
 
       {/* Pagination Controls */}

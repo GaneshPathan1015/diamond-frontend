@@ -138,7 +138,6 @@ export default function Diamond() {
     };
 
     debouncedFilterRef.current(params);
-    console.log("Selected shapes updated:", selectedShapes);
 
     return () => {
       debouncedFilterRef.current.cancel();
@@ -206,8 +205,6 @@ export default function Diamond() {
       per_page,
     };
 
-    console.log("Request params:", requestParams);
-
     setLoading(true);
     try {
       const response = await axiosClient.get("/api/get-all-diamonds", {
@@ -223,8 +220,6 @@ export default function Diamond() {
     }
   };
 
-  // console.log(diamonds);
-  
   const totalPages = Math.ceil(total / perPage);
 
   const sortedDiamonds = [...diamonds].sort((a, b) => {

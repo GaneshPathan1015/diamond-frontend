@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const DiamondSelectionModal = ({ onClose, ringCartItem }) => {
   const modalRef = useRef();
   const navigate = useNavigate();
-  
+
   // Close modal on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {

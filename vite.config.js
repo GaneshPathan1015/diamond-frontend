@@ -24,9 +24,9 @@ export default defineConfig({
         const destination = path.resolve(__dirname, 'dist/.htaccess')
         try {
           fs.copyFileSync(source, destination)
-          console.log('✅ .htaccess copied to dist folder')
+          console.log(' .htaccess copied to dist folder')
         } catch (error) {
-          console.error('❌ Failed to copy .htaccess:', error)
+          console.error(' Failed to copy .htaccess:', error)
         }
       },
     },

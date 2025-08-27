@@ -24,6 +24,7 @@ const RingWrapper = ({ ringCartItem }) => {
   // Determine which step order to use
   const isDiamondDetailsPage =
     location.pathname.startsWith("/diamond-details/");
+
   const steps =
     isDiamondDetailsPage || selectedDiamondParam ? diamondSteps : defaultSteps;
 
@@ -49,8 +50,10 @@ const RingWrapper = ({ ringCartItem }) => {
           {steps.map((step, index) => (
             <div
               key={step.id}
-              className={`step ${currentStep === step.id ? "active" : ""}`}
-              onClick={() => handleStepClick(step)}
+              className={`step ${currentStep === step.id ? "active" : ""} ${
+                step.id === 3 ? "disabled" : ""
+              }`}
+              onClick={() => step.id !== 3 && handleStepClick(step)} // 🚫 Prevent click for step 3
             >
               <div>
                 <span className="step-number">{step.id}</span>

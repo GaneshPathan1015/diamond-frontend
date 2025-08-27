@@ -13,7 +13,7 @@ const slides = [
       "A timeless expression of love, The W Classic draws the eye to a luminous center stone—elegant, enduring, and effortlessly captivating.",
   },
   {
-   images: [
+    images: [
       "https://thecaratcasa.com/api/storage/variation_images//variation_1752334426_BPShZh4cHv.webp",
       "https://thecaratcasa.com/api/storage/variation_images//variation_1752334426_9FYwvMsXzA.webp",
       "https://thecaratcasa.com/api/storage/variation_images//variation_1752334426_BPShZh4cHv.webp",
@@ -56,7 +56,12 @@ const EngagementRings = () => {
 
         <div className="slide">
           {slides[currentIndex].images.map((src, i) => (
-            <img key={i} src={src} alt={`Ring ${i + 1}`} className="ring-image" />
+            <img
+              key={i}
+              src={src}
+              alt={`Ring ${i + 1}`}
+              className="ring-image"
+            />
           ))}
         </div>
 
@@ -66,8 +71,8 @@ const EngagementRings = () => {
       </div>
 
       <div className="text-content">
-        <h3>{slides[currentIndex].title}</h3>
-        <p>{slides[currentIndex].description}</p>
+        <h3 className="text-content_h">{slides[currentIndex].title}</h3>
+        <p className="text-content_p">{slides[currentIndex].description}</p>
       </div>
     </div>
   );

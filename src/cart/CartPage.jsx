@@ -1,42 +1,83 @@
 import React, { useState, useEffect } from "react";
 import { useCart } from "../cart/CartContext";
-import "./cart.css";
 import Help from "../pages/contact/help";
 import { useNavigate } from "react-router-dom";
+import ComboCard from "./ComboCard";
+import DiamondCard from "./DiamondCard";
+import JewelryCard from "./JewelryCard";
+import BuildCard from "./BuildCard";
+import "./cart.css";
 
 export default function CartPage() {
   const navigate = useNavigate();
-  const { cartItems, removeFromCart, clearCart, updateCartItem } = useCart();
-
-  // Unique ID helper
-  const getItemId = (item) => item.certificate_number || item.sku || item.id;
-
-  // Quantity state
+  const { cartItems, removeFromCart, clearCart, updateCartItem, getItemId } =
+    useCart();
   const [quantities, setQuantities] = useState({});
-
 
   useEffect(() => {
     const initialQuantities = {};
     cartItems.forEach((item) => {
-      initialQuantities[getItemId(item)] = item.quantity || 1;
+      initialQuantities[getItemId(item)] = item.itemQuantity;
     });
     setQuantities(initialQuantities);
-  }, [cartItems]);
+  }, [cartItems, getItemId]);
 
- const handleQuantityChange = (itemId, delta) => {
-  const currentQty = quantities[itemId] || 1;
-  const newQty = Math.max(1, currentQty + delta);
+  const handleQuantityChange = (itemId, delta) => {
+    const currentQty = quantities[itemId];
+    const newQty = Math.max(1, currentQty + delta);
 
-  // First update local quantity state
-  setQuantities((prev) => ({ ...prev, [itemId]: newQty }));
+    // First update local quantity state
+    setQuantities((prev) => ({ ...prev, [itemId]: newQty }));
 
-  // Then update the cart context state safely
-  updateCartItem(itemId, newQty);
-};
+    // Then update the cart context state safely
+    updateCartItem(itemId, newQty);
+  };
 
-  const subtotal = cartItems.reduce((total, item) => {
-    const qty = quantities[getItemId(item)] || 1;
-    return total + parseFloat(item.price || 0) * qty;
+  const toNumber = (val) => {
+    if (typeof val === "number") return val;
+    if (!val) return 0;
+    const cleaned = String(val).replace(/[^0-9.-]/g, "");
+    const n = Number(cleaned);
+    return Number.isFinite(n) ? n : 0;
+  };
+
+  // Decide unit price based on item.type
+  const getUnitPrice = (item) => {
+    switch (item.productType) {
+      case "combo":
+        // Prefer pre-computed combo price if present
+        return toNumber(
+          item.price ??
+            toNumber(item.ring?.price) + toNumber(item.diamond?.price)
+        );
+
+      case "build":
+        // Build might have multiple parts (extend as needed)
+        return toNumber(
+          item.price ??
+            toNumber(item.ring?.price) + toNumber(item.diamond?.price)
+        );
+
+      case "diamond":
+        return toNumber(item.price);
+
+      case "jewelry":
+        return toNumber(item.price);
+
+      default:
+        return toNumber(item.price);
+    }
+  };
+
+  // Decide quantity (prefer context item.quantity)
+  const getQty = (item, quantities, getItemId) =>
+    (Number.isFinite(item.itemQuantity) ? item.itemQuantity : null) ??
+    quantities[getItemId(item)];
+
+  const subtotal = cartItems.reduce((sum, item) => {
+    const price = getUnitPrice(item);
+    const qty = getQty(item, quantities, getItemId);
+    return sum + price * qty;
   }, 0);
 
   const handleCheckout = () => {
@@ -70,121 +111,37 @@ export default function CartPage() {
     );
   }
 
+  const renderCartItem = (item, index) => {
+    const itemId = getItemId(item);
+    const quantity = quantities[itemId];
+
+    const cardProps = {
+      item,
+      quantity,
+      onQuantityChange: (delta) => handleQuantityChange(itemId, delta),
+      onRemove: () => removeFromCart(itemId),
+    };
+
+    switch (item.productType) {
+      case "combo":
+        return <ComboCard key={index} {...cardProps} />;
+      case "build":
+        return <BuildCard key={index} {...cardProps} />;
+      case "diamond":
+        return <DiamondCard key={index} {...cardProps} />;
+      case "jewelry":
+        return <JewelryCard key={index} {...cardProps} />;
+      default:
+        return <div key={index}>Unknown Item Type</div>;
+    }
+  };
+
   return (
     <>
       <div className="cart-container">
         <div className="cart-left">
           <h2>Your cart</h2>
-
-          <div className="promo-banner">
-            <img src="/images/elements.webp" alt="Free Necklace" />
-            <div>
-              <p className="almost-there">YOU'RE ALMOST THERE!</p>
-              <p>
-                You are{" "}
-                <strong>${460 - subtotal > 0 ? 460 - subtotal : 0}</strong> away
-                from FREE <strong>Diamond Necklace</strong>.
-              </p>
-              <p>
-                You are{" "}
-                <strong>${2460 - subtotal > 0 ? 2460 - subtotal : 0}</strong>{" "}
-                away from FREE <strong>Diamond Bracelet</strong>.
-              </p>
-            </div>
-          </div>
-
-          {cartItems.map((item, index) => {
-            const itemId = getItemId(item);
-            const quantity = quantities[itemId] || 1;
-            const isDiamond = !!item.certificate_number;
-
-            return (
-              <div key={index} className="product-card">
-                <div className="product-top">
-                  <img
-                    src={
-                      isDiamond
-                        ? `/images/shapes/${item.shape?.image}`
-                        : item.image || "/images/placeholder.png"
-                    }
-                    alt={isDiamond ? item.shape?.name : item.name}
-                    className="product-img"
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = "/images/placeholder.png";
-                    }}
-                  />
-
-                  <div className="product-details">
-                    <p>
-                      <strong>
-                        {isDiamond
-                          ? `${item.shape?.name} - ${item.carat_weight} Carat`
-                          : item.name}
-                      </strong>
-                    </p>
-                    <p>${item.price}</p>
-
-                    {isDiamond ? (
-                      <>
-                        <p>Color: {item.color?.name}</p>
-                        <p>Clarity: {item.clarity?.name}</p>
-                        <p>Cut: {item.cut?.full_name}</p>
-                      </>
-                    ) : (
-                      <>
-                        {item.diamondtype && (
-                          <p className="product-type">
-                            Type: {item.diamondtype}
-                          </p>
-                        )}
-                        {item.shape && (
-                          <p className="product-shape">Shape: {item.shape}</p>
-                        )}
-                        <p>Weight: {item.weight}g</p>
-                        {item.size && (
-                          <p className="product-size">Ring Size: {item.size}</p>
-                        )}
-                        {item.dimensions && (
-                          <p>Dimensions: {item.dimensions}</p>
-                        )}
-                        {item.engraving && <p>Engraving: {item.engraving}</p>}
-                        {/* ✅ Only show if selectedPlan exists */}
-                        {item.selectedPlan && (
-                          <p>
-                            Protection Plan:{" "}
-                            {item.selectedPlan?.toUpperCase()}
-                          </p>
-                        )}
-                      </>
-                    )}
-
-                    <p>SHIP BY: Wednesday, May 21</p>
-                    <p className="shipping-note">
-                      Track your order in real time before it ships
-                    </p>
-
-                    <div className="quantity-control">
-                      <button onClick={() => handleQuantityChange(itemId, -1)}>
-                        -
-                      </button>
-                      <span>{quantity}</span>
-                      <button onClick={() => handleQuantityChange(itemId, 1)}>
-                        +
-                      </button>
-                    </div>
-
-                    <button
-                      onClick={() => removeFromCart(itemId)}
-                      className="remove-btn"
-                    >
-                      ×
-                    </button>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+          {cartItems.map(renderCartItem)}
         </div>
 
         <div className="cart-right">
@@ -201,10 +158,10 @@ export default function CartPage() {
             </p>
 
             <div className="summary-features">
-              <p>✔ FREE INSURED SHIPPING</p>
-              <p>✔ 30 DAY RETURNS</p>
-              <p>✔ LIFETIME WARRANTY</p>
-              <p>✔ SECURED CHECKOUT</p>
+              <p className="summary-features_p">✔ FREE INSURED SHIPPING</p>
+              <p className="summary-features_p">✔ 30 DAY RETURNS</p>
+              <p className="summary-features_p">✔ LIFETIME WARRANTY</p>
+              <p className="summary-features_p">✔ SECURED CHECKOUT</p>
             </div>
           </div>
 
