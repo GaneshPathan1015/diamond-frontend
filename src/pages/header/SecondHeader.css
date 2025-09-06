@@ -20,8 +20,6 @@
   background-color: black !important;
 }
 
-
-
 .header-wrapper.jwl-menu-open {
   background-color: #fff !important;
   transition: background-color 10s ease;
@@ -47,3 +45,8 @@
   padding: 30px 60px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }  
+
+
+@media (max-width: 992px) {
+
+}

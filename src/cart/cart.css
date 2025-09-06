@@ -35,7 +35,8 @@
 }
 
 .product-card {
-  position: relative; /* Ensure remove button aligns to this */
+  position: relative;
+  /* Ensure remove button aligns to this */
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   padding: 20px 0;
@@ -56,7 +57,7 @@
   /* Removed position: relative from here */
 }
 
-.product-details p {
+.product-details_p {
   margin: 4px 0;
 }
 
@@ -132,7 +133,7 @@
   margin-bottom: 10px;
 }
 
-.summary-features p {
+.summary-features_p {
   font-size: 14px;
   margin: 5px 0;
 }
@@ -168,7 +169,7 @@
   cursor: pointer;
   line-height: 1;
 }
-    
+
 .remove-btn:hover {
   color: red;
 }

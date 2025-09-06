@@ -37,7 +37,6 @@ const JewelryDetailsPage = () => {
   const [selectedMetalId, setSelectedMetalId] = useState(null);
   const [selectedShapeId, setSelectedShapeId] = useState(null);
   const [selectedVariationIndex, setSelectedVariationIndex] = useState(0);
-  const [thumbnails, setThumbnails] = useState([]);
   const [selectedPlan, setSelectedPlan] = useState("1-year");
   const [activeFeature, setActiveFeature] = useState(null);
   const navigate = useNavigate();
@@ -45,7 +44,7 @@ const JewelryDetailsPage = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axiosClient.get(`/api/product-by-id/${id}`);
+        const res = await axiosClient.get(`/api/jewelry-product/${id}`);
         const data = res.data;
 
         const metalVariationKeys = Object.keys(data.metal_variations);
@@ -67,7 +66,7 @@ const JewelryDetailsPage = () => {
 
           setMainImage(getImageUrl(defaultVariation?.images?.[0]));
 
-          const allImages = metalVariationKeys.flatMap((metalId) =>
+          /* const allImages = metalVariationKeys.flatMap((metalId) =>
             Object.values(data.metal_variations[metalId]).flatMap(
               (shapeArray) =>
                 shapeArray.flatMap((variation) =>
@@ -76,19 +75,19 @@ const JewelryDetailsPage = () => {
             )
           );
 
-          setThumbnails([...new Set(allImages)]);
+          setThumbnails([...new Set(allImages)]); */
         } else {
           // CHANGE: keep your old (non-build) logic
           const defaultVariation = data.metal_variations[defaultMetalId][0];
           setMainImage(getImageUrl(defaultVariation?.images?.[0]));
 
-          const allImages = metalVariationKeys.flatMap((metalId) =>
+          /*  const allImages = metalVariationKeys.flatMap((metalId) =>
             data.metal_variations[metalId].flatMap((variation) =>
               (variation.images || []).map((img) => getImageUrl(img))
             )
           );
 
-          setThumbnails([...new Set(allImages)]);
+          setThumbnails([...new Set(allImages)]); */
         }
       } catch (err) {
         console.error("Failed to fetch product", err);
@@ -156,23 +155,27 @@ const JewelryDetailsPage = () => {
     <div className="container py-5">
       <div className="row">
         <div className="col-md-1 d-flex flex-column align-items-center gap-2 thumbs">
-          {thumbnails.map((src, i) => (
-            <img
-              key={i}
-              src={src}
-              alt={`Thumb ${i + 1}`}
-              onClick={() => setMainImage(src)}
-              style={{
-                cursor: "pointer",
-                border: mainImage === src ? "2px solid #000" : "1px solid #ccc",
-                padding: "2px",
-                width: "60px",
-                height: "60px",
-                objectFit: "cover",
-                borderRadius: "4px",
-              }}
-            />
-          ))}
+          {selectedVariation?.images?.map((img, i) => {
+            const src = getImageUrl(img);
+            return (
+              <img
+                key={i}
+                src={src}
+                alt={`Thumb ${i + 1}`}
+                onClick={() => setMainImage(src)}
+                style={{
+                  cursor: "pointer",
+                  border:
+                    mainImage === src ? "2px solid #000" : "1px solid #ccc",
+                  padding: "2px",
+                  width: "60px",
+                  height: "60px",
+                  objectFit: "scale-down",
+                  borderRadius: "4px",
+                }}
+              />
+            );
+          })}
         </div>
         {/* Main image */}
         <div className="col-md-6 main-image">
@@ -196,7 +199,7 @@ const JewelryDetailsPage = () => {
             {name}
           </h5>
           <p>
-            <span className="text-muted">• SKU: {variationSku}</span>
+            <span className="text-muted">SKU: {variationSku}</span>
           </p>
           <p>
             price: <strong>₹{price}</strong>{" "}
@@ -204,28 +207,6 @@ const JewelryDetailsPage = () => {
           <p className="mb-1">METAL COLOR</p>
 
           <div className="d-flex mb-3">
-            {/* {Object.entries(product.metal_variations).map(
-              ([metalId, group]) => {
-                // CHANGE: pick one variation to render metal_color (different for build)
-                const metal = isBuild
-                  ? group[Object.keys(group)[0]][0].metal_color
-                  : group[0].metal_color;
-
-                return (
-                  <div
-                    key={metalId}
-                    className={`option-circle ${
-                      selectedMetalId === metalId ? "active" : ""
-                    }`}
-                    onClick={() => handleMetalChange(metalId)}
-                    title={metal?.name}
-                    style={{ background: metal?.hex }}
-                  >
-                    {metal?.quality}
-                  </div>
-                );
-              }
-            )} */}
             {Object.entries(product.metal_variations)
               .sort(([aKey, aGroup], [bKey, bGroup]) => {
                 const aMetal = isBuild
@@ -377,15 +358,13 @@ const JewelryDetailsPage = () => {
                 className="btn btn-dark w-100"
                 onClick={() => {
                   const cartItem = {
-                    sku: variationSku,
+                    ...selectedVariation,
+                    productType: "jewelry",
                     name: name,
-                    price: price,
-                    image: mainImage,
-                    weight: weight,
-                    type: "jewelry",
-                    selectedMetal: selectedMetalId,
+                    itemQuantity: 1,
                     selectedPlan: selectedPlan,
                   };
+
                   addToCart(cartItem);
                   navigate("/cart");
                 }}

@@ -32,7 +32,8 @@ import Reserve from "./pages/reserve-collections/reserve";
 import Signature from "./pages/w-signature/signature";
 import EngagementDetails from "./pages/engagement-details/engDetails";
 import EngagementList from "./pages/engagement-list/engagementList";
-
+import CompleteRing from "./pages/completeRing/completeRing";
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
 
 
 export default function App() {
@@ -72,13 +73,17 @@ export default function App() {
             path="/jewellary-details/:id"
             element={<JewelryDetailsPage />}
           />
+          <Route path="/product/:slug?" element={<CompleteRing />} />
+          <Route
+            path="/engagment-details/:id"
+            element={<EngagementDetails />}
+          />
           <Route path="/megamenu" element={<MegaMenu />} />
 
           <Route path="/luxe" element={<Luxe />} />
-          <Route path="/reserve" element={<Reserve /> } />
-          <Route path="/signature" element={<Signature /> } />
-          <Route path="/engagment-details/:id" element={<EngagementDetails /> } />
-
+          <Route path="/reserve" element={<Reserve />} />
+          <Route path="/signature" element={<Signature />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </main>
       <Footer />

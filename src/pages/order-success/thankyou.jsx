@@ -1,11 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import './thankyou.css';
+import "./thankyou.css";
 
 const ThankYou = () => {
   const location = useLocation();
+  const [order, setOrder] = useState(null);
   const navigate = useNavigate();
-  const order = location.state?.order;
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const orderId = queryParams.get("order_id");
+
+    if (orderId) {
+      // Fetch order details for PayPal redirect
+      axiosClient.get(`/api/orders/${orderId}`).then((res) => {
+        setOrder(res.data);
+      });
+    } else if (location.state?.order) {
+      // Non-PayPal order from navigate()
+      setOrder(location.state.order);
+    }
+  }, [location.state]);
 
   const handleViewOrder = () => {
     if (order) {
@@ -14,7 +29,7 @@ const ThankYou = () => {
   };
 
   const handleContinueShopping = () => {
-    navigate("/diamond"); 
+    navigate("/diamond");
   };
 
   return (
@@ -34,10 +49,16 @@ const ThankYou = () => {
               Total Price: <strong>{order.total_price}</strong>
             </p>
             <div className="thankyou-buttons">
-              <button className="thankyou-btn-outline" onClick={handleViewOrder}>
+              <button
+                className="thankyou-btn-outline"
+                onClick={handleViewOrder}
+              >
                 VIEW ORDER
               </button>
-              <button className="thankyou-btn-filled" onClick={handleContinueShopping}>
+              <button
+                className="thankyou-btn-filled"
+                onClick={handleContinueShopping}
+              >
                 CONTINUE SHOPPING
               </button>
             </div>

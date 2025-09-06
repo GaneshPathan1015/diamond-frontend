@@ -11,7 +11,8 @@ import {
 import Loader from "../diamond/loader";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
-import "./EngagementList.css";
+import "./engagementList.css";
+import EngagementTabs from "../engagement-details/ring-product/EngagementTabs";
 
 const priceSlugMap = {
   "0-500": "$0 - $500",
@@ -25,14 +26,12 @@ const priceSlugReverseMap = Object.entries(priceSlugMap).reduce(
   (acc, [slug, label]) => {
     acc[label] = slug;
     return acc;
-  },
-  {}
+  }
 );
 
 const priceRanges = Object.values(priceSlugMap);
 
 const EngagementList = () => {
-
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
@@ -61,6 +60,7 @@ const EngagementList = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { slug } = useParams();
+  const diamond = location.state?.diamond;
 
   const toggleFilterSection = (section) => {
     setActiveFilterSection((prev) => (prev === section ? "" : section));
@@ -294,6 +294,7 @@ const EngagementList = () => {
     const styleParam = params.get("style");
     const shapeParam = params.get("shape");
     const menuShapeParam = params.get("menushape");
+    const selectRingParam = params.get("selectring");
     const menuStyleParam = params.get("menustyle");
     const priceParam = params.get("price");
     const sortParam = params.get("sort");
@@ -325,6 +326,15 @@ const EngagementList = () => {
         .join(" ");
       filters.shape = formattedShape;
     }
+
+    if (selectRingParam) {
+      const formattedShapeRing = selectRingParam
+        .split("-")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+      filters.shape = formattedShapeRing;
+    }
+
     if (shapeParam) {
       const shapeName = shapeParam.split("-").slice(1).join("-");
       filters.shape = shapeName;
@@ -471,6 +481,7 @@ const EngagementList = () => {
         </div>
       </section>
       <div className="container my-4">
+        <EngagementTabs diamond={diamond} />
         {/* Filters Top Bar */}
         <div className="d-flex justify-content-between filters-bar">
           <div className="d-flex align-items-center flex-wrap gap-3">
@@ -793,6 +804,7 @@ const EngagementList = () => {
                 >
                   <Link
                     to={`/engagment-details/${group.product?.id}`}
+                    state={{ diamond: diamond }} // pass state correctly
                     className="text-decoration-none text-dark mt-2"
                   >
                     <div className="product-image-container position-relative shadow">

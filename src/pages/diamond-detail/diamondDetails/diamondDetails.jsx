@@ -7,22 +7,22 @@ import Help from "../../contact/help";
 import RingWrapper from "../../diamond/ringWrapper/ringWrapper";
 import axiosClient from "../../../api/axios";
 
-const steps = [
-  { id: 1, label: "CHOOSE A DIAMOND" },
-  { id: 2, label: "CHOOSE A SETTING" },
-  { id: 3, label: "COMPLETE YOUR RING" },
-];
-
 export default function DiamondDetails() {
   const detailsRef = useRef(null);
-  const [selectedView, setSelectedView] = useState("image");
+
+  // const [selectedView, setSelectedView] = useState("image");
  
   const [currentStep, setCurrentStep] = useState(1);
   const { addToCart } = useCart();
-  const [openSection, setOpenSection] = useState(null);
+
   const navigate = useNavigate();
+  // const { addToCart } = useCart();
+  // const { state } = useLocation();
+  // const diamond = state?.diamond;
+  const ringCartItem = state?.ringCartItem;
+  const [selectedView, setSelectedView] = useState("image");
+  const [openSection, setOpenSection] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState({ type: "", text: "" });
   const [alreadyExists, setAlreadyExists] = useState(false);
 
 const { state } = useLocation();
@@ -53,12 +53,18 @@ useEffect(() => {
   const toggleSection = (section) => {
     setOpenSection(openSection === section ? null : section);
   };
+  const handleAddToCart = () => {
+    const diamondWithType = {
+      ...diamond,
+      productType: "diamond",
+      itemQuantity:1,
+    };
 
-  const handleStepClick = (stepId) => {
-    setCurrentStep(stepId);
+    addToCart(diamondWithType);
+    navigate("/cart");
   };
 
-  const handleAddToCart = () => {
+  /* const handleAddToCart = () => {
     const cartKey = "cart";
     const existingCart = JSON.parse(localStorage.getItem(cartKey)) || [];
 
@@ -78,7 +84,7 @@ useEffect(() => {
       try {
         const diamondWithType = {
           ...diamond,
-          type: "diamond", //  Important for backend processing     
+          type: "diamond",
         };
         const updatedCart = [...existingCart, diamondWithType];
         localStorage.setItem(cartKey, JSON.stringify(updatedCart));
@@ -90,6 +96,28 @@ useEffect(() => {
         setLoading(false);
       }
     }, 500);
+  }; */
+
+  const handelAddToRing = () => {
+    if (!ringCartItem) {
+      const slug = "shapes";
+      const shapeSlug = diamond.shape.name.toLowerCase().replace(/\s+/g, "-");
+      const params = new URLSearchParams();
+      params.set("selectring", shapeSlug);
+      // If ringCartItem is not set, pass diamond as state
+      navigate(
+        {
+          pathname: `/engagement-rings/${slug}`,
+          search: params.toString(),
+        },
+        { state: { diamond: diamond } }
+      );
+    } else {
+      // If already set, just navigate with params
+      const productSlug = "buildProduct";
+
+      navigate(`/product/${productSlug}`, { state: { diamond, ringCartItem } });
+    }
   };
 
   if (!diamond) {
@@ -98,29 +126,18 @@ useEffect(() => {
 
   return (
     <>
-      <section className="hero_section_wrapper">
-        <div className="container-fluid p-0 position-relative">
-          <img
-            src="/images/Header_Banner.jpg"
-            alt=""
-            className="img-fluid w-100"
-          />
-        </div>
-      </section>
-
-      <RingWrapper />
+      <RingWrapper ringCartItem={ringCartItem} />
 
       <div
         style={{
           display: "flex",
-          gap: "80px",
           alignItems: "flex-start",
           flexWrap: "wrap",
-          justifyContent: "end",
+          justifyContent: "center",
         }}
       >
         {/* Section 1: Diamond Viewer */}
-        <div className="diamond-viewer">
+        <div className="diamond-viewer col-12 col-lg-8">
           <div className="diamond-main-display">
             {selectedView === "image" && (
               <img
@@ -214,9 +231,15 @@ useEffect(() => {
         </div>
 
         {/* Section 2: Diamond Details */}
-        <div style={{ maxWidth: "600px" }}>
+        <div className="col-12 col-md-8 offset-md-2 col-lg-4 offset-lg-0">
           <h1 style={{ fontSize: "24px", fontWeight: "bold" }}>
-            {diamond.carat_weight} Carat {diamond.shape.name} Natural Diamond
+            {diamond.carat_weight} Carat {diamond.shape.name } 
+            {diamond.diamond_type === 1
+              ? " Natural "
+              : diamond.diamond_type === 2
+              ? " Lab "
+              : " Coloured "}
+             Diamond
           </h1>
           <p>
             <strong>Certificate Number#:</strong> {diamond.certificate_number}
@@ -267,7 +290,7 @@ useEffect(() => {
             <div>
               <p>Color: {diamond.color.name}</p>
               <p>Clarity: {diamond.clarity.name}</p>
-              <p>Certificate: {diamond.certificate_company.dl_name}</p>
+              <p>Certificate: {diamond.certificate_company?.dl_name || "NA"}</p>
             </div>
           </div>
 
@@ -296,6 +319,14 @@ useEffect(() => {
             <span>Track in real time before it ships</span>
           </div>
 
+          <button
+            className="custom-btn outlined"
+            style={{ width: "95%", height: "50px", marginBottom: "15px" }}
+            onClick={handelAddToRing}
+          >
+            ADD TO RING
+          </button>
+
           {loading && (
             <div className="overlay">
               <div className="spinner"></div>
@@ -303,11 +334,12 @@ useEffect(() => {
           )}
 
           <button
-            className="add-to-cart-btn"
+            className="custom-btn outlined"
+            style={{ width: "95%", height: "50px", marginBottom: "15px" }}
             onClick={handleAddToCart}
             disabled={loading}
           >
-            {loading ? "Processing..." : "Add to Cart"}
+            {loading ? "Processing..." : "BUY LOOSE"}
           </button>
 
           {alreadyExists && (

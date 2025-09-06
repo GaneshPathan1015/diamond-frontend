@@ -59,14 +59,6 @@ body header.header-wrapper.position-realtive .header-top-wrapper strong.text-whi
   color: #FFF !important;
 }
 
-/* -----------mega menu css end  */
-/* header end-------------------------------------------------------- */
-
-/* ----------------------common css start------------------ */
-/* .accordion-button:not(.collapsed)::after {
-  background-image: ;
- 
-} */
 .accordion-button:not(.collapsed) {
   color: #000;
   background-color:#ccc;
@@ -91,10 +83,7 @@ left:unset !important;
 .slick-next {
   right: 8px !important;
 }
-/* p {
-  line-height: 30px;
-  margin-bottom: 25px;
-}*/
+
 .section-header-lg {
   color: #000;
   font-size: 44px;
@@ -167,7 +156,7 @@ position: relative;
 .build_engagement_wrapper p{
   max-width:436px;
 }
-.best-selling-wrapper .tab-content .tab-pane p {
+.best-selling-wrapper .tab-content .tab-pane_p {
   color: #213245;
   font-size: 14px;
   line-height: 19px;
@@ -272,11 +261,11 @@ footer .site-footer__item-inner a {
   letter-spacing: 1.44px;
   text-transform: uppercase;
 }
-.build_engagement_wrapper  .content ul li{
+.build_engagement_wrapper .content ul li{
   list-style-type: none;
 
 }
-.build_engagement_wrapper  .content ul p {
+.build_engagement_wrapper .content_p {
   font-size: 16px;
   padding-left: 18px;
   margin-top: 4px;

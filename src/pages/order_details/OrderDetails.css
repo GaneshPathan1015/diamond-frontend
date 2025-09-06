@@ -37,13 +37,13 @@
   margin-bottom: 16px;
 }
 
-.product-details h4 {
+.product-details_h {
   font-size: 20px;
   margin: 0 0 4px;
   color: #222;
 }
 
-.product-details p {
+.product-details_p {
   margin: 3px 0;
   font-size: 14px;
   color: #555;
@@ -57,11 +57,6 @@
   border: 1px solid #ccc;
 }
 
-.price {
-  font-size: 18px;
-  font-weight: bold;
-  color: #d32f2f;
-}
 
 .order-timeline-box {
   margin: 24px 0 16px;
@@ -176,15 +171,15 @@
   border: 1px solid #ccc;
 }
 
-.shipping-details h4,
-.price-summary h4 {
+.shipping-details_h,
+.price-summary_h {
   font-size: 18px;
   margin-bottom: 14px;
   border-bottom: 1px solid #ddd;
   padding-bottom: 6px;
 }
 
-.shipping-details p {
+.shipping-details_p {
   font-size: 14px;
   color: #333;
   margin-bottom: 6px;

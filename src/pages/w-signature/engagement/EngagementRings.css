@@ -32,7 +32,7 @@
   transition: transform 0.3s ease;
 }
 
-.arrow {
+.arrowSignature {
   background: none;
   border: none;
   font-size: 2rem;
@@ -42,7 +42,7 @@
   transition: color 0.3s;
 }
 
-.arrow:hover {
+.arrowSignature:hover {
   color: #333;
 }
 
@@ -53,13 +53,13 @@
   margin-right: auto;
 }
 
-.text-content h3 {
+.text-content_h {
   font-size: 22px;
   margin-bottom: 10px;
   color: #222;
 }
 
-.text-content p {
+.text-content_p {
   font-size: 16px;
   color: #555;
   line-height: 1.6;
