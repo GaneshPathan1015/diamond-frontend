@@ -3,13 +3,10 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
-
-  // Load cart from localStorage on mount
-  useEffect(() => {
-    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    setCartItems(storedCart);
-  }, []);
+  // Initialize cart from localStorage
+  const [cartItems, setCartItems] = useState(() => {
+    return JSON.parse(localStorage.getItem("cart")) || [];
+  });
 
   // Save cart to localStorage whenever cartItems change
   useEffect(() => {
@@ -18,8 +15,6 @@ export const CartProvider = ({ children }) => {
 
   // Unique ID helper
   const getItemId = (item) => {
-    // console.log(item);
-
     if (item.productType === "combo") {
       return `combo-${item.ring?.id}-${item.diamond?.diamondid}-${item.size}`;
     }
@@ -34,40 +29,67 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  // Add item to cart (increments quantity if exists)
+  // Add item to cart
   const addToCart = (item) => {
     const itemId = getItemId(item);
-    const exists = cartItems.some((i) => getItemId(i) === itemId);
 
-    if (exists) {
-      const updated = cartItems.map((i) =>
-        getItemId(i) === itemId ? { ...i, itemQuantity: i.itemQuantity + 1 } : i
-      );
-      setCartItems(updated);
-    } else {
-      setCartItems([...cartItems, { ...item }]);
-    }
+    setCartItems((prevCart) => {
+      const exists = prevCart.some((i) => getItemId(i) === itemId);
+      if (exists) {
+        return prevCart.map((i) =>
+          getItemId(i) === itemId
+            ? { ...i, itemQuantity: i.itemQuantity + 1 }
+            : i
+        );
+      } else {
+        return [...prevCart, { ...item, itemQuantity: 1 }];
+      }
+    });
   };
 
   // Remove item by ID
   const removeFromCart = (itemId) => {
-    const updated = cartItems.filter((item) => getItemId(item) !== itemId);
-    setCartItems(updated);
+    setCartItems((prevCart) =>
+      prevCart.filter((item) => getItemId(item) !== itemId)
+    );
   };
 
-  // Update item quantity (minimum 1)
+  // Update item quantity
   const updateCartItem = (itemId, itemQuantity) => {
-    const updated = cartItems.map((item) =>
-      getItemId(item) === itemId
-        ? { ...item, itemQuantity: Math.max(1, itemQuantity) }
-        : item
+    setCartItems((prevCart) =>
+      prevCart.map((item) =>
+        getItemId(item) === itemId
+          ? { ...item, itemQuantity: Math.max(1, itemQuantity) }
+          : item
+      )
     );
-    setCartItems(updated);
   };
 
   // Clear cart
   const clearCart = () => {
     setCartItems([]);
+  };
+
+  // Calculate subtotal
+  const getSubTotal = () => {
+    return cartItems.reduce((total, item) => {
+      switch (item.productType) {
+        case "diamond":
+          return total + item.price * item.itemQuantity;
+        case "combo":
+          const comboPrice =
+            Number(item.ring.price) + Number(item.diamond.price);
+          return total + comboPrice * item.itemQuantity;
+        case "jewelry":
+          const planPrice = item.selectedPlan?.price || 0;
+          return total + (item.price + planPrice) * item.itemQuantity;
+        case "build":
+          const buildPrice = Number(item.price) || 0;
+          return total + buildPrice * item.itemQuantity;
+        default:
+          return total;
+      }
+    }, 0);
   };
 
   const cartCount = cartItems.length;
@@ -81,6 +103,7 @@ export const CartProvider = ({ children }) => {
         removeFromCart,
         updateCartItem,
         clearCart,
+        getSubTotal,
         cartCount,
       }}
     >

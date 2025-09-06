@@ -72,7 +72,7 @@ const CompleteRing = () => {
       ring: ringCartItem, // ring details
       diamond: diamond, // diamond details
       size: selectedSize, // ring size
-      itemQuantity:1,
+      itemQuantity: 1,
       totalPrice, // computed total
     };
     addToCart(cartItem);

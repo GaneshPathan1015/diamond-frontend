@@ -114,7 +114,7 @@ const MegaMenu = ({ type = "engagement", closeMegaMenu = () => {} }) => {
     const params = new URLSearchParams();
     params.set("menudiamond", itemSlug);
     navigate({
-      pathname:`/diamond`,
+      pathname: `/diamond`,
       search: params.toString(),
     });
   };
@@ -146,7 +146,7 @@ const MegaMenu = ({ type = "engagement", closeMegaMenu = () => {} }) => {
           handleShapeClick={handleShapeClick}
           handleStyleClick={handleStyleClick}
           handleItemClick={handleItemClick}
-          handleDiamondClick={handleDiamondClick}          
+          handleDiamondClick={handleDiamondClick}
           navigate={navigate}
           slugify={slugify}
         />

@@ -59,14 +59,6 @@ body header.header-wrapper.position-realtive .header-top-wrapper strong.text-whi
   color: #FFF !important;
 }
 
-/* -----------mega menu css end  */
-/* header end-------------------------------------------------------- */
-
-/* ----------------------common css start------------------ */
-/* .accordion-button:not(.collapsed)::after {
-  background-image: ;
- 
-} */
 .accordion-button:not(.collapsed) {
   color: #000;
   background-color:#ccc;

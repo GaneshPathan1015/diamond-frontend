@@ -10,10 +10,12 @@ import "./cart.css";
 
 export default function CartPage() {
   const navigate = useNavigate();
-  const { cartItems, removeFromCart, clearCart, updateCartItem, getItemId } =
+  const { cartItems, removeFromCart, updateCartItem, getItemId, getSubTotal } =
     useCart();
+
   const [quantities, setQuantities] = useState({});
 
+  // Initialize quantities when cartItems load
   useEffect(() => {
     const initialQuantities = {};
     cartItems.forEach((item) => {
@@ -23,65 +25,18 @@ export default function CartPage() {
   }, [cartItems, getItemId]);
 
   const handleQuantityChange = (itemId, delta) => {
-    const currentQty = quantities[itemId];
+    const currentQty = quantities[itemId] || 1;
     const newQty = Math.max(1, currentQty + delta);
 
-    // First update local quantity state
+    // Update local state
     setQuantities((prev) => ({ ...prev, [itemId]: newQty }));
 
-    // Then update the cart context state safely
+    // Update CartContext
     updateCartItem(itemId, newQty);
   };
 
-  const toNumber = (val) => {
-    if (typeof val === "number") return val;
-    if (!val) return 0;
-    const cleaned = String(val).replace(/[^0-9.-]/g, "");
-    const n = Number(cleaned);
-    return Number.isFinite(n) ? n : 0;
-  };
-
-  // Decide unit price based on item.type
-  const getUnitPrice = (item) => {
-    switch (item.productType) {
-      case "combo":
-        // Prefer pre-computed combo price if present
-        return toNumber(
-          item.price ??
-            toNumber(item.ring?.price) + toNumber(item.diamond?.price)
-        );
-
-      case "build":
-        // Build might have multiple parts (extend as needed)
-        return toNumber(
-          item.price ??
-            toNumber(item.ring?.price) + toNumber(item.diamond?.price)
-        );
-
-      case "diamond":
-        return toNumber(item.price);
-
-      case "jewelry":
-        return toNumber(item.price);
-
-      default:
-        return toNumber(item.price);
-    }
-  };
-
-  // Decide quantity (prefer context item.quantity)
-  const getQty = (item, quantities, getItemId) =>
-    (Number.isFinite(item.itemQuantity) ? item.itemQuantity : null) ??
-    quantities[getItemId(item)];
-
-  const subtotal = cartItems.reduce((sum, item) => {
-    const price = getUnitPrice(item);
-    const qty = getQty(item, quantities, getItemId);
-    return sum + price * qty;
-  }, 0);
-
   const handleCheckout = () => {
-    navigate("/checkout", { state: { cartItems, subtotal } });
+    navigate("/checkout");
   };
 
   if (cartItems.length === 0) {
@@ -146,7 +101,7 @@ export default function CartPage() {
 
         <div className="cart-right">
           <div className="summary-card">
-            <p className="subtotal">Subtotal : ${subtotal.toFixed(2)}</p>
+            <p className="subtotal">Subtotal : ${getSubTotal().toFixed(2)}</p>
             <p className="tax-info">
               Taxes and shipping calculated at checkout
             </p>
