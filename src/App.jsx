@@ -34,13 +34,14 @@ import EngagementDetails from "./pages/engagement-details/engDetails";
 import EngagementList from "./pages/engagement-list/engagementList";
 import CompleteRing from "./pages/completeRing/completeRing";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
-
+import WhiteClarityNav from "./pages/header/WhiteClarityNav"
 
 export default function App() {
   return (
     <>
       <ScrollToTop />
-      <HeaderWrapper />
+      {/* <HeaderWrapper /> */}
+      <WhiteClarityNav/>
       <main>
         <Routes>
           <Route path="/" element={<Home />} />

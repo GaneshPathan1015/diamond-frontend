@@ -1,0 +1,280 @@
+/* Navbar */
+.custom-navbar {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 2000;
+    font-family: Arial, sans-serif;
+    transition: background 0.3s, color 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+/* When on other pages before scrolling */
+.custom-navbar.no-home {
+    position: relative;
+    z-index: 2000;
+}
+
+/* Override text colors when no-home is applied */
+.custom-navbar.no-home .nav-container,
+.custom-navbar.no-home .menu-bar {
+    color: black;
+}
+
+.custom-navbar.no-home .top-bar {
+    background: #06374a;
+    color: white;
+}
+
+/* Top bar */
+.custom-navbar .top-bar {
+    background: #06374a;
+    color: #fff;
+    text-align: center;
+    padding: 8px 0;
+    font-size: 16px;
+}
+
+/* Nav container */
+.custom-navbar .nav-container,
+.menu-bar {
+    background: transparent;
+    color: white;
+}
+
+/* When scrolled */
+.custom-navbar.scrolled .nav-container,
+.custom-navbar.scrolled .menu-bar {
+    background: #ffffff;
+    color: #222;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 40px;
+}
+
+.nav-left,
+.nav-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-logo {
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}
+
+.appointment-btn {
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 5px 10px;
+    background: none;
+    cursor: pointer;
+}
+
+/* Menu bar (Desktop) */
+.menu-bar {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 20px 0;
+    transition: color 0.3s;
+}
+
+.menu-item {
+    cursor: pointer;
+    font-weight: 600;
+    position: relative;
+}
+
+/* Mega menu */
+.mega-menu-overlay {
+    position: fixed;
+    top: 20vh;
+    left: 0;
+    width: 100%;
+    height: auto;
+    min-height: 70vh;
+    max-height: calc(100vh - 40vh);
+    background: white;
+    color: black;
+    padding: 40px 80px;
+    z-index: 1500;
+    overflow-y: auto;
+    transition: height 0.3s ease;
+}
+
+
+.mega-menu-overlay.scrolled-menu {
+    background: #ffffff;
+}
+
+.mega-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.mega-content .links {
+    flex: 1;
+}
+
+.mega-content .links h4 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.mega-content .links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.mega-content .links ul li {
+    margin: 8px 0;
+    cursor: pointer;
+}
+
+.mega-content .image {
+    flex: 2;
+}
+
+.mega-content .image img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.custom-navbar.hovering-menu .nav-container,
+.custom-navbar.hovering-menu .menu-bar {
+    background: #ffffff !important;
+    color: #222 !important;
+}
+
+
+/* Hero video */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.hero-section video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Hamburger Button */
+.hamburger-btn {
+    color: #fafafa ;
+    display: none !important;
+    background: #06374a;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+}
+.custom-color-btn {
+    color: #fafafa !important;
+    background: #06374a !important;
+    border: none !important;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 280px;
+    height: 100%;
+    background: white;
+    z-index: 3000;
+    padding: 20px;
+    overflow-y: auto;
+    transition: left 0.3s ease;
+}
+
+.sidebar.open {
+    left: 0;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.sidebar-logo {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.close-btn {
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.submenu-item {
+    padding: 6px 0;
+    cursor: pointer;
+}
+
+/* Media Queries for Tablet/Mobile */
+@media (max-width: 992px) {
+    .menu-bar {
+        display: none;
+    }
+
+    .appointment-btn .text {
+        display: none;
+    }
+
+    .appointment-btn .icon {
+        font-size: 20px;
+    }
+
+    .hamburger-btn {
+        color: #ffffff;
+        background-color: #06374a;
+        display: block !important;
+    }
+
+    .nav-right .icon-text .text {
+        display: none;
+    }
+
+    .nav-right .icon-text {
+        font-size: 20px;
+        gap: 0;
+    }
+
+    .nav-container {
+        padding: 5px 20px;
+    }
+
+    .nav-left,
+    .nav-right {
+        gap: 10px;
+    }
+
+    .mega-menu-overlay {
+        display: none;
+    }
+}
+
+/* Appointment button hover effect */
+.appointment-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: #fff;
+}

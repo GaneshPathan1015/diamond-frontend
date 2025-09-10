@@ -1,0 +1,41 @@
+.hero_section_wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero_section_wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hero_section_wrapper .wrapper {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+  padding: 0 15px;
+}
+
+.hero_section_wrapper .slide-title {
+  font-size: 3rem; /* adjust as needed */
+  font-weight: bold;
+}
+
+.hero_section_wrapper .content p {
+  font-size: 1.25rem;
+}
+
+.hero_section_wrapper .slide-btn-wrapper .btn {
+  font-size: 0.7rem;
+  padding: 0.75rem 1.5rem;
+  border-width: 2px;
+  transition: 0.3s;
+}
+
+.hero_section_wrapper .slide-btn-wrapper .btn:hover {
+  background-color: white;
+  color: black;
+}
