@@ -10,23 +10,6 @@
     flex-direction: column;
 }
 
-/* When on other pages before scrolling */
-.custom-navbar.no-home {
-    position: relative;
-    z-index: 2000;
-}
-
-/* Override text colors when no-home is applied */
-.custom-navbar.no-home .nav-container,
-.custom-navbar.no-home .menu-bar {
-    color: black;
-}
-
-.custom-navbar.no-home .top-bar {
-    background: #06374a;
-    color: white;
-}
-
 /* Top bar */
 .custom-navbar .top-bar {
     background: #06374a;
@@ -50,11 +33,25 @@
     color: #222;
 }
 
+.custom-navbar.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2000;
+    background-color: #ffffff;
+}
+
+.main-content {
+    padding-top: 80px;
+    /* same height as navbar */
+}
+
 .nav-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 40px;
+    padding: 6px 40px;
 }
 
 .nav-left,
@@ -83,7 +80,7 @@
     display: flex;
     justify-content: center;
     gap: 40px;
-    padding: 20px 0;
+    padding: 0px 0 20px 0;
     transition: color 0.3s;
 }
 
@@ -96,17 +93,17 @@
 /* Mega menu */
 .mega-menu-overlay {
     position: fixed;
-    top: 20vh;
+    top: 16vh;
     left: 0;
     width: 100%;
     height: auto;
     min-height: 70vh;
-    max-height: calc(100vh - 40vh);
+    /* max-height: calc(100vh - 40vh); */
     background: white;
     color: black;
     padding: 40px 80px;
     z-index: 1500;
-    overflow-y: auto;
+    overflow-y: visible;
     transition: height 0.3s ease;
 }
 
@@ -175,13 +172,14 @@
 
 /* Hamburger Button */
 .hamburger-btn {
-    color: #fafafa ;
+    color: #fafafa;
     display: none !important;
     background: #06374a;
     border: none;
-    font-size: 28px;
+    font-size: 20px;
     cursor: pointer;
 }
+
 .custom-color-btn {
     color: #fafafa !important;
     background: #06374a !important;
@@ -230,6 +228,11 @@
     cursor: pointer;
 }
 
+/* Responsive behavior */
+
+
+
+
 /* Media Queries for Tablet/Mobile */
 @media (max-width: 992px) {
     .menu-bar {
@@ -271,6 +274,28 @@
     .mega-menu-overlay {
         display: none;
     }
+
+    .jwl-mega-menu-inner {
+        display: grid;
+        text-align: center;
+    }
+
+    .jwl-mega-col {
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .jwl-caption {
+        text-align: center;
+    }
+
+    .jwl-caption h6 {
+        font-size: 16px;
+    }
+
+    .jwl-caption a {
+        font-size: 14px;
+    }
 }
 
 /* Appointment button hover effect */
@@ -278,3 +303,27 @@
     background-color: rgba(255, 255, 255, 0.1);
     border-color: #fff;
 }
+
+/* @media (max-width: 768px) { */
+    /* .jwl-mega-menu-inner { */
+        /* display: grid; */
+        /* text-align: center; */
+    /* } */
+/*  */
+    /* .jwl-mega-col { */
+        /* width: 100%; */
+        /* padding: 10px 0; */
+    /* } */
+/*  */
+    /* .jwl-caption { */
+        /* text-align: center; */
+    /* } */
+/*  */
+    /* .jwl-caption h6 { */
+        /* font-size: 16px; */
+    /* } */
+/*  */
+    /* .jwl-caption a { */
+        /* font-size: 14px; */
+    /* } */
+/* } */

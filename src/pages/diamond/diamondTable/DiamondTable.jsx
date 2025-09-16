@@ -25,7 +25,6 @@ const DiamondTable = ({
   const [selectedRows, setSelectedRows] = useState([]);
 
   if (error) return <div>{error}</div>;
-
   return (
     <div className="diamond-table">
       <div className="table-header">
@@ -78,7 +77,11 @@ const DiamondTable = ({
                 <div className="featured-banner">FEATURED DEAL</div>
               )}
               <img
-                src={`${imageBaseUrl}${diamond.shape.image}`} // Constructing the full image URL
+                src={
+                  diamond.image_link
+                    ? diamond.image_link
+                    : "images/images.jpeg" 
+                } 
                 alt={diamond.shape.name || "NA"}
                 className="diamond-img"
               />

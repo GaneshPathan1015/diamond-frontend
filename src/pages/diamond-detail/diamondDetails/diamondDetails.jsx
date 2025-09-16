@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useLocation, useNavigate,useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./DiamondDetails.css";
 import { useCart } from "../../../cart/CartContext";
 import NoDealbreakers from "./nobrokrage/NoDealbreakers";
@@ -11,44 +11,38 @@ export default function DiamondDetails() {
   const detailsRef = useRef(null);
 
   // const [selectedView, setSelectedView] = useState("image");
- 
+
   const [currentStep, setCurrentStep] = useState(1);
   const { addToCart } = useCart();
-
   const navigate = useNavigate();
-  // const { addToCart } = useCart();
-  // const { state } = useLocation();
-  // const diamond = state?.diamond;
+  const { state } = useLocation();
+  const [diamond, setDiamond] = useState(state?.diamond || null);
   const ringCartItem = state?.ringCartItem;
   const [selectedView, setSelectedView] = useState("image");
   const [openSection, setOpenSection] = useState(null);
   const [loading, setLoading] = useState(false);
   const [alreadyExists, setAlreadyExists] = useState(false);
 
-const { state } = useLocation();
-const { id } = useParams(); // certified_no
-const [diamond, setDiamond] = useState(state?.diamond || null);
 
-useEffect(() => {
-  if (!diamond && id) {
-    // Fetch diamond by certified_no if not passed via state
-    axiosClient.get(`/diamonds/${id}`)
-      .then((res) => {
-        if (res.data) {
-          setDiamond(res.data);
+  const { id } = useParams(); // certified_no
 
-          // Optional: store in localStorage for RingWrapper usage
-          localStorage.setItem("selectedDiamond", JSON.stringify(res.data));
-        }
-      })
-      .catch((err) => {
-        console.error("Error fetching diamond:", err);
-      });
-  }
-}, [diamond, id]);
-
-
-
+  useEffect(() => {
+    if (!diamond && id) {
+      // Fetch diamond by certified_no if not passed via state
+      axiosClient
+        .get(`/diamonds/${id}`)
+        .then((res) => {
+          if (res.data) {
+            setDiamond(res.data);
+            // Optional: store in localStorage for RingWrapper usage
+            localStorage.setItem("selectedDiamond", JSON.stringify(res.data));
+          }
+        })
+        .catch((err) => {
+          console.error("Error fetching diamond:", err);
+        });
+    }
+  }, [diamond, id]);
 
   const toggleSection = (section) => {
     setOpenSection(openSection === section ? null : section);
@@ -57,7 +51,7 @@ useEffect(() => {
     const diamondWithType = {
       ...diamond,
       productType: "diamond",
-      itemQuantity:1,
+      itemQuantity: 1,
     };
 
     addToCart(diamondWithType);
@@ -142,16 +136,12 @@ useEffect(() => {
             {selectedView === "image" && (
               <img
                 src={
-                  diamond.image_link && diamond.image_link.trim() !== ""
-                    ? diamond.image_link
-                    : diamond.shape?.image
-                    ? `/images/shapes/${diamond.shape.image}`
-                    : "/images/placeholder.png"
+                  diamond.image_link ? diamond.image_link : "images/images.jpeg"
                 }
                 alt={diamond.shape?.name || "Diamond"}
                 className="diamond-main-img"
                 onError={(e) => {
-                  e.target.src = "/images/placeholder.png"; // fallback
+                  e.target.src = "images/images.jpeg"; // fallback
                 }}
               />
             )}
@@ -184,18 +174,14 @@ useEffect(() => {
             <button onClick={() => setSelectedView("image")}>
               <img
                 src={
-                  diamond.image_link && diamond.image_link.trim() !== ""
-                    ? diamond.image_link
-                    : diamond.shape?.image
-                    ? `/images/shapes/${diamond.shape.image}`
-                    : "/images/placeholder.png"
+                  diamond.image_link ? diamond.image_link : "images/images.jpeg"
                 }
                 alt="Thumbnail"
                 className={`thumb-img ${
                   selectedView === "image" ? "active" : ""
                 }`}
                 onError={(e) => {
-                  e.target.src = "/images/placeholder.png";
+                  e.target.src = "images/images.jpeg";
                 }}
               />
             </button>
@@ -233,13 +219,13 @@ useEffect(() => {
         {/* Section 2: Diamond Details */}
         <div className="col-12 col-md-8 offset-md-2 col-lg-4 offset-lg-0">
           <h1 style={{ fontSize: "24px", fontWeight: "bold" }}>
-            {diamond.carat_weight} Carat {diamond.shape.name } 
+            {diamond.carat_weight} Carat {diamond.shape.name}
             {diamond.diamond_type === 1
               ? " Natural "
               : diamond.diamond_type === 2
               ? " Lab "
               : " Coloured "}
-             Diamond
+            Diamond
           </h1>
           <p>
             <strong>Certificate Number#:</strong> {diamond.certificate_number}

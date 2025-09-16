@@ -27,6 +27,12 @@ const getImageUrl = (img) => {
   if (!img) return fallback;
   return `${import.meta.env.VITE_BACKEND_URL}/storage/variation_images/${img}`;
 };
+
+const getVideoUrl = (video) => {
+  if (!video) return null;
+  return `${import.meta.env.VITE_BACKEND_URL}${video}`;
+};
+
 const getShapeImageUrl = (img) => `${import.meta.env.VITE_BACKEND_URL}${img}`;
 
 const JewelryDetailsPage = () => {
@@ -40,6 +46,7 @@ const JewelryDetailsPage = () => {
   const [selectedPlan, setSelectedPlan] = useState("1-year");
   const [activeFeature, setActiveFeature] = useState(null);
   const navigate = useNavigate();
+  const [isVideo, setIsVideo] = useState(false);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -104,6 +111,7 @@ const JewelryDetailsPage = () => {
   const handleMetalChange = (metalId) => {
     setSelectedMetalId(metalId);
     setSelectedVariationIndex(0);
+    setIsVideo(false);
     const isBuild = (product.product?.is_build ?? product.is_build) === 1;
 
     if (isBuild) {
@@ -123,13 +131,15 @@ const JewelryDetailsPage = () => {
   const handleShapeChange = (shapeId) => {
     setSelectedShapeId(shapeId);
     setSelectedVariationIndex(0);
+    setIsVideo(false);
     const variation = product.metal_variations[selectedMetalId][shapeId][0];
     setMainImage(getImageUrl(variation?.images?.[0]));
   };
 
   const handleCaratChange = (index) => {
     setSelectedVariationIndex(index);
-
+    setIsVideo(false);
+    
     const isBuild = (product.product?.is_build ?? product.is_build) === 1;
     const variation = isBuild
       ? product.metal_variations[selectedMetalId][selectedShapeId][index] // CHANGE: read from shape for build
@@ -154,7 +164,20 @@ const JewelryDetailsPage = () => {
   return (
     <div className="container py-5">
       <div className="row">
-        <div className="col-md-1 d-flex flex-column align-items-center gap-2 thumbs">
+        {/* <div className="col-md-1 d-flex flex-column align-items-center gap-2 thumbs">
+          {selectedVariation?.video && (
+            <video
+              key="video-thumb"
+              src={getVideoUrl(selectedVariation.video)}
+              onClick={() => setMainImage(getVideoUrl(selectedVariation.video))}
+              className={
+                mainImage === getVideoUrl(selectedVariation.video)
+                  ? "selected"
+                  : ""
+              }
+            />
+          )}
+
           {selectedVariation?.images?.map((img, i) => {
             const src = getImageUrl(img);
             return (
@@ -176,19 +199,116 @@ const JewelryDetailsPage = () => {
               />
             );
           })}
+        </div> */}
+        <div className="col-md-1 d-flex flex-column align-items-center gap-2 thumbs">
+          {/* Video thumbnail */}
+          {selectedVariation?.video && (
+            <video
+              key="video-thumb"
+              src={getVideoUrl(selectedVariation.video)}
+              onClick={() => {
+                setMainImage(getVideoUrl(selectedVariation.video));
+                setIsVideo(true);
+              }}
+              className={isVideo ? "selected" : ""}
+              style={{
+                cursor: "pointer",
+                border: isVideo ? "2px solid #000" : "1px solid #ccc",
+                padding: "2px",
+                width: "60px",
+                height: "60px",
+                objectFit: "scale-down",
+                borderRadius: "4px",
+              }}
+            />
+          )}
+
+          {/* Image thumbnails */}
+          {selectedVariation?.images?.map((img, i) => {
+            const src = getImageUrl(img);
+            return (
+              <img
+                key={i}
+                src={src}
+                alt={`Thumb ${i + 1}`}
+                onClick={() => {
+                  setMainImage(src);
+                  setIsVideo(false);
+                }}
+                style={{
+                  cursor: "pointer",
+                  border:
+                    !isVideo && mainImage === src
+                      ? "2px solid #000"
+                      : "1px solid #ccc",
+                  padding: "2px",
+                  width: "60px",
+                  height: "60px",
+                  objectFit: "scale-down",
+                  borderRadius: "4px",
+                }}
+              />
+            );
+          })}
         </div>
+
         {/* Main image */}
-        <div className="col-md-6 main-image">
-          <div className="zoom-container">
+        {/* <div className="col-12 col-md-6 d-flex flex-column align-items-center main-image mb-4">
+          <div className="zoom-container w-100">
             <Zoom>
               <img
                 src={mainImage}
                 alt="Main Product"
-                className="img-fluid  zoomable-image"
+                className="img-fluid zoomable-image"
+                style={{
+                  maxHeight: "500px",
+                  objectFit: "contain",
+                  width: "100%",
+                }}
               />
             </Zoom>
           </div>
-          <button className="btn btn-outline-dark mt-2">
+          <button
+            className="btn btn-outline-dark mt-3 w-100 w-md-auto"
+            style={{ maxWidth: "250px" }}
+          >
+            📷 VIRTUAL TRY ON
+          </button>
+        </div> */}
+        <div className="col-12 col-md-6 d-flex flex-column align-items-center main-image mb-4">
+          <div className="zoom-container w-100">
+            {isVideo ? (
+              <video
+                src={mainImage}
+                className="img-fluid"
+                autoPlay
+                muted
+                loop
+                style={{
+                  maxHeight: "500px",
+                  objectFit: "contain",
+                  width: "100%",
+                }}
+              />
+            ) : (
+              <Zoom>
+                <img
+                  src={mainImage}
+                  alt="Main Product"
+                  className="img-fluid zoomable-image"
+                  style={{
+                    maxHeight: "500px",
+                    objectFit: "contain",
+                    width: "100%",
+                  }}
+                />
+              </Zoom>
+            )}
+          </div>
+          <button
+            className="btn btn-outline-dark mt-3 w-100 w-md-auto"
+            style={{ maxWidth: "250px" }}
+          >
             📷 VIRTUAL TRY ON
           </button>
         </div>
@@ -502,7 +622,7 @@ const JewelryDetailsPage = () => {
           </div>
         </div>
 
-        <div className="container py-4">
+        {/* <div className="container py-4">
           <div className="related-products">
             <h4>Related Products</h4>
             <div className="d-flex flex-wrap">
@@ -544,7 +664,7 @@ const JewelryDetailsPage = () => {
               ))}
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

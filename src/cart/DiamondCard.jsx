@@ -7,6 +7,7 @@ const DiamondCard = ({ item, quantity, onQuantityChange, onRemove }) => {
       : item.diamond_type === 2
       ? "Lab"
       : "N/A";
+  console.log(item);
 
   return (
     <div
@@ -42,7 +43,7 @@ const DiamondCard = ({ item, quantity, onQuantityChange, onRemove }) => {
           {/* diamond Image */}
           <div>
             <img
-              src={item.image}
+              src={item.image_link ? item.image_link : "images/images.jpeg"}
               alt={`${item.shape?.name} diamond`}
               style={{
                 width: "150px",

@@ -34,17 +34,49 @@ const TrendingNow = () => {
   };
 
   return (
-    <section className="trending-section my-5">
-      <div className="container trending-container">
-        <div className="trending-left">
-          <h2 className="trending-title">Trending <br /> Now</h2>
-          <a href="#" className="trending-btn">Explore Now</a>
+    // <section className="trending-section">
+    //   <div className="container trending-container">
+    //     <div className="trending-left">
+    //       <h2 className="trending-title">Trending <br /> Now</h2>
+    //       <a href="#" className="trending-btn">Explore Now</a>
+    //     </div>
+    //     <div className="trending-right">
+    //       <Slider {...settings}>
+    //         {trendingItems.map((item, index) => (
+    //           <div key={index} className="trending-item">
+    //             <img src={item.image} alt={item.title} className="img-fluid" />
+    //             <p className="item-label">{item.title}</p>
+    //           </div>
+    //         ))}
+    //       </Slider>
+    //     </div>
+    //   </div>
+    // </section>
+    <section className="trending-section">
+      <div className="container trending-container d-flex flex-column flex-md-row align-items-start">
+        {/* Left Title + Button */}
+        <div className="trending-left mb-4 mb-md-0 text-center text-md-start">
+          <h2 className="trending-title mb-3">
+            Trending <br /> Now
+          </h2>
+          <a
+            href="#"
+            className="trending-btn btn border-button border p-2 rounded-0 fw-bold"
+          >
+            Explore Now
+          </a>
         </div>
-        <div className="trending-right">
+
+        {/* Slider */}
+        <div className="trending-right flex-grow-1">
           <Slider {...settings}>
             {trendingItems.map((item, index) => (
-              <div key={index} className="trending-item">
-                <img src={item.image} alt={item.title} className="img-fluid" />
+              <div key={index} className="trending-item text-center">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="img-fluid mb-2"
+                />
                 <p className="item-label">{item.title}</p>
               </div>
             ))}

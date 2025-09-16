@@ -77,22 +77,6 @@ const WhiteClarityNav = () => {
     SALE: "/sale",
   };
 
-  // let headerClass = "custom-navbar";
-
-  // // Apply hover/scroll styles only if on the homepage
-  // if (scrolled || hoveredMenu || enter) {
-  //   headerClass += " scrolled";
-  // }
-
-  // // Apply fixed or no-home styles only if not on homepage
-  // if (!isHome) {
-  //   if (scrolled) {
-  //     headerClass += " fixed";
-  //   } else {
-  //     headerClass += " no-home";
-  //   }
-  // }
-
   let headerClass = "custom-navbar";
 
   if (scrolled || hoveredMenu || enter) {
@@ -100,11 +84,7 @@ const WhiteClarityNav = () => {
   }
 
   if (!isHome) {
-    if (scrolled) {
-      headerClass += " fixed";
-    } else {
-      headerClass += " no-home";
-    }
+    headerClass += " fixed scrolled"; // Always apply fixed on other pages
   }
 
   if (hoveringMegaMenu) {
@@ -139,7 +119,7 @@ const WhiteClarityNav = () => {
             >
               ☰
             </Button>
-            <button className="appointment-btn" style={{ color: 'inherit' }}>
+            <button className="appointment-btn" style={{ color: "inherit" }}>
               <span className="icon">📅</span>
               <span className="text">Book an Appointment</span>
             </button>
@@ -155,43 +135,6 @@ const WhiteClarityNav = () => {
               style={{ maxHeight: "50px" }}
             />
           </div>
-
-          {/* <div className="nav-right">
-            <span className="icon-text">
-              <span className="material-symbols-outlined">call</span>{" "}
-              <span className="text">1.844.234.6463</span>
-            </span>
-            <span
-              className="icon-text"
-              onClick={handleRedirect}
-              style={{ cursor: "pointer" }}
-            >
-              <span className="material-symbols-outlined">person</span>
-              <span className="text">
-                {user ? `Hi, ${user.name || "User"}` : "SIGN IN / UP"}
-              </span>
-            </span>
-
-            <div className="icon position-relative">
-              <Link
-                to="/cart"
-                className="d-flex align-items-center text-decoration-none text-current"
-                style={{ color: "inherit" }}
-              >
-                <span className="icon-text">
-                  <span className="material-symbols-outlined">local_mall</span>
-                </span>
-                {cartItems.length > 0 && (
-                  <span
-                    className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                    style={{ fontSize: "0.75rem" }}
-                  >
-                    {cartItems.length}
-                  </span>
-                )}
-              </Link>
-            </div>
-          </div> */}
           <div className="nav-right d-flex align-items-center gap-3">
             <div className="icon-text d-flex align-items-center gap-1">
               <span className="material-symbols-outlined">call</span>
@@ -276,6 +219,22 @@ const WhiteClarityNav = () => {
         </div>
       )}
 
+      {hoveredMenu === "HIGH JEWELRY" && (
+        <div
+          className={`mega-menu-overlay ${scrolled ? "scrolled-menu" : ""}`}
+          onMouseEnter={() => setHoveringMegaMenu(true)}
+          onMouseLeave={() => {
+            setHoveringMegaMenu(false);
+            setHoveredMenu(null); // Close on mouse leave
+          }}
+        >
+          <MegaMenu
+            type="highJewelry"
+            closeMegaMenu={() => setHoveredMenu(null)}
+          />
+        </div>
+      )}
+
       {hoveredMenu === "JEWELRY" && (
         <div
           className={`mega-menu-overlay ${scrolled ? "scrolled-menu" : ""}`}
@@ -286,6 +245,22 @@ const WhiteClarityNav = () => {
           }}
         >
           <MegaMenu type="jewelry" closeMegaMenu={() => setHoveredMenu(null)} />
+        </div>
+      )}
+
+      {hoveredMenu === "COLLECTIONS" && (
+        <div
+          className={`mega-menu-overlay ${scrolled ? "scrolled-menu" : ""}`}
+          onMouseEnter={() => setHoveringMegaMenu(true)}
+          onMouseLeave={() => {
+            setHoveringMegaMenu(false);
+            setHoveredMenu(null); // Close on mouse leave
+          }}
+        >
+          <MegaMenu
+            type="collection"
+            closeMegaMenu={() => setHoveredMenu(null)}
+          />
         </div>
       )}
 

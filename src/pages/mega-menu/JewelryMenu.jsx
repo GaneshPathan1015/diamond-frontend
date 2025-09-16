@@ -76,22 +76,22 @@ const JewelryMenu = ({
       {/* Collections */}
       <div className="jwl-mega-col">
         <h6 className="jwl-menu-title">COLLECTIONS</h6>
-         <ul className="jwl-list">
-  {Array.isArray(collections) &&
-    collections.map((item) => (
-      <li key={item.id}>
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            handleCollectionClick(item);
-          }}
-        >
-          {item.name}
-        </a>
-      </li>
-    ))}
-</ul>
+        <ul className="jwl-list">
+          {Array.isArray(collections) &&
+            collections.map((item) => (
+              <li key={item.id}>
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleCollectionClick(item);
+                  }}
+                >
+                  {item.name}
+                </a>
+              </li>
+            ))}
+        </ul>
       </div>
 
       {/* Image */}

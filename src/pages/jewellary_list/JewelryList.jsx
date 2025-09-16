@@ -790,7 +790,7 @@ const JewelryList = () => {
             const image =
               Array.isArray(selectedVariation?.images) &&
               selectedVariation.images.length > 0
-                ? `${import.meta.env.VITE_BACKEND_URL}/storage/variation_images/${
+                ? `${import.meta.env.VITE_BACKEND_URL}${
                     selectedVariation.images[0]
                   }`
                 : `${

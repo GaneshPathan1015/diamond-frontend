@@ -97,7 +97,9 @@ const Header = ({ onHoverChange }) => {
               </div>
 
               {/* Wishlist */}
-              <span className="material-symbols-outlined text-white">favorite</span>
+              <span className="material-symbols-outlined text-white">
+                favorite
+              </span>
 
               {/* Cart */}
               <div className="icon cart-icon position-relative">
@@ -105,7 +107,9 @@ const Header = ({ onHoverChange }) => {
                   to="/cart"
                   className="text-decoration-none text-black position-relative d-flex align-items-center"
                 >
-                  <span className="material-symbols-outlined text-white">local_mall</span>
+                  <span className="material-symbols-outlined text-white">
+                    local_mall
+                  </span>
                   {cartItems.length > 0 && (
                     <span
                       className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"

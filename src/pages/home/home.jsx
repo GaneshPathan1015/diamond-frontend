@@ -9,7 +9,14 @@ export default function Home() {
       {/* Hero Section */}
       <section className="hero_section_wrapper">
         <div className="container-fluid p-0 position-relative">
-          <video width="100%" height="100%" autoPlay muted loop>
+          <video
+            width="100%"
+            height="100%"
+            autoPlay
+            muted
+            loop
+            preload="metadata"
+          >
             <source src="/vedio/main-banner-vedio.mp4" type="video/mp4" />
           </video>
           <div className="wrapper position-absolute text-center w-100 mb-5">
@@ -187,7 +194,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="Home_Preview_wrapper">
+      {/* <section className="Home_Preview_wrapper">
         <div className="container">
           <div className="row my-5 align-items-end">
             <div className="col-8">
@@ -221,6 +228,49 @@ export default function Home() {
                 <a
                   href="#"
                   className="btn border-button border my-2 p-2 rounded-0 fw-bold border-dark"
+                >
+                  SCHEDULE YOUR APPOINTMENT
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> */}
+      <section className="home-preview-wrapper my-5">
+        <div className="container">
+          <div className="row align-items-center gy-4">
+            {/* Video Column */}
+            <div className="col-lg-8 col-md-6 order-md-1 order-1">
+              <div className="video-wrapper text-center">
+                <video
+                  width="100%"
+                  height="100%"
+                  playsInline
+                  preload="metadata"
+                  muted
+                  loop
+                  autoPlay
+                >
+                  <source src="vedio/side.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+
+            {/* Text Column */}
+            <div className="col-lg-4 col-md-6 order-md-2 order-2">
+              <div className="grid__content text-center text-md-start">
+                <span className="sub-title text-uppercase">
+                  TAILORED TO YOU
+                </span>
+                <h2 className="section-header-lg mt-2">Virtual or In-Person</h2>
+                <p className="mt-2">
+                  Meet our jewelry specialists, virtually or in-person at our
+                  SoHo showroom, for expert guidance on finding your perfect
+                  engagement ring or gift.
+                </p>
+                <a
+                  href="#"
+                  className="btn border-button border my-3 p-2 rounded-0 fw-bold border-dark"
                 >
                   SCHEDULE YOUR APPOINTMENT
                 </a>

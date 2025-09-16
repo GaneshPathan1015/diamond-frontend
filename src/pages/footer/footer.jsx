@@ -7,7 +7,7 @@ const Footer = () => {
   const companyLinks = [
     { label: "About", to: "/about" },
     { label: "Contact us", to: "/contact" },
-    { label: "Press", to: "#" },
+    { label: "Press", to: "/press" },
     { label: "Reviews", to: "#" },
     { label: "Radiance Rewards", to: "#" },
     { label: "Home Preview FAQs", to: "#" },
@@ -57,7 +57,10 @@ const Footer = () => {
   const socialLinks = [
     { icon: "fa-instagram", href: "https://www.instagram.com/thecaratcasa/#" },
     { icon: "fa-tiktok", href: "#" },
-    { icon: "fa-facebook-f", href: "https://www.facebook.com/share/194gTHJY21/?mibextid=wwXIfr" },
+    {
+      icon: "fa-facebook-f",
+      href: "https://www.facebook.com/share/194gTHJY21/?mibextid=wwXIfr",
+    },
     { icon: "fa-twitter", href: "#" },
     { icon: "fa-youtube", href: "#" },
     { icon: "fa-pinterest-p", href: "#" },
@@ -74,9 +77,19 @@ const Footer = () => {
               {companyLinks.map((item, i) => (
                 <li key={i}>
                   {item.to.startsWith("/") ? (
-                    <Link to={item.to} className="text-white text-decoration-none">{item.label}</Link>
+                    <Link
+                      to={item.to}
+                      className="text-white text-decoration-none"
+                    >
+                      {item.label}
+                    </Link>
                   ) : (
-                    <a href={item.to} className="text-white text-decoration-none">{item.label}</a>
+                    <a
+                      href={item.to}
+                      className="text-white text-decoration-none"
+                    >
+                      {item.label}
+                    </a>
                   )}
                 </li>
               ))}
@@ -90,9 +103,19 @@ const Footer = () => {
               {educationLinks.map((item, i) => (
                 <li key={i}>
                   {item.to.startsWith("/") ? (
-                    <Link to={item.to} className="text-white text-decoration-none">{item.label}</Link>
+                    <Link
+                      to={item.to}
+                      className="text-white text-decoration-none"
+                    >
+                      {item.label}
+                    </Link>
                   ) : (
-                    <a href={item.to} className="text-white text-decoration-none">{item.label}</a>
+                    <a
+                      href={item.to}
+                      className="text-white text-decoration-none"
+                    >
+                      {item.label}
+                    </a>
                   )}
                 </li>
               ))}
@@ -105,7 +128,12 @@ const Footer = () => {
             <ul className="list-unstyled">
               {shopLinks.map((item, i) => (
                 <li key={i}>
-                  <Link to={item.to} className="text-white text-decoration-none">{item.label}</Link>
+                  <Link
+                    to={item.to}
+                    className="text-white text-decoration-none"
+                  >
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -116,7 +144,11 @@ const Footer = () => {
             <h5>Customer Care</h5>
             <ul className="list-unstyled">
               {customerCareLinks.map((item, i) => (
-                <li key={i}><a href="#" className="text-white text-decoration-none">{item}</a></li>
+                <li key={i}>
+                  <a href="#" className="text-white text-decoration-none">
+                    {item}
+                  </a>
+                </li>
               ))}
             </ul>
           </div>
@@ -124,9 +156,15 @@ const Footer = () => {
           {/* Newsletter / Social */}
           <div className="col-12 col-md-4 mb-4">
             <div className="text-center mb-3">
-              <a href="/" className="text-white fs-3 text-decoration-none">AOD</a>
-              <p className="mt-2">Elevate Your <i>Everyday</i></p>
-              <p>Sign up for <strong>$100 OFF</strong> your first purchase</p>
+              <a href="/" className="text-white fs-3 text-decoration-none">
+                AOD
+              </a>
+              <p className="mt-2">
+                Elevate Your <i>Everyday</i>
+              </p>
+              <p>
+                Sign up for <strong>$100 OFF</strong> your first purchase
+              </p>
             </div>
 
             <form className="d-flex mb-3 justify-content-center flex-wrap">
@@ -136,13 +174,20 @@ const Footer = () => {
                 className="form-control mb-2 me-2"
                 style={{ maxWidth: "250px" }}
               />
-              <button type="submit" className="btn btn-primary mb-2">Submit</button>
+              <button type="submit" className="btn btn-primary mb-2">
+                Submit
+              </button>
             </form>
 
             <ul className="list-inline d-flex justify-content-center gap-3 mt-3">
               {socialLinks.map((social, i) => (
                 <li key={i} className="list-inline-item">
-                  <a href={social.href} target="_blank" rel="noopener noreferrer" className="text-white fs-4">
+                  <a
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white fs-4"
+                  >
                     <i className={`fab ${social.icon}`}></i>
                   </a>
                 </li>

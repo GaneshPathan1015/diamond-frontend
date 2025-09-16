@@ -1,10 +1,9 @@
-import React from 'react'
+import React from "react";
 
 export default function Quetions() {
   return (
-   
-<section className="accordian_class">
-      <div className="container">
+    <section className="accordian_class">
+      <div className="">
         <div className="section-heading text-center">
           <h2 className="section-header-sm section-header-reverse section-header-sb mb-5">
             WE’VE GOT ANSWERS TO YOUR QUESTIONS
@@ -33,7 +32,11 @@ export default function Quetions() {
             >
               <div className="accordion-body">
                 <p className="m-0">
-                  To choose a unique diamond for an engagement ring, consider factors like shape, cut, color, clarity, carat weight, and certification. Look for a shape that reflects your style, an excellent cut for maximum sparkle, and a color and clarity grade that suits your preferences...
+                  To choose a unique diamond for an engagement ring, consider
+                  factors like shape, cut, color, clarity, carat weight, and
+                  certification. Look for a shape that reflects your style, an
+                  excellent cut for maximum sparkle, and a color and clarity
+                  grade that suits your preferences...
                 </p>
               </div>
             </div>
@@ -61,7 +64,9 @@ export default function Quetions() {
             >
               <div className="accordion-body">
                 <p className="m-0">
-                  If you're looking to make your diamond appear larger, consider a halo setting, which surrounds the center diamond with smaller diamonds or gemstones...
+                  If you're looking to make your diamond appear larger, consider
+                  a halo setting, which surrounds the center diamond with
+                  smaller diamonds or gemstones...
                 </p>
               </div>
             </div>
@@ -89,7 +94,9 @@ export default function Quetions() {
             >
               <div className="accordion-body">
                 <p className="m-0">
-                  Determining the affordability of an engagement ring is influenced by factors like personal preferences, budget, and individual financial circumstances...
+                  Determining the affordability of an engagement ring is
+                  influenced by factors like personal preferences, budget, and
+                  individual financial circumstances...
                 </p>
               </div>
             </div>
@@ -117,10 +124,16 @@ export default function Quetions() {
             >
               <div className="accordion-body">
                 <p className="m-0">
-                  To determine the right engagement ring size, consider the width of the ring and potential finger fluctuations due to factors like temperature and humidity...<br />
-                  To measure ring size at home, you can try using a few methods. One option is to use a piece of string or a thin strip of paper...
+                  To determine the right engagement ring size, consider the
+                  width of the ring and potential finger fluctuations due to
+                  factors like temperature and humidity...
                   <br />
-                  Keep in mind that these at-home methods may not be as accurate as professional measurements...
+                  To measure ring size at home, you can try using a few methods.
+                  One option is to use a piece of string or a thin strip of
+                  paper...
+                  <br />
+                  Keep in mind that these at-home methods may not be as accurate
+                  as professional measurements...
                 </p>
               </div>
             </div>
@@ -148,7 +161,9 @@ export default function Quetions() {
             >
               <div className="accordion-body">
                 <p className="m-0">
-                  Absolutely! You have the opportunity to design your own engagement ring. You can begin the process by selecting the setting that appeals to you...
+                  Absolutely! You have the opportunity to design your own
+                  engagement ring. You can begin the process by selecting the
+                  setting that appeals to you...
                 </p>
               </div>
             </div>
@@ -156,7 +171,5 @@ export default function Quetions() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-
- 

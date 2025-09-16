@@ -1,0 +1,51 @@
+.press-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.press-item {
+  background-color: #d7ebed;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.press-logo img {
+  max-width: 100%;
+  height: auto;
+}
+
+.press-title {
+  font-size: 20px;
+
+  color: #1c3d5a;
+  margin-bottom: 30px;
+}
+
+.press-date {
+  font-size: 20px;
+  line-height: 28px;
+  color: #555;
+}
+
+
+@media (max-width: 768px) {
+  .press-item {
+    /* text-align: center; */
+    flex-direction: column; /* make the row stack vertically */
+  }
+
+  .press-logo {
+    margin-bottom: 10px;
+    width: 100%; /* take full width */
+  }
+
+  .col-12.col-md-9 {
+    width: 100%; /* take full width */
+  }
+
+  .press-title {
+    margin-bottom: 10px;
+    word-break: break-word;
+  }
+}

@@ -1,24 +1,117 @@
-.section-header {
-    font-size: 28px;
-    font-weight: 600;
-    letter-spacing: 1px;
+/* Hero Section */
+.hero_section_wrapper .wrapper {
+  padding: 0 15px;
+}
+
+@media (max-width: 768px) {
+  .slide-title {
+    font-size: 2rem; /* smaller title on mobile */
   }
-  
-  .btn {
-    transition: all 0.3s ease;
+
+  .slide-btn-wrapper {
+    flex-direction: column;
+    gap: 10px;
   }
-  
-  .btn:hover {
-    background-color: #000;
-    color: #fff;
+
+  .slide-btn-wrapper a {
+    width: 100%;
+    text-align: center;
   }
-  
-  .transition-image {
-    transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+/* Build Engagement Section */
+.build_engagement_wrapper .row.align-items-start {
+  flex-wrap: wrap;
+}
+
+.build_engagement_wrapper .col-6 {
+  flex: 0 0 50%;
+}
+
+@media (max-width: 768px) {
+  .build_engagement_wrapper .col-6 {
+    flex: 0 0 100%;
+    margin-bottom: 20px;
   }
-  
-  .image-hover {
-    transform: scale(1.05);
-    opacity: 0.85;
+
+  .build_engagement_wrapper .btn.ms-5 {
+    margin-left: 0 !important;
   }
-  
+
+  .build_engagement_wrapper .content {
+    text-align: center;
+  }
+}
+
+/* Ring Collections Section */
+.Ring-collection .row.align-items-center {
+  flex-wrap: wrap;
+}
+
+.Ring-collection .col-6 {
+  flex: 0 0 50%;
+}
+
+@media (max-width: 768px) {
+  .Ring-collection .col-6 {
+    flex: 0 0 100%;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .slider-for {
+    padding: 0 10px !important;
+  }
+
+  .d-flex.flex-wrap {
+    justify-content: center !important;
+  }
+}
+
+/* Home Preview Section */
+.home-preview .row.align-items-center {
+  flex-wrap: wrap;
+}
+
+.home-preview .col-8 {
+  flex: 0 0 66.666%;
+}
+.home-preview .col-4 {
+  flex: 0 0 33.333%;
+}
+
+@media (max-width: 768px) {
+  .home-preview .col-8,
+  .home-preview .col-4 {
+    flex: 0 0 100%;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-bottom: 20px;
+  }
+
+  .home-preview .grid__content {
+    text-align: center;
+  }
+}
+
+/* Ring Filter Buttons */
+.Ring-collection .d-flex.flex-wrap button {
+  margin-bottom: 5px;
+}
+
+/* Image Hover Effect */
+.hover-zoom {
+  transition: transform 0.3s ease-in-out;
+}
+.hover-zoom:hover {
+  transform: scale(1.05);
+}
+
+/* Buttons */
+.btn {
+  transition: all 0.3s ease;
+}
+.btn:hover {
+  background-color: #000;
+  color: #fff;
+}

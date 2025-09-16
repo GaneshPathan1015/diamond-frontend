@@ -1,4 +1,5 @@
-.thumbs img {
+.thumbs img,
+.thumbs video {
   width: 120px !important;
   height: 120px !important;
   object-fit: cover;
@@ -8,12 +9,14 @@
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
 }
 
-.thumbs img:hover {
+.thumbs img:hover,
+.thumbs video:hover {
   border-color: #000;
 }
 
 
-.main-image img {
+.main-image img,
+.main-image video {
   width: 100%;
   object-fit: scale-down;
 }
@@ -199,7 +202,6 @@
 
 .zoom-container {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;

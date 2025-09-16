@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
@@ -18,6 +17,10 @@ const getImageUrl = (img) => {
   if (!img) return fallback;
   return `${import.meta.env.VITE_BACKEND_URL}/storage/variation_images/${img}`;
 };
+const getVideoUrl = (video) => {
+  if (!video) return null;
+  return `${import.meta.env.VITE_BACKEND_URL}${video}`;
+};
 const getShapeImageUrl = (img) => `${import.meta.env.VITE_BACKEND_URL}${img}`;
 
 const RingProductView = ({ diamond }) => {
@@ -27,10 +30,10 @@ const RingProductView = ({ diamond }) => {
   const [selectedMetalId, setSelectedMetalId] = useState(null);
   const [selectedShapeId, setSelectedShapeId] = useState(null);
   const [selectedVariationIndex, setSelectedVariationIndex] = useState(0);
-  // const [thumbnails, setThumbnails] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [showSettingModal, setShowSettingModal] = useState(false);
   const [modalProductData, setModalProductData] = useState(null);
+  const [isVideo, setIsVideo] = useState(false);
 
   const navigate = useNavigate();
 
@@ -73,6 +76,7 @@ const RingProductView = ({ diamond }) => {
   const handleMetalChange = (metalId) => {
     setSelectedMetalId(metalId);
     setSelectedVariationIndex(0);
+    setIsVideo(false);
     const isBuild = (product.product?.is_build ?? product.is_build) === 1;
 
     if (isBuild) {
@@ -92,12 +96,14 @@ const RingProductView = ({ diamond }) => {
   const handleShapeChange = (shapeId) => {
     setSelectedShapeId(shapeId);
     setSelectedVariationIndex(0);
+    setIsVideo(false);
     const variation = product.metal_variations[selectedMetalId][shapeId][0];
     setMainImage(getImageUrl(variation?.images?.[0]));
   };
 
   const handleCaratChange = (index) => {
     setSelectedVariationIndex(index);
+    setIsVideo(false);
 
     const isBuild = (product.product?.is_build ?? product.is_build) === 1;
     const variation = isBuild
@@ -175,6 +181,27 @@ const RingProductView = ({ diamond }) => {
     <div className="container py-5">
       <div className="row">
         <div className="col-md-1 d-flex flex-column align-items-center gap-2 thumbs">
+          {/* Video thumbnail */}
+          {selectedVariation?.video && (
+            <video
+              key="video-thumb"
+              src={getVideoUrl(selectedVariation.video)}
+              onClick={() => {
+                setMainImage(getVideoUrl(selectedVariation.video));
+                setIsVideo(true);
+              }}
+              className={isVideo ? "selected" : ""}
+              style={{
+                cursor: "pointer",
+                border: isVideo ? "2px solid #000" : "1px solid #ccc",
+                padding: "2px",
+                width: "60px",
+                height: "60px",
+                objectFit: "scale-down",
+                borderRadius: "4px",
+              }}
+            />
+          )}
           {selectedVariation?.images?.map((img, i) => {
             const src = getImageUrl(img);
             return (
@@ -182,7 +209,10 @@ const RingProductView = ({ diamond }) => {
                 key={i}
                 src={src}
                 alt={`Thumb ${i + 1}`}
-                onClick={() => setMainImage(src)}
+                onClick={() => {
+                  setMainImage(src);
+                  setIsVideo(false);
+                }}
                 style={{
                   cursor: "pointer",
                   border:
@@ -198,13 +228,45 @@ const RingProductView = ({ diamond }) => {
           })}
         </div>
         {/* Main image */}
-        <div className="col-md-7">
+        {/* <div className="col-md-7">
           <div className="zoom-container">
             <img src={mainImage} alt="Main Product" />
           </div>
           <button className="btn btn-outline-dark mt-2">
             📷 VIRTUAL TRY ON
           </button>
+        </div> */}
+        <div className="col-md-7">
+          <div className="zoom-container">
+            {isVideo ? (
+              <video
+                src={mainImage}
+                autoPlay
+                muted
+                loop
+                style={{
+                  width: "100%",
+                  maxHeight: "500px",
+                  objectFit: "contain",
+                }}
+              />
+            ) : (
+              <img
+                src={mainImage}
+                alt="Main Product"
+                style={{
+                  width: "100%",
+                  maxHeight: "500px",
+                  objectFit: "contain",
+                }}
+              />
+            )}
+          </div>
+          {selectedVariation?.video && (
+            <button className="btn btn-outline-dark mt-2">
+              📷 VIRTUAL TRY ON
+            </button>
+          )}
         </div>
 
         {/* Right panel */}
@@ -468,7 +530,7 @@ const RingProductView = ({ diamond }) => {
 
         <Logosec />
 
-        <div className="container py-4">
+        {/* <div className="container py-4">
           <div className="related-products">
             <h4>Related Products</h4>
             <div className="d-flex flex-wrap">
@@ -510,7 +572,7 @@ const RingProductView = ({ diamond }) => {
               ))}
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <NoDealbreakers />

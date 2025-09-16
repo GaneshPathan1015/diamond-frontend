@@ -615,8 +615,10 @@ const Checkout = () => {
                   const total = (unitPrice * qty).toFixed(2);
 
                   let imageUrl = null;
-                  if (item.productType === "diamond" && item.shape?.image) {
-                    imageUrl = `/images/shapes/${item.shape.image}`;
+                  if (item.productType === "diamond") {
+                    imageUrl = item.image_link
+                      ? item.image_link
+                      : "images/images.jpeg";
                   } else if (
                     item.productType === "combo" &&
                     item.ring?.images?.[0]

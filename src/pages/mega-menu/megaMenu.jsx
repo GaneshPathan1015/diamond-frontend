@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useMegaMenu } from "../../context/MegaMenuContext";
 import JewelryMenu from "./JewelryMenu";
 import EngagementMenu from "./EngagementMenu";
+import CollectionMenu from "./CollectionMenu";
 import "./megaMenu.css";
+import HighJewelryMenu from "./HighJewelryMenu";
 
 const slugify = (text = "") =>
   text
@@ -133,6 +135,15 @@ const MegaMenu = ({ type = "engagement", closeMegaMenu = () => {} }) => {
           navigate={navigate}
         />
       )}
+      {type === "highJewelry" && (
+        <HighJewelryMenu
+          hoveredOption={hoveredOption}
+          setHoveredOption={setHoveredOption}
+          closeMegaMenu={closeMegaMenu}
+          navigate={navigate}
+          slugify={slugify}
+        />
+      )}
 
       {type === "engagement" && (
         <EngagementMenu
@@ -147,6 +158,16 @@ const MegaMenu = ({ type = "engagement", closeMegaMenu = () => {} }) => {
           handleStyleClick={handleStyleClick}
           handleItemClick={handleItemClick}
           handleDiamondClick={handleDiamondClick}
+          navigate={navigate}
+          slugify={slugify}
+        />
+      )}
+
+      {type === "collection" && (
+        <CollectionMenu
+          hoveredOption={hoveredOption}
+          setHoveredOption={setHoveredOption}
+          closeMegaMenu={closeMegaMenu}
           navigate={navigate}
           slugify={slugify}
         />

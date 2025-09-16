@@ -1,30 +1,72 @@
-.ring-wrapper {
-  margin-top: 20px;
+.diamond-ring-wrapper {
   display: flex;
   justify-content: center;
+  margin-top: 20px;
 }
 
-.tab-list {
-  list-style: none;
+.step-container {
   display: flex;
-  gap: 30px;
-  padding: 0;
-  margin: 0;
+  gap: 40px; /* spacing between steps on desktop */
+  flex-wrap: nowrap;
 }
 
-.tab-item {
-  padding: 10px 20px;
+.step {
+  display: flex;
+  flex-direction: column; /* keep step number and label stacked */
+  align-items: center;
   cursor: pointer;
+  text-align: center;
+}
+
+.step-number {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50%;
+  background-color: #ddd;
+  color: #000;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.step.active .step-number {
+  background-color: #000;
+  color: #fff;
+}
+
+.step-divider {
+  width: 2px;
+  height: 40px;
+  background-color: #ddd;
+  margin-bottom: 8px;
+}
+
+.step-label {
   font-weight: 500;
-  border-bottom: 2px solid transparent;
-  transition: border-bottom 0.3s, color 0.3s;
+  font-size: 0.95rem;
 }
 
-.tab-item:hover {
-  color: #000;
+.ring-preview-img {
+  width: 80px;
+  height: auto;
+  margin-top: 10px;
+  border-radius: 5px;
 }
 
-.tab-item.active {
-  border-bottom: 2px solid #000;
-  color: #000;
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .step-container {
+    flex-direction: column !important;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .step-divider {
+    display: none; /* remove vertical/horizontal divider on mobile */
+  }
+
+  .step {
+    flex-direction: column !important;
+  }
 }

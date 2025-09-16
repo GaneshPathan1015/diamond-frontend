@@ -34,15 +34,21 @@ import EngagementDetails from "./pages/engagement-details/engDetails";
 import EngagementList from "./pages/engagement-list/engagementList";
 import CompleteRing from "./pages/completeRing/completeRing";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
-import WhiteClarityNav from "./pages/header/WhiteClarityNav"
+import WhiteClarityNav from "./pages/header/WhiteClarityNav";
+
+
+// Footer pages 
+import Press from "./pages/footerpages/Press";
 
 export default function App() {
+  const location = useLocation();
+  const isHome = location.pathname === "/";
   return (
     <>
       <ScrollToTop />
       {/* <HeaderWrapper /> */}
-      <WhiteClarityNav/>
-      <main>
+      <WhiteClarityNav />
+      <main style={{ paddingTop: isHome ? "0px" : "146px" }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
@@ -69,7 +75,6 @@ export default function App() {
           <Route path="/order-details/:orderId" element={<OrderDetails />} />
           <Route path="/jewelry-list" element={<JewelryList />} />
           <Route path="/engagement-rings/:slug?" element={<EngagementList />} />
-
           <Route
             path="/jewellary-details/:id"
             element={<JewelryDetailsPage />}
@@ -80,15 +85,16 @@ export default function App() {
             element={<EngagementDetails />}
           />
           <Route path="/megamenu" element={<MegaMenu />} />
-
           <Route path="/luxe" element={<Luxe />} />
           <Route path="/reserve" element={<Reserve />} />
           <Route path="/signature" element={<Signature />} />
+          {/* 404 page */}
           <Route path="*" element={<PageNotFound />} />
+          {/* Footer pages start*/}
+          <Route path="/press" element={<Press />} />
         </Routes>
       </main>
       <Footer />
     </>
   );
 }
-  
