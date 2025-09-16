@@ -219,6 +219,22 @@ const WhiteClarityNav = () => {
         </div>
       )}
 
+      {hoveredMenu === "WEDDING" && (
+        <div
+          className={`mega-menu-overlay ${scrolled ? "scrolled-menu" : ""}`}
+          onMouseEnter={() => setHoveringMegaMenu(true)}
+          onMouseLeave={() => {
+            setHoveringMegaMenu(false);
+            setHoveredMenu(null); // Close on mouse leave
+          }}
+        >
+          <MegaMenu
+            type="wedding"
+            closeMegaMenu={() => setHoveredMenu(null)}
+          />
+        </div>
+      )}
+
       {hoveredMenu === "HIGH JEWELRY" && (
         <div
           className={`mega-menu-overlay ${scrolled ? "scrolled-menu" : ""}`}

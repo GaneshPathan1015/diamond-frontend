@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import './index.css';
+import "./index.css";
 
 export default function WedingCollection() {
-
   const ringTypes = [
     "METAL BRANDS",
     "DIAMOND BRANDS",
@@ -105,7 +104,6 @@ export default function WedingCollection() {
                   </div>
                 </div>
               </div>
-              
             </div>
           </div>
         </div>

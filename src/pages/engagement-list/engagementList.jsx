@@ -472,7 +472,7 @@ const EngagementList = () => {
               <a
                 title="SHOP ENGAGEMENT RINGS"
                 href="#"
-                className="text-white btn border-button border my-2 p-2 rounded-0 fw-bold border-white"
+                className="btn border-button border my-2 p-2 rounded-0 fw-bold border-white"
               >
                 SHOP ENGAGEMENT RINGS
               </a>

@@ -16,7 +16,9 @@
   .slide-btn-wrapper a {
     width: 100%;
     text-align: center;
+    color: white !important;
   }
+
 }
 
 /* Build Engagement Section */

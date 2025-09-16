@@ -194,48 +194,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* <section className="Home_Preview_wrapper">
-        <div className="container">
-          <div className="row my-5 align-items-end">
-            <div className="col-8">
-              <div>
-                <div>
-                  <video
-                    width="100%"
-                    height="100%"
-                    playsInline
-                    preload="metadata"
-                    muted
-                    loop
-                    autoPlay
-                  >
-                    <source src="vedio/side.mp4" type="video/mp4" />
-                  </video>
-                </div>
-              </div>
-            </div>
-            <div className="col-4">
-              <div className="grid__content small--text-center">
-                <span className="sub-title text-uppercase">
-                  TAILORED TO YOU
-                </span>
-                <h2 className="section-header-lg">Virtual or In-Person</h2>
-                <p>
-                  Meet our jewelry specialists, virtually or in-person at our
-                  SoHo showroom, for expert guidance on finding your perfect
-                  engagement ring or gift.
-                </p>
-                <a
-                  href="#"
-                  className="btn border-button border my-2 p-2 rounded-0 fw-bold border-dark"
-                >
-                  SCHEDULE YOUR APPOINTMENT
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> */}
       <section className="home-preview-wrapper my-5">
         <div className="container">
           <div className="row align-items-center gy-4">
