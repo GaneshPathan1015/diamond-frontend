@@ -40,6 +40,7 @@ import WhiteClarityNav from "./pages/header/WhiteClarityNav";
 // Footer pages 
 import Press from "./pages/footerpages/Company/Press";
 
+
 export default function App() {
   const location = useLocation();
   const isHome = location.pathname === "/";

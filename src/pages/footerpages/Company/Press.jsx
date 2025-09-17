@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Collapse } from "react-bootstrap";
 import Info from "../Info";
 
-
 import "./Press.css";
 
 const blogs = [
@@ -1358,7 +1357,7 @@ const Press = () => {
         </div>
       </div>
 
-      <Info/>
+      <Info />
     </>
   );
 };
