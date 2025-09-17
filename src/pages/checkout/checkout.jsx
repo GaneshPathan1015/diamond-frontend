@@ -25,7 +25,44 @@ const Checkout = () => {
     smsOffers: false,
   });
 
+  const [discountCode, setDiscountCode] = useState("");
+  const [discountResponse, setDiscountResponse] = useState(null);
+  const [discountError, setDiscountError] = useState("");
+  const [isApplying, setIsApplying] = useState(false);
   // Handle payment method selection
+  const handleApplyDiscount = async () => {
+    setDiscountError("");
+    setIsApplying(true);
+    try {
+      const today = new Date().toISOString().split("T")[0]; // Format as YYYY-MM-DD
+      const totalAmount = getSubTotal();
+
+      const res = await axiosClient.post("/api/apply-discount", {
+        code: discountCode,
+        cart_total: totalAmount,
+        date: today,
+      });
+      setDiscountResponse(res.data.data);
+      setDiscountError("");
+    } catch (error) {
+      const message = error.response?.data?.message || "Invalid code";
+      setDiscountError(message);
+      setDiscountResponse(null);
+    } finally {
+      setIsApplying(false);
+    }
+  };
+
+  const getTotalAmount = () => {
+    const subtotal = getSubTotal(); // Cart subtotal
+    if (discountResponse?.final_amount) {
+      return Number(discountResponse.final_amount); // Discount applied
+    }
+    return subtotal;
+  };
+
+  const totalAmount = getTotalAmount();
+
   const handleMethodChange = (event) => {
     setSelectedMethod(event.target.id);
   };
@@ -86,7 +123,7 @@ const Checkout = () => {
       }
       return item;
     }),
-    total: getSubTotal(),
+    total: /* getSubTotal() */getTotalAmount(),
     paymentMethod: selectedMethod,
   });
 
@@ -181,7 +218,7 @@ const Checkout = () => {
           user_name: `${formData.first_name} ${formData.last_name}`,
           contact_number: formData.phone,
           item_details: JSON.stringify(prepareOrderPayload()),
-          total_price: getSubTotal(),
+          total_price: /* getSubTotal() */getTotalAmount(),
           address: JSON.stringify(addressObject),
           order_status: "pending",
           payment_mode: "paypal",
@@ -196,7 +233,7 @@ const Checkout = () => {
         const paypalResponse = await axiosClient.post(
           "/api/paypal/create-order",
           {
-            amount: getSubTotal(),
+            amount: /* getSubTotal() */getTotalAmount(),
             currency: "USD",
             user_id: user.id,
             order_id: orderId,
@@ -212,7 +249,7 @@ const Checkout = () => {
         user_name: `${formData.first_name} ${formData.last_name}`,
         contact_number: formData.phone,
         item_details: JSON.stringify(prepareOrderPayload()),
-        total_price: getSubTotal(),
+        total_price: /* getSubTotal() */getTotalAmount(),
         address: JSON.stringify(addressObject),
         order_status: "pending",
         payment_mode: selectedMethod,
@@ -248,7 +285,7 @@ const Checkout = () => {
     <>
       <div className="container">
         <div className="row ">
-          <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+          <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-12 order-lg-1 order-2">
             {/* Redeem Section */}
             <div className="container my-5">
               <div className="redeem-card mb-4">
@@ -595,7 +632,7 @@ const Checkout = () => {
             </div>
           </div>
 
-          <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-12 co-sm-12 col-12">
+          <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-12 order-lg-2 order-1">
             <div className="container my-5" style={{ maxWidth: "600px" }}>
               <div className="product-summary">
                 {/* Loop over cartItems */}
@@ -732,20 +769,36 @@ const Checkout = () => {
                     type="text"
                     className="form-control"
                     placeholder="Discount code or gift card"
+                    value={discountCode}
+                    onChange={(e) => setDiscountCode(e.target.value)}
                   />
                   <button
                     className="btn btn-outline-secondary"
                     type="button"
-                    disabled
+                    onClick={handleApplyDiscount}
+                    disabled={isApplying}
                   >
                     Apply
                   </button>
                 </div>
 
+                {discountError && (
+                  <div className="text-danger mb-2">{discountError}</div>
+                )}
+
+                {discountResponse && (
+                  <div className="alert alert-success mt-2">
+                    Discount applied: {discountResponse.coupon_code} - ₹
+                    {discountResponse.discount}
+                    <br />
+                    Final amount: ₹{discountResponse.final_amount}
+                  </div>
+                )}
+
                 {/* Subtotal */}
                 <div className="d-flex justify-content-between mb-2">
                   <div className="text-gray">Subtotal</div>
-                  <div>${getSubTotal().toFixed(2)}</div>
+                  <div>${getTotalAmount().toFixed(2)}</div>
                 </div>
 
                 {/* Shipping */}
@@ -767,7 +820,7 @@ const Checkout = () => {
                   <div>
                     <span className="currency">USD</span>{" "}
                     <span className="total-price">
-                      ${getSubTotal().toFixed(2)}
+                      ${getTotalAmount().toFixed(2)}
                     </span>
                   </div>
                 </div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Collapse } from "react-bootstrap";
-import Info from "./Info";
+import Info from "../Info";
 
 
 import "./Press.css";
