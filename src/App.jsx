@@ -38,7 +38,7 @@ import WhiteClarityNav from "./pages/header/WhiteClarityNav";
 
 
 // Footer pages 
-import Press from "./pages/footerpages/Company/Press";
+import Press from "./pages/footerpages/company/Press";
 
 
 export default function App() {
