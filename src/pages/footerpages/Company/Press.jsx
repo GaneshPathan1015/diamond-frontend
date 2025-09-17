@@ -1264,64 +1264,6 @@ const blogs = [
   },
 ];
 
-//   {
-//     logo: "/footerpress/RCFA.avif",
-//     title:
-//       "Kandi Burruss Wore Christian Siriano To The ‘Othello’ Opening Night Party",
-//     date: "March 2025",
-//   },
-//   {
-//     logo: "People",
-//     title:
-//       "Justin Theroux and Nicole Brydon Bloom Got Married with Custom Wedding Rings. This Is How They Designed Them (Exclusive).",
-//     date: "March 2025",
-//   },
-//   {
-//     logo: "Wedding Forward",
-//     title:
-//       "Engagement Ring Trends 2025: From Classic Revivals to Modern Twists.",
-//     date: "March 2025",
-//   },
-//   {
-//     logo: "Vogue",
-//     title:
-//       "Justin Theroux and Nicole Brydon Bloom Are Married! Inside Their Laid-Back Beach Wedding in Mexico",
-//     date: "March 2025",
-//   },
-//   {
-//     logo: "Byrdie",
-//     title:
-//       "Brooches Have Entered a New Era—Here's How You Can Style Them in 2025",
-//     date: "March 2025",
-//   },
-//   {
-//     logo: "Yahoo! Life",
-//     title: "The Best Luxury Jewelry For Every Sign From With Clarity",
-//     date: "March 2025",
-//   },
-//   {
-//     logo: "JCK",
-//     title:
-//       "JCK Special Report - Lab Grown Diamonds - With Clarity’s Timely New Brooch Collection",
-//     date: "March 2025",
-//   },
-//   {
-//     logo: "Brides",
-//     title: "How to Choose a Coordinated Wedding Wardrobe With Your Partner",
-//     date: "March 2025",
-//   },
-//   {
-//     logo: "Other",
-//     title: "What Is an East-West Engagement Ring? Your Complete Guide",
-//     date: "March 2025",
-//   },
-//   {
-//     logo: "Abhi",
-//     title: "What Is an East-West Engagement Ring? Your Complete Guide",
-//     date: "March 2025",
-//   },
-// ];
-
 const Press = () => {
   const [open, setOpen] = useState(null);
 
