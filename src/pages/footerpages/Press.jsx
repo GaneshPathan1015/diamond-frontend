@@ -135,7 +135,7 @@ const blogs = [
     date: "JANUARY 2025",
   },
   {
-    logo: "/footerpress/The_Knot_480x.avif",
+    logo: "/footerpress/theknot_LOGO_480x.svg",
     title: "Engagement Ring Trends You're Going to See Everywhere in 2025",
     date: "JANUARY 2025",
   },
@@ -426,22 +426,22 @@ const blogs = [
     date: "SEPTEMBER 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/5_cosmopolitan_1_480x.avif",
     title: "70 Splurge-y, Luxury Gifts for Women Who (Seem to) Have It All",
     date: "SEPTEMBER 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/the_PR_net_a16c8d52-4d75-45cb-98d8-f4de0536c6fa_480x.avif",
     title: "Fall Fashion Heroes: Pieces to Embrace the New Season",
     date: "AUGUST 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Vesture_Debate_9ef6066a-6bd9-4faa-8255-0d3ccd585fc6_480x.avif",
     title: "The Bouquet Collection From With Clarity",
     date: "AUGUST 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/forbes_f074f74b-d0a6-4eeb-bafb-7da6a80c7512_480x.avif",
     title: "The Best Places To Buy Engagement Rings, According To Gem Experts",
     date: "AUGUST 2024",
   },
@@ -467,17 +467,17 @@ const blogs = [
     date: "AUGUST 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Martha_Stewart_06a5c6c5-3548-4702-b4c3-37df2f584328_345x.svg",
     title: "Nothing Is More Timeless Than A BIG Diamond Engagement Ring",
     date: "JULY 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/WeddingVibe-logo-magenta_a5247aea-e7a7-4cd6-aadd-c3c275cb4d24_345x.avif",
     title: "Your Ultimate Guide to Hidden Halos",
     date: "JULY 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Emmaline_345x.avif",
     title: "Three Stone Engagement Rings for the Modern Bride",
     date: "JULY 2024",
   },
@@ -488,40 +488,40 @@ const blogs = [
     date: "JULY 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Mimoni_345x.webp",
     title:
       "The Symbolism of Flowers in Jewelry: What Your Accessories Say About You",
     date: "JULY 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/PRESS_LOGO_480x.avif",
     title: "The 13 Best Places to Buy Lab Grown Diamonds in 2024",
     date: "JULY 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Emmaline_345x.avif",
     title:
       "Uncover The Reserve: With Clarity Limited Collection of Engagement Rings and High Jewelry",
     date: "JULY 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Purewow_345x.svg",
     title: "The 31 Best Jewelry Gifts to Give This Year",
     date: "JULY 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/StyleCaster_77577ce5-b1c1-4f60-92b6-72f198ff6552_345x.avif",
     title: "Most Legit Places To Buy Engagement Rings Online",
     date: "JUNE 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/StyleCaster_77577ce5-b1c1-4f60-92b6-72f198ff6552_345x.avif",
     title:
       "The Only Online Jewelers You Should be Buying Diamonds From, According to the Pros",
     date: "JUNE 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Martha_Stewart_06a5c6c5-3548-4702-b4c3-37df2f584328_345x.svg",
     title: "Diamond Essentials That Every Girl Needs In Her Collection",
     date: "MAY 2024",
   },
@@ -543,37 +543,37 @@ const blogs = [
     date: "MAY 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/CityLifestyle_Darien_New_Canaan_Lifestyle_CT_Black1_1_345x.avif",
     title: "May 2024 Issue",
     date: "MAY 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Glamour_6a7ffd0a-1e2e-445e-9381-b77c5c8f0e6d_345x.webp",
     title: "Met Gala 2024 Red Carpet Looks featuring With Clarity",
     date: "MAY 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/jck_in_svg_345x.svg",
     title: "Met Gala 2024 Red Carpet: See All The Divine Looks",
     date: "MAY 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/5_cosmopolitan_1_345x.avif",
     title: "Tony Nominee Maleah Joi Moon in With Clarity at The Met Gala",
     date: "MAY 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/12_MiamiLiving_345x.avif",
     title: "Introducing The Reserve: With Clarity's High Jewelry Collection",
     date: "MAY 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/style_Meets_345x.webp",
     title: "Personalized Mother's Gifts She Will Adore",
     date: "MAY 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/wwd_345x.avif",
     title:
       "Why Younger Shoppers Are Turning to Heritage Jewelry Like Signet Rings and Tennis Bracelets",
     date: "April 2024",
@@ -589,17 +589,17 @@ const blogs = [
     date: "April 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/PRESS_LOGO_345x.avif",
     title: "The Best Engagement Ring Style for Your Partner's Personality",
     date: "April 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/wedding_sparrow_2_345x.avif",
     title: "What to expect from an Engagement Ring Appointment at With Clarity",
     date: "April 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/12_MiamiLiving_345x.avif",
     title: "Introducing The World of The Reserve",
     date: "April 2024",
   },
@@ -615,53 +615,53 @@ const blogs = [
     date: "April 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/national_jewelry_345x.avif",
     title: "With Clarity Partners With NFL on Wedding Bands",
     date: "April 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/wwd_345x.avif",
     title:
       "NFL Releases Wedding Bands Collection With Fine JewelryLabel With Clarity",
     date: "April 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/southernBride_LOGO_345x.svg",
     title: "Vintage Inspired Engagement Rings from With Clarity",
     date: "April 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/forbes-logo_345x.avif",
     title: "Fine Jewelry Brand, With Clarity, Launches NYC Storefront",
     date: "April 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/jck_in_svg_345x.svg",
     title: "With Clarity Expands to In-Person Shopping With NYC Boutique",
     date: "April 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/wedding_sparrow_2_345x.avif",
     title: "18 Best Places to Buy Engagement Rings",
     date: "March 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Bridal_Guide_345x.avif",
     title: "Sustainable Rings We Love from With Clarity",
     date: "March 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Martha_Stewart_06a5c6c5-3548-4702-b4c3-37df2f584328_345x.svg",
     title: "Everything You Need To Know: Home Preview",
     date: "March 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/wedding_sparrow_2_345x.avif",
     title: "Eternity Bands for Every Spring 2024 Trend",
     date: "March 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Wedding_Forward_345x.avif",
     title: "Determining Your Engagement Ring Width",
     date: "March 2024",
   },
@@ -676,7 +676,7 @@ const blogs = [
     date: "March 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/harpers-bazaar-vector-logo_345x.avif",
     title: "Red Carpet Looks in With Clarity",
     date: "February 2024",
   },
@@ -686,23 +686,23 @@ const blogs = [
     date: "February 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/wedding_sparrow_2_345x.avif",
     title: "Our Ten Favorite Sets of Studs from With Clarity",
     date: "February 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/southernBride_LOGO_345x.svg",
     title:
       "Your Guide to Choosing The Perfect Diamond for Your Engagement Ring",
     date: "February 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Martha_Stewart_06a5c6c5-3548-4702-b4c3-37df2f584328_345x.svg",
     title: "Art Deco-Inspired Engagement Rings",
     date: "February 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/StyleCaster_77577ce5-b1c1-4f60-92b6-72f198ff6552_345x.avif",
     title:
       "22 Best Valentine's Day Gifts For Your Partner, Your Galentine — Or Yourself",
     date: "February 2024",
@@ -713,7 +713,7 @@ const blogs = [
     date: "February 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Woman_s_World_345x.avif",
     title: "Valentine's Day Gift Ideas for Everyone in Your Life",
     date: "February 2024",
   },
@@ -739,50 +739,50 @@ const blogs = [
     date: "January 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/forbes-logo_480x.avif",
     title: "Valentine's Day Gift Guide 2024: The Best Travel-Friendly Earrings",
     date: "January 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/City_lifestyle_480x.svg",
     title: "Jen Birn's 'My Favorite Things'",
     date: "January 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/wedding_sparrow_2_480x.avif",
     title: "5 Myths About Lab-Grown Diamond Engagement Rings",
     date: "January 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/The_Knot_480x.webp",
     title:
       "The Top Valentine's Day Engagement Ring and Wedding Band Sales of 2024",
     date: "January 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Marie_claire_480x.svg",
     title: "Engagement Rings You Want to Bookmark",
     date: "January 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/jck_in_svg_480x.svg",
     title: "From Our Founder: How I Got Here",
     date: "January 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/5_cosmopolitan_1_480x.avif",
     title:
       "46 Personalized Valentine's Day Gifts: With Clarity Nameplate Necklaces",
     date: "JANUARY 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/forbes-logo_480x.avif",
     title:
       "Valentine's Day Gift Guide 2024: The Best Lab-Grown Diamond Bracelets",
     date: "JANUARY 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/GH_LOGO_WHITE_345x.avif",
     title: "Wedding Anniversary Gifts to Celebrate 25 Years",
     date: "JANUARY2024",
   },
@@ -792,42 +792,42 @@ const blogs = [
     date: "JANUARY 2024",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/12_MiamiLiving_480x.avif",
     title: "Timeless Jewelry for EveryOccasion",
     date: "DECEMBER 2023",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Martha_Stewart_06a5c6c5-3548-4702-b4c3-37df2f584328_480x (2).svg",
     title: "10 Anniversary Rings for Your Milestone Memories",
     date: "DECEMBER 2023",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Purewow_345x.svg",
     title: "31 Best Jewelry Gifts for the Holiday Season",
     date: "DECEMBER 2023",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/trend_hunter_345x.svg",
     title: "Our Blue Topaz Collection",
     date: "DECEMBER 2023",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Martha_Stewart_06a5c6c5-3548-4702-b4c3-37df2f584328_480x (3).svg",
     title: "Add a Pop of Color: Vibrant Engagement Rings",
     date: "DECEMBER 2023",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/green_wedding_shoes_ImgID1_480x.avif",
     title: "Lab Grown Diamonds: Breaking Down the Benefits",
     date: "December 2023",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/southernBride_LOGO_480x.svg",
     title: "Introducing The Elegance Collection: Embracing Minimalism",
     date: "December 2023",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Martha_Stewart_06a5c6c5-3548-4702-b4c3-37df2f584328_480x.svg",
     title: "All about With Clarity: Who We Are",
     date: "November 2023",
   },
@@ -842,7 +842,7 @@ const blogs = [
     date: "November 2023",
   },
   {
-    logo: "/footerpress/theknot_LOGO_480x.avif",
+    logo: "/footerpress/theknot_LOGO_480x.svg",
     title: "Top Engagement Rings Sales for Black Friday and Cyber Monday",
     date: "November 2023",
   },
@@ -852,23 +852,23 @@ const blogs = [
     date: "November 2023",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Martha_Stewart_06a5c6c5-3548-4702-b4c3-37df2f584328_480x (4).svg",
     title: "The Most Unique and Amazing Engagement Rings",
     date: "March 2023",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/sheFind_LOGO_345x.svg",
     title:
       "With Clarity Has The Largest Selection of Lab Diamonds And Some of Our Engagement Rings and Earrings Made With Them.",
     date: "January 2023",
   },
   {
-    logo: "/footerpress/theknot_LOGO_480x.avif",
+    logo: "/footerpress/theknot_LOGO_480x.svg",
     title: "31 Must-Have Oval Engagement Rings",
     date: "January 2023",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/southernBride_LOGO_480x.svg",
     title: "Current Engagement Ring Trends and Bespoke Designs In 2023",
     date: "January 2023",
   },
@@ -878,31 +878,31 @@ const blogs = [
     date: "January 2023",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/LabGrownCarats_LOGO_345x.svg",
     title:
       "Top selects of our bestselling lab diamond jewelry gifts for under $1000.",
     date: "November 2022",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/cnn_underscored_logo_345x.avif",
     title:
       "Mentioned as one of the best places to buy engagement rings, especially for our easy to buy preset collection.",
     date: "November 2022",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/forbes-logo_480x.avif",
     title:
       "With Clarity is ranked as the #1 Best Overall Place to Buy Engagement Rings Online.",
     date: "October 2022",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/The_Knot_480x.webp",
     title:
       "View our top rated anniversary, diamond and eternity bands. Ranked as one of the best gifts for a milestone anniversary.",
     date: "June 2022",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/VOGUE_LOGO_345x.svg",
     title:
       "Our gorgeous rose gold jewelry pieces and most loved styles, highlighted in Vogue.",
     date: "May 2022",
@@ -914,35 +914,35 @@ const blogs = [
     date: "April 2022",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/BI_new_345x.avif",
     title:
       "With Clarity featured in The Lead's top 50 breakout brands in the fashion, beauty and lifestyle space.",
     date: "March 2022",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/cnn_underscored_logo_345x.avif",
     title:
       "Planning to propose? Here are 23 expert-approved rings worth buying",
     date: "May 2021",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/nice_ice-logo_345x.avif",
     title: "With Clarity Diamond Reviews 2021 Discover Spectacular Sparkle",
     date: "March 2021",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/forbes-logo_480x.avif",
     title:
       "Meet With Clarity, The Online Jewelry Brand That Let's You Try On Before You Buy",
     date: "March 2021",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/zeo_logo_345x.webp",
     title: "The Rare-Cut Diamond Trend Designers Say Will Rise In 2021",
     date: "Feb 2021",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/forbes-logo_480x.avif",
     title: "Where To Buy An Engagement Ring Online",
     date: "Feb 2021",
   },
@@ -952,45 +952,45 @@ const blogs = [
     date: "Feb 2021",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/The_Knot_480x.webp",
     title:
       "Beautiful Royal Engagement Rings Throughout History, Plus Lookalikes You Can Buy Now",
     date: "Jan 2021",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Wedding_Wire_345x.avif",
     title: "27 Minimalist Engagement Rings for Your Understated Other Half",
     date: "Jan 2021",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/The_Lead_345x.webp",
     title: "The Foremost 50 of 2020",
     date: "Jan 2021",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/zeo_logo_345x.webp",
     title:
       "Demystifying Lab-Grown Diamonds: 2 Experts On The Essential Facts & Common Myths",
     date: "December 2020",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Stylecaster_345x.webp",
     title: "5 2021 Jewelry Trends To Invest In, From Pendants To Pearls",
     date: "December 2020",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/The_Knot_480x.webp",
     title: "How COVID Revamped the Online Engagement Ring Shopping Experience",
     date: "December 2020",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Refinery_29_345x.webp",
     title:
       "8 Engagement Ring Trends That Will Be Big In 2021, According to Experts",
     date: "December 2020",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Rolling_Stone_345x.webp",
     title: "The Latest Pandemic Trend: Getting Engaged",
     date: "December 2020",
   },
@@ -1000,7 +1000,7 @@ const blogs = [
     date: "December 2020",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/zeo_logo_345x.webp",
     title:
       "Winter's Top Earrings Trends Have The Approval Of The Industry's Coolest Designers",
     date: "Nov 2020",
@@ -1011,251 +1011,256 @@ const blogs = [
     date: "Nov 2020",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/She_Finds_345x.avif",
     title: "9 Engagement Ring Trends That Are IN For 2021",
     date: "Nov 2020",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Martha_Stewart_345x.svg",
     title: "How to Choose the Right Wedding Band for the Groom",
     date: "June 2020",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/medium_CP_BTSS_Podcast_cover_345x.avif",
     title: "Sharing the story of working together and building With Clarity.",
     date: "April 2020",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Financial-Times-Logo_new_345x.avif",
     title: "With Clarity ranks at #13 fastest growing company in 2020.",
     date: "April 2020",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Hustlr_new_345x.avif",
     title:
       "Slisha & Anubh from With Clarity talk about scaling and growing fast.",
     date: "March 2020",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Ruffled_new_345x.webp",
     title: "Sharing how Lab Diamond Engagement Rings are the next big thing.",
     date: "December 2019",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/The_Adult_Man-logo_345x.avif",
     title: "Proposals are hard to mess up if you follow a few guidelines",
     date: "November 2019",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Digitail_360-logo_345x.avif",
     title: "With Clarity's unique approach drives massive growth",
     date: "November 2019",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/CNYB-logo_345x.webp",
     title:
       "With Clarity is ranked as the 3rd fastest growing company in New York on Crain's Fast 50 list.",
     date: "November 2019",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Inc._magazine_logo_345x.webp",
     title:
       "These startups came up with unique business models--and they turned out to be wildly lucrative.",
     date: "November 2019",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Digiday-logo_345x.webp",
     title:
       "How With Clarity and other brands are 'on a mission to DTC-ify engagement and wedding rings.'",
     date: "November 2019",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/cosmopolitan-logo_345x.avif",
     title:
       "Our two tips to a great Christmas proposal: Make sure to find time when the two of you can be alone together; and...don't lose the ring.",
     date: "November 2019",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/AE_345x.avif",
     title: "Our tips on making sure customers are top priority every time.",
     date: "August 2019",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/CMS-Wire-logo_345x.avif",
     title:
       "Building a brand with strength from the inside out. What we've learned along the way",
     date: "August 2019",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Inc._magazine_logo_345x.webp",
     title:
       "We're thrilled that our team made it to #3 on the 10 hottest companies in NYC",
     date: "August 2019",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/BI_new_2b9200fc-dbf8-4adc-8941-ba0b7df45a7a_345x.avif",
     title:
       "The smartest and most stress-free way to shop for her engagement ring online.",
     date: "August 2019",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/inc-image_345x.avif",
     title:
       "With Clarity was named #18 on the INC 5000 list of fastest growing companies in the USA.",
     date: "August 2019",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/forbes_1_345x.webp",
     title: "With Clarity: The Warby Parker Of Engagement Rings",
     date: "July 2019",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Yahoo_345x.webp",
     title: "Startup taking the stress out of engagement ring shopping",
     date: "May 2019",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/createthefuture_345x.avif",
     title: "With Clarity Offers Elegant Custom-Made Engagement Rings",
     date: "May 2019",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Martha_Stewart_345x.svg",
     title:
       "How Often Should You Take Your Engagement Ring to the Jeweler for a Tune-Up?",
     date: "May 2019",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Martha_Stewart_345x.svg",
     title: "How to Choose a Timeless Engagement Ring",
     date: "June 2018",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/She_Finds_345x.avif",
     title: "9 Engagement Ring Trends That Are So In for 2019",
     date: "June 2018",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Medium-Magazine_345x.webp",
     title:
       "Female Disruptors: Slisha Kankariya is a hidden gem in the diamond industry",
     date: "August 2018",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Martha_Stewart_345x.svg",
     title: "From Start to Finish: This Is How a Custom Engagement Ring Is Made",
     date: "September 2018",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/The-Yes-Girls_2_345x.avif",
     title: "Friday 'Rocks'! Featuring Four Mine",
     date: "March 2018",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/StarTribune_345x.avif",
     title:
       "With Clarity offers a quick way to try rings at home comfortably before you make your purchase.",
     date: "September 2017",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Bravo_345x.avif",
     title:
       "Instead of bothering a jeweler to let you try on every single ring they have on display, you can use an at-home service that mails ring options to you.",
     date: "September 2017",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Fox_345x.avif",
     title:
       "Shop with ease for an engagement ring online. Try it at home before you buy.",
     date: "September 2017",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Credit_345x.avif",
     title:
       "Every piece is handcrafted with care in their New York City studio, so you can be sure that you're only getting the highest quality.",
     date: "May 2017",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/She_Finds_345x.avif",
     title: "12 Engagement rings trends that will be huge this season.",
     date: "July 2016",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Tc_345x.png",
     title: "With Clarity is a venture backed company growing rapidly.",
     date: "June 2016",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Glamour_345x.avif",
     title:
       "We share advice on how to keep your ring sparkling and new now and forever.",
     date: "June 2016",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/June_345x.avif",
     title:
       "Our gorgeous engagement ring and wedding bands featured at a local New York wedding.",
     date: "April 2016",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Your-Tango_345x.avif",
     title:
       "This box is a great way to get going with engagement ring shopping.",
     date: "February 2016",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/twp_345x.avif",
     title:
       "Going online gives shoppers more options to choose from and comparison shop.",
     date: "December 2015",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Tech-co_345x.avif",
     title:
       "With Clarity is the only online jeweler that provides all of the benefits of in-store shopping, at home.",
     date: "October 2015",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Popsugar_345x.webp",
     title:
       "With Clarity shares how to showcase your engagement ring once he's popped question.",
     date: "August 2015",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/AW_345x.avif",
     title:
       "With Clarity eliminates the uncertainty of shopping online with it's at Home Preview for engagement rings.",
     date: "June 2015",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/WH_345x.avif",
     title:
       "With Clarity is featured as a top bolg for wedding and engagement ring advice.",
     date: "June 2015",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/B_345x.webp",
     title:
       "With Clarity offers expertise on the entire engagement ring process from start to finish.",
     date: "May 2015",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/E_345x.webp",
     title:
       "Ecommerce is the new way to shop and work. With Clarity brings technology to the forefront in every experience.",
     date: "March 2015",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/BI_new_2b9200fc-dbf8-4adc-8941-ba0b7df45a7a_345x.avif",
     title:
       "With Clarity shares how to save on your diamond when shopping online.",
     date: "February 2015",
   },
   {
-    logo: "/footerpress/RCFA.avif",
+    logo: "/footerpress/Time_345x.webp",
     title:
       "With Clarity shares our tips on how to obtain the most value when purchasing a diamond ring.",
     date: "February 2015",
+  },
+  {
+    logo: "/footerpress/WB_345x.avif",
+    title:
+      "Engagement ring buying tips from former diamond cutter and third-generation jeweler Anubh Shah.",
   },
 ];
 
