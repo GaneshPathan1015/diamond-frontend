@@ -423,26 +423,6 @@ const JewelryList = () => {
       key !== "category" && key !== "subcategory" && key !== "menucollection"
   );
 
-  // this function support both
-  // function normalizeVariations(group) {
-  //   const normalized = {};
-  //   const isBuild = group.product?.is_build;
-  //   const metalVariations = group.metal_variations || {};
-
-  //   Object.entries(metalVariations).forEach(([metalId, variations]) => {
-  //     if (isBuild === 1) {
-  //       // metalVariations[metalId][shapeId] = [variation, ...]
-  //       const flat = Object.values(variations).flat();
-  //       normalized[metalId] = flat;
-  //     } else {
-  //       // metalVariations[metalId] = [variation, ...]
-  //       normalized[metalId] = variations;
-  //     }
-  //   });
-
-  //   return normalized;
-  // }
-
   return (
     <>
       <section className="hero_section_wrapper">
@@ -761,7 +741,6 @@ const JewelryList = () => {
         <h5 className="mt-4">Showing {total} products.</h5>
         <div className="row row-cols-1 row-cols-md-4 g-4">
           {loading && <Loader />}
-
 
           {products.map((group) => {
             const metalKeys = Object.keys(group.metal_variations).sort(

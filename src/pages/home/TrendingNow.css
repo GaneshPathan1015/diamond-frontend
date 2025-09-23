@@ -1,59 +1,98 @@
 .trending-section {
-    padding: 20px 0;
+  background: #fff;
+}
+
+.trending-title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.explore-btn {
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.trending-item img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.item-label {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 10px;
+}
+
+/* Slick arrow customization */
+/* .slick-prev, */
+/* .slick-next { */
+/* width: 35px; */
+/* height: 35px; */
+/* background: #fff !important; */
+/* border: 1px solid #000; */
+/* border-radius: 50%; */
+/* z-index: 1000; */
+/* } */
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 18px;
+  color: #000;
+}
+
+.slick-prev {
+  left: auto;
+  right: 40px;
+  top: -10px;
+}
+
+.slick-next {
+  right: 10px;
+  top: -10px;
+}
+
+/* Ensure slider items stretch full width on mobile */
+.trending-item {
+  padding: 0 5px;
+  /* small spacing between slides */
+}
+
+.trending-item img {
+  width: 100%;
+  /* full width */
+  height: auto;
+  /* maintain aspect ratio */
+  object-fit: cover;
+  /* fill properly */
+  border-radius: 0;
+  /* optional: remove rounded edges */
+}
+
+/* Responsive text sizing */
+@media (max-width: 576px) {
+  .trending-section .container {
+    padding: 0 10px;
   }
-  
-  .trending-container {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-  }
-  
-  .trending-left {
-    width: 25%;
-    padding: 20px;
-  }
-  
-  .trending-title {
-    font-size: 3rem;
-    font-weight:500;
-    margin-bottom: 15px;
-    margin-top: 40px;
-  }
-  
-  .trending-btn {
-    display: inline-block;
-    border: 1px solid #000;
-    padding: 6px 6px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background 0.3s ease;
-    color: #000;
-    font-size: 13px;
-  }
-  
-  .trending-btn:hover {
-    background: #000;
-    color: #fff;
-  }
-  
-  .trending-right {
-    width: 75%;
-  }
-  
+
   .trending-item {
-    padding: 10px;
-    text-align: center;
+    padding: 0;
+    /* remove side gaps */
   }
-  
+
   .trending-item img {
     width: 100%;
-    /* border-radius: 6px; */
+    /* full stretch */
   }
-  
-  .item-label {
-    text-transform: uppercase;
-    font-size: 14px;
-    margin-top: 10px;
-    font-weight: 500;
+
+  .trending-title {
+    font-size: 1.5rem;
   }
-  
+
+  .explore-btn {
+    width: 100%;
+    font-size: 0.85rem;
+  }
+}

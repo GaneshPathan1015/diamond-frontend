@@ -40,8 +40,8 @@ export default function Education() {
   }`;
 
   return (
-    <section className="creste-your-own py-5">
-      <div className="container px-5">
+    <section className="creste-your-own py-2">
+      <div className="container px-2">
         <div className="text-center mb-4">
           <h2 className="section-header">DIAMOND EDUCATION</h2>
           <div className="d-flex justify-content-center gap-4 mt-3">
@@ -66,8 +66,8 @@ export default function Education() {
         </div>
 
         {activeTab === "natural" && (
-          <div className="row align-items-center">
-            <div className="col-md-6">
+          <div className="row align-items-center ">
+            <div className="col-md-6 mb-2">
               <h3 className="fw-bold mb-3 fst-italic">Natural Diamond</h3>
               <p>
                 Natural Diamonds are exquisite gemstones that form deep within
@@ -98,7 +98,7 @@ export default function Education() {
 
         {activeTab === "lab" && (
           <div className="row align-items-center">
-            <div className="col-md-6">
+            <div className="col-md-6  mb-2">
               <h3 className="fw-bold mb-3 fst-italic">Lab Grown Diamond</h3>
               <p>
                 Lab-grown diamonds possess the same physical and chemical

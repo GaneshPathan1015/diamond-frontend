@@ -2,24 +2,18 @@ import React from "react";
 import TrendingNow from "./TrendingNow";
 import BestsellingRings from "./BestsellingRings";
 import ExclusiveOffers from "./ExclusiveOffers";
+import "./home.css";
 
 export default function Home() {
   return (
     <>
       {/* Hero Section */}
       <section className="hero_section_wrapper">
-        <div className="container-fluid p-0 position-relative">
-          <video
-            width="100%"
-            height="100%"
-            autoPlay
-            muted
-            loop
-            preload="metadata"
-          >
+        <div className="container-fluid p-0 position-relative h-100">
+          <video autoPlay muted loop preload="metadata">
             <source src="/vedio/main-banner-vedio.mp4" type="video/mp4" />
           </video>
-          <div className="wrapper position-absolute text-center w-100 mb-5">
+          <div className="wrapper position-absolute text-center w-100">
             <h2 className="fs-1 slide-title text-white">
               The Perfect Beginning
             </h2>
@@ -49,15 +43,16 @@ export default function Home() {
 
       {/* Trending Now Section */}
       <TrendingNow />
-
-      <section className="build_engagement_wrapper my-5">
+      <section className="build_engagement_wrapper py-5">
         <div className="container">
-          <div className="row">
-            <div className="col-6">
+          <div className="row align-items-center">
+            {/* Left Side */}
+            <div className="col-lg-6 col-md-6 col-12 mb-4 mb-md-0">
               <div className="row">
+                {/* Top Text */}
                 <div className="col-12">
-                  <div className="content small--text-center text-start">
-                    <h2 className="section-header-lg section-header-md">
+                  <div className="content text-center text-md-start mb-4">
+                    <h2 className="section-header-lg section-header-md mb-3">
                       Build Your <br /> Engagement Ring
                     </h2>
                     <p className="mb-4">
@@ -66,23 +61,29 @@ export default function Home() {
                     </p>
                     <a
                       href="#"
-                      className="btn border-button border my-4 p-2 rounded-0 fw-bold border-dark"
+                      className="btn border-button border p-2 rounded-0 fw-bold border-dark"
                     >
                       START DESIGNING
                     </a>
                   </div>
                 </div>
+
+                {/* Bottom Image */}
                 <div className="col-12">
                   <img
-                    src="https://images.unsplash.com/photo-1716366192997-817bb5e88d52?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDB8fGRpYW1vbmQlMjByaW5nfGVufDB8fDB8fHww"
-                    alt=""
-                    className="img-fluid"
+                    src="https://images.unsplash.com/photo-1716366192997-817bb5e88d52?w=800&auto=format&fit=crop&q=80"
+                    alt="Build Engagement Ring"
+                    className="img-fluid w-100 shadow-sm"
+                    style={{ maxHeight: "400px", objectFit: "cover" }}
                   />
                 </div>
               </div>
             </div>
-            <div className="col-6">
+
+            {/* Right Side */}
+            <div className="col-lg-6 col-md-6 col-12">
               <div className="row">
+                {/* Top Image */}
                 <div className="col-12">
                   <img
                     src="https://img.freepik.com/free-photo/beautiful-engagement-ring-with-diamonds_23-2149509236.jpg?ga=GA1.1.1364773145.1746277227&semt=ais_hybrid&w=740"
@@ -90,18 +91,20 @@ export default function Home() {
                     className="img-fluid"
                   />
                 </div>
+
+                {/* Bottom Text */}
                 <div className="col-12">
-                  <div className="content small--text-center text-end mt-5">
-                    <h2 className="section-header-lg section-header-md text-end">
+                  <div className="content text-center text-md-start mt-4">
+                    <h2 className="section-header-lg section-header-md mb-3">
                       Preset <br /> Engagement Rings
                     </h2>
-                    <p className="text-end ms-auto mb-4">
+                    <p className="mb-4">
                       Find your perfect match with our assortment of ready to
                       purchase designs.
                     </p>
                     <a
                       href="#"
-                      className="btn border-button border p-2 rounded-0 fw-bold border-dark text-end"
+                      className="btn border-button border p-2 rounded-0 fw-bold border-dark"
                     >
                       EXPLORE NOW
                     </a>
@@ -151,21 +154,22 @@ export default function Home() {
       <BestsellingRings />
       <ExclusiveOffers />
 
-      <section className="Home_Preview_wrapper">
+      <section className="Home_Preview_wrapper py-5">
         <div className="container">
-          <div className="row my-5 align-items-center">
-            <div className="col-4">
-              <div className="grid__content small--text-center">
-                <span className="sub-title text-uppercase">
+          <div className="row align-items-center">
+            {/* Left Content */}
+            <div className="col-lg-4 col-md-5 col-12 text-center text-md-start mb-4 mb-md-0">
+              <div className="grid__content">
+                <span className="sub-title text-uppercase d-block mb-2">
                   TRY BEFORE YOU BUY
                 </span>
-                <h2 className="section-header-lg">Home Preview</h2>
-                <p>
+                <h2 className="section-header-lg mb-3">Home Preview</h2>
+                <p className="mb-3">
                   Seeking love at first sight?
                   <br />
                   Try two rings at home &amp; find the right one for you.
                 </p>
-                <ul className="home-preview-features">
+                <ul className="home-preview-features list-unstyled mb-3">
                   <li>3D PRINTED</li>
                   <li>FINELY CRAFTED</li>
                   <li>CUSTOM REPLICA</li>
@@ -173,21 +177,21 @@ export default function Home() {
                 </ul>
                 <a
                   href="#"
-                  className="btn border-button border my-2 p-2 rounded-0 fw-bold border-dark"
+                  className="btn border-button border p-2 rounded-0 fw-bold border-dark"
                 >
                   LEARN MORE
                 </a>
               </div>
             </div>
-            <div className="col-8">
-              <div>
-                <div>
-                  <img
-                    src="https://images.unsplash.com/photo-1559006864-38a01f201f95?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGRpYW1vbmQlMjByaW5nfGVufDB8fDB8fHww"
-                    alt=""
-                    className="img-fluid p-2"
-                  />
-                </div>
+
+            {/* Right Image */}
+            <div className="col-lg-8 col-md-7 col-12">
+              <div className="text-center text-md-end">
+                <img
+                  src="https://images.unsplash.com/photo-1559006864-38a01f201f95?w=1000&auto=format&fit=crop&q=80"
+                  alt="Diamond Ring"
+                  className="img-fluid shadow-sm"
+                />
               </div>
             </div>
           </div>

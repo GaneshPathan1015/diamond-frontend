@@ -4,18 +4,21 @@ import Education from "../engagement/education/education";
 import DesigningProcess from "../engagement/designing-process/designingProcess.";
 import Quetions from "../engagement/quetions/quetions";
 import WedingCollection from "./collaction/wedingCollection";
-
+import "./index.css";
 export default function Weddingbrands() {
   return (
     <>
       <section className="hero_section_wrapper">
-        <div className="container-fluid p-0 position-relative">
+        <div className="container-fluid p-0 position-relative h-100">
+          {/* Hero image */}
           <img
             src="/images/engagement-rings-banner.webp"
             alt="Engagement Rings Banner"
-            className="img-fluid w-100"
+            className="w-100 h-100 hero-img"
           />
-          <div className="wrapper position-absolute text-center w-100 mb-5">
+
+          {/* Text overlay */}
+          <div className="wrapper position-absolute bottom-0 start-50 translate-middle-x text-center w-100 mb-5">
             <h2 className="fs-1 slide-title text-white">Wedding Bands</h2>
             <div className="content">
               <p className="text-white">
@@ -28,7 +31,6 @@ export default function Weddingbrands() {
             </div>
             <div className="slide-btn-wrapper justify-content-center align-items-center gap-5">
               <a
-                title="SHOP ENGAGEMENT RINGS"
                 href="#"
                 className="text-white btn border-button border my-2 p-2 rounded-0 fw-bold border-white"
               >

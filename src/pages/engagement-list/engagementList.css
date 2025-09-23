@@ -10,7 +10,7 @@
 
 .product-variation__title {
   margin-top: 5px;
-  max-height: 40px; 
+  max-height: 40px;
   line-height: 20px;
   overflow: hidden;
 }
@@ -225,7 +225,7 @@
   text-transform: uppercase;
   font-weight: bold;
   display: block;
- /* margin-bottom: 0.5rem;*/
+  /* margin-bottom: 0.5rem;*/
 }
 
 .product-variation__carat-wrap {
@@ -242,7 +242,8 @@
   text-align: center;
   margin-inline: 2px;
 }
-.product-variation__carat-pill.active{
+
+.product-variation__carat-pill.active {
   border: 1px solid #000;
   color: black;
   background-color: white;
@@ -252,15 +253,10 @@
   width: 100%;
   height: 279px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* smooth shadow */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  /* smooth shadow */
 }
 
-.product-image-full {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-}
 
 .overlay-text {
   position: absolute;
@@ -279,11 +275,14 @@
   padding-bottom: 5px;
   margin-bottom: 5px;
 
-  -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
-  overscroll-behavior-x: none;       /* prevent over-scroll */
+  -webkit-overflow-scrolling: touch;
+  /* smooth scroll on iOS */
+  overscroll-behavior-x: none;
+  /* prevent over-scroll */
 
   /* Remove native scroll arrows (Windows) */
-  scrollbar-width: thin;             /* Firefox */
+  scrollbar-width: thin;
+  /* Firefox */
   scrollbar-color: #aaa transparent;
 
   /* Remove Windows system-style arrows */
@@ -298,12 +297,13 @@
   /* Optional visual cleanup */
   background-clip: padding-box;
   box-shadow: none !important;
-  background: white; /* Match your site background */
+  background: white;
+  /* Match your site background */
 }
 
 /* WebKit (Chrome, Edge, Safari) scrollbar */
 .style-scroll-wrapper::-webkit-scrollbar {
-   height: 3px;
+  height: 3px;
 }
 
 .style-scroll-wrapper::-webkit-scrollbar-track {
@@ -379,7 +379,7 @@
   border-bottom: 1px solid black;
 }
 
-.price-label-jewelry-page{
+.price-label-jewelry-page {
   font-size: 10px;
 }
 
@@ -407,11 +407,14 @@
   font-weight: 500;
   border-bottom: 1px solid black;
 }
+
 .sort-by-wrapper {
   display: flex;
   align-items: center;
-  gap: 8px; /* spacing between label and select */
-  flex-wrap: wrap; /* allow wrap on smaller screens */
+  gap: 8px;
+  /* spacing between label and select */
+  flex-wrap: wrap;
+  /* allow wrap on smaller screens */
 }
 
 .sort-label {
@@ -419,7 +422,8 @@
 }
 
 .sort-dropdown {
-  max-width: 250px; /* or whatever fits your layout */
+  max-width: 250px;
+  /* or whatever fits your layout */
   width: auto;
   padding: 6px 10px;
   text-overflow: ellipsis;
@@ -461,4 +465,139 @@
 .metal-item.active .metal-label {
   font-weight: bold;
   text-decoration: underline;
+}
+
+.product-image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-image-full {
+  width: 100%;
+  height: 280px;
+  object-fit: scale-down;
+  transition: transform 0.3s ease;
+}
+
+.product-image-container:hover .product-image-full {
+  transform: scale(1.05);
+}
+
+.overlay-text {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  font-size: 0.8rem;
+  color: #fff;
+}
+
+
+/* Metal Buttons */
+.product-variation__btn {
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  padding: 0;
+}
+
+.product-variation__btn:hover {
+  border: 2px solid #000;
+}
+
+/* Carat Pills */
+.product-variation__carat-pill {
+  border: 1px solid #ccc;
+
+  background: #f8f9fa;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.product-variation__carat-pill.active {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+.hero_section_wrapper {
+  position: relative;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+.hero_section_wrapper .container-fluid {
+  padding-bottom: 0;
+  /* remove padding */
+}
+
+.hero_section_wrapper img,
+.hero_section_wrapper video {
+  display: block;
+  /* remove inline spacing below images/videos */
+  margin-bottom: 0;
+}
+
+.hero_section_wrapperengage {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero-media {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 900px;
+  padding: 0 15px;
+  z-index: 2;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+}
+
+.hero-btn {
+  border-radius: 0;
+  transition: 0.3s ease;
+}
+
+.hero-btn:hover {
+  background: #fff;
+  color: #000 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-overlay {
+    display: none;
+    /* hide overlay text on small screens */
+  }
 }

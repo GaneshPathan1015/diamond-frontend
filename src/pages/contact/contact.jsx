@@ -22,21 +22,19 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Clear old messages
     setSuccessMessage("");
+    setErrorMessage("");
 
     try {
-      const response = await axiosClient.post(
-        "/api/contact",
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axiosClient.post("/api/contact", formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (response.status === 200) {
-        setSuccessMessage(response.data.message); // Display success message
+        setSuccessMessage(response.data.message); // ✅ Show success
         setFormData({
           name: "",
           email: "",
@@ -44,8 +42,11 @@ export default function Contact() {
           topic: "",
           question: "",
         });
-      } else {
-        // setError('Submission failed. Please try again.');
+
+        // ✅ Auto clear success after 3s
+        setTimeout(() => {
+          setSuccessMessage("");
+        }, 3000);
       }
     } catch (err) {
       if (err.response && err.response.status === 422) {
@@ -57,41 +58,260 @@ export default function Contact() {
         // General error
         setErrorMessage("Something went wrong. Please try again later.");
       }
+
+      // ✅ Auto clear error after 3s
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 3000);
     }
   };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   setSuccessMessage("");
+
+  //   try {
+  //     const response = await axiosClient.post("/api/contact", formData, {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+
+  //     if (response.status === 200) {
+  //       setSuccessMessage(response.data.message); // Display success message
+  //       setFormData({
+  //         name: "",
+  //         email: "",
+  //         phone: "",
+  //         topic: "",
+  //         question: "",
+  //       });
+  //     } else {
+  //       // setError('Submission failed. Please try again.');
+  //     }
+  //   } catch (err) {
+  //     if (err.response && err.response.status === 422) {
+  //       // Laravel validation error
+  //       const errors = err.response.data.errors;
+  //       const errorMessages = Object.values(errors).flat().join(" ");
+  //       setErrorMessage(errorMessages);
+  //     } else {
+  //       // General error
+  //       setErrorMessage("Something went wrong. Please try again later.");
+  //     }
+  //   }
+  // };
   return (
     <>
-      <section className="customize-engagement-ring hero_section_wrapper">
-        <div className="container position-relative">
-          <div className="wrapper text-center w-100 mb-3 ps-5">
-            <div className="content-inner medium-up--one-half">
-              <div className="section-heading">
-                <h3 className="mb-2 mt-4 display-4">
-                  Our expert gemologists can guide you on diamonds, gemstones
-                  and jewelry.
-                </h3>
+      <section className="customize-engagement-ring py-5">
+        <div className="container text-center">
+          <div className="content-inner mx-auto px-3">
+            <h3 className="section-heading display-6 display-md-4 mb-3">
+              Our expert gemologists can guide you on diamonds, gemstones, and
+              jewelry.
+            </h3>
+          </div>
+        </div>
+      </section>
+
+      {/* Banner Section */}
+      <section className="py-0">
+        <div className="container text-center">
+          <img
+            src="/images/contact_banner-desk.jpg"
+            alt="Contact Banner"
+            className="img-fluid w-100 rounded"
+          />
+        </div>
+      </section>
+
+      {/* Contact Form Section */}
+      <section className="contact-form-section py-5">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-12 col-md-10 col-lg-8">
+              <div className="contact-form-wrapper p-4 p-md-5 shadow rounded bg-white">
+                <div className="text-center mb-4">
+                  <h2 className="mb-2">Send us a message</h2>
+                  <p className="text-muted">
+                    Contact one of our expert gemologists and we’ll get back to
+                    you as soon as possible. You’ll be amazed at how helpful we
+                    can be.
+                  </p>
+                </div>
+
+                <div className="form-wrapper">
+                  {successMessage && (
+                    <div className="alert alert-success">{successMessage}</div>
+                  )}
+                  {errorMessage && (
+                    <div className="alert alert-danger">{errorMessage}</div>
+                  )}
+
+                  <form
+                    method="post"
+                    action="/contact#ContactForm"
+                    id="ContactForm"
+                    acceptCharset="UTF-8"
+                    className="contact-form"
+                    onSubmit={handleSubmit}
+                  >
+                    <div className="mb-3">
+                      <label htmlFor="ContactForm-name" className="form-label">
+                        Name
+                      </label>
+                      <input
+                        type="text"
+                        id="ContactForm-name"
+                        className="form-control"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+
+                    <div className="mb-3">
+                      <label htmlFor="ContactForm-email" className="form-label">
+                        Email <span className="text-danger">*</span>
+                      </label>
+                      <input
+                        type="email"
+                        id="ContactForm-email"
+                        className="form-control"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+
+                    <div className="mb-3">
+                      <label htmlFor="ContactForm-phone" className="form-label">
+                        Phone Number
+                      </label>
+                      <input
+                        type="tel"
+                        id="ContactForm-phone"
+                        className="form-control"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        pattern="[0-9\-]*"
+                      />
+                    </div>
+
+                    <div className="mb-3">
+                      <label htmlFor="ContactForm-topic" className="form-label">
+                        Topic <span className="text-danger">*</span>
+                      </label>
+                      <select
+                        id="ContactForm-topic"
+                        className="form-select"
+                        name="topic"
+                        value={formData.topic}
+                        onChange={handleChange}
+                        required
+                      >
+                        <option value="">Select</option>
+                        <option value="Diamonds">Diamonds</option>
+                        <option value="Engagement Rings">
+                          Engagement Rings
+                        </option>
+                        <option value="Jewelry">Jewelry</option>
+                        <option value="Home Preview">Home Preview</option>
+                        <option value="Policies">Policies</option>
+                      </select>
+                    </div>
+
+                    <div className="mb-3">
+                      <label
+                        htmlFor="ContactForm-message"
+                        className="form-label"
+                      >
+                        Ask a Question
+                      </label>
+                      <textarea
+                        rows="5"
+                        id="ContactForm-message"
+                        className="form-control"
+                        name="question"
+                        value={formData.question}
+                        onChange={handleChange}
+                      ></textarea>
+                    </div>
+
+                    <div className="text-center">
+                      <button
+                        type="submit"
+                        className="btn btn-dark px-5 py-2 fw-bold"
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-      <section className="hero_section_wrapper w-75 m-auto">
-        <div className="container-fluid p-0 position-relative">
+
+      {/* Help Section */}
+      <section className="customize-engagement-ring py-5">
+        <div className="container">
+          <div className="text-center px-3">
+            <h3 className="mb-3 mt-2 display-6 display-md-4">
+              We're always here to help.
+            </h3>
+            <p className="text-muted">
+              A commitment to sustainability, transparency and jewelry made to
+              fit beautifully into your big moments.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="accordian_class py-5">
+        <div className="container">
+          <div className="section-heading text-center mb-5">
+            <h2 className="fw-bold">FAQ&apos;s</h2>
+          </div>
+          <div className="accordion px-2" id="accordionExample">
+            {/* Accordion items stay same as your code */}
+          </div>
+        </div>
+      </section>
+      {/* <section className="customize-engagement-ring py-5">
+        <div className="container text-center">
+          <div className="content-inner mx-auto">
+            <h3 className="section-heading display-4 mb-3">
+              Our expert gemologists can guide you on diamonds, gemstones, and
+              jewelry.
+            </h3>
+          </div>
+        </div>
+      </section>
+
+      <section className=" py-0">
+        <div className="container text-center">
           <img
             src="images/contact_banner-desk.jpg"
             alt="Contact Banner"
-            className="img-fluid"
+            className="img-fluid w-100 rounded"
           />
         </div>
       </section>
 
-      <section className="py-5 pb-5 contact-form-section">
+      <section className="contact-form-section">
         <div className="container">
           <div className="row">
             <div className="col-12">
               <div className="contact-form-wrapper">
                 <div className="text-center">
-                  <h2 className="section-header">Send us a message</h2>
+                  <h2 className="">Send us a message</h2>
                   <p>
                     Contact one of our expert gemologists and we’ll get back to
                     you as soon as possible. You’ll be amazed at how helpful we
@@ -101,14 +321,10 @@ export default function Contact() {
 
                 <div className="form-wrapper form-vertical">
                   {successMessage && (
-                    <div className="successBtn">
-                      {successMessage}
-                    </div>
+                    <div className="successBtn">{successMessage}</div>
                   )}
                   {errorMessage && (
-                    <div className="errorBtn">
-                      {errorMessage}
-                    </div>
+                    <div className="errorBtn">{errorMessage}</div>
                   )}
                   <form
                     method="post"
@@ -221,7 +437,7 @@ export default function Contact() {
           </div>
         </div>
       </section>
-      <section className="customize-engagement-ring hero_section_wrapper">
+      <section className="customize-engagement-ring">
         <div className="container position-relative">
           <div className="wrapper text-center w-100 mb-3 ps-5">
             <div className="content-inner medium-up--one-half">
@@ -237,11 +453,11 @@ export default function Contact() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Help section */}
 
-      <Help />
+      {/* <Help />
 
       <section className="accordian_class">
         <div className="container">
@@ -250,7 +466,7 @@ export default function Contact() {
               FAQ&apos;s
             </h2>
           </div>
-          <div className="accordion mx-5 pb-5 px-5" id="accordionExample">
+          <div className="accordion px-3" id="accordionExample">
             <div className="accordion-item">
               <h2 className="accordion-header" id="headingOne">
                 <button
@@ -273,11 +489,11 @@ export default function Contact() {
                 <div className="accordion-body">
                   <p className="m-0">
                     We would love to hear from you. To place an order on the
-                    phone, simply call us at +1 (816) 888-1111 during our business
-                    hours. It may be helpful to call in for custom orders, split
-                    payments, or if you have a shipping deadline in mind. We’re
-                    always available to help with questions and special
-                    requests.
+                    phone, simply call us at +1 (816) 888-1111 during our
+                    business hours. It may be helpful to call in for custom
+                    orders, split payments, or if you have a shipping deadline
+                    in mind. We’re always available to help with questions and
+                    special requests.
                   </p>
                 </div>
               </div>
@@ -370,8 +586,8 @@ export default function Contact() {
                     For all general questions, you can see our policies about
                     warranties, insurance, returns and more. For anything
                     specific, please feel free to email, live chat or call us at
-                     +1 (816) 888-1111 and we can provide you with quick answers to
-                    your questions.
+                    +1 (816) 888-1111 and we can provide you with quick answers
+                    to your questions.
                   </p>
                 </div>
               </div>
@@ -444,7 +660,7 @@ export default function Contact() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </>
   );
 }

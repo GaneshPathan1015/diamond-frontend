@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "./index.css";
 import DesigningProcess from "./designing-process/designingProcess.";
 import Education from "./education/education";
 import Quetions from "./quetions/quetions";
 import Customize from "./customize/customize";
+import "./index.css";
 
 export default function Engagement() {
   const ringTypes = [
@@ -29,13 +29,16 @@ export default function Engagement() {
   return (
     <>
       <section className="hero_section_wrapper">
-        <div className="container-fluid p-0 position-relative">
+        <div className="container-fluid p-0 position-relative h-100">
+          {/* Hero image */}
           <img
             src="images/engagement-rings-banner.webp"
-            alt=""
-            className="img-fluid w-100"
+            alt="Engagement Rings"
+            className="w-100 h-100 hero-img"
           />
-          <div className="wrapper position-absolute text-center w-100 mb-5">
+
+          {/* Text overlay */}
+          <div className="wrapper position-absolute bottom-0 start-50 translate-middle-x text-center w-100 mb-5">
             <h2 className="fs-1 slide-title text-white">Engagement Rings</h2>
             <div className="content">
               <p className="text-white">
@@ -45,7 +48,6 @@ export default function Engagement() {
             </div>
             <div className="slide-btn-wrapper justify-content-center align-items-center gap-5">
               <a
-                title="SHOP ENGAGEMENT RINGS"
                 href="#"
                 className="text-white btn border-button border my-2 p-2 rounded-0 fw-bold border-white"
               >
@@ -55,6 +57,7 @@ export default function Engagement() {
           </div>
         </div>
       </section>
+
       <section className="build_engagement_wrapper engagement-bulid-your-ring py-5">
         <div className="container">
           <div className="row">
@@ -258,9 +261,9 @@ export default function Engagement() {
                 <source src="vedio/home-preview.mp4" type="video/mp4" />
               </video>
             </div>
-            <div className="col-4 ps-5">
-              <div className="grid__content medium-up--one-half small--text-center">
-                <p className="section-sub-title m-0">TRY BEFORE YOU BUY</p>
+            <div className="col-4">
+              <div className="grid__content medium-up--one-half small--text-center px-3">
+                <p className="section-sub-title">TRY BEFORE YOU BUY</p>
                 <h2 className="section-header-lg fst-italic">Home Preview</h2>
                 <div className="content">
                   <p>
@@ -292,7 +295,6 @@ export default function Engagement() {
       <Education />
 
       {/* Quetions section */}
-
       <Quetions />
     </>
   );

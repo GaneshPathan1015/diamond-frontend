@@ -4,7 +4,7 @@ export default  function DesigningProcess() {
   return (
    <section className="creste-your-own">
      <div className="container">
-       <div className="row align-items-center mx-5">
+       <div className="row align-items-center">
          <div className="col-6">
            <img
              src="images/create-your-unique-ring_640x.webp"

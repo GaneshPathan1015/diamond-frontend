@@ -9,9 +9,9 @@ export default function Quetions() {
             WE’VE GOT ANSWERS TO YOUR QUESTIONS
           </h2>
         </div>
-        <div className="accordion mx-5 pb-5 px-5" id="accordionExample">
+        <div className="accordion  px-3" id="accordionExample">
           {/* Accordion Item 1 */}
-          <div className="accordion-item">
+          <div className="accordion-item ">
             <h2 className="accordion-header" id="headingOne">
               <button
                 className="accordion-button"

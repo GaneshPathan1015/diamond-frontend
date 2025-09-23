@@ -35,11 +35,11 @@ import EngagementList from "./pages/engagement-list/engagementList";
 import CompleteRing from "./pages/completeRing/completeRing";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import WhiteClarityNav from "./pages/header/WhiteClarityNav";
+import PrivateRoute from "./routes/PrivateRoute";
 
-
-// Footer pages 
+// Footer pages
 import Press from "./pages/footerpages/company/Press";
-
+import Metal from "./pages/footerpages/education/Metal";
 
 export default function App() {
   const location = useLocation();
@@ -69,7 +69,15 @@ export default function App() {
             path="/reset-password/:token"
             element={<ResetPasswordForm />}
           />
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute>
+                <Profile />
+              </PrivateRoute>
+            }
+          />
+
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/thankyou" element={<ThankYou />} />
           <Route path="/paymnet-failed" element={<PaymentFailed />} />
@@ -93,6 +101,7 @@ export default function App() {
           <Route path="*" element={<PageNotFound />} />
           {/* Footer pages start*/}
           <Route path="/press" element={<Press />} />
+          <Route path="/metal" element={<Metal />} />
         </Routes>
       </main>
       <Footer />

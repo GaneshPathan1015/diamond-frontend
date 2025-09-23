@@ -4,8 +4,8 @@ import { useAuth } from "../../context/AuthContext";
 import { useCart } from "../../cart/CartContext";
 import MegaMenu from "../mega-menu/megaMenu";
 import { useMegaMenu } from "../../context/MegaMenuContext";
-import "./whiteClarityNav.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import "./whiteClarityNav.css";
 
 const WhiteClarityNav = () => {
   const { user } = useAuth();

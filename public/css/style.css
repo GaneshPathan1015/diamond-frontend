@@ -83,29 +83,10 @@ body header.header-wrapper.position-realtive .header-top-wrapper strong.text-whi
   background-color: #ccc;
 }
 
-.slick-prev:before,
-.slick-next:before {
-  color: #213245 !important;
-}
-
-.slick-slide p {
-  margin-top: 10px !important;
-  font-weight: 600;
-}
-
-.slick-prev,
-.slick-next {
-  top: 0 !important;
-}
-
-.slick-prev {
-  right: 30px !important;
-  left: unset !important;
-}
-
-.slick-next {
-  right: 8px !important;
-}
+/* .slick-prev:before, */
+/* .slick-next:before { */
+  /* color: #213245 !important; */
+/* } */
 
 /* Typography */
 .section-header-lg {
@@ -163,22 +144,22 @@ nav .nav-link.active {
 }
 
 /* Common styles */
-.hero_section_wrapper .position-absolute {
-  bottom: 0;
-}
+/* .hero_section_wrapper .position-absolute { */
+  /* bottom: 0; */
+/* } */
 
-.hero_section_wrapper .position-absolute .fs-1 {
-  font-size: 60px !important;
-  line-height: 80px;
-  letter-spacing: -1.2px;
-  font-weight: 400;
-}
+/* .hero_section_wrapper .position-absolute .fs-1 { */
+  /* font-size: 60px !important; */
+  /* line-height: 80px; */
+  /* letter-spacing: -1.2px; */
+  /* font-weight: 400; */
+/* } */
 
-.hero_section_wrapper .content {
-  max-width: 900px;
-  margin: auto;
-  width: 100%;
-}
+/* .hero_section_wrapper .content { */
+  /* max-width: 900px; */
+  /* margin: auto; */
+  /* width: 100%; */
+/* } */
 
 .trending_noe_wrapper .trending_now p {
   color: #000;
@@ -187,10 +168,6 @@ nav .nav-link.active {
   line-height: 22px;
   letter-spacing: 1.28px;
   margin-top: 8px;
-}
-
-.build_engagement_wrapper p {
-  max-width: 436px;
 }
 
 .best-selling-wrapper .tab-content .tab-pane_p {
@@ -328,13 +305,13 @@ footer .site-footer__item-inner a {
 }
 
 /* Customize engagement */
-.customize-engagement-ring.hero_section_wrapper .sub-title {
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: 1.92px;
-  margin-bottom: 0;
-}
+/* .customize-engagement-ring.hero_section_wrapper .sub-title { */
+  /* font-size: 24px; */
+  /* font-weight: 600; */
+  /* line-height: 1; */
+  /* letter-spacing: 1.92px; */
+  /* margin-bottom: 0; */
+/* } */
 
 .customize-engagement-ring h2 {
   font-size: 55px;
@@ -553,11 +530,6 @@ button.accordion-button {
     position: relative;
   }
 
-  .hero_section_wrapper .position-absolute .fs-1 {
-    font-size: 32px !important;
-    line-height: 40px;
-  }
-
   .section-header-lg {
     font-size: 28px;
     line-height: 36px;
@@ -587,11 +559,6 @@ button.accordion-button {
 }
 
 @media (max-width: 576px) {
-  .hero_section_wrapper .position-absolute .fs-1 {
-    font-size: 24px !important;
-    line-height: 32px;
-  }
-
   .section-header-lg {
     font-size: 22px;
     line-height: 28px;

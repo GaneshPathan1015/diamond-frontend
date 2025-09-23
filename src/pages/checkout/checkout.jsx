@@ -29,6 +29,8 @@ const Checkout = () => {
   const [discountResponse, setDiscountResponse] = useState(null);
   const [discountError, setDiscountError] = useState("");
   const [isApplying, setIsApplying] = useState(false);
+  const [appliedCode, setAppliedCode] = useState(null);
+  const [discountValue, setDiscountValue] = useState(0);
   // Handle payment method selection
   const handleApplyDiscount = async () => {
     setDiscountError("");
@@ -123,7 +125,7 @@ const Checkout = () => {
       }
       return item;
     }),
-    total: /* getSubTotal() */getTotalAmount(),
+    total: /* getSubTotal() */ getTotalAmount(),
     paymentMethod: selectedMethod,
   });
 
@@ -135,9 +137,6 @@ const Checkout = () => {
       // Restore form
       setFormData(savedAddress.formData || {});
       setSelectedMethod(savedAddress.selectedMethod || "");
-
-      // console.log(cartItems.length);
-      // console.log(savedAddress.cartPayload?.length);
 
       //  Restore cart if it's empty
       if (
@@ -211,6 +210,7 @@ const Checkout = () => {
         is_get_offer: formData.smsOffers ? 1 : 0,
       });
 
+
       // PayPal payment
       if (selectedMethod === "pay-paypal") {
         const orderResponse = await axiosClient.post("/api/store-order", {
@@ -218,7 +218,9 @@ const Checkout = () => {
           user_name: `${formData.first_name} ${formData.last_name}`,
           contact_number: formData.phone,
           item_details: JSON.stringify(prepareOrderPayload()),
-          total_price: /* getSubTotal() */getTotalAmount(),
+          total_price: /* getSubTotal() */ getTotalAmount(),
+          coupon_discount: discountValue,
+          coupon_code: appliedCode,
           address: JSON.stringify(addressObject),
           order_status: "pending",
           payment_mode: "paypal",
@@ -233,7 +235,7 @@ const Checkout = () => {
         const paypalResponse = await axiosClient.post(
           "/api/paypal/create-order",
           {
-            amount: /* getSubTotal() */getTotalAmount(),
+            amount: /* getSubTotal() */ getTotalAmount(),
             currency: "USD",
             user_id: user.id,
             order_id: orderId,
@@ -249,7 +251,9 @@ const Checkout = () => {
         user_name: `${formData.first_name} ${formData.last_name}`,
         contact_number: formData.phone,
         item_details: JSON.stringify(prepareOrderPayload()),
-        total_price: /* getSubTotal() */getTotalAmount(),
+        total_price: /* getSubTotal() */ getTotalAmount(),
+        coupon_discount: discountValue,
+        coupon_code: appliedCode,
         address: JSON.stringify(addressObject),
         order_status: "pending",
         payment_mode: selectedMethod,

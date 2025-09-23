@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import "./DiamondDetails.css";
 import { useCart } from "../../../cart/CartContext";
 import NoDealbreakers from "./nobrokrage/NoDealbreakers";
 import Help from "../../contact/help";
 import RingWrapper from "../../diamond/ringWrapper/ringWrapper";
 import axiosClient from "../../../api/axios";
+import "./DiamondDetails.css";
 
 export default function DiamondDetails() {
   const detailsRef = useRef(null);

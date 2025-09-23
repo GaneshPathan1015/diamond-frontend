@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 import Loader from "../diamond/loader";
 import Zoom from "react-medium-image-zoom";
-import "react-medium-image-zoom/dist/styles.css";
+// import "react-medium-image-zoom/dist/styles.css";
 import "./engagementList.css";
 import EngagementTabs from "../engagement-details/ring-product/EngagementTabs";
 
@@ -433,7 +433,50 @@ const EngagementList = () => {
 
   return (
     <>
-      <section className="hero_section_wrapper">
+      <section className="hero_section_wrapperengage position-relative">
+        {bannerVideo ? (
+          <video
+            className="hero-media w-100"
+            autoPlay
+            muted
+            loop
+            playsInline
+            src={`${import.meta.env.VITE_BACKEND_URL}/storage/${bannerVideo}`}
+          >
+            Your browser does not support the video tag.
+          </video>
+        ) : (
+          <img
+            src={
+              bannerImage
+                ? `${import.meta.env.VITE_BACKEND_URL}/storage/${bannerImage}`
+                : "https://www.withclarity.com/cdn/shop/files/Women_s_Diamond_Gemstone_Jewelry_1366x.jpg?v=1729163233"
+            }
+            alt="Engagement Banner"
+            className="hero-media w-100"
+          />
+        )}
+
+        {/* Overlay only for md and above */}
+        <div className="hero-overlay d-none d-md-flex flex-column justify-content-center align-items-center text-center">
+          <h2 className="hero-title mb-3 text-white">
+            ENGAGEMENT RING EDUCATION
+          </h2>
+          <p className="hero-subtitle mb-4 text-white">
+            Learn about engagement ring setting styles, metal options, ring
+            sizing and more.
+          </p>
+          <a
+            href="#"
+            className="btn hero-btn fw-bold px-4 py-2 border border-white text-white"
+            title="SHOP ENGAGEMENT RINGS"
+          >
+            SHOP ENGAGEMENT RINGS
+          </a>
+        </div>
+      </section>
+
+      {/* <section className="hero_section_wrapperengage">
         <div className="container-fluid p-0 position-relative">
           {bannerVideo ? (
             <video
@@ -479,8 +522,9 @@ const EngagementList = () => {
             </div>
           </div>
         </div>
-      </section>
-      <div className="container my-4">
+      </section> */}
+
+      <div className="container">
         <EngagementTabs diamond={diamond} />
         {/* Filters Top Bar */}
         <div className="d-flex justify-content-between filters-bar">
@@ -746,13 +790,13 @@ const EngagementList = () => {
 
         {/* Product Listing */}
         <h5 className="mt-4">Showing {total} products.</h5>
-        <div className="row row-cols-1 row-cols-md-4 g-4">
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
           {loading && <Loader />}
 
           {products.map((group) => {
             const metalVariations = group.metal_variations || {};
 
-            // Flatten variations for each metalId (since is_build === 1)
+            // Flatten variations
             const flattenedMetalVariations = {};
             Object.entries(metalVariations).forEach(([metalId, shapeMap]) => {
               flattenedMetalVariations[metalId] =
@@ -784,9 +828,9 @@ const EngagementList = () => {
             const image =
               Array.isArray(selectedVariation?.images) &&
               selectedVariation.images.length > 0
-                ? `${
-                    import.meta.env.VITE_BACKEND_URL
-                  }/storage/variation_images${selectedVariation.images[0]}`
+                ? `${import.meta.env.VITE_BACKEND_URL}${
+                    selectedVariation.images[0]
+                  }`
                 : `${
                     import.meta.env.VITE_BACKEND_URL
                   }/storage/variation_images/No_Image_Available.jpg`;
@@ -798,106 +842,109 @@ const EngagementList = () => {
 
             return (
               <div className="col" key={group.id}>
-                <div
-                  className="h-100 d-flex flex-column"
-                  style={{ width: "95%" }}
-                >
+                <div className="card h-100 shadow-sm border-0">
+                  {/* Product Image */}
                   <Link
                     to={`/engagment-details/${group.product?.id}`}
-                    state={{ diamond: diamond }} // pass state correctly
-                    className="text-decoration-none text-dark mt-2"
+                    state={{ diamond: diamond }}
+                    className="text-decoration-none text-dark"
                   >
-                    <div className="product-image-container position-relative shadow">
+                    <div className="product-image-container position-relative">
                       <img
                         src={image}
-                        alt="Product"
-                        className="product-image-full"
+                        alt={group.product?.name || "Product"}
+                        className="product-image-full card-img-top"
                       />
                       <div className="overlay-text d-flex justify-content-between px-2">
                         <span className="ready-to-ship">
-                          {group.product?.ready_to_ship ? "READY TO SHIP" : ""}
+                          {group.product?.ready_to_ship
+                            ? "READY TO SHIP"
+                            : ""}
                         </span>
                         <span className="discount">{discount}</span>
                       </div>
                     </div>
+                  </Link>
+                  <div className="card-body">
                     <p className="fw-semibold mb-1 product-variation__title">
                       {group.product?.name || "NA"}
                     </p>
-                  </Link>
+                    <p className="mb-2 small text-muted">{sku}</p>
 
-                  <p className="mb-2">{sku}</p>
+                    {/* Metal buttons */}
+                    <div className="product-metal__buttons mb-2 d-flex gap-2 flex-wrap">
+                      {metalKeys.map((metalId) => {
+                        const metal =
+                          flattenedMetalVariations[metalId][0]?.metal_color;
+                        return (
+                          <button
+                            key={metalId}
+                            className="product-variation__btn"
+                            style={{
+                              background: metal?.hex,
+                              border: `1px solid ${
+                                String(activeMetal[group.id]) ===
+                                String(metalId)
+                                  ? "#000"
+                                  : "#ccc"
+                              }`,
+                            }}
+                            onClick={() => {
+                              setActiveMetal((prev) => ({
+                                ...prev,
+                                [group.id]: metalId,
+                              }));
+                              setSelectedVariations((prev) => ({
+                                ...prev,
+                                [group.id]: 0,
+                              }));
+                            }}
+                          >
+                            {metal?.quality}
+                          </button>
+                        );
+                      })}
+                    </div>
 
-                  {/* Metal buttons */}
-                  <div className="product-metal__buttons mb-2 d-flex gap-1 flex-wrap">
-                    {metalKeys.map((metalId) => {
-                      const metal =
-                        flattenedMetalVariations[metalId][0]?.metal_color;
-                      return (
-                        <button
-                          key={metalId}
-                          className="product-variation__btn"
-                          style={{
-                            background: metal?.hex,
-                            border: `1px solid ${
-                              String(activeMetal[group.id]) === String(metalId)
-                                ? "#000"
-                                : "#ccc"
-                            }`,
-                            color: "#000",
-                          }}
-                          onClick={() => {
-                            setActiveMetal((prev) => ({
-                              ...prev,
-                              [group.id]: metalId,
-                            }));
-                            setSelectedVariations((prev) => ({
-                              ...prev,
-                              [group.id]: 0,
-                            }));
-                          }}
-                        >
-                          {metal?.quality}
-                        </button>
-                      );
-                    })}
+                    {/* Carat selector */}
+                    <div className="product-variation__carat-group">
+                      <small className="product-variation__carat-title">
+                        Total Carat Weight
+                      </small>
+                      <div className="d-flex gap-2 flex-wrap mt-1">
+                        {metalOptions.length > 0 ? (
+                          metalOptions.map((variation, index) => (
+                            <button
+                              key={index}
+                              className={`product-variation__carat-pill ${
+                                selectedIndex === index ? "active" : ""
+                              }`}
+                              onClick={() =>
+                                setSelectedVariations((prev) => ({
+                                  ...prev,
+                                  [group.id]: index,
+                                }))
+                              }
+                            >
+                              {variation.weight || "NA"}
+                            </button>
+                          ))
+                        ) : (
+                          <p className="small text-muted">No variations</p>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Price */}
+                    <p className="mt-2 mb-0">
+                      <span className="fw-bold">${price}</span>
+                      {originalPrice && (
+                        <span className="original-price text-muted text-decoration-line-through ms-2">
+                          ${originalPrice}
+                        </span>
+                      )}
+                    </p>
                   </div>
-
-                  {/* Weight selector */}
-                  <div className="product-variation__carat-group">
-                    <small className="product-variation__carat-title">
-                      Total Carat Weight
-                    </small>
-
-                    {metalOptions.length > 0 ? (
-                      metalOptions.map((variation, index) => (
-                        <button
-                          key={index}
-                          className={`product-variation__carat-pill ${
-                            selectedIndex === index ? "active" : ""
-                          }`}
-                          onClick={() =>
-                            setSelectedVariations((prev) => ({
-                              ...prev,
-                              [group.id]: index,
-                            }))
-                          }
-                        >
-                          {variation.weight || "NA"}
-                        </button>
-                      ))
-                    ) : (
-                      <p>No metal variations available</p>
-                    )}
-                  </div>
-
-                  <p className="mt-1">
-                    <span className="fw-bold">${price}</span>
-                    {originalPrice && (
-                      <span className="original-price text-muted text-decoration-line-through ms-2">
-                        ${originalPrice}
-                      </span>
-                    )}
-                  </p>
                 </div>
               </div>
             );

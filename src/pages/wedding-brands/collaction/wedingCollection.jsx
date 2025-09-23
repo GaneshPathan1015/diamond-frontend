@@ -76,7 +76,7 @@ export default function WedingCollection() {
               </div>
 
               {/* Content Section */}
-              <div className="slider slider-for px-5 mx-5">
+              <div className="slider slider-for">
                 <div className="row align-items-center">
                   <div className="col-6">
                     <div className="medium-up--one-half block-content medium-up--text-left">

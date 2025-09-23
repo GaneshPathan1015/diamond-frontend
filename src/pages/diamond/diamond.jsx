@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
-import "./index.css";
 import axiosClient from "../../api/axios";
 import debounce from "lodash.debounce";
 import Loader from "./loader/index";
@@ -15,6 +14,7 @@ import DiamondTable from "./diamondTable/DiamondTable";
 import DiamondTabFilter from "./diamondTabFilter/DiamondTabFilter";
 import RingWrapper from "./ringWrapper/ringWrapper";
 import { useLocation } from "react-router-dom";
+import "./index.css";
 
 export default function Diamond() {
   const [shapes, setShapes] = useState([]);
@@ -379,6 +379,17 @@ export default function Diamond() {
   return (
     <>
       <section className="hero_section_wrapper">
+        <div className="container-fluid p-0 position-relative h-100">
+          {/* Hero image */}
+          <img
+            src="images/Header_Banner.jpg"
+            alt="Header Banner"
+            className="w-100 h-100 hero-img"
+          />
+        </div>
+      </section>
+
+      {/* <section className="hero_section_wrapper">
         <div className="container-fluid p-0 position-relative">
           <img
             src="images/Header_Banner.jpg"
@@ -386,7 +397,7 @@ export default function Diamond() {
             className="img-fluid w-100"
           />
         </div>
-      </section>
+      </section> */}
 
       <RingWrapper ringCartItem={ringCartItem} />
 
