@@ -10,6 +10,7 @@ const Profile = () => {
   const { user, logout } = useAuth();
   const [loading, setLoading] = useState(false);
   const [orders, setOrders] = useState([]);
+  const [selectedOrder, setSelectedOrder] = useState(null);
   const [pagination, setPagination] = useState({
     current_page: 1,
     last_page: 1,
@@ -17,63 +18,6 @@ const Profile = () => {
   });
   const ordersCache = useRef({});
   const navigate = useNavigate();
-
-  /*  const orders = [
-    {
-      id: "ORD-60740a91",
-      items: 4,
-      price: 584.5,
-      status: "pending",
-      date: "9/19/2025",
-      payment: "COD (pending)",
-      image: "https://via.placeholder.com/60",
-    },
-    {
-      id: "ORD-6b90797d",
-      items: 4,
-      price: 584.5,
-      status: "pending",
-      date: "9/19/2025",
-      payment: "COD (pending)",
-      image: "https://via.placeholder.com/60",
-    },
-    {
-      id: "ORD-75c0294e",
-      items: 4,
-      price: 514.66,
-      status: "pending",
-      date: "9/19/2025",
-      payment: "COD (pending)",
-      image: "https://via.placeholder.com/60",
-    },
-    {
-      id: "ORD-60740a91",
-      items: 4,
-      price: 584.5,
-      status: "pending",
-      date: "9/19/2025",
-      payment: "COD (pending)",
-      image: "https://via.placeholder.com/60",
-    },
-    {
-      id: "ORD-6b90797d",
-      items: 4,
-      price: 584.5,
-      status: "pending",
-      date: "9/19/2025",
-      payment: "COD (pending)",
-      image: "https://via.placeholder.com/60",
-    },
-    {
-      id: "ORD-75c0294e",
-      items: 4,
-      price: 514.66,
-      status: "pending",
-      date: "9/19/2025",
-      payment: "COD (pending)",
-      image: "https://via.placeholder.com/60",
-    },
-  ]; */
 
   const fetchOrders = async (page = 1) => {
     if (ordersCache.current[page]) {
@@ -117,9 +61,20 @@ const Profile = () => {
     }
   };
 
+  const formatDate = (dateString) => {
+    if (!dateString) return "N/A";
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
   const renderOrders = () => {
     return orders.map((order, index) => (
-      <div className="order-card shadow-sm" key={index}>
+      <div
+        className="order-card shadow-sm"
+        key={index}
+        onClick={() => setSelectedOrder(order)}
+        style={{ cursor: "pointer" }}
+      >
         <div className="d-flex align-items-center order-left">
           <img
             src={order.image || "https://via.placeholder.com/60"}
@@ -128,7 +83,7 @@ const Profile = () => {
           />
           <div className="ms-3">
             <p className="mb-1 fw-bold">Order Id: {order.order_id}</p>
-            <small>Items: {order.items || order.order_items_count || 0}</small>
+            <small>Items: {order.total_quantity || 0}</small>
           </div>
         </div>
         <div className="ms-auto text-end order-right">
@@ -136,49 +91,97 @@ const Profile = () => {
             ${order.total_price || "0.00"}
           </p>
           <p className="text-danger mb-0">
-            ● {order.status} on {order.date} <br />
-            <span className="text-muted">Payment: {order.payment_status || "NA"}</span>
+            Order on : {formatDate(order.created_at)}
+            <br />
+            <span className="text-muted">
+              Status: {order.order_status || "NA"}
+            </span>
+            <br />
+            <span className="text-muted">
+              Payment: {order.payment_status || "NA"}
+            </span>
           </p>
         </div>
       </div>
     ));
   };
+  const renderOrderDetails = (order) => {
+    if (!order) return null;
+
+    let items = [];
+    try {
+      items = JSON.parse(order.item_details)?.items || [];
+    } catch (err) {
+      console.error("Error parsing order items", err);
+    }
+
+    return (
+      <div className="order-details p-3 shadow-sm">
+        <button
+          className="btn btn-sm btn-outline-secondary mb-3"
+          onClick={() => setSelectedOrder(null)}
+        >
+          ← Back to Orders
+        </button>
+
+        <h4 className="mb-3">Order Details</h4>
+        <p>
+          <strong>Order ID:</strong> {order.order_id}
+        </p>
+        <p>
+          <strong>Date:</strong> {formatDate(order.created_at)}
+        </p>
+        <p>
+          <strong>Status:</strong> {order.order_status}
+        </p>
+        <p>
+          <strong>Payment:</strong> {order.payment_status}
+        </p>
+        <p>
+          <strong>Total:</strong> ${order.total_price}
+        </p>
+
+        <h5 className="mt-4">Items:</h5>
+        <div className="order-items-list">
+          {items.map((item, i) => (
+            <div className="d-flex align-items-center mb-3" key={i}>
+              <img
+                src={item.images?.[0] || "https://via.placeholder.com/60"}
+                alt={item.name}
+                width="60"
+                className="rounded"
+              />
+              <div className="ms-3">
+                <p className="fw-bold mb-1">{item.name}</p>
+                <small>Price: ${item.price}</small>
+                <br />
+                <small>Qty: {item.itemQuantity || item.quantity}</small>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
   const renderContent = () => {
     switch (activeTab) {
       case "orders":
         return (
           <>
-            {/* <div className="tab-content-box">
-            <h4 className="mb-3">Order History</h4>
-            {orders.map((order, i) => (
-              <div className="order-card shadow-sm" key={i}>
-                <div className="d-flex align-items-center order-left">
-                  <img src={order.image} alt="diamond" className="order-img" />
-                  <div className="ms-3">
-                    <p className="mb-1 fw-bold">Order Id: {order.id}</p>
-                    <small>Items: {order.items}</small>
-                  </div>
-                </div>
-                <div className="ms-auto text-end order-right">
-                  <p className="text-success fw-bold mb-1">
-                    ${order.price.toFixed(2)}
-                  </p>
-                  <p className="text-danger mb-0">
-                    ● {order.status} on {order.date} <br />
-                    <span className="text-muted">Payment: {order.payment}</span>
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div> */}
             <div
               className="tab-content-box scrollable-orders"
-              onScroll={handleScroll}
+              // onScroll={handleScroll}
+              onScroll={selectedOrder ? null : handleScroll}
               style={{ maxHeight: "70vh", overflowY: "auto" }}
             >
               <h4 className="mb-3">Order History</h4>
-              {renderOrders()}
-              {loading && <p>Loading more orders...</p>}
+              {/* {renderOrders()} */}
+              {selectedOrder
+                ? renderOrderDetails(selectedOrder)
+                : renderOrders()}
+              {loading && !selectedOrder && <p>Loading more orders...</p>}
+              {/* {loading && <p>Loading more orders...</p>} */}
             </div>
           </>
         );

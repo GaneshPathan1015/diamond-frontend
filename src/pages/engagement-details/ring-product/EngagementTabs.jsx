@@ -59,7 +59,7 @@ const EngagementTabs = ({ diamond }) => {
                 {diamond?.shape?.image && index === 0 && (
                   <div className="ring-preview">
                     <img
-                      src={`/images/shapes/${diamond.shape.image}`}
+                      src={diamond.image_link}
                       alt={diamond.shape.name || "NA"}
                       className="ring-preview-img"
                     />

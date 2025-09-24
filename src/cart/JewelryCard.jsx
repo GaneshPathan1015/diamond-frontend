@@ -15,7 +15,7 @@ export default function JewelryCard({
     if (!img) return fallback;
     return `${
       import.meta.env.VITE_BACKEND_URL
-    }/storage/variation_images/${img}`;
+    }${img}`;
   };
 
   return (

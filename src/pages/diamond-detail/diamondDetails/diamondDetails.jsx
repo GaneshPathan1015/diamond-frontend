@@ -58,40 +58,7 @@ export default function DiamondDetails() {
     navigate("/cart");
   };
 
-  /* const handleAddToCart = () => {
-    const cartKey = "cart";
-    const existingCart = JSON.parse(localStorage.getItem(cartKey)) || [];
-
-    const isDuplicate = existingCart.some(
-      (item) => item.certificate_number === diamond.certificate_number
-    );
-
-    if (isDuplicate) {
-      setAlreadyExists(true);
-      setTimeout(() => setAlreadyExists(false), 5000);
-      return;
-    }
-
-    setLoading(true);
-
-    setTimeout(() => {
-      try {
-        const diamondWithType = {
-          ...diamond,
-          type: "diamond",
-        };
-        const updatedCart = [...existingCart, diamondWithType];
-        localStorage.setItem(cartKey, JSON.stringify(updatedCart));
-        addToCart(diamondWithType);
-        navigate("/cart");
-      } catch (error) {
-        console.error("Error adding to cart:", error);
-      } finally {
-        setLoading(false);
-      }
-    }, 500);
-  }; */
-
+  
   const handelAddToRing = () => {
     if (!ringCartItem) {
       const slug = "shapes";
@@ -109,7 +76,6 @@ export default function DiamondDetails() {
     } else {
       // If already set, just navigate with params
       const productSlug = "buildProduct";
-
       navigate(`/product/${productSlug}`, { state: { diamond, ringCartItem } });
     }
   };

@@ -425,7 +425,7 @@ const JewelryList = () => {
 
   return (
     <>
-      <section className="hero_section_wrapper">
+      <section className="hero_section_wrapper_jewellry">
         <div className="container-fluid p-0 position-relative">
           {bannerVideo ? (
             <video

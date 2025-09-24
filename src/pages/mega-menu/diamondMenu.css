@@ -1,0 +1,53 @@
+.diamond-section {
+    background: #fff;
+}
+
+.menu-heading {
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+p {
+    margin: 0.2rem 0;
+    color: #222;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+p:hover {
+    color: #8a8a8a;
+}
+
+.diamond-img {
+    border-radius: 2px;
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.diamond-img {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.diamond-img.taller {
+    width: 350px;
+    height: 320px;
+    object-fit: cover;
+}
+
+.shop-now {
+    display: inline-block;
+    margin-top: 0.3rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #000;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+.shop-now:hover {
+    color: #0d6efd;
+}

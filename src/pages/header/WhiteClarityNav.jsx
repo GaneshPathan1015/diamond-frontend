@@ -228,10 +228,20 @@ const WhiteClarityNav = () => {
             setHoveredMenu(null); // Close on mouse leave
           }}
         >
-          <MegaMenu
-            type="wedding"
-            closeMegaMenu={() => setHoveredMenu(null)}
-          />
+          <MegaMenu type="wedding" closeMegaMenu={() => setHoveredMenu(null)} />
+        </div>
+      )}
+
+      {hoveredMenu === "DIAMONDS" && (
+        <div
+          className={`mega-menu-overlay ${scrolled ? "scrolled-menu" : ""}`}
+          onMouseEnter={() => setHoveringMegaMenu(true)}
+          onMouseLeave={() => {
+            setHoveringMegaMenu(false);
+            setHoveredMenu(null); // Close on mouse leave
+          }}
+        >
+          <MegaMenu type="diamond" closeMegaMenu={() => setHoveredMenu(null)} />
         </div>
       )}
 
@@ -277,6 +287,19 @@ const WhiteClarityNav = () => {
             type="collection"
             closeMegaMenu={() => setHoveredMenu(null)}
           />
+        </div>
+      )}
+
+      {hoveredMenu === "GIFTS" && (
+        <div
+          className={`mega-menu-overlay ${scrolled ? "scrolled-menu" : ""}`}
+          onMouseEnter={() => setHoveringMegaMenu(true)}
+          onMouseLeave={() => {
+            setHoveringMegaMenu(false);
+            setHoveredMenu(null); // Close on mouse leave
+          }}
+        >
+          <MegaMenu type="gift" closeMegaMenu={() => setHoveredMenu(null)} />
         </div>
       )}
 

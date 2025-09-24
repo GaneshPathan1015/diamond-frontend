@@ -25,7 +25,7 @@ const getImageUrl = (img) => {
     import.meta.env.VITE_BACKEND_URL
   }/storage/variation_images/No_Image_Available.jpg`;
   if (!img) return fallback;
-  return `${import.meta.env.VITE_BACKEND_URL}/storage/variation_images/${img}`;
+  return `${import.meta.env.VITE_BACKEND_URL}${img}`;
 };
 
 const getVideoUrl = (video) => {

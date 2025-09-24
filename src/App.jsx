@@ -77,7 +77,6 @@ export default function App() {
               </PrivateRoute>
             }
           />
-
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/thankyou" element={<ThankYou />} />
           <Route path="/paymnet-failed" element={<PaymentFailed />} />

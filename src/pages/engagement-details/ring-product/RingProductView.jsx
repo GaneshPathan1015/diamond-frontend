@@ -15,7 +15,7 @@ const getImageUrl = (img) => {
     import.meta.env.VITE_BACKEND_URL
   }/storage/variation_images/No_Image_Available.jpg`;
   if (!img) return fallback;
-  return `${import.meta.env.VITE_BACKEND_URL}/storage/variation_images/${img}`;
+  return `${import.meta.env.VITE_BACKEND_URL}${img}`;
 };
 const getVideoUrl = (video) => {
   if (!video) return null;
@@ -529,50 +529,6 @@ const RingProductView = ({ diamond }) => {
         </div>
 
         <Logosec />
-
-        {/* <div className="container py-4">
-          <div className="related-products">
-            <h4>Related Products</h4>
-            <div className="d-flex flex-wrap">
-              {[...Array(4)].map((_, i) => (
-                <img
-                  key={i}
-                  src="/assets/images/main.png"
-                  className="product-thumb"
-                  alt="Related Product"
-                />
-              ))}
-            </div>
-          </div>
-
-          <div className="custom-slider-section">
-            <h4>Inspired By Your Browsing History</h4>
-            <div className="d-flex flex-wrap">
-              {[...Array(4)].map((_, i) => (
-                <img
-                  key={i}
-                  src="/assets/images/main.png"
-                  className="product-thumb"
-                  alt="Browsing History Product"
-                />
-              ))}
-            </div>
-          </div>
-
-          <div className="custom-slider-section">
-            <h4>Top Selling Products</h4>
-            <div className="d-flex flex-wrap">
-              {[...Array(4)].map((_, i) => (
-                <img
-                  key={i}
-                  src="/assets/images/main.png"
-                  className="product-thumb"
-                  alt="Top Selling Product"
-                />
-              ))}
-            </div>
-          </div>
-        </div> */}
       </div>
 
       <NoDealbreakers />

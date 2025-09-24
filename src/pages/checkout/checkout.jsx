@@ -277,7 +277,7 @@ const Checkout = () => {
       import.meta.env.VITE_BACKEND_URL
     }/storage/variation_images/No_Image_Available.jpg`;
     return img
-      ? `${import.meta.env.VITE_BACKEND_URL}/storage/variation_images/${img}`
+      ? `${import.meta.env.VITE_BACKEND_URL}${img}`
       : fallback;
   };
 

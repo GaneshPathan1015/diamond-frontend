@@ -475,55 +475,6 @@ const EngagementList = () => {
           </a>
         </div>
       </section>
-
-      {/* <section className="hero_section_wrapperengage">
-        <div className="container-fluid p-0 position-relative">
-          {bannerVideo ? (
-            <video
-              className="w-100"
-              autoPlay
-              muted
-              loop
-              playsInline
-              src={`${import.meta.env.VITE_BACKEND_URL}/storage/${bannerVideo}`}
-            >
-              Your browser does not support the video tag.
-            </video>
-          ) : (
-            <img
-              src={
-                bannerImage
-                  ? `${import.meta.env.VITE_BACKEND_URL}/storage/${bannerImage}`
-                  : "https://www.withclarity.com/cdn/shop/files/Women_s_Diamond_Gemstone_Jewelry_1366x.jpg?v=1729163233"
-              }
-              alt="banner"
-              className="img-fluid w-100"
-            />
-          )}
-
-          <div className="wrapper position-absolute text-center w-100 mb-5">
-            <h2 className="fs-1 slide-title text-white">
-              ENGAGEMENT RING EDUCATION
-            </h2>
-            <div className="content">
-              <p className="text-white">
-                Learn about engagement ring setting styles, metal options, ring
-                sizing and more.
-              </p>
-            </div>
-            <div className="slide-btn-wrapper justify-content-center align-items-center gap-5">
-              <a
-                title="SHOP ENGAGEMENT RINGS"
-                href="#"
-                className="btn border-button border my-2 p-2 rounded-0 fw-bold border-white"
-              >
-                SHOP ENGAGEMENT RINGS
-              </a>
-            </div>
-          </div>
-        </div>
-      </section> */}
-
       <div className="container">
         <EngagementTabs diamond={diamond} />
         {/* Filters Top Bar */}

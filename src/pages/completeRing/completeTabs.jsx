@@ -46,7 +46,7 @@ const CompleteTabs = ({ diamond, ringCartItem, fromChooseSetting }) => {
     if (steps === defaultSteps && index === 0 && diamond.shape.image) {
       return (
         <img
-          src={`/images/shapes/${diamond.shape.image}`}
+          src={diamond.image_link}
           alt="Diamond"
           className="ring-preview-img"
         />
@@ -55,7 +55,7 @@ const CompleteTabs = ({ diamond, ringCartItem, fromChooseSetting }) => {
     if (steps === diamondSteps && index === 1 && diamond.shape.image) {
       return (
         <img
-          src={`/images/shapes/${diamond.shape.image}`}
+          src={diamond.image_link}
           alt="Diamond"
           className="ring-preview-img"
         />

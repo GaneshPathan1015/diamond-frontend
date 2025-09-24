@@ -5,7 +5,9 @@ import JewelryMenu from "./JewelryMenu";
 import EngagementMenu from "./EngagementMenu";
 import CollectionMenu from "./CollectionMenu";
 import HighJewelryMenu from "./HighJewelryMenu";
+import DiamondMenu from "./DiamondMenu";
 import Wedding from "./Wedding";
+import GiftMenu from "./GiftMenu";
 import "./megaMenu.css";
 
 const slugify = (text = "") =>
@@ -145,6 +147,14 @@ const MegaMenu = ({ type = "engagement", closeMegaMenu = () => {} }) => {
         />
       )}
 
+      {type === "diamond" && (
+        <DiamondMenu
+          handleClick={handleClick}
+          closeMegaMenu={closeMegaMenu}
+          navigate={navigate}
+        />
+      )}
+
       {type === "highJewelry" && (
         <HighJewelryMenu
           hoveredOption={hoveredOption}
@@ -180,6 +190,14 @@ const MegaMenu = ({ type = "engagement", closeMegaMenu = () => {} }) => {
           closeMegaMenu={closeMegaMenu}
           navigate={navigate}
           slugify={slugify}
+        />
+      )}
+
+      {type === "gift" && (
+        <GiftMenu
+          handleClick={handleClick}
+          closeMegaMenu={closeMegaMenu}
+          navigate={navigate}
         />
       )}
     </div>
