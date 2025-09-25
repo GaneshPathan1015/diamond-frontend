@@ -40,6 +40,7 @@ import PrivateRoute from "./routes/PrivateRoute";
 // Footer pages
 import Press from "./pages/footerpages/company/Press";
 import Metal from "./pages/footerpages/education/Metal";
+import Blog from "./pages/footerpages/education/blog/Blog";
 
 export default function App() {
   const location = useLocation();
@@ -101,6 +102,7 @@ export default function App() {
           {/* Footer pages start*/}
           <Route path="/press" element={<Press />} />
           <Route path="/metal" element={<Metal />} />
+          <Route path="/blog" element={<Blog />} />
         </Routes>
       </main>
       <Footer />

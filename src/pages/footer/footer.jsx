@@ -26,7 +26,7 @@ const Footer = () => {
     { label: "Conflict diamond policy", to: "#" },
     { label: "Lab grown diamonds", to: "#" },
     { label: "Metals", to: "/metal" },
-    { label: "Blog", to: "#" },
+    { label: "Blog", to: "/blog" },
   ];
 
   const shopLinks = [
