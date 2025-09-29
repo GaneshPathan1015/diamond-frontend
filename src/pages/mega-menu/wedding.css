@@ -1,7 +1,9 @@
 .bands-section {
     background: #fff;
 }
-
+.clickable-link{
+    cursor: pointer;
+}
 .bands-container {
     display: flex;
     flex-wrap: wrap;
@@ -9,6 +11,16 @@
     width: 100%;
     margin: auto;
     gap: 15px;
+}
+
+.clickable-heading {
+    cursor: pointer;
+    color: #000000;
+}
+
+.clickable-heading:hover {
+    text-decoration: underline;
+
 }
 
 .bands-links {
@@ -29,6 +41,7 @@
 }
 
 .bands-links li {
+
     margin-bottom: 6px;
 }
 

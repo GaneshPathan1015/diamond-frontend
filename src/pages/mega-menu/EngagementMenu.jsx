@@ -3,7 +3,6 @@ import React from "react";
 const EngagementMenu = ({
   styles = [],
   shapes = [],
-  loadingEngagement = false,
   hoveredOption,
   setHoveredOption,
   closeMegaMenu,

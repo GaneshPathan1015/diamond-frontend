@@ -4,7 +4,7 @@ import debounce from "lodash/debounce";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import Loader from "../diamond/loader";
 import "react-medium-image-zoom/dist/styles.css";
-import "./JewelryList.css";
+import "./weddingList.css";
 
 const priceSlugMap = {
   "0-500": "$0 - $500",
@@ -21,36 +21,92 @@ const priceSlugReverseMap = Object.entries(priceSlugMap).reduce(
   },
   {}
 );
-
 const priceRanges = Object.values(priceSlugMap);
-
-const JewelryList = () => {
+const WeddingList = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
+
   const perPage = 20;
+
   const [appliedFilters, setAppliedFilters] = useState({});
   const [filtersInitialized, setFiltersInitialized] = useState(false);
+
   const [activeMetal, setActiveMetal] = useState({});
   const [selectedVariations, setSelectedVariations] = useState({});
-  const [bannerImage, setBannerImage] = useState(null);
-  const [bannerVideo, setBannerVideo] = useState(null);
+
   const [styleData, setStyleData] = useState([]);
   const [styleNameToIdMap, setStyleNameToIdMap] = useState({});
+
   const [collectionData, setCollectionData] = useState([]);
-  const [metalTypes, setMetalTypes] = useState([]);
   const [collectionNameToIdMap, setCollectionNameToIdMap] = useState({});
-  const [activeFilterSection, setActiveFilterSection] = useState("style");
-  const [readyToShip, setReadyToShip] = useState(false);
+
+  const [metalTypes, setMetalTypes] = useState([]);
   const [metalNameToId, setMetalNameToId] = useState({});
   const [metalIdToName, setMetalIdToName] = useState({});
 
+  const [activeFilterSection, setActiveFilterSection] = useState("style");
+  const [readyToShip, setReadyToShip] = useState(false);
+
   const loaderRef = useRef(null);
   const location = useLocation();
+  const { slug } = useParams();
   const navigate = useNavigate();
+
+  const heroContent = {
+    "women-wedding-rings": {
+      title: "Women's Wedding Bands",
+      description:
+        "Explore our women's wedding bands to find the perfect blend of elegance and enduring beauty that represents your love.",
+      image: "/images/womens.webp",
+    },
+    "womens-anniversary-rings": {
+      title: "Diamond Anniversary Rings",
+      description:
+        "Celebrate your love with an anniversary ring, each a testament to shared milestones and cherished memories.",
+      image: "/images/Anniverary_Rings_women.webp",
+    },
+    "womens-eternity-rings": {
+      title: "Diamond Eternity Rings",
+      description:
+        "Mark milestones and cherished anniversaries with an eternity band, a symbol of your everlasting love.",
+      image: "/images/Eternity_Rings_women.webp",
+    },
+    "womens-metal-wedding-rings": {
+      title: "Women's Metal Wedding Rings",
+      description:
+        "Crafted for lasting durability, our metal wedding bands symbolize a love that's as strong as your bond.",
+      image: "/images/Metal_Bands_women.webp",
+    },
+    "womens-diamond-wedding-rings": {
+      title: "Women's Diamond Wedding Rings",
+      description:
+        "Indulge in love's brilliance with our diamond wedding bands—a symbol of your unique journey and enduring commitment.",
+      image: "/images/Diamond_Bands_women.webp",
+    },
+
+    "men-wedding-rings": {
+      title: "Men's Wedding Bands",
+      description:
+        "Discover our collection of men's wedding bands—strong, stylish, and elegantly crafted.",
+      image: "/images/Men_s_Bands.webp",
+    },
+    "mens-metal-wedding-bands": {
+      title: "Men’s Metal Wedding Bands",
+      description:
+        "Step into a world of exceptional style and craftsmanship with our men's metal wedding bands.",
+      image: "/images/Metal_Bands__Mens.webp",
+    },
+    "mens-diamond-wedding-bands": {
+      title: "Men's Diamond Wedding Bands",
+      description:
+        "Find the perfect blend of strength and sophistication with our men's diamond wedding bands.",
+      image: "/images/Mens_Diamond_Bands.webp",
+    },
+  };
 
   const toggleFilterSection = (section) => {
     setActiveFilterSection((prev) => (prev === section ? "" : section));
@@ -58,419 +114,402 @@ const JewelryList = () => {
 
   const updateURLFromFilters = (filters) => {
     const params = new URLSearchParams();
-    if (filters.category)
-      params.set("category", `category-${filters.category}`);
-    if (filters.subcategory)
-      params.set("subcategory", `subcategory-${filters.subcategory}`);
-    if (filters.menucollection)
-      params.set("menucollection", `menucollection-${filters.menucollection}`);
+
     if (filters.price && priceSlugReverseMap[filters.price]) {
       params.set("price", priceSlugReverseMap[filters.price]);
     }
     if (filters.collection)
       params.set("collection", `collection-${filters.collection}`);
     if (filters.style) params.set("style", `style-${filters.style}`);
-    if (filters.ready_to_ship) {
-      params.set("ready_to_ship", "true"); // keep it "true"
-    }
-    if (filters.metal) {
-      params.set("metal", encodeURIComponent(filters.metal));
-    }
-    if (filters.sort) {
-      params.set("sort", filters.sort);
-    }
+    if (filters.ready_to_ship) params.set("ready_to_ship", "true");
+    if (filters.metal) params.set("metal", encodeURIComponent(filters.metal));
+    if (filters.sort) params.set("sort", filters.sort);
+
     navigate({ search: params.toString() });
   };
 
   const addFilter = (value) => {
     const updatedFilters = { ...appliedFilters };
-
     const isPriceValue = priceRanges.includes(value);
 
     if (isPriceValue) {
-      if (updatedFilters.price === value) {
-        delete updatedFilters.price; // Deselect price if clicked again
-      } else {
-        updatedFilters.price = value; // Select new price
-      }
-    } else if (value.startsWith("category-")) {
-      updatedFilters.category = value.split("-")[1];
-    } else if (value.startsWith("subcategory-")) {
-      updatedFilters.subcategory = value.split("-")[1];
-    } else if (value.startsWith("menucollection-")) {
-      updatedFilters.menucollection = value.split("-")[1];
+      updatedFilters.price = updatedFilters.price === value ? undefined : value;
     } else if (styleNameToIdMap[value]) {
-      if (updatedFilters.style === value) {
-        delete updatedFilters.style; // Deselect style if clicked again
-      } else {
-        updatedFilters.style = value;
-      }
+      updatedFilters.style = updatedFilters.style === value ? undefined : value;
     } else if (collectionNameToIdMap[value]) {
-      if (appliedFilters.collection === value) {
-        delete updatedFilters.collection; // Deselect collection if clicked again
-      } else {
-        updatedFilters.collection = value;
-      }
+      updatedFilters.collection =
+        updatedFilters.collection === value ? undefined : value;
     } else {
-      updatedFilters[value] = true;
+      updatedFilters[value] = !updatedFilters[value];
     }
 
     setAppliedFilters(updatedFilters);
     updateURLFromFilters(updatedFilters);
   };
 
+  // 🔹 Metal filter toggle
   const handleMetalClick = (metalId) => {
     const metalName = metalIdToName[metalId];
-    const updatedFilters = { ...appliedFilters };
+    const updated = { ...appliedFilters };
 
-    if (updatedFilters.metal === metalName) {
-      delete updatedFilters.metal;
-    } else {
-      updatedFilters.metal = metalName;
-    }
-
-    setAppliedFilters(updatedFilters);
-    updateURLFromFilters(updatedFilters);
+    updated.metal = updated.metal === metalName ? undefined : metalName;
+    setAppliedFilters(updated);
+    updateURLFromFilters(updated);
   };
 
+  // 🔹 Ready-to-ship filter toggle
   const handleReadyToShipToggle = () => {
     const newState = !readyToShip;
     setReadyToShip(newState);
 
     const updated = { ...appliedFilters };
-    if (newState) {
-      updated.ready_to_ship = true;
-    } else {
-      delete updated.ready_to_ship;
-    }
+    if (newState) updated.ready_to_ship = true;
+    else delete updated.ready_to_ship;
 
     setAppliedFilters(updated);
     updateURLFromFilters(updated);
   };
 
+  // 🔹 Sort filter
   const handleSortChange = (sortValue) => {
-    const updatedFilters = { ...appliedFilters };
+    const updated = { ...appliedFilters };
+    if (sortValue) updated.sort = sortValue;
+    else delete updated.sort;
 
-    if (sortValue) {
-      updatedFilters.sort = sortValue;
-    } else {
-      delete updatedFilters.sort;
-    }
-
-    setAppliedFilters(updatedFilters);
-    updateURLFromFilters(updatedFilters);
+    setAppliedFilters(updated);
+    updateURLFromFilters(updated);
   };
 
+  // 🔹 Clear filters
   const clearAllFilters = () => {
-    // Preserve category and subcategory if they exist
-    const { category, subcategory, menucollection } = appliedFilters;
-
-    const preservedFilters = {};
-    if (category) preservedFilters.category = category;
-    if (subcategory) preservedFilters.subcategory = subcategory;
-    if (menucollection) preservedFilters.menucollection = menucollection;
-
-    setAppliedFilters(preservedFilters); // Reset others, keep category/subcategory
     setReadyToShip(false);
-    // Update URL with preserved filters
-    const params = new URLSearchParams();
-    if (category) params.set("category", `category-${category}`);
-    if (subcategory) params.set("subcategory", `subcategory-${subcategory}`);
-    if (menucollection) {
-      params.set("menucollection", `menucollection-${menucollection}`);
-    }
-
-    navigate({ search: params.toString() });
+    setAppliedFilters({});
+    navigate({ search: "" });
   };
 
   const removeFilterByKey = (key) => {
     const updated = { ...appliedFilters };
     delete updated[key];
-
-    if (key === "ready_to_ship") {
-      setReadyToShip(false);
-    }
+    if (key === "ready_to_ship") setReadyToShip(false);
     setAppliedFilters(updated);
     updateURLFromFilters(updated);
   };
 
+  // 🔹 Fetch products
+  // const fetchProducts = async ({ page, filters = {} }) => {
+  //   const isInitialLoad = page === 1;
+  //   if (isInitialLoad) setLoading(true);
+
+  //   const apiFilters = { ...filters };
+
+  //   // Convert UI filters → API params
+  //   if (filters.style && styleNameToIdMap[filters.style]) {
+  //     apiFilters.style = styleNameToIdMap[filters.style];
+  //   }
+  //   if (filters.collection && collectionNameToIdMap[filters.collection]) {
+  //     apiFilters.collection = collectionNameToIdMap[filters.collection];
+  //   }
+  //   if (filters.price && priceSlugReverseMap[filters.price]) {
+  //     apiFilters.price = priceSlugReverseMap[filters.price];
+  //   }
+  //   if (filters.metal && metalNameToId[filters.metal]) {
+  //     apiFilters.metal_color_id = metalNameToId[filters.metal];
+  //   }
+
+  //   try {
+  //     const { data } = await axiosClient.get(`/api/get-all-wedding-data/${slug}`, {
+  //       params: { page, perPage: 20, ...apiFilters },
+  //     });
+
+  //     const fetchedProducts = data.data || [];
+  //     const totalProducts = parseInt(data.totalProducts) || 0;
+  //     const pages = Math.ceil(totalProducts / 20);
+
+  //     // 🔹 Meta data
+  //     setStyleData(data.style_data || []);
+  //     setCollectionData(data.collection_data || []);
+  //     setMetalTypes(data.metal_types || []);
+
+  //     // Build maps
+  //     const styleMap = {};
+  //     (data.style_data || []).forEach((style) => (styleMap[style.psc_name] = style.psc_id));
+  //     setStyleNameToIdMap(styleMap);
+
+  //     const collectionMap = {};
+  //     (data.collection_data || []).forEach((c) => (collectionMap[c.name] = c.id));
+  //     setCollectionNameToIdMap(collectionMap);
+
+  //     const nameToId = {};
+  //     const idToName = {};
+  //     (data.metal_types || []).forEach((m) => {
+  //       nameToId[m.dmt_name] = m.dmt_id;
+  //       idToName[m.dmt_id] = m.dmt_name;
+  //     });
+  //     setMetalNameToId(nameToId);
+  //     setMetalIdToName(idToName);
+
+  //     // 🔹 Default selections
+  //     const newSelections = { ...(isInitialLoad ? {} : selectedVariations) };
+  //     const newActiveMetals = { ...(isInitialLoad ? {} : activeMetal) };
+
+  //     fetchedProducts.forEach((group) => {
+  //       const metals = Object.keys(group.metal_variations || {});
+  //       if (metals.length === 0) return;
+
+  //       let selectedMetalId = metals[0];
+  //       let selectedIndex = 0;
+
+  //       if (filters.sort?.startsWith("price")) {
+  //         let bestPrice = filters.sort === "price_asc" ? Infinity : -Infinity;
+  //         metals.forEach((metalId) => {
+  //           group.metal_variations[metalId].forEach((v, i) => {
+  //             if (v.price != null) {
+  //               const p = parseFloat(v.price);
+  //               const better =
+  //                 (filters.sort === "price_asc" && p < bestPrice) ||
+  //                 (filters.sort === "price_desc" && p > bestPrice);
+  //               if (better) {
+  //                 bestPrice = p;
+  //                 selectedMetalId = metalId;
+  //                 selectedIndex = i;
+  //               }
+  //             }
+  //           });
+  //         });
+  //       }
+
+  //       newActiveMetals[group.id] = parseInt(selectedMetalId);
+  //       newSelections[group.id] = selectedIndex;
+  //     });
+
+  //     setSelectedVariations(newSelections);
+  //     setActiveMetal(newActiveMetals);
+
+  //     setProducts((prev) => (isInitialLoad ? fetchedProducts : [...prev, ...fetchedProducts]));
+  //     setTotalPages(pages);
+  //     setTotal(totalProducts);
+  //   } catch (error) {
+  //     console.error("Product fetch failed", error);
+  //   } finally {
+  //     setLoading(false);
+  //     setIsFetchingMore(false);
+  //   }
+  // };
   const fetchProducts = async ({ page, filters = {} }) => {
     const isInitialLoad = page === 1;
     if (isInitialLoad) setLoading(true);
 
-    const apiFilters = { ...filters };
-
-    // Convert style name to ID
-    if (filters.style && styleNameToIdMap[filters.style]) {
-      apiFilters.style = styleNameToIdMap[filters.style];
-    }
-
-    // Convert collection name to ID
-    if (filters.collection && collectionNameToIdMap[filters.collection]) {
-      apiFilters.collection = collectionNameToIdMap[filters.collection];
-    }
-
-    // Convert price label to slug
-    if (filters.price && priceSlugReverseMap[filters.price]) {
-      apiFilters.price = priceSlugReverseMap[filters.price];
-    }
-    // Convert metal name to metal_color_id
-    if (filters.metal && metalNameToId[filters.metal]) {
-      apiFilters.metal_color_id = metalNameToId[filters.metal];
-    }
-
     try {
-      const response = await axiosClient.get(`/api/get-all-products`, {
-        params: { page, perPage, ...apiFilters },
-      });
+      // -----------------------------
+      // Map UI filters → API params
+      // -----------------------------
+      const apiFilters = {
+        ...filters,
+        style: filters.style ? styleNameToIdMap[filters.style] : undefined,
+        collection: filters.collection
+          ? collectionNameToIdMap[filters.collection]
+          : undefined,
+        price: filters.price ? priceSlugReverseMap[filters.price] : undefined,
+        metal_color_id: filters.metal
+          ? metalNameToId[filters.metal]
+          : undefined,
+      };
 
-      const fetchedProducts = response.data.data || [];
-      const totalProducts = parseInt(response.data.totalProducts) || 0;
-      const pages = Math.ceil(totalProducts / perPage);
+      // -----------------------------
+      // Fetch products from API
+      // -----------------------------
+      const { data } = await axiosClient.get(
+        `/api/get-all-wedding-data/${slug}`,
+        {
+          params: { page, perPage: 20, ...apiFilters },
+        }
+      );
 
-      setBannerImage(response.data.banner_image || null);
-      setBannerVideo(response.data.banner_video || null);
-      setStyleData(response.data.style_data || []);
-      setCollectionData(response.data.collection_data || []);
-      setMetalTypes(response.data.metal_types || []);
+      const fetchedProducts = data.data || [];
+      const totalProducts = parseInt(data.totalProducts) || 0;
+      const totalPagesCalc = Math.ceil(totalProducts / 20);
 
-      const nameToId = {};
-      const idToName = {};
-      (response.data.metal_types || []).forEach((metal) => {
-        nameToId[metal.dmt_name] = metal.dmt_id;
-        idToName[metal.dmt_id] = metal.dmt_name;
-      });
-      setMetalNameToId(nameToId);
-      setMetalIdToName(idToName);
+      // -----------------------------
+      // Update meta data and maps
+      // -----------------------------
+      setStyleData(data.style_data || []);
+      setCollectionData(data.collection_data || []);
+      setMetalTypes(data.metal_types || []);
 
-      // Build style and collection maps for name-to-ID conversion
-      const styleMap = {};
-      response.data.style_data?.forEach((style) => {
-        styleMap[style.psc_name] = style.psc_id;
-      });
+      const styleMap = Object.fromEntries(
+        (data.style_data || []).map((s) => [s.psc_name, s.psc_id])
+      );
+      const collectionMap = Object.fromEntries(
+        (data.collection_data || []).map((c) => [c.name, c.id])
+      );
+      const metalNameToIdMap = Object.fromEntries(
+        (data.metal_types || []).map((m) => [m.dmt_name, m.dmt_id])
+      );
+      const metalIdToNameMap = Object.fromEntries(
+        (data.metal_types || []).map((m) => [m.dmt_id, m.dmt_name])
+      );
+
       setStyleNameToIdMap(styleMap);
-
-      const collectionMap = {};
-      response.data.collection_data?.forEach((collection) => {
-        collectionMap[collection.name] = collection.id;
-      });
       setCollectionNameToIdMap(collectionMap);
+      setMetalNameToId(metalNameToIdMap);
+      setMetalIdToName(metalIdToNameMap);
 
-      // Manage metal selection and default variation
-      const newSelections = { ...(isInitialLoad ? {} : selectedVariations) };
-      const newActiveMetals = { ...(isInitialLoad ? {} : activeMetal) };
+      // -----------------------------
+      // Handle default variation selection
+      // -----------------------------
+      const updatedSelections = {
+        ...(isInitialLoad ? {} : selectedVariations),
+      };
+      const updatedActiveMetals = { ...(isInitialLoad ? {} : activeMetal) };
 
-      fetchedProducts.forEach((group) => {
-        const variationsByMetal = group.metal_variations || {};
-        const metalKeys = Object.keys(variationsByMetal);
+      fetchedProducts.forEach((product) => {
+        const metalVariations = product.metal_variations || {};
+        const metalIds = Object.keys(metalVariations);
 
-        if (metalKeys.length === 0) return;
+        if (metalIds.length === 0) return;
 
-        let selectedMetalId = metalKeys[0];
-        let selectedVariationIndex = 0;
+        // Default to first metal
+        let selectedMetalId = metalIds[0];
+        let selectedIndex = 0;
 
-        if (filters.sort === "price_asc" || filters.sort === "price_desc") {
+        // Sort by price if needed
+        if (filters.sort?.startsWith("price")) {
           let bestPrice = filters.sort === "price_asc" ? Infinity : -Infinity;
 
-          metalKeys.forEach((metalId) => {
-            const variations = variationsByMetal[metalId];
-
+          metalIds.forEach((metalId) => {
+            const variations = metalVariations[metalId] || [];
             variations.forEach((variation, index) => {
               if (variation.price != null) {
                 const price = parseFloat(variation.price);
                 const better =
                   (filters.sort === "price_asc" && price < bestPrice) ||
                   (filters.sort === "price_desc" && price > bestPrice);
-
                 if (better) {
                   bestPrice = price;
                   selectedMetalId = metalId;
-                  selectedVariationIndex = index;
+                  selectedIndex = index;
                 }
               }
             });
           });
         }
 
-        newActiveMetals[group.id] = parseInt(selectedMetalId);
-        newSelections[group.id] = selectedVariationIndex;
+        // Save selections
+        updatedActiveMetals[product.id] = Number(selectedMetalId);
+        updatedSelections[product.id] = selectedIndex;
       });
 
-      // Set state
-      setSelectedVariations(newSelections);
-      setActiveMetal(newActiveMetals);
-
-      if (isInitialLoad) {
-        setProducts(fetchedProducts);
-      } else {
-        setProducts((prev) => [...prev, ...fetchedProducts]);
-      }
-
-      setTotalPages(pages);
+      // -----------------------------
+      // Update state
+      // -----------------------------
+      setSelectedVariations(updatedSelections);
+      setActiveMetal(updatedActiveMetals);
+      setProducts((prev) =>
+        isInitialLoad ? fetchedProducts : [...prev, ...fetchedProducts]
+      );
+      setTotalPages(totalPagesCalc);
       setTotal(totalProducts);
     } catch (error) {
-      console.error("Product fetch failed", error);
+      console.error("Product fetch failed:", error);
     } finally {
       setLoading(false);
       setIsFetchingMore(false);
     }
   };
 
-  //  Read filters from URL on mount
+  // 🔹 Parse filters from URL
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const categoryParam = params.get("category");
-    const subcategoryParam = params.get("subcategory");
-    const collectionParam = params.get("collection");
-    const styleParam = params.get("style");
-    const priceParam = params.get("price");
-    const sortParam = params.get("sort");
-    const metalParam = params.get("metal");
-    const menucollectionParam = params.get("menucollection");
-
     const filters = {};
 
-    if (categoryParam) {
-      const id = parseInt(categoryParam.split("-").pop());
-      if (!isNaN(id)) filters.category = id;
-    }
-
-    if (subcategoryParam) {
-      const id = parseInt(subcategoryParam.split("-").pop());
-      if (!isNaN(id)) filters.subcategory = id;
-    }
-
-    if (menucollectionParam) {
-      const id = parseInt(menucollectionParam.split("-").pop());
-      if (!isNaN(id)) filters.menucollection = id;
-    }
-
+    const priceParam = params.get("price");
     if (priceParam && priceSlugMap[priceParam]) {
-      filters.price = priceSlugMap[priceParam]; // Reverse lookup: "0-500" → "$0 - $500"
+      filters.price = priceSlugMap[priceParam];
     }
 
-    if (collectionParam) {
-      const collectionName = collectionParam.split("-").slice(1).join("-");
-      filters.collection = collectionName;
-    }
+    const collectionParam = params.get("collection");
+    if (collectionParam)
+      filters.collection = collectionParam.split("-").slice(1).join("-");
 
-    if (styleParam) {
-      const styleName = styleParam.split("-").slice(1).join("-");
-      filters.style = styleName;
-    }
+    const styleParam = params.get("style");
+    if (styleParam) filters.style = styleParam.split("-").slice(1).join("-");
 
     if (params.get("ready_to_ship") === "true") {
       filters.ready_to_ship = true;
       setReadyToShip(true);
     }
 
-    if (metalParam) {
-      filters.metal = decodeURIComponent(metalParam);
-    }
-    if (sortParam) filters.sort = sortParam;
+    const metalParam = params.get("metal");
+    if (metalParam) filters.metal = decodeURIComponent(metalParam);
+
+    if (params.get("sort")) filters.sort = params.get("sort");
 
     setAppliedFilters(filters);
-    setFiltersInitialized(true); //  Mark filters ready
+    setFiltersInitialized(true);
   }, [location.search]);
 
+  // 🔹 Re-sync ready_to_ship state
   useEffect(() => {
     setReadyToShip(!!appliedFilters.ready_to_ship);
   }, [appliedFilters.ready_to_ship]);
 
-  //  Fetch products when filters are ready
+  // 🔹 Fetch products on filter change
+  /* useEffect(() => {
+    if (filtersInitialized) {
+      setPage(1);
+      fetchProducts({ page: 1, filters: appliedFilters });
+    }
+  }, [appliedFilters, filtersInitialized, slug]); */
+
+  // 🔹 Infinite scroll observer
+  // useEffect(() => {
+  //   if (page > 1) fetchProducts({ page, filters: appliedFilters });
+  // }, [page]);
+
+  // useEffect(() => {
+  //   const handleIntersection = debounce(() => {
+  //     if (!isFetchingMore && page < totalPages && !loading) {
+  //       setIsFetchingMore(true);
+  //       setPage((prev) => prev + 1);
+  //     }
+  //   }, 300);
+
+  //   const observer = new IntersectionObserver(
+  //     (entries) => {
+  //       if (entries[0].isIntersecting) handleIntersection();
+  //     },
+  //     { threshold: 1 }
+  //   );
+
+  //   if (loaderRef.current) observer.observe(loaderRef.current);
+  //   return () => observer.disconnect();
+  // }, [isFetchingMore, totalPages, page, loading]);
+
   useEffect(() => {
     if (!filtersInitialized) return;
-    setPage(1);
-    fetchProducts({ page: 1, filters: appliedFilters });
-  }, [appliedFilters, filtersInitialized]);
+    fetchProducts({ page, filters: appliedFilters });
+  }, [appliedFilters, page, filtersInitialized]);
 
-  //  Infinite scroll fetch
-  useEffect(() => {
-    if (page > 1) fetchProducts({ page, filters: appliedFilters });
-  }, [page]);
-
-  useEffect(() => {
-    const handleIntersection = debounce(() => {
-      setIsFetchingMore(true);
-      setPage((prev) => prev + 1);
-    }, 300);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const first = entries[0];
-        if (
-          first.isIntersecting &&
-          !isFetchingMore &&
-          page < totalPages &&
-          !loading
-        ) {
-          handleIntersection();
-        }
-      },
-      { threshold: 1 }
-    );
-
-    const currentLoader = loaderRef.current;
-    if (currentLoader) observer.observe(currentLoader);
-    return () => {
-      if (currentLoader) observer.unobserve(currentLoader);
-    };
-  }, [isFetchingMore, totalPages, page, loading]);
-
-  const visibleFilters = Object.entries(appliedFilters).filter(
-    ([key]) =>
-      key !== "category" && key !== "subcategory" && key !== "menucollection"
-  );
-
+  const visibleFilters = Object.entries(appliedFilters);
   return (
     <>
-      <section className="hero_section_wrapper_jewellry">
-        <div className="container-fluid p-0 position-relative">
-          {bannerVideo ? (
-            <video
-              className="w-100"
-              autoPlay
-              muted
-              loop
-              playsInline
-              src={`${import.meta.env.VITE_BACKEND_URL}/storage/${bannerVideo}`}
-            >
-              Your browser does not support the video tag.
-            </video>
-          ) : (
-            <img
-              src={
-                bannerImage
-                  ? `${import.meta.env.VITE_BACKEND_URL}/storage/${bannerImage}`
-                  : "https://www.withclarity.com/cdn/shop/files/Women_s_Diamond_Gemstone_Jewelry_1366x.jpg?v=1729163233"
-              }
-              alt="banner"
-              className="img-fluid w-100"
-            />
-          )}
-
-          <div className="wrapper position-absolute text-center w-100 mb-5">
-            <h2 className="fs-1 slide-title text-white">
-              ENGAGEMENT RING EDUCATION
-            </h2>
-            <div className="content">
-              <p className="text-white">
-                Learn about engagement ring setting styles, metal options, ring
-                sizing and more.
-              </p>
-            </div>
-            <div className="slide-btn-wrapper justify-content-center align-items-center gap-5">
-              <a
-                title="SHOP ENGAGEMENT RINGS"
-                href="#"
-                className="text-white btn border-button border my-2 p-2 rounded-0 fw-bold border-white"
-              >
-                SHOP ENGAGEMENT RINGS
-              </a>
-            </div>
-          </div>
+      <section className="hero-wrapper">
+        <img
+          src={heroContent[slug]?.image}
+          alt={heroContent[slug]?.title || "Wedding Bands"}
+          className="hero-img img-fluid"
+        />
+        <div className="hero-text text-center">
+          <h1 className="fw-bold">
+            {heroContent[slug]?.title || "Wedding Bands"}
+          </h1>
+          <p>
+            {heroContent[slug]?.description ||
+              "Explore our wedding band collection."}
+          </p>
         </div>
       </section>
+
       <div className="container my-4">
         {/* Filters Top Bar */}
         <div className="d-flex justify-content-between filters-bar">
@@ -708,6 +747,7 @@ const JewelryList = () => {
         <hr />
 
         {/* Applied Filters */}
+
         {visibleFilters.length > 0 && (
           <div className="applied-filters-bar mt-3">
             <strong>APPLIED FILTERS</strong>
@@ -883,4 +923,4 @@ const JewelryList = () => {
   );
 };
 
-export default JewelryList;
+export default WeddingList;

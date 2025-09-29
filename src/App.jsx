@@ -32,6 +32,7 @@ import Reserve from "./pages/reserve-collections/reserve";
 import Signature from "./pages/w-signature/signature";
 import EngagementDetails from "./pages/engagement-details/engDetails";
 import EngagementList from "./pages/engagement-list/engagementList";
+import WeddingList from "./pages/wedding-brands/WeddingList";
 import CompleteRing from "./pages/completeRing/completeRing";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import WhiteClarityNav from "./pages/header/WhiteClarityNav";
@@ -83,6 +84,7 @@ export default function App() {
           <Route path="/order-details/:orderId" element={<OrderDetails />} />
           <Route path="/jewelry-list" element={<JewelryList />} />
           <Route path="/engagement-rings/:slug?" element={<EngagementList />} />
+          <Route path="/wedding/:slug?" element={<WeddingList />} />
           <Route
             path="/jewellary-details/:id"
             element={<JewelryDetailsPage />}
