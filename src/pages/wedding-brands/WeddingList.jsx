@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import axiosClient from "../../api/axios";
-import debounce from "lodash/debounce";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import Loader from "../diamond/loader";
 import "react-medium-image-zoom/dist/styles.css";
@@ -57,7 +56,7 @@ const WeddingList = () => {
   const navigate = useNavigate();
 
   const heroContent = {
-    "women-wedding-rings": {
+    "womens-wedding-rings": {
       title: "Women's Wedding Bands",
       description:
         "Explore our women's wedding bands to find the perfect blend of elegance and enduring beauty that represents your love.",
@@ -88,7 +87,7 @@ const WeddingList = () => {
       image: "/images/Diamond_Bands_women.webp",
     },
 
-    "men-wedding-rings": {
+    "mens-wedding-rings": {
       title: "Men's Wedding Bands",
       description:
         "Discover our collection of men's wedding bands—strong, stylish, and elegantly crafted.",
@@ -195,106 +194,6 @@ const WeddingList = () => {
     updateURLFromFilters(updated);
   };
 
-  // 🔹 Fetch products
-  // const fetchProducts = async ({ page, filters = {} }) => {
-  //   const isInitialLoad = page === 1;
-  //   if (isInitialLoad) setLoading(true);
-
-  //   const apiFilters = { ...filters };
-
-  //   // Convert UI filters → API params
-  //   if (filters.style && styleNameToIdMap[filters.style]) {
-  //     apiFilters.style = styleNameToIdMap[filters.style];
-  //   }
-  //   if (filters.collection && collectionNameToIdMap[filters.collection]) {
-  //     apiFilters.collection = collectionNameToIdMap[filters.collection];
-  //   }
-  //   if (filters.price && priceSlugReverseMap[filters.price]) {
-  //     apiFilters.price = priceSlugReverseMap[filters.price];
-  //   }
-  //   if (filters.metal && metalNameToId[filters.metal]) {
-  //     apiFilters.metal_color_id = metalNameToId[filters.metal];
-  //   }
-
-  //   try {
-  //     const { data } = await axiosClient.get(`/api/get-all-wedding-data/${slug}`, {
-  //       params: { page, perPage: 20, ...apiFilters },
-  //     });
-
-  //     const fetchedProducts = data.data || [];
-  //     const totalProducts = parseInt(data.totalProducts) || 0;
-  //     const pages = Math.ceil(totalProducts / 20);
-
-  //     // 🔹 Meta data
-  //     setStyleData(data.style_data || []);
-  //     setCollectionData(data.collection_data || []);
-  //     setMetalTypes(data.metal_types || []);
-
-  //     // Build maps
-  //     const styleMap = {};
-  //     (data.style_data || []).forEach((style) => (styleMap[style.psc_name] = style.psc_id));
-  //     setStyleNameToIdMap(styleMap);
-
-  //     const collectionMap = {};
-  //     (data.collection_data || []).forEach((c) => (collectionMap[c.name] = c.id));
-  //     setCollectionNameToIdMap(collectionMap);
-
-  //     const nameToId = {};
-  //     const idToName = {};
-  //     (data.metal_types || []).forEach((m) => {
-  //       nameToId[m.dmt_name] = m.dmt_id;
-  //       idToName[m.dmt_id] = m.dmt_name;
-  //     });
-  //     setMetalNameToId(nameToId);
-  //     setMetalIdToName(idToName);
-
-  //     // 🔹 Default selections
-  //     const newSelections = { ...(isInitialLoad ? {} : selectedVariations) };
-  //     const newActiveMetals = { ...(isInitialLoad ? {} : activeMetal) };
-
-  //     fetchedProducts.forEach((group) => {
-  //       const metals = Object.keys(group.metal_variations || {});
-  //       if (metals.length === 0) return;
-
-  //       let selectedMetalId = metals[0];
-  //       let selectedIndex = 0;
-
-  //       if (filters.sort?.startsWith("price")) {
-  //         let bestPrice = filters.sort === "price_asc" ? Infinity : -Infinity;
-  //         metals.forEach((metalId) => {
-  //           group.metal_variations[metalId].forEach((v, i) => {
-  //             if (v.price != null) {
-  //               const p = parseFloat(v.price);
-  //               const better =
-  //                 (filters.sort === "price_asc" && p < bestPrice) ||
-  //                 (filters.sort === "price_desc" && p > bestPrice);
-  //               if (better) {
-  //                 bestPrice = p;
-  //                 selectedMetalId = metalId;
-  //                 selectedIndex = i;
-  //               }
-  //             }
-  //           });
-  //         });
-  //       }
-
-  //       newActiveMetals[group.id] = parseInt(selectedMetalId);
-  //       newSelections[group.id] = selectedIndex;
-  //     });
-
-  //     setSelectedVariations(newSelections);
-  //     setActiveMetal(newActiveMetals);
-
-  //     setProducts((prev) => (isInitialLoad ? fetchedProducts : [...prev, ...fetchedProducts]));
-  //     setTotalPages(pages);
-  //     setTotal(totalProducts);
-  //   } catch (error) {
-  //     console.error("Product fetch failed", error);
-  //   } finally {
-  //     setLoading(false);
-  //     setIsFetchingMore(false);
-  //   }
-  // };
   const fetchProducts = async ({ page, filters = {} }) => {
     const isInitialLoad = page === 1;
     if (isInitialLoad) setLoading(true);
@@ -453,42 +352,17 @@ const WeddingList = () => {
     setReadyToShip(!!appliedFilters.ready_to_ship);
   }, [appliedFilters.ready_to_ship]);
 
-  // 🔹 Fetch products on filter change
-  /* useEffect(() => {
-    if (filtersInitialized) {
-      setPage(1);
-      fetchProducts({ page: 1, filters: appliedFilters });
-    }
-  }, [appliedFilters, filtersInitialized, slug]); */
-
-  // 🔹 Infinite scroll observer
-  // useEffect(() => {
-  //   if (page > 1) fetchProducts({ page, filters: appliedFilters });
-  // }, [page]);
-
-  // useEffect(() => {
-  //   const handleIntersection = debounce(() => {
-  //     if (!isFetchingMore && page < totalPages && !loading) {
-  //       setIsFetchingMore(true);
-  //       setPage((prev) => prev + 1);
-  //     }
-  //   }, 300);
-
-  //   const observer = new IntersectionObserver(
-  //     (entries) => {
-  //       if (entries[0].isIntersecting) handleIntersection();
-  //     },
-  //     { threshold: 1 }
-  //   );
-
-  //   if (loaderRef.current) observer.observe(loaderRef.current);
-  //   return () => observer.disconnect();
-  // }, [isFetchingMore, totalPages, page, loading]);
-
   useEffect(() => {
     if (!filtersInitialized) return;
     fetchProducts({ page, filters: appliedFilters });
   }, [appliedFilters, page, filtersInitialized]);
+  
+  useEffect(() => {
+    if (!slug) return;
+    setPage(1);
+    setProducts([]);
+    fetchProducts({ page: 1, filters: appliedFilters });
+  }, [slug]);
 
   const visibleFilters = Object.entries(appliedFilters);
   return (
@@ -518,24 +392,27 @@ const WeddingList = () => {
             <span className="filter-divider">|</span>
 
             {/* Collection */}
-            <div
-              onClick={() => toggleFilterSection("collection")}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                cursor: "pointer",
-              }}
-            >
-              <span>Collection</span>
-              <span className="material-symbols-outlined">
-                {activeFilterSection === "collection"
-                  ? "expand_less"
-                  : "expand_more"}
-              </span>
-            </div>
+            {!slug.startsWith("mens") && (
+              <>
+                <div
+                  onClick={() => toggleFilterSection("collection")}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    cursor: "pointer",
+                  }}
+                >
+                  <span>Collection</span>
+                  <span className="material-symbols-outlined">
+                    {activeFilterSection === "collection"
+                      ? "expand_less"
+                      : "expand_more"}
+                  </span>
+                </div>
 
-            <span className="filter-divider">|</span>
-
+                <span className="filter-divider">|</span>
+              </>
+            )}
             {/* Style */}
             <div
               onClick={() => toggleFilterSection("style")}
@@ -635,32 +512,34 @@ const WeddingList = () => {
           </div>
         </div>
 
-        {activeFilterSection === "collection" && collectionData.length > 0 && (
-          <div className="style-scroll-wrapper">
-            <div className="collection-icon-bar">
-              {collectionData.map((collection) => (
-                <div
-                  key={collection.id}
-                  className={`collection-item ${
-                    appliedFilters.collection === collection.name
-                      ? "active-style"
-                      : ""
-                  }`}
-                  onClick={() => addFilter(collection.name)}
-                >
-                  <img
-                    src={`${import.meta.env.VITE_BACKEND_URL}/storage/${
-                      collection.collection_image
+        {!slug.startsWith("mens") &&
+          activeFilterSection === "collection" &&
+          collectionData.length > 0 && (
+            <div className="style-scroll-wrapper">
+              <div className="collection-icon-bar">
+                {collectionData.map((collection) => (
+                  <div
+                    key={collection.id}
+                    className={`collection-item ${
+                      appliedFilters.collection === collection.name
+                        ? "active-style"
+                        : ""
                     }`}
-                    alt={collection.name}
-                    className="style-img"
-                  />
-                  <div className="style-name">{collection.name}</div>
-                </div>
-              ))}
+                    onClick={() => addFilter(collection.name)}
+                  >
+                    <img
+                      src={`${import.meta.env.VITE_BACKEND_URL}/storage/${
+                        collection.collection_image
+                      }`}
+                      alt={collection.name}
+                      className="style-img"
+                    />
+                    <div className="style-name">{collection.name}</div>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
         {activeFilterSection === "style" && styleData.length > 0 && (
           <div className="style-scroll-wrapper">
@@ -778,143 +657,150 @@ const WeddingList = () => {
 
         {/* Product Listing */}
         <h5 className="mt-4">Showing {total} products.</h5>
-        <div className="row row-cols-1 row-cols-md-4 g-4">
-          {loading && <Loader />}
+        <div className="container">
+          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+            {loading && <Loader />}
 
-          {products.map((group) => {
-            const metalKeys = Object.keys(group.metal_variations).sort(
-              (a, b) => {
-                const qualityA =
-                  group.metal_variations[a][0]?.metal_color?.quality || "";
-                const qualityB =
-                  group.metal_variations[b][0]?.metal_color?.quality || "";
-                const numA = parseInt(qualityA);
-                const numB = parseInt(qualityB);
+            {products.map((group) => {
+              const metalKeys = Object.keys(group.metal_variations).sort(
+                (a, b) => {
+                  const qualityA =
+                    group.metal_variations[a][0]?.metal_color?.quality || "";
+                  const qualityB =
+                    group.metal_variations[b][0]?.metal_color?.quality || "";
+                  const numA = parseInt(qualityA);
+                  const numB = parseInt(qualityB);
 
-                if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
-                if (!isNaN(numA)) return -1;
-                if (!isNaN(numB)) return 1;
-                return qualityA.localeCompare(qualityB);
-              }
-            );
+                  if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
+                  if (!isNaN(numA)) return -1;
+                  if (!isNaN(numB)) return 1;
+                  return qualityA.localeCompare(qualityB);
+                }
+              );
 
-            const currentMetalId = String(
-              activeMetal[group.id] ?? metalKeys[0]
-            );
-            const metalOptions = group.metal_variations[currentMetalId] || [];
-            const selectedIndex = selectedVariations[group.id] || 0;
-            const selectedVariation = metalOptions[selectedIndex];
+              const currentMetalId = String(
+                activeMetal[group.id] ?? metalKeys[0]
+              );
+              const metalOptions = group.metal_variations[currentMetalId] || [];
+              const selectedIndex = selectedVariations[group.id] || 0;
+              const selectedVariation = metalOptions[selectedIndex];
 
-            const image =
-              Array.isArray(selectedVariation?.images) &&
-              selectedVariation.images.length > 0
-                ? `${import.meta.env.VITE_BACKEND_URL}${
-                    selectedVariation.images[0]
-                  }`
-                : `${
-                    import.meta.env.VITE_BACKEND_URL
-                  }/storage/variation_images/No_Image_Available.jpg`;
+              const image =
+                Array.isArray(selectedVariation?.images) &&
+                selectedVariation.images.length > 0
+                  ? `${import.meta.env.VITE_BACKEND_URL}${
+                      selectedVariation.images[0]
+                    }`
+                  : `${
+                      import.meta.env.VITE_BACKEND_URL
+                    }/storage/variation_images/No_Image_Available.jpg`;
 
-            const price = selectedVariation?.price || "NA";
-            const originalPrice = selectedVariation?.original_price || "NA";
-            const sku = selectedVariation?.sku || "NA";
-            const discount = selectedVariation?.discount || "";
+              const price = selectedVariation?.price || "NA";
+              const originalPrice = selectedVariation?.original_price || "NA";
+              const sku = selectedVariation?.sku || "NA";
+              const discount = selectedVariation?.discount || "";
 
-            return (
-              <div className="col" key={group.id}>
-                <div className="h-100 d-flex flex-column">
-                  <Link
-                    to={`/jewellary-details/${group.product?.id}`}
-                    className="text-decoration-none text-dark mt-2"
-                  >
-                    <div className="product-image-container position-relative shadow">
-                      <img
-                        src={image}
-                        alt="Product"
-                        className="product-image-full"
-                      />
-                      <div className="overlay-text d-flex justify-content-between px-2">
-                        <span className="ready-to-ship">
-                          {group.product?.ready_to_ship ? "READY TO SHIP" : ""}
-                        </span>
-                        <span className="discount">{discount}</span>
+              return (
+                <div className="col" key={group.id}>
+                  <div className="h-100 d-flex flex-column product-card shadow-sm rounded">
+                    <Link
+                      to={`/jewellary-details/${group.product?.id}`}
+                      className="text-decoration-none text-dark mt-2"
+                    >
+                      <div className="product-image-container position-relative">
+                        <img
+                          src={image}
+                          alt="Product"
+                          className="img-fluid product-image-full"
+                        />
+                        <div className="overlay-text d-flex justify-content-between px-2">
+                          <span className="ready-to-ship">
+                            {group.product?.ready_to_ship
+                              ? "READY TO SHIP"
+                              : ""}
+                          </span>
+                          <span className="discount">{discount}</span>
+                        </div>
+                      </div>
+                      <p className="fw-semibold mb-1 product-variation__title text-truncate">
+                        {group.product?.name || "NA"}
+                      </p>
+                    </Link>
+
+                    <p className="mb-2">{sku}</p>
+
+                    <div className="product-metal__buttons mb-2 d-flex gap-1 flex-wrap">
+                      {metalKeys.map((metalId) => {
+                        const metal =
+                          group.metal_variations[metalId][0]?.metal_color;
+                        return (
+                          <button
+                            key={metalId}
+                            className="product-variation__btn btn btn-sm"
+                            style={{
+                              background: metal?.hex,
+                              border: `1px solid ${
+                                String(activeMetal[group.id]) ===
+                                String(metalId)
+                                  ? "#000"
+                                  : "#ccc"
+                              }`,
+                              color: "#000",
+                            }}
+                            onClick={() => {
+                              setActiveMetal((prev) => ({
+                                ...prev,
+                                [group.id]: metalId,
+                              }));
+                              setSelectedVariations((prev) => ({
+                                ...prev,
+                                [group.id]: 0,
+                              }));
+                            }}
+                          >
+                            {metal?.quality}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <div className="product-variation__carat-group">
+                      <small className="product-variation__carat-title">
+                        Total Carat Weight
+                      </small>
+                      <div className="d-flex flex-wrap gap-1 mt-1">
+                        {metalOptions.map((variation, index) => (
+                          <button
+                            key={index}
+                            className={`product-variation__carat-pill btn btn-outline-dark btn-sm ${
+                              selectedIndex === index ? "active" : ""
+                            }`}
+                            onClick={() =>
+                              setSelectedVariations((prev) => ({
+                                ...prev,
+                                [group.id]: index,
+                              }))
+                            }
+                          >
+                            {variation.weight || "NA"}
+                          </button>
+                        ))}
                       </div>
                     </div>
-                    <p className="fw-semibold mb-1 product-variation__title">
-                      {group.product?.name || "NA"}
+
+                    <p className="mt-auto">
+                      <span className="fw-bold">${price}</span>
+                      {originalPrice && (
+                        <span className="original-price text-muted text-decoration-line-through ms-2">
+                          ${originalPrice}
+                        </span>
+                      )}
                     </p>
-                  </Link>
-
-                  <p className="mb-2">{sku}</p>
-
-                  <div className="product-metal__buttons mb-2 d-flex gap-1 flex-wrap">
-                    {metalKeys.map((metalId) => {
-                      const metal =
-                        group.metal_variations[metalId][0]?.metal_color;
-                      return (
-                        <button
-                          key={metalId}
-                          className="product-variation__btn"
-                          style={{
-                            background: metal?.hex,
-                            border: `1px solid ${
-                              String(activeMetal[group.id]) === String(metalId)
-                                ? "#000"
-                                : "#ccc"
-                            }`,
-                            color: "#000",
-                          }}
-                          onClick={() => {
-                            setActiveMetal((prev) => ({
-                              ...prev,
-                              [group.id]: metalId,
-                            }));
-                            setSelectedVariations((prev) => ({
-                              ...prev,
-                              [group.id]: 0,
-                            }));
-                          }}
-                        >
-                          {metal?.quality}
-                        </button>
-                      );
-                    })}
                   </div>
-
-                  <div className="product-variation__carat-group">
-                    <small className="product-variation__carat-title">
-                      Total Carat Weight
-                    </small>
-                    {metalOptions.map((variation, index) => (
-                      <button
-                        key={index}
-                        className={`product-variation__carat-pill ${
-                          selectedIndex === index ? "active" : ""
-                        }`}
-                        onClick={() =>
-                          setSelectedVariations((prev) => ({
-                            ...prev,
-                            [group.id]: index,
-                          }))
-                        }
-                      >
-                        {variation.weight || "NA"}
-                      </button>
-                    ))}
-                  </div>
-
-                  <p className="mt-auto">
-                    <span className="fw-bold">${price}</span>
-                    {originalPrice && (
-                      <span className="original-price text-muted text-decoration-line-through ms-2">
-                        ${originalPrice}
-                      </span>
-                    )}
-                  </p>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
 
         <div ref={loaderRef}>{isFetchingMore && <Loader />}</div>

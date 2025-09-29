@@ -23,7 +23,7 @@ const Wedding = ({ handleStartWedding }) => {
           <div className="column">
             <h6
               className="clickable-heading"
-              onClick={() => handleStartWedding("women-wedding-rings")}
+              onClick={() => handleStartWedding("womens-wedding-rings")}
             >
               Women’s Bands
             </h6>
@@ -39,7 +39,7 @@ const Wedding = ({ handleStartWedding }) => {
               ))}
               <li
                 className="clickable-heading"
-                onClick={() => handleStartWedding("women-wedding-rings")}
+                onClick={() => handleStartWedding("womens-wedding-rings")}
               >
                 Shop all
               </li>
@@ -50,7 +50,7 @@ const Wedding = ({ handleStartWedding }) => {
           <div className="column">
             <h6
               className="clickable-heading"
-              onClick={() => handleStartWedding("men-wedding-rings")}
+              onClick={() => handleStartWedding("mens-wedding-rings")}
             >
               Men’s Bands
             </h6>
@@ -66,7 +66,7 @@ const Wedding = ({ handleStartWedding }) => {
               ))}
               <li
                 className="clickable-heading"
-                onClick={() => handleStartWedding("men-wedding-rings")}
+                onClick={() => handleStartWedding("mens-wedding-rings")}
               >
                 Shop all
               </li>

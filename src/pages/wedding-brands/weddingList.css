@@ -278,9 +278,6 @@
   -webkit-overflow-scrolling: touch;
   /* smooth scroll on iOS */
   overscroll-behavior-x: none;
-  /* prevent over-scroll */
-
-  /* Remove native scroll arrows (Windows) */
   scrollbar-width: thin;
   /* Firefox */
   scrollbar-color: #aaa transparent;
@@ -412,9 +409,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  /* spacing between label and select */
   flex-wrap: wrap;
-  /* allow wrap on smaller screens */
 }
 
 .sort-label {
@@ -423,7 +418,6 @@
 
 .sort-dropdown {
   max-width: 250px;
-  /* or whatever fits your layout */
   width: auto;
   padding: 6px 10px;
   text-overflow: ellipsis;
@@ -510,7 +504,6 @@
 /* Carat Pills */
 .product-variation__carat-pill {
   border: 1px solid #ccc;
-
   background: #f8f9fa;
   cursor: pointer;
   font-size: 0.8rem;
@@ -526,10 +519,39 @@
 
 
 /*  */
+.product-card {
+  padding: 10px;
+  background: #fff;
+}
+
+.product-image-container {
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.product-image-full {
+  width: 100%;
+  object-fit: scale-down;
+}
+
+.overlay-text {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  right: 0;
+  font-size: 12px;
+}
+
+.product-variation__btn,
+.product-variation__carat-pill {
+  font-size: 12px;
+  padding: 3px 6px;
+}
+
 .hero-wrapper {
   position: relative;
   width: 100%;
-  height: 80vh;            /* always full height of screen */
+  height: 80vh;           
   overflow: hidden;
   margin-bottom: 30px;
 }
