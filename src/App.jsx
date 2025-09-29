@@ -40,8 +40,11 @@ import PrivateRoute from "./routes/PrivateRoute";
 
 // Footer pages
 import Press from "./pages/footerpages/company/Press";
+
+// Education
 import Metal from "./pages/footerpages/education/Metal";
 import Blog from "./pages/footerpages/education/blog/Blog";
+import LabGrownDiamonds from "./pages/footerpages/education/LabGrownDiamonds/LabGrownDiamonds";
 
 export default function App() {
   const location = useLocation();
@@ -103,8 +106,11 @@ export default function App() {
           <Route path="*" element={<PageNotFound />} />
           {/* Footer pages start*/}
           <Route path="/press" element={<Press />} />
+
+          {/* footer Education */}
           <Route path="/metal" element={<Metal />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/lab-diamonds" element={<LabGrownDiamonds />} />
         </Routes>
       </main>
       <Footer />

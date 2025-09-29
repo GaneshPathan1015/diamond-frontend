@@ -195,106 +195,7 @@ const WeddingList = () => {
     updateURLFromFilters(updated);
   };
 
-  // 🔹 Fetch products
-  // const fetchProducts = async ({ page, filters = {} }) => {
-  //   const isInitialLoad = page === 1;
-  //   if (isInitialLoad) setLoading(true);
 
-  //   const apiFilters = { ...filters };
-
-  //   // Convert UI filters → API params
-  //   if (filters.style && styleNameToIdMap[filters.style]) {
-  //     apiFilters.style = styleNameToIdMap[filters.style];
-  //   }
-  //   if (filters.collection && collectionNameToIdMap[filters.collection]) {
-  //     apiFilters.collection = collectionNameToIdMap[filters.collection];
-  //   }
-  //   if (filters.price && priceSlugReverseMap[filters.price]) {
-  //     apiFilters.price = priceSlugReverseMap[filters.price];
-  //   }
-  //   if (filters.metal && metalNameToId[filters.metal]) {
-  //     apiFilters.metal_color_id = metalNameToId[filters.metal];
-  //   }
-
-  //   try {
-  //     const { data } = await axiosClient.get(`/api/get-all-wedding-data/${slug}`, {
-  //       params: { page, perPage: 20, ...apiFilters },
-  //     });
-
-  //     const fetchedProducts = data.data || [];
-  //     const totalProducts = parseInt(data.totalProducts) || 0;
-  //     const pages = Math.ceil(totalProducts / 20);
-
-  //     // 🔹 Meta data
-  //     setStyleData(data.style_data || []);
-  //     setCollectionData(data.collection_data || []);
-  //     setMetalTypes(data.metal_types || []);
-
-  //     // Build maps
-  //     const styleMap = {};
-  //     (data.style_data || []).forEach((style) => (styleMap[style.psc_name] = style.psc_id));
-  //     setStyleNameToIdMap(styleMap);
-
-  //     const collectionMap = {};
-  //     (data.collection_data || []).forEach((c) => (collectionMap[c.name] = c.id));
-  //     setCollectionNameToIdMap(collectionMap);
-
-  //     const nameToId = {};
-  //     const idToName = {};
-  //     (data.metal_types || []).forEach((m) => {
-  //       nameToId[m.dmt_name] = m.dmt_id;
-  //       idToName[m.dmt_id] = m.dmt_name;
-  //     });
-  //     setMetalNameToId(nameToId);
-  //     setMetalIdToName(idToName);
-
-  //     // 🔹 Default selections
-  //     const newSelections = { ...(isInitialLoad ? {} : selectedVariations) };
-  //     const newActiveMetals = { ...(isInitialLoad ? {} : activeMetal) };
-
-  //     fetchedProducts.forEach((group) => {
-  //       const metals = Object.keys(group.metal_variations || {});
-  //       if (metals.length === 0) return;
-
-  //       let selectedMetalId = metals[0];
-  //       let selectedIndex = 0;
-
-  //       if (filters.sort?.startsWith("price")) {
-  //         let bestPrice = filters.sort === "price_asc" ? Infinity : -Infinity;
-  //         metals.forEach((metalId) => {
-  //           group.metal_variations[metalId].forEach((v, i) => {
-  //             if (v.price != null) {
-  //               const p = parseFloat(v.price);
-  //               const better =
-  //                 (filters.sort === "price_asc" && p < bestPrice) ||
-  //                 (filters.sort === "price_desc" && p > bestPrice);
-  //               if (better) {
-  //                 bestPrice = p;
-  //                 selectedMetalId = metalId;
-  //                 selectedIndex = i;
-  //               }
-  //             }
-  //           });
-  //         });
-  //       }
-
-  //       newActiveMetals[group.id] = parseInt(selectedMetalId);
-  //       newSelections[group.id] = selectedIndex;
-  //     });
-
-  //     setSelectedVariations(newSelections);
-  //     setActiveMetal(newActiveMetals);
-
-  //     setProducts((prev) => (isInitialLoad ? fetchedProducts : [...prev, ...fetchedProducts]));
-  //     setTotalPages(pages);
-  //     setTotal(totalProducts);
-  //   } catch (error) {
-  //     console.error("Product fetch failed", error);
-  //   } finally {
-  //     setLoading(false);
-  //     setIsFetchingMore(false);
-  //   }
-  // };
   const fetchProducts = async ({ page, filters = {} }) => {
     const isInitialLoad = page === 1;
     if (isInitialLoad) setLoading(true);
@@ -452,38 +353,6 @@ const WeddingList = () => {
   useEffect(() => {
     setReadyToShip(!!appliedFilters.ready_to_ship);
   }, [appliedFilters.ready_to_ship]);
-
-  // 🔹 Fetch products on filter change
-  /* useEffect(() => {
-    if (filtersInitialized) {
-      setPage(1);
-      fetchProducts({ page: 1, filters: appliedFilters });
-    }
-  }, [appliedFilters, filtersInitialized, slug]); */
-
-  // 🔹 Infinite scroll observer
-  // useEffect(() => {
-  //   if (page > 1) fetchProducts({ page, filters: appliedFilters });
-  // }, [page]);
-
-  // useEffect(() => {
-  //   const handleIntersection = debounce(() => {
-  //     if (!isFetchingMore && page < totalPages && !loading) {
-  //       setIsFetchingMore(true);
-  //       setPage((prev) => prev + 1);
-  //     }
-  //   }, 300);
-
-  //   const observer = new IntersectionObserver(
-  //     (entries) => {
-  //       if (entries[0].isIntersecting) handleIntersection();
-  //     },
-  //     { threshold: 1 }
-  //   );
-
-  //   if (loaderRef.current) observer.observe(loaderRef.current);
-  //   return () => observer.disconnect();
-  // }, [isFetchingMore, totalPages, page, loading]);
 
   useEffect(() => {
     if (!filtersInitialized) return;
