@@ -6,7 +6,6 @@ const staticCollectionRoutes = {
 };
 
 const CollectionMenu = ({
-  setHoveredOption,
   closeMegaMenu,
   navigate,
   slugify,
@@ -33,7 +32,6 @@ const CollectionMenu = ({
   return (
     <div
       className=" collection-menu"
-      onMouseLeave={() => setHoveredOption(null)}
     >
       {/* Left Menu */}
       <div className="menu-left">

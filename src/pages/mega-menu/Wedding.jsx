@@ -1,43 +1,74 @@
 import React from "react";
-import "./wedding.css"
+import "./wedding.css";
 
-const Wedding = () => {
+const Wedding = ({ handleStartWedding }) => {
+  const womenBands = [
+    { label: "Anniversary Rings", slug: "womens-anniversary-rings" },
+    { label: "Eternity Rings", slug: "womens-eternity-rings" },
+    { label: "Metal Bonds", slug: "womens-metal-wedding-rings" },
+    { label: "Diamond Bonds", slug: "womens-diamond-wedding-rings" },
+  ];
+
+  const menBands = [
+    { label: "Metal Bonds", slug: "mens-metal-wedding-bands" },
+    { label: "Diamond Bonds", slug: "mens-diamond-wedding-bands" },
+  ];
+
   return (
     <div className="bands-section">
       <div className="bands-container">
         {/* Left Section */}
         <div className="bands-links">
+          {/* Women */}
           <div className="column">
-            <h6>Women’s Bands</h6>
+            <h6
+              className="clickable-heading"
+              onClick={() => handleStartWedding("women-wedding-rings")}
+            >
+              Women’s Bands
+            </h6>
             <ul>
-              <li>
-                <a href="#">Classic</a>
-              </li>
-              <li>
-                <a href="#">Eternity</a>
-              </li>
-              <li>
-                <a href="#">Diamond</a>
-              </li>
-              <li>
-                <a href="#">Stackable</a>
+              {womenBands.map((band) => (
+                <li
+                  key={band.slug}
+                  className="clickable-link"
+                  onClick={() => handleStartWedding(band.slug)}
+                >
+                  {band.label}
+                </li>
+              ))}
+              <li
+                className="clickable-heading"
+                onClick={() => handleStartWedding("women-wedding-rings")}
+              >
+                Shop all
               </li>
             </ul>
           </div>
+
+          {/* Men */}
           <div className="column">
-            <h6>Men’s Bands</h6>
+            <h6
+              className="clickable-heading"
+              onClick={() => handleStartWedding("men-wedding-rings")}
+            >
+              Men’s Bands
+            </h6>
             <ul>
-              <li>
-                <a href="#">Classic</a>
-              </li>
-              <li>
-                <a href="#">Modern</a>
-              </li>
-              <li>
-                <a href="#">Diamond</a>
-              </li>
-              <li>
-                <a href="#">Alternative Metals</a>
+              {menBands.map((band) => (
+                <li
+                  key={band.slug}
+                  className="clickable-link"
+                  onClick={() => handleStartWedding(band.slug)}
+                >
+                  {band.label}
+                </li>
+              ))}
+              <li
+                className="clickable-heading"
+                onClick={() => handleStartWedding("men-wedding-rings")}
+              >
+                Shop all
               </li>
             </ul>
           </div>
@@ -48,8 +79,11 @@ const Wedding = () => {
           <img src="/images/wedding.webp" alt="Bands" />
           <h6>Wedding Bands Guide</h6>
           <p>Everything you need to know before choosing the right band.</p>
-          <a href="#" className="learn-btn">
-            shop all
+          <a
+            onClick={() => handleStartWedding("wedding-bands")}
+            className="learn-btn"
+          >
+            Shop all
           </a>
         </div>
       </div>
