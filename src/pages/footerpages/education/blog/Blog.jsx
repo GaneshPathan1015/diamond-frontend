@@ -177,68 +177,68 @@ const Blog = () => {
     ];
 
     const gemstoneItems = [
-        { img: "images/blog/slider2.1.webp", label: "GEMSTONE", heading: "Fiery Passion" },
-        { img: "images/blog/slider2.2.webp", label: "GEMSTONE", heading: "Royal Blue" },
-        { img: "images/blog/slider2.3.webp", label: "GEMSTONE", heading: "Green Glow" },
-        { img: "images/blog/slider2.4.webp", label: "GEMSTONE", heading: "Sparkle Facts" },
-        { img: "images/blog/slider2.5.webp", label: "GEMSTONE", heading: "Ocean Treasure" },
-        { img: "images/blog/slider2.6.webp", label: "GEMSTONE", heading: "Mystic Fire" },
-        { img: "images/blog/slider2.7.webp", label: "GEMSTONE", heading: "Ocean Treasure" },
-        { img: "images/blog/slider2.8.webp", label: "GEMSTONE", heading: "Mystic Fire" }
+        { img: "images/blog/slider2.1.webp", label: "GEMSTONE", heading: "HOW SAPPHIRES ARE VALUED" },
+        { img: "images/blog/slider2.2.webp", label: "GEMSTONE", heading: "HOW MUCH DOES MOISSANITE COST?" },
+        { img: "images/blog/slider2.3.webp", label: "GEMSTONE", heading: "HOW IS AQUAMARINE VALUED?" },
+        { img: "images/blog/slider2.4.webp", label: "GEMSTONE", heading: "NATURAL EMERALD GRADING" },
+        { img: "images/blog/slider2.5.webp", label: "GEMSTONE", heading: "NATURAL SAPPHIRE GRADING" },
+        { img: "images/blog/slider2.6.webp", label: "GEMSTONE", heading: "RUBY MEANING" },
+        { img: "images/blog/slider2.7.webp", label: "GEMSTONE", heading: "EMERALD MEANING" },
+        { img: "images/blog/slider2.8.webp", label: "GEMSTONE", heading: "WHAT ARE MOISSANITE GRADES" }
     ];
 
     const weddingItems = [
-        { img: "images/blog/slider3.1.webp", label: "WEDDING BANDS", heading: "Forever Bond" },
-        { img: "images/blog/slider3.2.webp", label: "WEDDING BANDS", heading: "Golden Glow" },
-        { img: "images/blog/slider3.3.webp", label: "WEDDING BANDS", heading: "Subtle Shine" },
-        { img: "images/blog/slider3.4.webp", label: "WEDDING BANDS", heading: "Eternal Spark" },
-        { img: "images/blog/slider3.5.webp", label: "WEDDING BANDS", heading: "Couple Goals" },
-        { img: "images/blog/slider3.6.webp", label: "WEDDING BANDS", heading: "Unique Design" },
-        { img: "images/blog/slider3.7.webp", label: "WEDDING BANDS", heading: "Couple Goals" },
-        { img: "images/blog/slider3.8.webp", label: "WEDDING BANDS", heading: "Unique Design" }
+        { img: "images/blog/slider3.1.webp", label: "WEDDING BANDS", heading: "ALL OF THE DIFFERENT STYLES OF WEDDING BANDS FOR MEN, EXPLAINED" },
+        { img: "images/blog/slider3.2.webp", label: "WEDDING BANDS", heading: "MEN'S WEDDING BANDS WIDTH GUIDE" },
+        { img: "images/blog/slider3.3.webp", label: "WEDDING BANDS", heading: "WEDDING BANDS VS ANNIVERSARY BANDS" },
+        { img: "images/blog/slider3.4.webp", label: "WEDDING BANDS", heading: "A GUIDE TO WOMEN’S WEDDING BAND COST" },
+        { img: "images/blog/slider3.5.webp", label: "WEDDING BANDS", heading: "GUIDE TO CHOOSING UNIQUE ANNIVERSARY BANDS" },
+        { img: "images/blog/slider3.6.webp", label: "WEDDING BANDS", heading: "YOUR GUIDE TO WOMEN’S WEDDING BAND STYLES" },
+        { img: "images/blog/slider3.7.webp", label: "WEDDING BANDS", heading: "A GUIDE TO STACKED WEDDING BANDS" },
+        { img: "images/blog/slider3.8.webp", label: "WEDDING BANDS", heading: "HOW TO MATCH THIS AND HERS WEDDING BANDS" }
     ];
 
     const metalItems = [
-        { img: "images/blog/slider4.1.webp", label: "METAL", heading: "Rich & Classic" },
-        { img: "images/blog/slider4.2.jpg", label: "METAL", heading: "Pure Strength" },
-        { img: "images/blog/slider4.3.webp", label: "METAL", heading: "Affordable Grace" },
-        { img: "images/blog/slider4.4.webp", label: "METAL", heading: "Romantic Hue" },
-        { img: "images/blog/slider4.5.webp", label: "METAL", heading: "Modern Metal" },
-        { img: "images/blog/slider4.6.webp", label: "METAL", heading: "Premium Choice" },
-        { img: "images/blog/slider4.7.webp", label: "METAL", heading: "Modern Metal" },
-        { img: "images/blog/slider4.8.webp", label: "METAL", heading: "Premium Choice" }
+        { img: "images/blog/slider4.1.webp", label: "METAL", heading: "WHITE GOLD VS PLATINUM: WHICH METAL IS BEST FOR YOUR RING?" },
+        { img: "images/blog/slider4.2.jpg", label: "METAL", heading: "YOU'RE GOING TO HAVE TO GET YOUR WHITE GOLD RING DIPPED - HERE'S WHAT THAT MEANS AND HOW MUCH IT COSTS" },
+        { img: "images/blog/slider4.3.webp", label: "METAL", heading: "IF YOUR RING LOOKS DULL, IT MIGHT BE PLATINUM PATINA - HERE'S WHAT THAT IS AND WHAT TO DO ABOUT IT" },
+        { img: "images/blog/slider4.4.webp", label: "METAL", heading: "14KT VS 18KT GOLD ENGAGEMENT RINGS" },
+        { img: "images/blog/slider4.5.webp", label: "METAL", heading: "MEN;S PLATINUM WEDDING BANDS" },
+        { img: "images/blog/slider4.6.webp", label: "METAL", heading: "PLATINUM RING & JEWELRY" },
+        { img: "images/blog/slider4.7.webp", label: "METAL", heading: "WHITE GOLD VS ROSE GOLD VS YELLOW GOLD" },
+        { img: "images/blog/slider4.8.webp", label: "METAL", heading: "GOLD RING GUIDE" }
     ];
 
     const buyingGuideItems = [
-        { img: "images/blog/slider5.1.webp", label: "BUYING GUIDE", heading: "Smart Buying" },
-        { img: "images/blog/slider5.2.webp", label: "BUYING GUIDE", heading: "Perfect Match" },
-        { img: "images/blog/slider5.3.webp", label: "BUYING GUIDE", heading: "Celebrate Love" },
-        { img: "images/blog/slider5.4.webp", label: "BUYING GUIDE", heading: "Special Moments" },
-        { img: "images/blog/slider5.5.webp", label: "BUYING GUIDE", heading: "Value Growth" },
-        { img: "images/blog/slider5.6.webp", label: "BUYING GUIDE", heading: "Keep it Sparkling" },
-        { img: "images/blog/slider5.7.webp", label: "BUYING GUIDE", heading: "Value Growth" },
-        { img: "images/blog/slider5.8.webp", label: "BUYING GUIDE", heading: "Keep it Sparkling" },
+        { img: "images/blog/slider5.1.webp", label: "BUYING GUIDE", heading: "HOW MUCH SHOULD AN ENGAGEMENT RING COST? (HINT: THE OLD RULE IS OUTDATED)" },
+        { img: "images/blog/slider5.2.webp", label: "BUYING GUIDE", heading: "" },
+        { img: "images/blog/slider5.3.webp", label: "BUYING GUIDE", heading: "" },
+        { img: "images/blog/slider5.4.webp", label: "BUYING GUIDE", heading: "THE BEST PROMISE RING STYLES" },
+        { img: "images/blog/slider5.5.webp", label: "BUYING GUIDE", heading: "GUIDE TO CROSS NECKLACES" },
+        { img: "images/blog/slider5.6.webp", label: "BUYING GUIDE", heading: "HIDDEN ACCENT ENGAGEMENT RING GUIDE" },
+        { img: "images/blog/slider5.7.webp", label: "BUYING GUIDE", heading: "WHAT TO SAY WHEN GIVING A PROMISE RING?" },
+        { img: "images/blog/slider5.8.webp", label: "BUYING GUIDE", heading: "A GUIDE TO VINTAGE PROMISE RING STYLES" },
     ]
     const diamondItems = [
-        { img: "images/blog/slider6.1.webp", label: "DIAMOND", heading: "Earth’s Gem" },
-        { img: "images/blog/slider6.2.webp", label: "DIAMOND", heading: "Eco Friendly" },
-        { img: "images/blog/slider6.3.webp", label: "DIAMOND", heading: "Precision Art" },
-        { img: "images/blog/slider6.4.webp", label: "DIAMOND", heading: "Crystal Clear" },
-        { img: "images/blog/slider6.5.webp", label: "DIAMOND", heading: "Spectrum Shine" },
-        { img: "images/blog/slider6.6.webp", label: "DIAMOND", heading: "Size Matters" },
-        { img: "images/blog/slider6.7.webp", label: "DIAMOND", heading: "Value Growth" },
-        { img: "images/blog/slider6.8.webp", label: "DIAMOND", heading: "Keep it Sparkling" },
+        { img: "images/blog/slider6.1.webp", label: "DIAMOND", heading: "LAB DIAMOND CARAT & COST" },
+        { img: "images/blog/slider6.2.webp", label: "DIAMOND", heading: "REAL VS. FAKE DIAMONDS: HOW TO TELL IF A DIAMOND IS REAL" },
+        { img: "images/blog/slider6.3.webp", label: "DIAMOND", heading: "VS1 VS VS2 WHAT'S HE ACTUAL DIFFRENCE BETWEEN THESE CLARITY GRADES?" },
+        { img: "images/blog/slider6.4.webp", label: "DIAMOND", heading: "D  F COLORED DIAMONDS: COLORLESS QUALITY" },
+        { img: "images/blog/slider6.5.webp", label: "DIAMOND", heading: "BUYING NATURAL VS. SYNTHETIC DIAMONDS" },
+        { img: "images/blog/slider6.6.webp", label: "DIAMOND", heading: "YOUR ULTIMATE GUIDE TO UNDERSTANDING DIAMOND CARAT AND SIZE" },
+        { img: "images/blog/slider6.7.webp", label: "DIAMOND", heading: "THIS IS THE MOST EXPENSIVE DIAMOND CUT, AND EXACTLY WHY IT COSTS MORE" },
+        { img: "images/blog/slider6.8.webp", label: "DIAMOND", heading: "WHAT YOU NEED TO KNOW ABOUT CTTW, OR CARAT TOTAL WEIGHT, BEFORE BUYING RING" },
     ];
 
     const jewelryItems = [
-        { img: "images/blog/slider7.1.webp", label: "JEWELRY", heading: "Graceful Chains" },
-        { img: "images/blog/slider7.2.webp", label: "JEWELRY", heading: "Wrist Glam" },
-        { img: "images/blog/slider7.3.webp", label: "JEWELRY", heading: "Ear Elegance" },
-        { img: "images/blog/slider7.4.webp", label: "JEWELRY", heading: "Statement Piece" },
-        { img: "images/blog/slider7.5.webp", label: "JEWELRY", heading: "Classic Pin" },
-        { img: "images/blog/slider7.6.webp", label: "JEWELRY", heading: "Extra Spark" },
-        { img: "images/blog/slider7.7.webp", label: "JEWELRY", heading: "Classic Pin" },
-        { img: "images/blog/slider7.8.webp", label: "JEWELRY", heading: "Extra Spark" }
+        { img: "images/blog/slider7.1.webp", label: "JEWELRY", heading: "ENGAGEMENT RINGS VS. WEDDING BANDS" },
+        { img: "images/blog/slider7.2.webp", label: "JEWELRY", heading: "EVERYTHING YOU NEED TO KNOW ABOUT SILVER ANNIVERSARY" },
+        { img: "images/blog/slider7.3.webp", label: "JEWELRY", heading: "GIUDE TO PURITY RINGS" },
+        { img: "images/blog/slider7.4.webp", label: "JEWELRY", heading: "EMERALD JEWELRY FOR YOUR 20TH WEDDING ANNIVERSARY" },
+        { img: "images/blog/slider7.5.webp", label: "JEWELRY", heading: "DIAMOND TENNIS BRACELETS: A GUIDE" },
+        { img: "images/blog/slider7.6.webp", label: "JEWELRY", heading: "WHAT YOU NEED TO KNOW ABOUT BACKLESS EARRINGS (AND SECURE BACKS)" },
+        { img: "images/blog/slider7.7.webp", label: "JEWELRY", heading: "LAB CREATED STUD EARRING PRICES" },
+        { img: "images/blog/slider7.8.webp", label: "JEWELRY", heading: "WHAT IS A LOVE KNOT NECKLACE?" }
     ];
 
     return (
