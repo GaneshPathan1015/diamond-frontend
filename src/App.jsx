@@ -42,9 +42,11 @@ import PrivateRoute from "./routes/PrivateRoute";
 import Press from "./pages/footerpages/company/Press";
 
 // Education
+import Jewelry from "./pages/footerpages/education/jewelry/jewelry";
+import OurPolicy from "./pages/footerpages/education/policy/OurPolicy";
+import LabGrownDiamonds from "./pages/footerpages/education/LabGrownDiamonds/LabGrownDiamonds";
 import Metal from "./pages/footerpages/education/Metal";
 import Blog from "./pages/footerpages/education/blog/Blog";
-import LabGrownDiamonds from "./pages/footerpages/education/LabGrownDiamonds/LabGrownDiamonds";
 
 export default function App() {
   const location = useLocation();
@@ -108,9 +110,11 @@ export default function App() {
           <Route path="/press" element={<Press />} />
 
           {/* footer Education */}
+          <Route path="/fine-jewelry-earrings" element={<Jewelry/>}/>
+          <Route path="/our-policies" element={<OurPolicy />} />
+          <Route path="/lab-diamonds" element={<LabGrownDiamonds />} />
           <Route path="/metal" element={<Metal />} />
           <Route path="/blog" element={<Blog />} />
-          <Route path="/lab-diamonds" element={<LabGrownDiamonds />} />
         </Routes>
       </main>
       <Footer />
