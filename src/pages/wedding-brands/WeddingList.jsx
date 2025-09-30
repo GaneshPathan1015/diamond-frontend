@@ -356,7 +356,7 @@ const WeddingList = () => {
     if (!filtersInitialized) return;
     fetchProducts({ page, filters: appliedFilters });
   }, [appliedFilters, page, filtersInitialized]);
-  
+
   useEffect(() => {
     if (!slug) return;
     setPage(1);
