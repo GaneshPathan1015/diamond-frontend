@@ -37,6 +37,8 @@ import CompleteRing from "./pages/completeRing/completeRing";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import WhiteClarityNav from "./pages/header/WhiteClarityNav";
 import PrivateRoute from "./routes/PrivateRoute";
+import CollectionsRouter from "./pages/collectionsRouter/CollectionsRouter";
+
 
 // Footer pages
 import Press from "./pages/footerpages/company/Press";
@@ -91,6 +93,8 @@ export default function App() {
           <Route path="/jewelry-list" element={<JewelryList />} />
           <Route path="/engagement-rings/:slug?" element={<EngagementList />} />
           <Route path="/wedding/:slug?" element={<WeddingList />} />
+          <Route path="/collections/:slug" element={<CollectionsRouter />} />
+
           <Route
             path="/jewellary-details/:id"
             element={<JewelryDetailsPage />}
@@ -110,7 +114,7 @@ export default function App() {
           <Route path="/press" element={<Press />} />
 
           {/* footer Education */}
-          <Route path="/fine-jewelry-earrings" element={<Jewelry/>}/>
+          <Route path="/fine-jewelry-earrings" element={<Jewelry />} />
           <Route path="/our-policies" element={<OurPolicy />} />
           <Route path="/lab-diamonds" element={<LabGrownDiamonds />} />
           <Route path="/metal" element={<Metal />} />

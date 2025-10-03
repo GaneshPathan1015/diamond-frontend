@@ -202,12 +202,18 @@ const Header = ({ onHoverChange }) => {
                   </button>
                 </li>
                 <li className="nav-item">
-                  <button className="btn text-uppercase dropdown-toggle text-white">
+                  <button
+                    className="btn text-uppercase dropdown-toggle text-white"
+                    onClick={() => navigate("/engagement")}
+                  >
                     GIFTS
                   </button>
                 </li>
                 <li className="nav-item">
-                  <button className="btn text-uppercase dropdown-toggle text-white">
+                  <button
+                    className="btn text-uppercase dropdown-toggle text-white"
+                    onClick={() => navigate("/engagement")}
+                  >
                     SALE
                   </button>
                 </li>

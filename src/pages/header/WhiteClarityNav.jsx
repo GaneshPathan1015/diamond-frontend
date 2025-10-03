@@ -73,8 +73,8 @@ const WhiteClarityNav = () => {
     "HIGH JEWELRY": "/high-jewelry",
     JEWELRY: "/jewelry-list",
     COLLECTIONS: "/collections",
-    GIFTS: "/gifts",
-    SALE: "/sale",
+    GIFTS: "/collections/jewelry-gifts",
+    SALE: "/collections/diamond-jewelry-sale",
   };
 
   let headerClass = "custom-navbar";
