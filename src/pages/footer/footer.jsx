@@ -14,14 +14,14 @@ const Footer = () => {
     { label: "Affiliate Program", to: "#" },
     { label: "Terms of Use", to: "/terms" },
     { label: "Privacy Policy", to: "/policy" },
-    { label: "Site Map", to: "#" },
+    { label: "Site Map", to: "/site-map" },
   ];
 
   const educationLinks = [
     { label: "Diamonds", to: "/diamond" },
     { label: "Engagement", to: "/engagement" },
     { label: "Wedding bands", to: "/wedding-brands" },
-    { label: "Gemstones", to: "#" },
+    { label: "Gemstones", to: "/gemstones-types-guide" },
     { label: "Jewelry", to: "/fine-jewelry-earrings" },
     { label: "Conflict diamond policy", to: "/our-policies" },
     { label: "Lab grown diamonds", to: "/lab-diamonds" },

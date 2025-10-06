@@ -8,7 +8,7 @@ function LabGrownDiamonds() {
         <div className="container">
           <div className="row pb-4">
             <div className="col-md-6">
-              <div className="hero-image">
+              <div className="hero-image-lab">
                 <img src="images/LabGrownDiamonds/Diamond_Vid_990x.webp" alt="" width={650} />
               </div>
             </div>
