@@ -53,10 +53,6 @@
   height: 150px !important;
 }
 
-.product-details {
-  /* Removed position: relative from here */
-}
-
 .product-details_p {
   margin: 4px 0;
 }

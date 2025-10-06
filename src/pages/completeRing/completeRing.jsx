@@ -86,7 +86,6 @@ const CompleteRing = () => {
         ringCartItem={ringCartItem}
         fromChooseSetting={fromChooseSetting}
       />
-      {/* <RingWrapper diamond={diamond} ringCartItem={ringCartItem} fromChooseSetting={fromChooseSetting}/> */}
       <div className="container my-4">
         <div className="row">
           {/* Left Side - Images */}
@@ -97,6 +96,7 @@ const CompleteRing = () => {
                   src={diamond.image_link}
                   alt="Diamond"
                   className="img-fluid rounded shadow"
+                  style={{ maxWidth: '400px', height: '400px', objectFit: 'scale-down' }}
                 />
               </div>
               <div className="w-100">
@@ -104,6 +104,7 @@ const CompleteRing = () => {
                   src={ringCartItem.image}
                   alt="Ring"
                   className="img-fluid rounded shadow"
+                  style={{ maxWidth: '400px', height: '400px', objectFit: 'scale-down' }}
                 />
               </div>
             </div>
