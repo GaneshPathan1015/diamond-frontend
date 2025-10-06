@@ -39,7 +39,6 @@ import WhiteClarityNav from "./pages/header/WhiteClarityNav";
 import PrivateRoute from "./routes/PrivateRoute";
 import CollectionsRouter from "./pages/collectionsRouter/CollectionsRouter";
 
-
 // Footer pages
 import Press from "./pages/footerpages/company/Press";
 

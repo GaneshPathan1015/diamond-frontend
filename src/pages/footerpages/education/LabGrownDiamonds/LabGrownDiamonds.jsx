@@ -9,7 +9,7 @@ function LabGrownDiamonds() {
           <div className="row pb-4">
             <div className="col-md-6">
               <div className="hero-image">
-                <img src="images/LabGrownDiamonds/Diamond_Vid_990x.webp" alt="" width={650} />
+                <img src="/images/LabGrownDiamonds/Diamond_Vid_990x.webp" alt="" width={650} />
               </div>
             </div>
             <div className="col-md-6">

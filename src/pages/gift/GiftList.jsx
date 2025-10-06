@@ -53,6 +53,7 @@ const GiftList = () => {
   const [activeMetal, setActiveMetal] = useState({});
   const [selectedVariations, setSelectedVariations] = useState({});
 
+  const [shapeData, setShapeData] = useState([]);
   const [styleData, setStyleData] = useState([]);
   const [styleNameToIdMap, setStyleNameToIdMap] = useState({});
 
@@ -297,12 +298,9 @@ const GiftList = () => {
       // -----------------------------
       // Fetch products from API
       // -----------------------------
-      const { data } = await axiosClient.get(
-        `/api/get-all-gift-data/${slug}`,
-        {
-          params: { page, perPage: 20, ...apiFilters },
-        }
-      );
+      const { data } = await axiosClient.get(`/api/get-all-gift-data/${slug}`, {
+        params: { page, perPage: 20, ...apiFilters },
+      });
 
       const fetchedProducts = data.data || [];
       const totalProducts = parseInt(data.totalProducts) || 0;
@@ -311,6 +309,7 @@ const GiftList = () => {
       // -----------------------------
       // Update meta data and maps
       // -----------------------------
+      setShapeData(res.data.shapes || []);
       setStyleData(data.style_data || []);
       setCollectionData(data.collection_data || []);
       setMetalTypes(data.metal_types || []);
@@ -604,7 +603,6 @@ const GiftList = () => {
         return null;
     }
   };
-
 
   return (
     <>

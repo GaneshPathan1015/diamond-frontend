@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 const Footer = () => {
   const companyLinks = [
@@ -160,14 +159,14 @@ const Footer = () => {
               <a href="/" className="text-white fs-3 text-decoration-none">
                 AOD
               </a>
-              <p className="mt-2">
+              <p className="mt-2 text-white">
                 Elevate Your <i>Everyday</i>
               </p>
-              <p>
+              <p className="text-white">
                 Sign up for <strong>$100 OFF</strong> your first purchase
               </p>
 
-              <form className="d-flex mb-3 justify-content-center flex-wrap">
+              <form className="text-white d-flex mb-3 justify-content-center flex-wrap">
                 <input
                   type="email"
                   placeholder="Enter your email"
