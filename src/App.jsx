@@ -37,14 +37,19 @@ import CompleteRing from "./pages/completeRing/completeRing";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import WhiteClarityNav from "./pages/header/WhiteClarityNav";
 import PrivateRoute from "./routes/PrivateRoute";
+import CollectionsRouter from "./pages/collectionsRouter/CollectionsRouter";
 
 // Footer pages
-import Press from "./pages/footerpages/company/Press";
+import Press from "./pages/footerpages/Company/Press";
+import SiteMap  from "./pages/footerpages/Company/Sitemap";
 
 // Education
+import Jewelry from "./pages/footerpages/education/jewelry/jewelry";
+import OurPolicy from "./pages/footerpages/education/policy/OurPolicy";
+import Gemstones from "./pages/footerpages/education/Gemstones/Gemstones";
+import LabGrownDiamonds from "./pages/footerpages/education/LabGrownDiamonds/LabGrownDiamonds";
 import Metal from "./pages/footerpages/education/Metal";
 import Blog from "./pages/footerpages/education/blog/Blog";
-import LabGrownDiamonds from "./pages/footerpages/education/LabGrownDiamonds/LabGrownDiamonds";
 
 export default function App() {
   const location = useLocation();
@@ -62,6 +67,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/diamond" element={<Diamond />} />
           <Route path="/terms" element={<Terms />} />
+          <Route path="/site-map" element={<SiteMap />} />
           <Route path="/policy" element={<Policy />} />
           <Route path="/wedding-brands" element={<Weddingbrands />} />
           <Route path="/engagement-ring-style" element={<RingStyle />} />
@@ -89,6 +95,8 @@ export default function App() {
           <Route path="/jewelry-list" element={<JewelryList />} />
           <Route path="/engagement-rings/:slug?" element={<EngagementList />} />
           <Route path="/wedding/:slug?" element={<WeddingList />} />
+          <Route path="/collections/:slug" element={<CollectionsRouter />} />
+
           <Route
             path="/jewellary-details/:id"
             element={<JewelryDetailsPage />}
@@ -108,9 +116,12 @@ export default function App() {
           <Route path="/press" element={<Press />} />
 
           {/* footer Education */}
+          <Route path="/fine-jewelry-earrings" element={<Jewelry />} />
+          <Route path="/our-policies" element={<OurPolicy />} />
+          <Route path="/gemstones-types-guide" element={<Gemstones />} />
+          <Route path="/lab-diamonds" element={<LabGrownDiamonds />} />
           <Route path="/metal" element={<Metal />} />
           <Route path="/blog" element={<Blog />} />
-          <Route path="/lab-diamonds" element={<LabGrownDiamonds />} />
         </Routes>
       </main>
       <Footer />

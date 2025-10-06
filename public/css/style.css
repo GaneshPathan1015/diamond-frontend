@@ -14,6 +14,27 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Playfair Display", serif;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.container-fluid, .row {
+  max-width: 100vw; /* Never exceed screen width */
+  overflow-x: hidden;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.slide-btn-wrapper {
+  flex-wrap: wrap; /* Prevent buttons from overflowing */
+}
+
 /* ---------------------- header styles ---------------------- */
 .header-wrapper .header-top-wrapper {
   background-color: #06364c;
@@ -83,10 +104,6 @@ body header.header-wrapper.position-realtive .header-top-wrapper strong.text-whi
   background-color: #ccc;
 }
 
-/* .slick-prev:before, */
-/* .slick-next:before { */
-  /* color: #213245 !important; */
-/* } */
 
 /* Typography */
 .section-header-lg {
@@ -143,23 +160,6 @@ nav .nav-link.active {
   box-shadow: none;
 }
 
-/* Common styles */
-/* .hero_section_wrapper .position-absolute { */
-  /* bottom: 0; */
-/* } */
-
-/* .hero_section_wrapper .position-absolute .fs-1 { */
-  /* font-size: 60px !important; */
-  /* line-height: 80px; */
-  /* letter-spacing: -1.2px; */
-  /* font-weight: 400; */
-/* } */
-
-/* .hero_section_wrapper .content { */
-  /* max-width: 900px; */
-  /* margin: auto; */
-  /* width: 100%; */
-/* } */
 
 .trending_noe_wrapper .trending_now p {
   color: #000;
@@ -304,14 +304,7 @@ footer .site-footer__item-inner a {
   background-color: #dee9eb4d;
 }
 
-/* Customize engagement */
-/* .customize-engagement-ring.hero_section_wrapper .sub-title { */
-  /* font-size: 24px; */
-  /* font-weight: 600; */
-  /* line-height: 1; */
-  /* letter-spacing: 1.92px; */
-  /* margin-bottom: 0; */
-/* } */
+
 
 .customize-engagement-ring h2 {
   font-size: 55px;

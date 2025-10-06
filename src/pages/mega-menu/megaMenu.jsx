@@ -82,6 +82,11 @@ const MegaMenu = ({ type = "engagement", closeMegaMenu = () => {} }) => {
     navigate(`/wedding/${startType}`);
   };
 
+  const handleStartGift = (startType) => {
+    closeMegaMenu();
+    navigate(`/collections/${startType}`);
+  };
+
   const handleShapeClick = (shape) => {
     const slug = "shapes";
     const shapeSlug = shape.name.toLowerCase().replace(/\s+/g, "-");
@@ -159,6 +164,7 @@ const MegaMenu = ({ type = "engagement", closeMegaMenu = () => {} }) => {
       {type === "diamond" && (
         <DiamondMenu closeMegaMenu={closeMegaMenu} navigate={navigate} />
       )}
+
       {type === "highJewelry" && (
         <HighJewelryMenu
           closeMegaMenu={closeMegaMenu}
@@ -189,7 +195,11 @@ const MegaMenu = ({ type = "engagement", closeMegaMenu = () => {} }) => {
       )}
 
       {type === "gift" && (
-        <GiftMenu closeMegaMenu={closeMegaMenu} navigate={navigate} />
+        <GiftMenu
+          handleStartGift={handleStartGift}
+          closeMegaMenu={closeMegaMenu}
+          navigate={navigate}
+        />
       )}
     </div>
   );

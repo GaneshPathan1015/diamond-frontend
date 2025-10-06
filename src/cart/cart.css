@@ -169,3 +169,10 @@
 .remove-btn:hover {
   color: red;
 }
+@media (max-width: 768px) {
+  .cart-container {
+    flex-direction: column; /* stack items vertically */
+    gap: 20px;              /* smaller gap for mobile */
+    padding: 20px;          /* reduce padding on mobile */
+  }
+}

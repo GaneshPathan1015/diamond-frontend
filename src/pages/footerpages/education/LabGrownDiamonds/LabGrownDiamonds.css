@@ -1,10 +1,10 @@
-.col-md-6 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-}
+/* .col-md-6 { */
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    /* flex-direction: column; */
+    /* text-align: center; */
+/* } */
 
 a.hero_btn {
     background: transparent;
@@ -82,7 +82,7 @@ a.hero_btn:hover {
 
 
 @media (max-width: 991px) {
-  .hero-image img {
+  .hero-image-lab img {
     width: 100% !important;
     height: auto;
   }
@@ -129,7 +129,7 @@ a.hero_btn:hover {
   }
 
   .accordion-button {
-    font-size: 14px;
+    font-size: 14px; 
     padding: 12px;
   }
 
@@ -145,7 +145,7 @@ a.hero_btn:hover {
     text-align: center;
   }
 
-  .hero-image img {
+  .hero-image-lab img {
     width: 100%;
     height: auto;
   }
