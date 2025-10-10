@@ -40,8 +40,11 @@ import PrivateRoute from "./routes/PrivateRoute";
 import CollectionsRouter from "./pages/collectionsRouter/CollectionsRouter";
 
 // Footer pages
+import RadianceRewards from "./pages/footerpages/Company/RadianceRewards";
 import Press from "./pages/footerpages/Company/Press";
+import Reviews from "./pages/footerpages/Company/Reviews";
 import SiteMap  from "./pages/footerpages/Company/Sitemap";
+import MonthlyPaymentOption  from "./pages/footerpages/Company/MonthlyPaymentOption";
 
 // Education
 import Jewelry from "./pages/footerpages/education/jewelry/jewelry";
@@ -114,6 +117,9 @@ export default function App() {
           <Route path="*" element={<PageNotFound />} />
           {/* Footer pages start*/}
           <Route path="/press" element={<Press />} />
+          <Route path="/reviews" element={<Reviews />} />
+          <Route path="/monthly-payment-option" element={<MonthlyPaymentOption />} />
+          <Route path="/radiance-rewards-program" element={<RadianceRewards />} />
 
           {/* footer Education */}
           <Route path="/fine-jewelry-earrings" element={<Jewelry />} />
