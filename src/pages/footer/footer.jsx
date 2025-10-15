@@ -11,7 +11,7 @@ const Footer = () => {
     { label: "Radiance Rewards", to: "/radiance-rewards-program" },
     { label: "Home Preview FAQs", to: "/our-policies" },
     { label: "Monthly Payment Option", to: "/monthly-payment-option" },
-    { label: "Affiliate Program", to: "#" },
+    { label: "Affiliate Program", to: "/affiliates" },
     { label: "Terms of Use", to: "/terms" },
     { label: "Privacy Policy", to: "/policy" },
     { label: "Site Map", to: "/site-map" },
@@ -42,15 +42,15 @@ const Footer = () => {
   ];
 
   const customerCareLinks = [
-    "Schedule an appointment",
-    "Free shipping",
-    "Free Returns",
-    "Extended warranty",
-    "Lifetime warranty",
-    "Financing",
-    "Insurance",
-    "ID.me",
-    "Accessibility",
+    { label: "Schedule an appointment", to: "#" },
+    { label: "Free shipping", to: "#" },
+    { label: "Free Returns", to: "#" },
+    { label: "Extended warranty", to: "#" },
+    { label: "Lifetime warranty", to: "#" },
+    { label: "Financing", to: "/financing" },
+    { label: "Insurance", to: "/insurance" },
+    { label: "ID.me", to: "/id-me" },
+    { label: "Accessibility", to: "#" },
   ];
 
   const socialLinks = [
@@ -147,9 +147,15 @@ const Footer = () => {
               <ul className="list-unstyled">
                 {customerCareLinks.map((item, i) => (
                   <li key={i}>
-                    <a href="#" className="text-white text-decoration-none">
-                      {item}
-                    </a>
+                    {typeof item === "string" ? (
+                      <a href="#" className="text-white text-decoration-none">
+                        {item}
+                      </a>
+                    ) : (
+                      <Link to={item.to} className="text-white text-decoration-none">
+                        {item.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>

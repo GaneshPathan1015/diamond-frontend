@@ -379,8 +379,8 @@ const MonthlyPaymentOption = () => {
                 </div>
             </section>
             {/* --- Section: Contact --- */}
-            <section className="contact-section">
-                <div className="container contact-container">
+            <section className="contact-section mb-4" >
+                <div className="container contact-container" style={{background:'#f0f4f7', padding:'48px'}}>
                     <div className="row align-items-center text-center contact-row">
                         <div className="col-lg-6 col-md-12 mb-4 mb-lg-0">
                             <h1>We're here to help.</h1>
@@ -394,31 +394,31 @@ const MonthlyPaymentOption = () => {
                         </div>
 
                         <div className="col-lg-2 col-md-4 col-sm-4 mb-3">
-                            <div className="reviews-link">
-                                <a href="#">
-                                    <i className="fa-solid fa-comment-dots contact-icon"></i>
+                            <div className="reviews-link" style={{borderRight: '1px solid #00000043'}}>
+                                <a href="#" style={{textDecoration: 'none'}}>
+                                    <i style={{fontSize:'30px', fontFamily: 'FontAwesome',color: '#00000043'}} className="fa-solid fa-comment-dots contact-icon"></i>
                                     <br />
-                                    <span>Chat</span>
+                                    <span style={{color:'#000'}}>Chat</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div className="col-lg-2 col-md-4 col-sm-4 mb-3">
+                            <div className="reviews-link" style={{borderRight: '1px solid #00000043'}}>
+                                <a href="#" style={{textDecoration: 'none'}}>
+                                    <i className="fa-solid fa-envelope contact-icon" style={{fontSize:'30px', fontFamily: 'FontAwesome',color: '#00000043'}}></i>
+                                    <br />
+                                    <span style={{color:'#000'}}>Email</span>
                                 </a>
                             </div>
                         </div>
 
                         <div className="col-lg-2 col-md-4 col-sm-4 mb-3">
                             <div className="reviews-link">
-                                <a href="#">
-                                    <i className="fa-solid fa-envelope contact-icon"></i>
+                                <a href="#" style={{textDecoration: 'none'}}>
+                                    <i className="fa-solid fa-phone contact-icon" style={{fontSize:'30px', fontFamily: 'FontAwesome',color: '#00000043'}}></i>
                                     <br />
-                                    <span>Email</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div className="col-lg-2 col-md-4 col-sm-4 mb-3">
-                            <div className="reviews-link">
-                                <a href="#">
-                                    <i className="fa-solid fa-phone contact-icon"></i>
-                                    <br />
-                                    <span>Phone</span>
+                                    <span style={{color:'#000'}}>Phone</span>
                                 </a>
                             </div>
                         </div>

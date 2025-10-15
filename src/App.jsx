@@ -43,6 +43,7 @@ import CollectionsRouter from "./pages/collectionsRouter/CollectionsRouter";
 import RadianceRewards from "./pages/footerpages/Company/RadianceRewards";
 import Press from "./pages/footerpages/Company/Press";
 import Reviews from "./pages/footerpages/Company/Reviews";
+import Affiliates from "./pages/footerpages/Company/Affiliates";
 import SiteMap  from "./pages/footerpages/Company/Sitemap";
 import MonthlyPaymentOption  from "./pages/footerpages/Company/MonthlyPaymentOption";
 
@@ -53,6 +54,11 @@ import Gemstones from "./pages/footerpages/education/Gemstones/Gemstones";
 import LabGrownDiamonds from "./pages/footerpages/education/LabGrownDiamonds/LabGrownDiamonds";
 import Metal from "./pages/footerpages/education/Metal";
 import Blog from "./pages/footerpages/education/blog/Blog";
+
+// Customer care
+import Idme from "./pages/footerpages/customercare/idme";
+import Insurance from "./pages/footerpages/customercare/insurance";
+import Financing from "./pages/footerpages/customercare/financing";
 
 export default function App() {
   const location = useLocation();
@@ -118,6 +124,7 @@ export default function App() {
           {/* Footer pages start*/}
           <Route path="/press" element={<Press />} />
           <Route path="/reviews" element={<Reviews />} />
+          <Route path="/affiliates" element={<Affiliates />} />
           <Route path="/monthly-payment-option" element={<MonthlyPaymentOption />} />
           <Route path="/radiance-rewards-program" element={<RadianceRewards />} />
 
@@ -128,6 +135,11 @@ export default function App() {
           <Route path="/lab-diamonds" element={<LabGrownDiamonds />} />
           <Route path="/metal" element={<Metal />} />
           <Route path="/blog" element={<Blog />} />
+
+          {/* Customer care */}
+          <Route path="/id-me" element={<Idme />} />
+          <Route path="/insurance" element={<Insurance />} />
+          <Route path="/financing" element={<Financing />} />
         </Routes>
       </main>
       <Footer />
