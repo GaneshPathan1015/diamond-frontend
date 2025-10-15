@@ -1,5 +1,5 @@
 .hero-image-ourPolicy {
-    background-image: url("/images/OurPolicies/our-policies-desktop_1366x.webp");
+    background-image: url("/images/ourpolicies/1.webp");
     background-size: cover;
     background-position: center;
     width: 100%;
@@ -14,6 +14,16 @@
     justify-content: center;
     margin-top: 50px;
     padding-top: 50px;
+}
+
+.span-h1 {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 0px;
+    padding-top: 0px;
 }
 
 .feature-slider {

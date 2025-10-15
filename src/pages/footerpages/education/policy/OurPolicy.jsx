@@ -19,12 +19,12 @@ function OurPolicy() {
     <>
       <section>
         <div className="container" style={{ color: '#14344a' }}>
-          <div className="hero-image">
+          <div className="hero-image-ourPolicy">
             <div className="row">
               <div className="col-md-6"></div>
               <div className="col-md-6 heading-top">
                 <h1 className="heading-h1">CUSTOMER CARE</h1>
-                <span>Our aim is to delight you not only with the quality and<br /> beauty of our jewelry but also with the care and<br /> attention that we put into everything that we craft.</span>
+                <span className="span-h1">Our aim is to delight you not only with the quality and<br /> beauty of our jewelry but also with the care and<br /> attention that we put into everything that we craft.</span>
               </div>
             </div>
           </div>
