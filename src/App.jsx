@@ -55,6 +55,7 @@ import Gemstones from "./pages/footerpages/education/Gemstones/Gemstones";
 import LabGrownDiamonds from "./pages/footerpages/education/LabGrownDiamonds/LabGrownDiamonds";
 import Metal from "./pages/footerpages/education/Metal";
 import Blog from "./pages/footerpages/education/blog/Blog";
+import WeddingBandStyle from "./pages/footerpages/education/WeddingBandStyle";
 
 // Customer care
 import Idme from "./pages/footerpages/customercare/idme";
@@ -139,6 +140,8 @@ export default function App() {
           <Route path="/lab-diamonds" element={<LabGrownDiamonds />} />
           <Route path="/metal" element={<Metal />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/wedding-band-styles" element={<WeddingBandStyle />} />
+          
 
           {/* Customer care */}
           <Route path="/id-me" element={<Idme />} />
