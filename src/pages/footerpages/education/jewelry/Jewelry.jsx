@@ -18,10 +18,10 @@ function Jewelry() {
           {/* Top Navigation */}
           <nav className="top-nav">
             <a href="#">ENGAGEMENT RINGS</a><span>|</span>
-            <a href="#">DIAMONDS</a><span>|</span>
+            <a href="/diamonds">DIAMONDS</a><span>|</span>
             <a href="#">WEDDING BANDS</a><span>|</span>
-            <a href="#">FINE JEWELRY</a><span>|</span>
-            <a href="#" className="active">GEMSTONE</a>
+            <a href="#" className="active">FINE JEWELRY</a><span>|</span>
+            <a href="/gemstones-types-guide">GEMSTONE</a>
           </nav>
 
           <div className="row">

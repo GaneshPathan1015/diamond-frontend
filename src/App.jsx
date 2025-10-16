@@ -48,6 +48,7 @@ import SiteMap  from "./pages/footerpages/Company/Sitemap";
 import MonthlyPaymentOption  from "./pages/footerpages/Company/MonthlyPaymentOption";
 
 // Education
+import DiamondFooter from "./pages/footerpages/education/DiamondFooter";
 import Jewelry from "./pages/footerpages/education/jewelry/jewelry";
 import OurPolicy from "./pages/footerpages/education/policy/OurPolicy";
 import Gemstones from "./pages/footerpages/education/Gemstones/Gemstones";
@@ -131,6 +132,7 @@ export default function App() {
           <Route path="/radiance-rewards-program" element={<RadianceRewards />} />
 
           {/* footer Education */}
+          <Route path="/diamonds" element={<DiamondFooter />} />
           <Route path="/fine-jewelry-earrings" element={<Jewelry />} />
           <Route path="/our-policies" element={<OurPolicy />} />
           <Route path="/gemstones-types-guide" element={<Gemstones />} />

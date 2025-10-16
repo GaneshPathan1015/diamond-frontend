@@ -18,7 +18,7 @@ const Footer = () => {
   ];
 
   const educationLinks = [
-    { label: "Diamonds", to: "/diamond" },
+    { label: "Diamonds", to: "/diamonds" },
     { label: "Engagement", to: "/engagement" },
     { label: "Wedding bands", to: "/wedding-brands" },
     { label: "Gemstones", to: "/gemstones-types-guide" },
