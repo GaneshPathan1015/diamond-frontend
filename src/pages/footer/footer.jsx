@@ -7,7 +7,7 @@ const Footer = () => {
     { label: "Contact us", to: "/contact" },
     { label: "Press", to: "/press" },
     { label: "Reviews", to: "/reviews" },
-    { label: "Conflict diamond policy", to: "/our-policies" },
+    // { label: "Conflict diamond policy", to: "/our-policies" },
     { label: "Radiance Rewards", to: "/radiance-rewards-program" },
     { label: "Home Preview FAQs", to: "/our-policies" },
     { label: "Monthly Payment Option", to: "/monthly-payment-option" },
@@ -42,11 +42,11 @@ const Footer = () => {
   ];
 
   const customerCareLinks = [
-    { label: "Schedule an appointment", to: "#" },
-    { label: "Free shipping", to: "#" },
-    { label: "Free Returns", to: "#" },
-    { label: "Extended warranty", to: "#" },
-    { label: "Lifetime warranty", to: "#" },
+    { label: "Schedule an appointment", to: "/book-an-appointment" },
+    { label: "Free shipping", to: "/our-policies" },
+    { label: "Free Returns", to: "/our-policies" },
+    { label: "Extended warranty", to: "jewelry-protection-plan" },
+    { label: "Lifetime warranty", to: "/our-policies" },
     { label: "Financing", to: "/financing" },
     { label: "Insurance", to: "/insurance" },
     { label: "ID.me", to: "/id-me" },

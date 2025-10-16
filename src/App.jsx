@@ -59,6 +59,8 @@ import Blog from "./pages/footerpages/education/blog/Blog";
 import Idme from "./pages/footerpages/customercare/idme";
 import Insurance from "./pages/footerpages/customercare/insurance";
 import Financing from "./pages/footerpages/customercare/financing";
+import ExtendedWarranty from "./pages/footerpages/customercare/ExtendedWarranty";
+import Appointment from "./pages/footerpages/customercare/Appointment";
 
 export default function App() {
   const location = useLocation();
@@ -140,6 +142,8 @@ export default function App() {
           <Route path="/id-me" element={<Idme />} />
           <Route path="/insurance" element={<Insurance />} />
           <Route path="/financing" element={<Financing />} />
+          <Route path="/jewelry-protection-plan" element={<ExtendedWarranty />} />
+          <Route path="/book-an-appointment" element={<Appointment />} />
         </Routes>
       </main>
       <Footer />
