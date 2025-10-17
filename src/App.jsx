@@ -49,6 +49,7 @@ import MonthlyPaymentOption  from "./pages/footerpages/Company/MonthlyPaymentOpt
 
 // Education
 import DiamondFooter from "./pages/footerpages/education/DiamondFooter";
+import ClarityPlusDiamonds  from "./pages/footerpages/education/ClarityPlusDiamonds";
 import Jewelry from "./pages/footerpages/education/jewelry/jewelry";
 import OurPolicy from "./pages/footerpages/education/policy/OurPolicy";
 import Gemstones from "./pages/footerpages/education/Gemstones/Gemstones";
@@ -125,6 +126,8 @@ export default function App() {
           <Route path="/signature" element={<Signature />} />
           {/* 404 page */}
           <Route path="*" element={<PageNotFound />} />
+
+
           {/* Footer pages start*/}
           <Route path="/press" element={<Press />} />
           <Route path="/reviews" element={<Reviews />} />
@@ -141,6 +144,7 @@ export default function App() {
           <Route path="/metal" element={<Metal />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/wedding-band-styles" element={<WeddingBandStyle />} />
+          <Route path="/clarity-plus-diamonds" element={<ClarityPlusDiamonds />} />
           
 
           {/* Customer care */}

@@ -7,7 +7,6 @@ const Footer = () => {
     { label: "Contact us", to: "/contact" },
     { label: "Press", to: "/press" },
     { label: "Reviews", to: "/reviews" },
-    // { label: "Conflict diamond policy", to: "/our-policies" },
     { label: "Radiance Rewards", to: "/radiance-rewards-program" },
     { label: "Home Preview FAQs", to: "/our-policies" },
     { label: "Monthly Payment Option", to: "/monthly-payment-option" },
@@ -19,6 +18,7 @@ const Footer = () => {
 
   const educationLinks = [
     { label: "Diamonds", to: "/diamonds" },
+    { label: "Clarity Plus Diamonds", to: "/clarity-plus-diamonds" },
     { label: "Engagement", to: "/engagement" },
     { label: "Wedding bands", to: "/wedding-brands" },
     { label: "Gemstones", to: "/gemstones-types-guide" },
