@@ -1,5 +1,6 @@
 import React from 'react'
 import "./designingProcess.css"
+import { Link } from 'react-router-dom'
 export default  function DesigningProcess() {
   return (
    <section className="creste-your-own">
@@ -26,13 +27,13 @@ export default  function DesigningProcess() {
                  dream ring becomes a reality.
                </p>
                <div className="btn-wrapper flex flex-wrap justify-content_center">
-                 <a
+                 <Link
                    title="SHOP ENGAGEMENT RINGS"
-                   href="#"
+                   to="/engagement-rings/rings"
                    className="text-dark btn border-button border my-2 p-2 rounded-0 fw-bold border-dark"
                  >
                    Start with a setting
-                 </a>
+                 </Link>
                </div>
              </div>
            </div>

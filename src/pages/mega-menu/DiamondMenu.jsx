@@ -15,8 +15,8 @@ const DiamondMenu = () => {
                   {/* Categories col-3 */}
                   <div className="col-6">
                     <h6 className="menu-heading">Lab Diamonds</h6>
-                    <p>Explore Lab Diamonds</p>
-                    <p>Explore Colored Lab Diamonds</p>
+                    <p className=".diamond-menu-p">Explore Lab Diamonds</p>
+                    <p className=".diamond-menu-p">Explore Colored Lab Diamonds</p>
 
                     <h6 className="menu-heading mt-4">Fall Sale</h6>
 
@@ -27,30 +27,30 @@ const DiamondMenu = () => {
                     <h6 className="menu-heading mt-4">Natural Diamonds</h6>
 
                     <h6 className="menu-heading mt-4">Create Your Own Ring</h6>
-                    <p>Lab Diamond</p>
-                    <p>Natural Diamond</p>
-                    <p>Colored Lab Diamond</p>
-                    <p>Featured Deal Diamond</p>
+                    <p className=".diamond-menu-p">Lab Diamond</p>
+                    <p className=".diamond-menu-p">Natural Diamond</p>
+                    <p className=".diamond-menu-p">Colored Lab Diamond</p>
+                    <p className=".diamond-menu-p">Featured Deal Diamond</p>
                   </div>
 
                   {/* Price col-4 */}
                   <div className="col-4">
                     <h6 className="menu-heading">Price</h6>
-                    <p>Under $2000</p>
-                    <p>$2000 - $4000</p>
-                    <p>$4000 - $6000</p>
-                    <p>$6000 - $8000</p>
-                    <p>$8000+</p>
+                    <p className=".diamond-menu-p">Under $2000</p>
+                    <p className=".diamond-menu-p">$2000 - $4000</p>
+                    <p className=".diamond-menu-p">$4000 - $6000</p>
+                    <p className=".diamond-menu-p">$6000 - $8000</p>
+                    <p className=".diamond-menu-p">$8000+</p>
                   </div>
 
                   {/* Carat col-5 */}
                   <div className="col-2">
                     <h6 className="menu-heading">Carat</h6>
-                    <p>1 to 2 ct.</p>
-                    <p>2 to 3 ct.</p>
-                    <p>3 to 4 ct.</p>
-                    <p>4 to 6 ct.</p>
-                    <p>6 ct. & above</p>
+                    <p className=".diamond-menu-p">1 to 2 ct.</p>
+                    <p className=".diamond-menu-p">2 to 3 ct.</p>
+                    <p className=".diamond-menu-p">3 to 4 ct.</p>
+                    <p className=".diamond-menu-p">4 to 6 ct.</p>
+                    <p className=".diamond-menu-p">6 ct. & above</p>
                   </div>
                 </div>
               </div>

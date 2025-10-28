@@ -1,5 +1,6 @@
 import React from "react";
 import "./LabGrownDiamonds.css";
+import { Link } from "react-router-dom";
 
 function LabGrownDiamonds() {
   return (
@@ -7,7 +8,7 @@ function LabGrownDiamonds() {
       <section>
         <div className="container">
           <div className="row pb-4">
-            <div className="col-md-6">
+            <div className="col-md-6 LabGrownDiamonds-column">
               <div className="hero-image-lab">
                 <img
                   src="/images/LabGrownDiamonds/Diamond_Vid_990x.webp"
@@ -23,7 +24,7 @@ function LabGrownDiamonds() {
                   All about lab grown diamonds and rings.
                 </span>
                 <div className="hero-button pt-3">
-                  <a className="hero_btn btn">SHOP LAB-GROWN DIAMONDS</a>
+                  <Link to="/diamond?menudiamond=lab-diamonds" className="hero_btn btn">SHOP LAB-GROWN DIAMONDS</Link>
                 </div>
               </div>
             </div>

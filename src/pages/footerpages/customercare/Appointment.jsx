@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 
 const Appointment = () => {
     const [hoveredBtn, setHoveredBtn] = useState(null);
@@ -61,23 +62,23 @@ const Appointment = () => {
                         gap: "32px",
                     }}
                 >
-                    <a
-                        href="#"
+                    <Link
+                        to="#"
                         style={buttonStyle(hoveredBtn === 1)}
                         onMouseEnter={() => setHoveredBtn(1)}
                         onMouseLeave={() => setHoveredBtn(null)}
                     >
                         SHOWROOM APPOINTMENT
-                    </a>
+                    </Link>
 
-                    <a
-                        href="#"
+                    <Link
+                        to="#"
                         style={buttonStyle(hoveredBtn === 2)}
                         onMouseEnter={() => setHoveredBtn(2)}
                         onMouseLeave={() => setHoveredBtn(null)}
                     >
                         VIRTUAL APPOINTMENT
-                    </a>
+                    </Link>
                 </div>
             </section>
             <section style={{ background: '#213245', marginBottom: '80px' }}>
@@ -223,11 +224,11 @@ const Appointment = () => {
                                 alt="Easy Financing Options"
                                 className="radiance-feature-img mx-auto"
                             />
-                            <a className="text-decoration-none" href="/our-policies">
+                            <Link className="text-decoration-none" to="/our-policies">
                                 <p className="radiance-feature-text mt-2">
                                     EASY FINANCING OPTIONS
                                 </p>
-                            </a>
+                            </Link>
                         </div>
 
                         {/* Item 2 */}
@@ -237,11 +238,11 @@ const Appointment = () => {
                                 alt="Lifetime Warranty"
                                 className="radiance-feature-img mx-auto"
                             />
-                            <a className="text-decoration-none" href="/our-policies">
+                            <Link className="text-decoration-none" to="/our-policies">
                                 <p className="radiance-feature-text mt-2">
                                     LIFETIME WARRANTY
                                 </p>
-                            </a>
+                            </Link>
                         </div>
 
                         {/* Item 3 */}
@@ -251,11 +252,11 @@ const Appointment = () => {
                                 alt="Hassle Free Returns"
                                 className="radiance-feature-img mx-auto"
                             />
-                            <a className="text-decoration-none" href="/our-policies">
+                            <Link className="text-decoration-none" to="/our-policies">
                                 <p className="radiance-feature-text mt-2">
                                     HASSLE FREE RETURNS
                                 </p>
-                            </a>
+                            </Link>
                         </div>
 
                         {/* Item 4 */}
@@ -265,11 +266,11 @@ const Appointment = () => {
                                 alt="Free Resizing"
                                 className="radiance-feature-img mx-auto"
                             />
-                            <a className="text-decoration-none" href="/our-policies">
+                            <Link className="text-decoration-none" to="/our-policies">
                                 <p className="radiance-feature-text mt-2">
                                     FREE RESIZING
                                 </p>
-                            </a>
+                            </Link>
                         </div>
 
                         {/* Item 5 */}
@@ -279,11 +280,11 @@ const Appointment = () => {
                                 alt="Conflict Free Diamonds"
                                 className="radiance-feature-img mx-auto"
                             />
-                            <a className="text-decoration-none" href="/our-policies">
+                            <Link className="text-decoration-none" to="/our-policies">
                                 <p className="radiance-feature-text mt-2">
                                     CONFLICT FREE DIAMONDS
                                 </p>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>

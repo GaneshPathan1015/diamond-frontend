@@ -1,5 +1,5 @@
 import React from "react";
-import "./blog.css";
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -7,32 +7,32 @@ import "slick-carousel/slick/slick-theme.css";
 // ✅ Single Section Component
 const BlogSection = ({ title, items, settings }) => {
   return (
-    <section className="Exclusive_Offers_wrapper my-5 bg-secondary py-5">
-      <div className="container">
-        <div className="row align-items-center">
-          <div className="col-12">
-            <h2 className="section-header-lg small--text-center mb-4">
+    <section className="blog-exclusive-offers-wrapper blog-my-5 blog-bg-secondary blog-py-5">
+      <div className="blog-container">
+        <div className="blog-row blog-align-items-center">
+          <div className="blog-col-12">
+            <h2 className="blog-section-header-lg blog-small-text-center blog-mb-4">
               {title}
             </h2>
-            <Slider {...settings} className="Exclusive_Offers">
+            <Slider {...settings} className="blog-exclusive-offers">
               {items.map((item, index) => (
                 <div key={index}>
-                  <div className="img-block text-center">
+                  <div className="blog-img-block blog-text-center">
                     <img
                       src={item.img}
                       alt={item.label}
-                      className="img-fluid mb-2"
+                      className="blog-img-fluid blog-mb-2"
                     />
                   </div>
                   {/* ✅ Card Heading & Subheading */}
-                  <p className="text-center text-uppercase mt-2">
+                  <p className="blog-text-center blog-text-uppercase blog-mt-2">
                     {item.label}
                   </p>
-                  <a href="#">
-                    <h1 className="text-center text-capitalize mt-1">
+                  <Link to="#">
+                    <h1 className="blog-text-center blog-text-capitalize blog-mt-1">
                       {item.heading}
                     </h1>
-                  </a>
+                  </Link>
                 </div>
               ))}
             </Slider>
@@ -46,117 +46,117 @@ const BlogSection = ({ title, items, settings }) => {
 // ✅ Navigation Menu
 const BlogNavigation = () => {
   return (
-    <div className="blogs-nav medium-up--text-center small--text-left">
-      <nav className="flex-md">
-        <div className="border-top border-bottom bg-white">
-          <div className="container">
-            <ul className="d-flex justify-content-center list-unstyled mb-0 topmenu">
-              <li className="blog-nav__link position-relative mx-3 dropdown-menu-hover">
-                <a href="#" className="menu-link">
+    <div className="blog-nav blog-medium-up-text-center blog-small-text-left">
+      <nav className="blog-flex-md">
+        <div className="blog-border-top blog-border-bottom blog-bg-white">
+          <div className="blog-container">
+            <ul className="blog-d-flex blog-justify-content-center blog-list-unstyled blog-mb-0 blog-topmenu">
+              <li className="blog-nav-link blog-position-relative blog-mx-3 blog-dropdown-menu-hover">
+                <Link to="#" className="blog-menu-link">
                   ENGAGEMENT RINGS
-                </a>
-                <ul className="dropdown-list">
-                  <li className="child-link">
-                    <a href="#">Proposal Playbook</a>
+                </Link>
+                <ul className="blog-dropdown-list">
+                  <li className="blog-child-link">
+                    <Link to="#">Proposal Playbook</Link>
                   </li>
-                  <li className="child-link">
-                    <a href="#">This or That</a>
+                  <li className="blog-child-link">
+                    <Link to="#">This or That</Link>
                   </li>
-                  <li className="child-link">
-                    <a href="#">Top Trends</a>
+                  <li className="blog-child-link">
+                    <Link to="#">Top Trends</Link>
                   </li>
-                  <li className="child-link">
-                    <a href="#">The Gemologist's Guide</a>
+                  <li className="blog-child-link">
+                    <Link to="#">The Gemologist's Guide</Link>
                   </li>
                 </ul>
               </li>
 
-              <li className="blog-nav__link position-relative mx-3 dropdown-menu-hover">
-                <a href="#" className="menu-link">
+              <li className="blog-nav-link blog-position-relative blog-mx-3 blog-dropdown-menu-hover">
+                <Link to="#" className="blog-menu-link">
                   GEMSTONE INSIGHTS
-                </a>
-                <ul className="dropdown-list">
-                  <li className="child-link">
-                    <a href="#">Birthstones 101</a>
+                </Link>
+                <ul className="blog-dropdown-list">
+                  <li className="blog-child-link">
+                    <Link to="#">Birthstones 101</Link>
                   </li>
-                  <li className="child-link">
-                    <a href="#">Precious Picks</a>
+                  <li className="blog-child-link">
+                    <Link to="#">Precious Picks</Link>
                   </li>
                 </ul>
               </li>
 
-              <li className="blog-nav__link position-relative mx-3 dropdown-menu-hover">
-                <a href="#" className="menu-link">
+              <li className="blog-nav-link blog-position-relative blog-mx-3 blog-dropdown-menu-hover">
+                <Link to="#" className="blog-menu-link">
                   WEDDING BANDS
-                </a>
-                <ul className="dropdown-list">
-                  <li className="child-link">
-                    <a href="#">Forever Sparkle</a>
+                </Link>
+                <ul className="blog-dropdown-list">
+                  <li className="blog-child-link">
+                    <Link to="#">Forever Sparkle</Link>
                   </li>
-                  <li className="child-link">
-                    <a href="#">Wedding Wows</a>
+                  <li className="blog-child-link">
+                    <Link to="#">Wedding Wows</Link>
                   </li>
                 </ul>
               </li>
 
-              <li className="blog-nav__link position-relative mx-3 dropdown-menu-hover">
-                <a href="#" className="menu-link">
+              <li className="blog-nav-link blog-position-relative blog-mx-3 blog-dropdown-menu-hover">
+                <Link to="#" className="blog-menu-link">
                   METAL
-                </a>
-                <ul className="dropdown-list">
-                  <li className="child-link">
-                    <a href="#">Metal Education</a>
+                </Link>
+                <ul className="blog-dropdown-list">
+                  <li className="blog-child-link">
+                    <Link to="#">Metal Education</Link>
                   </li>
-                  <li className="child-link">
-                    <a href="#">WC Selects</a>
+                  <li className="blog-child-link">
+                    <Link to="#">WC Selects</Link>
                   </li>
                 </ul>
               </li>
 
-              <li className="blog-nav__link position-relative mx-3 dropdown-menu-hover">
-                <a href="#" className="menu-link">
+              <li className="blog-nav-link blog-position-relative blog-mx-3 blog-dropdown-menu-hover">
+                <Link to="#" className="blog-menu-link">
                   BUYING GUIDES
-                </a>
-                <ul className="dropdown-list">
-                  <li className="child-link">
-                    <a href="#">Engagement</a>
+                </Link>
+                <ul className="blog-dropdown-list">
+                  <li className="blog-child-link">
+                    <Link to="#">Engagement</Link>
                   </li>
-                  <li className="child-link">
-                    <a href="#">Jewelry</a>
+                  <li className="blog-child-link">
+                    <Link to="#">Jewelry</Link>
                   </li>
                 </ul>
               </li>
 
-              <li className="blog-nav__link position-relative mx-3 dropdown-menu-hover">
-                <a href="#" className="menu-link">
+              <li className="blog-nav-link blog-position-relative blog-mx-3 blog-dropdown-menu-hover">
+                <Link to="#" className="blog-menu-link">
                   DIAMOND
-                </a>
-                <ul className="dropdown-list">
-                  <li className="child-link">
-                    <a href="#">All About Lab</a>
+                </Link>
+                <ul className="blog-dropdown-list">
+                  <li className="blog-child-link">
+                    <Link to="#">All About Lab</Link>
                   </li>
-                  <li className="child-link">
-                    <a href="#">4C's & Beyond</a>
+                  <li className="blog-child-link">
+                    <Link to="#">4C's & Beyond</Link>
                   </li>
-                  <li className="child-link">
-                    <a href="#">Decode The Dazzle</a>
+                  <li className="blog-child-link">
+                    <Link to="#">Decode The Dazzle</Link>
                   </li>
                 </ul>
               </li>
 
-              <li className="blog-nav__link position-relative mx-3 dropdown-menu-hover">
-                <a href="#" className="menu-link">
+              <li className="blog-nav-link blog-position-relative blog-mx-3 blog-dropdown-menu-hover">
+                <Link to="#" className="blog-menu-link">
                   JEWELRY
-                </a>
-                <ul className="dropdown-list">
-                  <li className="child-link">
-                    <a href="#">Art of Gifting</a>
+                </Link>
+                <ul className="blog-dropdown-list">
+                  <li className="blog-child-link">
+                    <Link to="#">Art of Gifting</Link>
                   </li>
-                  <li className="child-link">
-                    <a href="#">Inspo & Info</a>
+                  <li className="blog-child-link">
+                    <Link to="#">Inspo & Info</Link>
                   </li>
-                  <li className="child-link">
-                    <a href="#">Fresh Finds</a>
+                  <li className="blog-child-link">
+                    <Link to="#">Fresh Finds</Link>
                   </li>
                 </ul>
               </li>
@@ -171,20 +171,20 @@ const BlogNavigation = () => {
 // ✅ Header
 const BlogHeader = () => {
   return (
-    <section className="py-5 bg-light">
-      <div className="container blog-header text-center">
+    <section className="blog-py-5 blog-bg-light">
+      <div className="blog-container blog-header blog-text-center">
         <nav aria-label="breadcrumb">
-          <ol className="breadcrumb justify-content-start mb-3">
-            <li className="breadcrumb-item">
-              <a href="/">Home</a>
+          <ol className="blog-breadcrumb blog-justify-content-start blog-mb-3">
+            <li className="blog-breadcrumb-item">
+              <Link to="/">Home</Link>
             </li>
-            <li className="breadcrumb-item active" aria-current="page">
+            <li className="blog-breadcrumb-item blog-active" aria-current="page">
               Blog
             </li>
           </ol>
         </nav>
 
-        <h1 className="header-heading">The With Clarity Blog</h1>
+        <h1 className="blog-header-heading">The With Clarity Blog</h1>
 
         <p>
           Elevate your everyday with inspiration, delivered fresh, by the With
@@ -324,7 +324,7 @@ const Blog = () => {
     {
       img: "images/blog/slider3.4.webp",
       label: "WEDDING BANDS",
-      heading: "A GUIDE TO WOMEN’S WEDDING BAND COST",
+      heading: "A GUIDE TO WOMEN'S WEDDING BAND COST",
     },
     {
       img: "images/blog/slider3.5.webp",
@@ -334,7 +334,7 @@ const Blog = () => {
     {
       img: "images/blog/slider3.6.webp",
       label: "WEDDING BANDS",
-      heading: "YOUR GUIDE TO WOMEN’S WEDDING BAND STYLES",
+      heading: "YOUR GUIDE TO WOMEN'S WEDDING BAND STYLES",
     },
     {
       img: "images/blog/slider3.7.webp",
@@ -374,7 +374,7 @@ const Blog = () => {
     {
       img: "images/blog/slider4.5.webp",
       label: "METAL",
-      heading: "MEN;S PLATINUM WEDDING BANDS",
+      heading: "MEN'S PLATINUM WEDDING BANDS",
     },
     {
       img: "images/blog/slider4.6.webp",
@@ -520,6 +520,356 @@ const Blog = () => {
 
   return (
     <>
+      <style>
+        {`
+          .blog-header h1 {
+            color: #1d3348;
+            font-size: 44px;
+            line-height: 54px;
+          }
+
+          .blog-header p {
+            color: #1d3348;
+            font-size: 18px;
+            line-height: 26px;
+            margin-top: 16px;
+            text-align: center;
+          }
+
+          .blog-topmenu .blog-menu-link {
+            display: inline-block;
+            padding: 12px 8px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            position: relative;
+          }
+
+          .blog-topmenu .blog-menu-link::after {
+            content: "▼";
+            font-size: 0.6rem;
+            margin-left: 6px;
+            display: inline-block;
+            transition: transform 0.3s ease;
+          }
+
+          .blog-dropdown-list {
+            list-style: none;
+            padding: 10px 0;
+            margin: 0;
+            position: absolute;
+            left: 0;
+            top: 100%;
+            min-width: 180px;
+            background: #fff;
+            border: 1px solid #ddd;
+            display: none;
+            z-index: 1000;
+          }
+
+          .blog-dropdown-menu-hover:hover .blog-dropdown-list {
+            display: block;
+          }
+
+          .blog-dropdown-menu-hover:hover .blog-menu-link::after {
+            transform: rotate(180deg);
+          }
+
+          .blog-dropdown-list li a {
+            display: block;
+            padding: 8px 15px;
+            color: #333;
+            text-decoration: none;
+          }
+
+          .blog-dropdown-list li a:hover {
+            background-color: #f8f9fa;
+          }
+
+          .blog-nav nav {
+            justify-content: space-between;
+          }
+
+          .blog-nav {
+            margin-top: 70px;
+          }
+
+          .blog-nav {
+            border-top: 1px solid #707070;
+            border-bottom: 1px solid #707070;
+          }
+
+          .blog-nav .blog-nav-link>a {
+            color: #707070;
+            font-size: 15px;
+            line-height: 22px;
+            text-transform: uppercase;
+            display: block;
+            padding: 8px 15px;
+          }
+
+          .blog-dropdown-list li a {
+            color: #707070;
+            font-size: 16px;
+            line-height: 22px;
+            text-transform: uppercase;
+            display: block;
+          }
+
+          .blog-item-box-blog {
+            border: 1px solid #dadada;
+            text-align: center;
+            padding: 20px;
+            border-radius: 6px;
+            background: #fff;
+            transition: all 0.3s;
+          }
+
+          .blog-item-box-blog:hover {
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+          }
+
+          .blog-item-box-blog-image img {
+            width: 100%;
+            border-radius: 6px;
+          }
+
+          .blog-carousel-control-prev, .blog-carousel-control-next {
+            width: 5%;
+          }
+
+          .blog-carousel-control-prev-icon,
+          .blog-carousel-control-next-icon {
+            background-size: 100% 100%;
+            background-color: #000;
+            border-radius: 50%;
+            padding: 15px;
+          }
+
+          .blog-exclusive-offers a {
+            color: #14344a;
+            text-decoration: none;
+          }
+
+          .blog-exclusive-offers a:focus {
+            color: #14344a;
+          }
+
+          .blog-exclusive-offers-wrapper.blog-bg-secondary {
+            background-color: #ffffff !important;
+          }
+
+          .blog-header-heading{
+            color: #1d3348;
+            font-size: 44px;
+            line-height: 54px;
+          }
+
+          /* Layout Styles */
+          .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+          }
+
+          .blog-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
+          }
+
+          .blog-col-12 {
+            flex: 0 0 100%;
+            max-width: 100%;
+            padding: 0 15px;
+          }
+
+          /* Utility Classes */
+          .blog-text-center {
+            text-align: center;
+          }
+
+          .blog-text-left {
+            text-align: left;
+          }
+
+          .blog-text-uppercase {
+            text-transform: uppercase;
+          }
+
+          .blog-text-capitalize {
+            text-transform: capitalize;
+          }
+
+          .blog-bg-white {
+            background-color: #fff;
+          }
+
+          .blog-bg-light {
+            background-color: #f8f9fa;
+          }
+
+          .blog-bg-secondary {
+            background-color: #6c757d;
+          }
+
+          .blog-position-relative {
+            position: relative;
+          }
+
+          .blog-list-unstyled {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+          }
+
+          .blog-d-flex {
+            display: flex;
+          }
+
+          .blog-flex-md {
+            display: flex;
+          }
+
+          .blog-justify-content-center {
+            justify-content: center;
+          }
+
+          .blog-justify-content-start {
+            justify-content: flex-start;
+          }
+
+          .blog-align-items-center {
+            align-items: center;
+          }
+
+          .blog-border-top {
+            border-top: 1px solid #dee2e6;
+          }
+
+          .blog-border-bottom {
+            border-bottom: 1px solid #dee2e6;
+          }
+
+          .blog-img-fluid {
+            max-width: 100%;
+            height: auto;
+          }
+
+          .blog-w-100 {
+            width: 100%;
+          }
+
+          /* Spacing Utilities */
+          .blog-my-5 {
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+          }
+
+          .blog-mb-0 {
+            margin-bottom: 0;
+          }
+
+          .blog-mb-3 {
+            margin-bottom: 1rem;
+          }
+
+          .blog-mb-4 {
+            margin-bottom: 1.5rem;
+          }
+
+          .blog-mt-1 {
+            margin-top: 0.25rem;
+          }
+
+          .blog-mt-2 {
+            margin-top: 0.5rem;
+          }
+
+          .blog-mx-3 {
+            margin-left: 1rem;
+            margin-right: 1rem;
+          }
+
+          .blog-py-5 {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+          }
+
+          .blog-px-2 {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+          }
+
+          .blog-px-md-4 {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+          }
+
+          /* Component Styles */
+          .blog-section-header-lg {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #1d3348;
+          }
+
+          .blog-img-block {
+            margin-bottom: 1rem;
+          }
+
+          .blog-breadcrumb {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+          }
+
+          .blog-breadcrumb-item {
+            margin-right: 0.5rem;
+          }
+
+          .blog-breadcrumb-item.blog-active {
+            color: #6c757d;
+          }
+
+          .blog-breadcrumb-item a {
+            color: #007bff;
+            text-decoration: none;
+          }
+
+          .blog-breadcrumb-item a:hover {
+            text-decoration: underline;
+          }
+
+          @media (max-width: 768px) {
+            .blog-topmenu {
+              flex-direction: column;
+            }
+            .blog-topmenu li {
+              margin: 5px 0;
+            }
+            .blog-header-heading {
+              font-size: 28px;
+            }
+            .blog-header p {
+              font-size: 14px;
+            }
+            .blog-small-text-center {
+              text-align: center;
+            }
+            .blog-small-text-left {
+              text-align: left;
+            }
+          }
+
+          @media (min-width: 768px) {
+            .blog-medium-up-text-center {
+              text-align: center;
+            }
+          }
+        `}
+      </style>
+
       <BlogHeader />
 
       <BlogSection
@@ -556,4 +906,5 @@ const Blog = () => {
     </>
   );
 };
+
 export default Blog;

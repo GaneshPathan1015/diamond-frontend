@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Financing = () => {
     return (
@@ -6,7 +7,7 @@ const Financing = () => {
             <section>
 
                 <div className='text-center'>
-                    <span style={{ fontSize: '20px', lineHeight: '1.4', textAlign: 'center' }}>Do you have a With Clarity Credit Card? <a style={{ textDecoration: 'none' }} href="">Manage your account</a> </span>
+                    <span style={{ fontSize: '20px', lineHeight: '1.4', textAlign: 'center' }}>Do you have a With Clarity Credit Card? Manage your account</span>
                 </div>
 
                 <div className="container" style={{ paddingTop: '100px' }}>
@@ -105,9 +106,9 @@ const Financing = () => {
                         </div>
                     </div>
 
-                    <div className='pt-4'>
-                        <a style={{ background: 'none', border: '2px solid #000', textDecoration: 'none', padding: '5px 10px', color: '#000' }} className='' href="">APPLY NOW</a>
-                    </div>
+                    {/* <div className='pt-4'>
+                        <Link style={{ background: 'none', border: '2px solid #000', textDecoration: 'none', padding: '5px 10px', color: '#000' }} className='' to="">APPLY NOW</Link>
+                    </div> */}
 
                     
 
@@ -245,9 +246,9 @@ const Financing = () => {
                         </div>
                     </div>
 
-                    <div style={{ paddingTop: '80px', textAlign: 'center', alignItems: 'center' }}>
-                        <a style={{ background: 'none', border: '2px solid #000', textDecoration: 'none', padding: '5px 10px', color: '#000' }} className='' href="">APPLY NOW</a>
-                    </div>
+                    {/* <div style={{ paddingTop: '80px', textAlign: 'center', alignItems: 'center' }}>
+                        <Link style={{ background: 'none', border: '2px solid #000', textDecoration: 'none', padding: '5px 10px', color: '#000' }} className='' to="">APPLY NOW</Link>
+                    </div> */}
 
                     <p style={{ textAlign: 'center', fontSize: '12px', paddingBottom: '80px', paddingTop: '50px' }}>Qualifying purchase amount must be on one receipt. No interest will be charged on the promo balance if you pay it off, in full, within the promo period. If you do not, interest will be charged on the <br /> promo balance from the purchase date. The required minimum monthly payments may or may not pay off the promo balance before the end of the promo period, depending on purchase amount, <br /> promo length and payment allocation. Regular account terms apply to non-promo purchases and, after promo period ends, to the promo balance New Accounts as of 07/31/2025: Purchase APR is 34.99%. Penalty APR <br /> is 39.99%. Min Interest Charge is $2. Existing cardholders: See your credit card agreement terms. Subject to credit approval. We reserve the right to discontinue or alter the terms of this offer anytime.</p>
                 </div>
@@ -269,31 +270,31 @@ const Financing = () => {
 
                         <div className="col-lg-2 col-md-4 col-sm-4 mb-3">
                             <div className="reviews-link" style={{ borderRight: '1px solid #00000043' }}>
-                                <a href="#" style={{ textDecoration: 'none' }}>
+                                <Link to="#" style={{ textDecoration: 'none' }}>
                                     <i style={{ fontSize: '30px', fontFamily: 'FontAwesome', color: '#00000043' }} className="fa-solid fa-comment-dots contact-icon"></i>
                                     <br />
                                     <span style={{ color: '#000' }}>Chat</span>
-                                </a>
+                                </Link>
                             </div>
                         </div>
 
                         <div className="col-lg-2 col-md-4 col-sm-4 mb-3">
                             <div className="reviews-link" style={{ borderRight: '1px solid #00000043' }}>
-                                <a href="#" style={{ textDecoration: 'none' }}>
+                                <Link to="mailto:service@withclarity.com" style={{ textDecoration: 'none' }}>
                                     <i className="fa-solid fa-envelope contact-icon" style={{ fontSize: '30px', fontFamily: 'FontAwesome', color: '#00000043' }}></i>
                                     <br />
                                     <span style={{ color: '#000' }}>Email</span>
-                                </a>
+                                </Link>
                             </div>
                         </div>
 
                         <div className="col-lg-2 col-md-4 col-sm-4 mb-3">
                             <div className="reviews-link">
-                                <a href="#" style={{ textDecoration: 'none' }}>
+                                <Link to="tel:1-844-234-6463" style={{ textDecoration: 'none' }}>
                                     <i className="fa-solid fa-phone contact-icon" style={{ fontSize: '30px', fontFamily: 'FontAwesome', color: '#00000043' }}></i>
                                     <br />
                                     <span style={{ color: '#000' }}>Phone</span>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>

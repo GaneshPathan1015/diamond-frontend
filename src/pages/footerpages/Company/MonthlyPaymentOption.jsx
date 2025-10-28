@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const MonthlyPaymentOption = () => {
     const [activeOption, setActiveOption] = useState("split"); // default: Split Pay
@@ -130,6 +131,11 @@ const MonthlyPaymentOption = () => {
                                             style={styles.image}
                                         />
                                     </div>
+                                    <div className="text-center">
+                                        <h1>Choose 12, 18, Or 36 Monthly Payments</h1>
+                                        <p className="text-dark">* For example, a $700 purchase might cost $64/mo over 12 months at 15% APR.</p>
+                                    </div>
+
                                 </>
                             )}
                         </div>
@@ -234,7 +240,7 @@ const MonthlyPaymentOption = () => {
                     </div>
                 </div>
 
-                <p className="text-center pt-4 mt-4">* Your rate will be 0-36% APR based on credit, and is subject to an eligibility check. For example, a $700<br /> purchase might cost $63.18/mo over 12 months at 15% APR. Payment options through Affirm are provided<br /> by these lending partners: <a style={{ textDecoration: "none" }} href="">affirm.com/lenders</a> . Options depend on your purchase amount and a down<br /> payment may be required.</p>
+                <p className="text-center pt-4 mt-4 text-dark">* Your rate will be 0-36% APR based on credit, and is subject to an eligibility check. For example, a $700<br /> purchase might cost $63.18/mo over 12 months at 15% APR. Payment options through Affirm are provided<br /> by these lending partners: <Link style={{ textDecoration: "none" }} to="https://www.affirm.com/lenders">affirm.com/lenders</Link> . Options depend on your purchase amount and a down<br /> payment may be required.</p>
             </section>
 
             <section>
@@ -380,7 +386,7 @@ const MonthlyPaymentOption = () => {
             </section>
             {/* --- Section: Contact --- */}
             <section className="contact-section mb-4" >
-                <div className="container contact-container" style={{background:'#f0f4f7', padding:'48px'}}>
+                <div className="container contact-container" style={{ background: '#f0f4f7', padding: '48px' }}>
                     <div className="row align-items-center text-center contact-row">
                         <div className="col-lg-6 col-md-12 mb-4 mb-lg-0">
                             <h1>We're here to help.</h1>
@@ -394,32 +400,32 @@ const MonthlyPaymentOption = () => {
                         </div>
 
                         <div className="col-lg-2 col-md-4 col-sm-4 mb-3">
-                            <div className="reviews-link" style={{borderRight: '1px solid #00000043'}}>
-                                <a href="#" style={{textDecoration: 'none'}}>
-                                    <i style={{fontSize:'30px', fontFamily: 'FontAwesome',color: '#00000043'}} className="fa-solid fa-comment-dots contact-icon"></i>
+                            <div className="reviews-link" style={{ borderRight: '1px solid #00000043' }}>
+                                <Link to="#" style={{ textDecoration: 'none' }}>
+                                    <i style={{ fontSize: '30px', fontFamily: 'FontAwesome', color: '#00000043' }} className="fa-solid fa-comment-dots contact-icon"></i>
                                     <br />
-                                    <span style={{color:'#000'}}>Chat</span>
-                                </a>
+                                    <span style={{ color: '#000' }}>Chat</span>
+                                </Link>
                             </div>
                         </div>
 
                         <div className="col-lg-2 col-md-4 col-sm-4 mb-3">
-                            <div className="reviews-link" style={{borderRight: '1px solid #00000043'}}>
-                                <a href="#" style={{textDecoration: 'none'}}>
-                                    <i className="fa-solid fa-envelope contact-icon" style={{fontSize:'30px', fontFamily: 'FontAwesome',color: '#00000043'}}></i>
+                            <div className="reviews-link" style={{ borderRight: '1px solid #00000043' }}>
+                                <Link to="mailto:service@withclarity.com" style={{ textDecoration: 'none' }}>
+                                    <i className="fa-solid fa-envelope contact-icon" style={{ fontSize: '30px', fontFamily: 'FontAwesome', color: '#00000043' }}></i>
                                     <br />
-                                    <span style={{color:'#000'}}>Email</span>
-                                </a>
+                                    <span style={{ color: '#000' }}>Email</span>
+                                </Link>
                             </div>
                         </div>
 
                         <div className="col-lg-2 col-md-4 col-sm-4 mb-3">
                             <div className="reviews-link">
-                                <a href="#" style={{textDecoration: 'none'}}>
-                                    <i className="fa-solid fa-phone contact-icon" style={{fontSize:'30px', fontFamily: 'FontAwesome',color: '#00000043'}}></i>
+                                <Link to="tel:1-844-234-6463" style={{ textDecoration: 'none' }}>
+                                    <i className="fa-solid fa-phone contact-icon" style={{ fontSize: '30px', fontFamily: 'FontAwesome', color: '#00000043' }}></i>
                                     <br />
-                                    <span style={{color:'#000'}}>Phone</span>
-                                </a>
+                                    <span style={{ color: '#000' }}>Phone</span>
+                                </Link>
                             </div>
                         </div>
                     </div>

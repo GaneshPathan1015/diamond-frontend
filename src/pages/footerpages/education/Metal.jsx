@@ -1,6 +1,7 @@
 import React from "react";
 import "./Metal.css";
 import "../../diamond-detail/diamondDetails/DiamondDetails.css";
+import { Link } from "react-router-dom";
 function Metal() {
   return (
     <>
@@ -232,9 +233,9 @@ function Metal() {
         </div>
 
         <div className="contact-btn text-center my-4">
-          <button className=" custom-btn outlined">
+          <Link to="/contact" style={{textDecoration:'none'}} className=" custom-btn outlined">
             CONTACT US
-          </button>
+          </Link>
         </div>
       </div>
     </>

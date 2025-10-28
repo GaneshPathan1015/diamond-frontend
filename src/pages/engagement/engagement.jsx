@@ -4,6 +4,7 @@ import Education from "./education/education";
 import Quetions from "./quetions/quetions";
 import Customize from "./customize/customize";
 import "./index.css";
+import { Link } from "react-router-dom";
 
 export default function Engagement() {
   const ringTypes = [
@@ -47,12 +48,12 @@ export default function Engagement() {
               </p>
             </div>
             <div className="slide-btn-wrapper justify-content-center align-items-center gap-5">
-              <a
-                href="#"
+              <Link
+                to="/engagement-rings/rings"
                 className="text-white btn border-button border my-2 p-2 rounded-0 fw-bold border-white"
               >
                 SHOP ENGAGEMENT RINGS
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -92,13 +93,13 @@ export default function Engagement() {
                       <p>Fill in your size and complimentary engraving.</p>
                     </li>
                   </ul>
-                  <a
+                  <Link
                     title="SHOP ENGAGEMENT RINGS"
-                    href="#"
+                    to="/engagement-rings/rings"
                     className="btn border-button border my-2 p-2 rounded-0 fw-bold border-dark ms-5 mt-0 mb-2"
                   >
                     Build Your Ring
-                  </a>
+                  </Link>
                 </div>
                 <div className="col-6">
                   <img
@@ -144,13 +145,13 @@ export default function Engagement() {
                         <p>Fill in your ring size and get ready to be wowed.</p>
                       </li>
                     </ul>
-                    <a
+                    <Link
                       title="SHOP ENGAGEMENT RINGS"
-                      href="#"
+                      to="/engagement-rings/preset-rings"
                       className="btn border-button border my-2 p-2 rounded-0 fw-bold border-dark ms-5 mt-0"
                     >
                       EXPLORE LAB DIAMOND RINGS
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -219,13 +220,13 @@ export default function Engagement() {
                                 showcasing its exquisite cut, clarity and carat
                                 weight.
                               </p>
-                              <a
+                              <Link
                                 title="SHOP ENGAGEMENT RINGS"
-                                href="#"
+                                to="#"
                                 className="btn border-button border my-2 p-2 rounded-0 fw-bold border-dark mt-0"
                               >
                                 EXPLORE LAB DIAMOND RINGS
-                              </a>
+                              </Link>
                             </div>
                           </div>
                           <div className="col-6">
@@ -277,14 +278,14 @@ export default function Engagement() {
                     <li>COMPLIMENTARY CONSULTATION</li>
                   </ul>
                 </div>
-                <a
+                <Link
                   title="SHOP ENGAGEMENT RINGS"
-                  href="#"
+                  to="/home-preview"
                   className="btn border-button border my-2 p-2 rounded-0 fw-bold border-dark mt-0"
                   tabIndex="0"
                 >
                   Learn More
-                </a>
+                </Link>
               </div>
             </div>
           </div>

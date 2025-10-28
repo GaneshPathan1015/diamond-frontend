@@ -5,6 +5,7 @@ import HeaderWrapper from "./pages/header/HeaderWrapper";
 
 // All your page imports
 import Home from "./pages/home/home";
+import HomePreview from "./pages/homePreview/HomePreview";
 import Contact from "./pages/contact/contact";
 import Engagement from "./pages/engagement/engagement";
 import About from "./pages/about/about";
@@ -76,6 +77,7 @@ export default function App() {
       <main style={{ paddingTop: isHome ? "0px" : "146px" }}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/home-preview" element={<HomePreview />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/engagement" element={<Engagement />} />
           <Route path="/about" element={<About />} />
@@ -146,7 +148,7 @@ export default function App() {
           <Route path="/wedding-band-styles" element={<WeddingBandStyle />} />
           <Route path="/clarity-plus-diamonds" element={<ClarityPlusDiamonds />} />
           
-
+ 
           {/* Customer care */}
           <Route path="/id-me" element={<Idme />} />
           <Route path="/insurance" element={<Insurance />} />

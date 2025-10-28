@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 
 const Reviews = () => {
     const [hoveredText, setHoveredText] = useState("");
@@ -9,48 +10,123 @@ const Reviews = () => {
             id: 1,
             img: "/images/reviews/home-logo-sprite1.webp",
             text: "Startup taking the stress out of engagement ring shopping.",
+            link: "/about"
         },
         {
             id: 2,
             img: "/images/reviews/home-logo-sprite-cnn_9bd63659-8aed-44b0-8eea-35568017ca18.webp",
             text: "Ranked #18 on the list of fastest-growing companies in the USA.",
+            link: "/press"
         },
         {
             id: 3,
             img: "/images/reviews/Layer_7_b928e7c8-4a1d-428e-95c7-7749050efcf6.webp",
             text: "With Clarity is ranked as the 3rd fastest growing company in New York on Crain's Fast 50 list.",
+            link: "/achievements"
         },
         {
             id: 4,
             img: "/images/reviews/Layer_8_b9c46a8a-c744-4e9b-a96d-20e8b35ad80d.webp",
             text: "With Clarity is featured for its modern jewelry shopping experience.",
+            link: "/features"
         },
         {
             id: 5,
             img: "/images/reviews/Layer_10_c8d0a905-14eb-43ad-933f-d030d2540465.avif",
             text: "With Clarity ranks at #13 fastest growing company in 2020.",
+            link: "/rankings"
         },
     ];
 
     const slides = [
         {
-            leftImage: "/images/reviews/Testimonial_logo-758x585_px_780x.webp",
-            rightImage: "/images/reviews/Testimonial_logo-758x585_px_9f82b8ac-140c-4f29-951d-6ad6a345a4ed_780x.webp",
-            text: "“I wanted something specific for my wedding band and I was having trouble finding it at a jewelry store. I reached out to With Clarity and we were able to create something perfect.”",
-            author: "ALLISON & TIM",
+            image: "/images/reviews/7.png",
         },
         {
-            leftImage: "https://i.imgur.com/D8Z0D1Q.jpeg",
-            rightImage: "https://i.imgur.com/Yh3KyBl.jpeg",
-            text: "“He proposed under the stars with soft music playing in the background. It felt like a dream come true.”",
-            author: "EMMA AND LIAM",
+            image: "/images/reviews/8.png",
         },
         {
-            leftImage: "https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-            rightImage: "https://images.unsplash.com/photo-1537633552985-df8429e8048b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-            text: "“The ring was even more beautiful in person. The quality and craftsmanship exceeded our expectations.”",
-            author: "JAMES AND SOPHIA",
+            image: "/images/reviews/9.png",
         },
+        {
+            image: "/images/reviews/10.png",
+        },
+        {
+            image: "/images/reviews/11.png",
+        },
+        {
+            image: "/images/reviews/12.png",
+        },
+        {
+            image: "/images/reviews/13.png",
+        },
+        {
+            image: "/images/reviews/14.png",
+        },
+        {
+            image: "/images/reviews/15.png",
+        },
+    ];
+
+    const bestsellingProducts = [
+        {
+            id: 1,
+            name: "The Windsor Ring",
+            image: "/images/reviews/1.webp",
+            link: "https://thecaratcasa.com/jewellary-details/269",
+        },
+        {
+            id: 2,
+            name: "The Cambridge Band",
+            image: "/images/reviews/2.webp",
+            link: "https://thecaratcasa.com/jewellary-details/265",
+        },
+        {
+            id: 3,
+            name: "The Oxford Collection",
+            image: "/images/reviews/3.webp",
+            link: "https://thecaratcasa.com/jewellary-details/262",
+
+        },
+        {
+            id: 4,
+            name: "The Victoria Set",
+            image: "/images/reviews/4.webp",
+            link: "https://thecaratcasa.com/jewellary-details/261",
+
+        },
+        {
+            id: 5,
+            name: "The Kensington",
+            image: "/images/reviews/5.webp",
+            link: "https://thecaratcasa.com/jewellary-details/260",
+
+        },
+        {
+            id: 6,
+            name: "The Chelsea",
+            image: "/images/reviews/6.webp",
+            link: "https://thecaratcasa.com/jewellary-details/259",
+
+        },
+    ];
+
+    const contactMethods = [
+        {
+            name: "Chat",
+            icon: "fa-comment-dots", 
+            link: "/chat"
+        },
+        {
+            name: "Email",
+            icon: "fa-envelope",
+            link: "mailto:service@withclarity.com"
+        },
+        {
+            name: "Phone",
+            icon: "fa-phone",
+            link: "tel:1-844-234-6463"
+        }
     ];
 
     const nextSlide = () => {
@@ -90,22 +166,32 @@ const Reviews = () => {
             {/* --- Section: Slider --- */}
             <section className="py-5 bg-white">
                 <div className="container">
-                    <h2 className="display-5 fw-light text-start mb-5" style={{ lineHeight: '1.3', letterSpacing: '-0.44px' }}>
-                        We love happy <br /> customers
+                    <h2 className="display-5 fw-light text-md-start mb-5" style={{ lineHeight: '1.3', letterSpacing: '-0.44px' }}>
+                        We love happy <br className="d-none d-md-block" /> customers
                     </h2>
 
                     <div className="position-relative mx-auto mb-4" style={{ maxWidth: '1200px', overflow: 'hidden', borderRadius: '15px', boxShadow: '0 10px 30px rgba(0, 0, 0, 0.15)' }}>
+                        
+                        {/* Previous Button */}
                         <button 
                             className="position-absolute top-50 start-0 translate-middle-y border-0 rounded-circle d-flex align-items-center justify-content-center"
                             onClick={prevSlide}
-                            style={{ width: '50px', height: '50px', background: 'rgba(255, 255, 255, 0.85)', zIndex: 10, left: '20px', boxShadow: '0 3px 12px rgba(0, 0, 0, 0.15)', transition: 'all 0.3s ease' }}
+                            style={{ 
+                                width: '40px', 
+                                height: '40px', 
+                                background: 'rgba(255, 255, 255, 0.95)', 
+                                zIndex: 10, 
+                                left: '10px',
+                                boxShadow: '0 3px 12px rgba(0, 0, 0, 0.15)',
+                                transition: 'all 0.3s ease'
+                            }}
                             onMouseEnter={(e) => {
                                 e.target.style.background = 'white';
                                 e.target.style.boxShadow = '0 5px 18px rgba(0, 0, 0, 0.25)';
                                 e.target.style.transform = 'translateY(-50%) scale(1.1)';
                             }}
                             onMouseLeave={(e) => {
-                                e.target.style.background = 'rgba(255, 255, 255, 0.85)';
+                                e.target.style.background = 'rgba(255, 255, 255, 0.95)';
                                 e.target.style.boxShadow = '0 3px 12px rgba(0, 0, 0, 0.15)';
                                 e.target.style.transform = 'translateY(-50%) scale(1)';
                             }}
@@ -113,6 +199,7 @@ const Reviews = () => {
                             &#10094;
                         </button>
 
+                        {/* Slider Content */}
                         <div style={{ overflow: 'hidden', borderRadius: '15px' }}>
                             <div 
                                 className="d-flex"
@@ -122,33 +209,24 @@ const Reviews = () => {
                                 }}
                             >
                                 {slides.map((slide, index) => (
-                                    <div key={index} className="d-flex" style={{ minWidth: '100%', flexShrink: 0, height: '500px' }}>
-                                        <div className="flex-fill position-relative overflow-hidden">
+                                    <div key={index} style={{ minWidth: '100%', flexShrink: 0 }}>
+                                        {/* Image Only - All Devices */}
+                                        <div className="position-relative overflow-hidden d-flex align-items-center justify-content-center" 
+                                             style={{ 
+                                                 height: '400px', 
+                                                 backgroundColor: '#f9f9f9',
+                                                 padding: '20px'
+                                             }}>
                                             <img 
-                                                src={slide.leftImage} 
-                                                alt="Customer" 
-                                                className="w-100 h-100"
-                                                style={{ objectFit: 'cover', transition: 'transform 0.4s ease' }}
-                                                onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
-                                                onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
-                                            />
-                                        </div>
-
-                                        <div className="flex-fill d-flex flex-column justify-content-center align-items-center text-center p-4" style={{ background: '#f9f9f9' }}>
-                                            <p className="fs-5 lh-base text-secondary fst-italic mb-4" style={{ maxWidth: '90%', fontWeight: '400' }}>
-                                                {slide.text}
-                                            </p>
-                                            <h5 className="fs-6 fw-semibold text-dark" style={{ letterSpacing: '1px' }}>
-                                                {slide.author}
-                                            </h5>
-                                        </div>
-
-                                        <div className="flex-fill position-relative overflow-hidden">
-                                            <img 
-                                                src={slide.rightImage} 
-                                                alt="Customer" 
-                                                className="w-100 h-100"
-                                                style={{ objectFit: 'cover', transition: 'transform 0.4s ease' }}
+                                                src={slide.image} 
+                                                alt={`Customer Review ${index + 1}`} 
+                                                className="h-100 w-auto"
+                                                style={{ 
+                                                    objectFit: 'contain',
+                                                    maxWidth: '100%',
+                                                    maxHeight: '100%',
+                                                    transition: 'transform 0.4s ease'
+                                                }}
                                                 onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
                                                 onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
                                             />
@@ -158,17 +236,26 @@ const Reviews = () => {
                             </div>
                         </div>
 
+                        {/* Next Button */}
                         <button 
                             className="position-absolute top-50 end-0 translate-middle-y border-0 rounded-circle d-flex align-items-center justify-content-center"
                             onClick={nextSlide}
-                            style={{ width: '50px', height: '50px', background: 'rgba(255, 255, 255, 0.85)', zIndex: 10, right: '20px', boxShadow: '0 3px 12px rgba(0, 0, 0, 0.15)', transition: 'all 0.3s ease' }}
+                            style={{ 
+                                width: '40px', 
+                                height: '40px', 
+                                background: 'rgba(255, 255, 255, 0.95)', 
+                                zIndex: 10, 
+                                right: '10px',
+                                boxShadow: '0 3px 12px rgba(0, 0, 0, 0.15)',
+                                transition: 'all 0.3s ease'
+                            }}
                             onMouseEnter={(e) => {
                                 e.target.style.background = 'white';
                                 e.target.style.boxShadow = '0 5px 18px rgba(0, 0, 0, 0.25)';
                                 e.target.style.transform = 'translateY(-50%) scale(1.1)';
                             }}
                             onMouseLeave={(e) => {
-                                e.target.style.background = 'rgba(255, 255, 255, 0.85)';
+                                e.target.style.background = 'rgba(255, 255, 255, 0.95)';
                                 e.target.style.boxShadow = '0 3px 12px rgba(0, 0, 0, 0.15)';
                                 e.target.style.transform = 'translateY(-50%) scale(1)';
                             }}
@@ -177,6 +264,7 @@ const Reviews = () => {
                         </button>
                     </div>
 
+                    {/* Slide Indicators */}
                     <div className="d-flex justify-content-center gap-3 mt-4">
                         {slides.map((_, index) => (
                             <button
@@ -184,11 +272,12 @@ const Reviews = () => {
                                 className={`border-0 rounded-circle ${index === currentSlide ? 'bg-dark' : 'bg-secondary'}`}
                                 onClick={() => goToSlide(index)}
                                 style={{ 
-                                    width: '14px', 
-                                    height: '14px', 
+                                    width: '12px', 
+                                    height: '12px', 
                                     transition: 'all 0.3s ease',
                                     transform: index === currentSlide ? 'scale(1.3)' : 'scale(1)'
                                 }}
+                                aria-label={`Go to slide ${index + 1}`}
                             ></button>
                         ))}
                     </div>
@@ -197,45 +286,54 @@ const Reviews = () => {
 
             {/* --- Section: Press Logos --- */}
             <section className="text-center bg-white py-5">
-                <h1 className="display-5 fw-light mb-5" style={{ lineHeight: '1.3', letterSpacing: '-0.44px' }}>
-                    We're the talk of the town.
-                </h1>
                 <div className="container">
-                    <div className="d-flex justify-content-center align-items-center flex-nowrap border-top border-bottom py-4">
+                    <h1 className="display-5 fw-light mb-5" style={{ lineHeight: '1.3', letterSpacing: '-0.44px' }}>
+                        We're the talk of the town.
+                    </h1>
+                    
+                    {/* Press Logos - Single Line Layout */}
+                    <div className="d-flex justify-content-center align-items-center flex-nowrap border-top border-bottom py-4"
+                         style={{ overflowX: 'auto', overflowY: 'hidden', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                         {logos.map((logo, index) => (
                             <div
                                 key={logo.id}
-                                className={`flex-fill text-center position-relative px-4 ${index !== logos.length - 1 ? 'border-end' : ''}`}
-                                style={{ transition: 'transform 0.3s ease, opacity 0.3s ease' }}
+                                className="flex-shrink-0 text-center position-relative px-3 px-md-4"
+                                style={{ 
+                                    minWidth: '150px',
+                                    transition: 'transform 0.3s ease, opacity 0.3s ease'
+                                }}
                                 onMouseEnter={() => setHoveredText(logo.text)}
                                 onMouseLeave={() => setHoveredText("")}
                             >
-                                <img 
-                                    src={logo.img} 
-                                    alt={`Logo ${logo.id}`} 
-                                    style={{ 
-                                        height: '50px', 
-                                        width: 'auto', 
-                                        maxWidth: '150px',
-                                        filter: 'grayscale(100%)',
-                                        opacity: '0.7',
-                                        transition: 'all 0.3s ease'
-                                    }}
-                                    onMouseEnter={(e) => {
-                                        e.target.style.filter = 'grayscale(0%)';
-                                        e.target.style.opacity = '1';
-                                        e.target.style.transform = 'scale(1.05)';
-                                    }}
-                                    onMouseLeave={(e) => {
-                                        e.target.style.filter = 'grayscale(100%)';
-                                        e.target.style.opacity = '0.7';
-                                        e.target.style.transform = 'scale(1)';
-                                    }}
-                                />
+                                <Link to={logo.link} className="text-decoration-none">
+                                    <img 
+                                        src={logo.img} 
+                                        alt={`Press logo ${logo.id}`} 
+                                        style={{ 
+                                            height: '40px', 
+                                            width: 'auto', 
+                                            maxWidth: '120px',
+                                            filter: 'grayscale(100%)',
+                                            opacity: '0.7',
+                                            transition: 'all 0.3s ease'
+                                        }}
+                                        onMouseEnter={(e) => {
+                                            e.target.style.filter = 'grayscale(0%)';
+                                            e.target.style.opacity = '1';
+                                            e.target.style.transform = 'scale(1.05)';
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            e.target.style.filter = 'grayscale(100%)';
+                                            e.target.style.opacity = '0.7';
+                                            e.target.style.transform = 'scale(1)';
+                                        }}
+                                    />
+                                </Link>
                             </div>
                         ))}
                     </div>
 
+                    {/* Hover Text Display */}
                     <div 
                         className={`mt-3 fs-6 text-dark fw-normal ${hoveredText ? 'opacity-100' : 'opacity-0'}`}
                         style={{ 
@@ -249,28 +347,31 @@ const Reviews = () => {
                 </div>
 
                 <div className="container mt-5">
-                    <div className="row align-items-stretch g-0">
+                    <div className="row align-items-stretch g-0 shadow-lg rounded overflow-hidden">
                         <div className="col-lg-6 col-md-12 d-flex align-items-center" style={{ background: '#d5ebec', minHeight: '400px', padding: '50px 40px' }}>
                             <div>
                                 <h1 className="display-6 mb-4" style={{ color: '#14344a', fontWeight: '400' }}>
                                     We are the talk of the town
                                 </h1>
-                                <h6 className="fs-6 lh-base text-body-secondary fw-light">
+                                <h6 className="fs-6 lh-base text-body-secondary fw-light mb-4">
                                     With Clarity uses 3D printed customized ring samples to take the stress out of engagement ring shopping.
                                     <br />
                                     With Clarity CEO Anubh Shah and CMO Slisha Kankariya on how the company's business model
                                     takes the pressure out of shopping for engagement rings.
                                 </h6>
+                                
                             </div>
                         </div>
                         <div className="col-lg-6 col-md-12 p-0">
                             <div style={{ width: '100%', height: '100%', minHeight: '400px' }}>
-                                <img 
-                                    src="/images/reviews/foxbuisness_1__000_1.jpg" 
-                                    alt="Fox Business Feature" 
-                                    className="w-100 h-100"
-                                    style={{ objectFit: 'cover', display: 'block' }}
-                                />
+                                <Link to="/press">
+                                    <img 
+                                        src="/images/reviews/foxbuisness_1__000_1.jpg" 
+                                        alt="Fox Business Feature - With Clarity in the news" 
+                                        className="w-100 h-100"
+                                        style={{ objectFit: 'cover', display: 'block' }}
+                                    />
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -279,45 +380,50 @@ const Reviews = () => {
 
             {/* --- Section: Bestselling Products --- */}
             <section className="bg-white py-5">
-                <h1 className="display-5 text-center mb-5" style={{ color: '#14344a', fontWeight: '400' }}>
-                    Our bestselling jewelry
-                </h1>
-                <div className="container text-center">
+                <div className="container">
+                    <h1 className="display-5 text-center mb-5" style={{ color: '#14344a', fontWeight: '400' }}>
+                        Our bestselling jewelry
+                    </h1>
                     <div className="row justify-content-center">
-                        {[1, 2, 3, 4, 5, 6].map((num) => (
-                            <div key={num} className="col-lg-4 col-md-6 col-sm-6 mb-4">
-                                <div style={{ transition: 'transform 0.3s ease' }} 
-                                     onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-5px)'}
-                                     onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
-                                    <a href="#" className="text-decoration-none text-dark">
+                        {bestsellingProducts.map((product) => (
+                            <div key={product.id} className="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-4">
+                                <div 
+                                    className="h-100 text-center"
+                                    style={{ transition: 'transform 0.3s ease' }} 
+                                    onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-5px)'}
+                                    onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+                                >
+                                    <Link to={product.link} className="text-decoration-none text-dark">
                                         <img 
-                                            src={`/images/reviews/${num}.webp`} 
-                                            alt="Jewelry Product" 
+                                            src={product.image} 
+                                            alt={product.name} 
                                             className="w-100 rounded-3 mb-3"
                                             style={{ height: '250px', objectFit: 'cover', transition: 'transform 0.3s ease' }}
                                             onMouseEnter={(e) => e.target.style.transform = 'scale(1.03)'}
                                             onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
                                         />
-                                        <span className="fs-6 fw-medium d-block mt-2">The Windsor Ring</span>
-                                    </a>
+                                        <span className="fs-6 fw-medium d-block mt-2">{product.name}</span>
+                                    </Link>
                                 </div>
                             </div>
                         ))}
                     </div>
                     <div className="text-center pt-4 pb-4">
-                        <a className="btn btn-outline-dark border-2 px-4 py-2 fw-semibold rounded-1" 
-                           href="#"
-                           style={{ transition: 'all 0.3s ease' }}
-                           onMouseEnter={(e) => {
-                               e.target.style.background = '#14344a';
-                               e.target.style.color = 'white';
-                           }}
-                           onMouseLeave={(e) => {
-                               e.target.style.background = 'transparent';
-                               e.target.style.color = '#14344a';
-                           }}>
-                            VIEW ALL
-                        </a>
+                        <Link 
+                            className="btn btn-outline-dark border-2 px-4 py-2 fw-semibold rounded-1" 
+                            to="https://thecaratcasa.com/jewelry-list"
+                            style={{ transition: 'all 0.3s ease' }}
+                            onMouseEnter={(e) => {
+                                e.target.style.background = '#14344a';
+                                e.target.style.color = 'white';
+                            }}
+                            onMouseLeave={(e) => {
+                                e.target.style.background = 'transparent';
+                                e.target.style.color = '#14344a';
+                            }}
+                        >
+                            VIEW ALL PRODUCTS
+                        </Link>
                     </div>
                 </div>
             </section>
@@ -339,23 +445,26 @@ const Reviews = () => {
                             </p>
                         </div>
 
-                        {['Chat', 'Email', 'Phone'].map((service, index) => (
-                            <div key={service} className="col-lg-2 col-md-4 col-sm-4 mb-3">
-                                <div className="text-center py-3 h-100 d-flex align-items-center justify-content-center border-end" 
-                                     style={{ borderColor: index < 2 ? 'rgba(123, 123, 123, 0.3)' : 'transparent' }}>
-                                    <a href="#" className="text-decoration-none text-dark text-center">
-                                        <i className={`fa-solid ${
-                                            service === 'Chat' ? 'fa-comment-dots' : 
-                                            service === 'Email' ? 'fa-envelope' : 'fa-phone'
-                                        } d-block mb-2`} 
-                                           style={{ fontSize: '2.5rem', color: '#14344a', transition: 'transform 0.3s ease' }}
-                                           onMouseEnter={(e) => e.target.style.transform = 'scale(1.1)'}
-                                           onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}></i>
-                                        <span className="fs-6 fw-medium">{service}</span>
-                                    </a>
-                                </div>
+                        <div className="col-lg-6 col-md-12">
+                            <div className="row justify-content-center">
+                                {contactMethods.map((service, index) => (
+                                    <div key={service.name} className="col-lg-4 col-md-4 col-sm-4 mb-3">
+                                        <div className="text-center py-3 h-100 d-flex flex-column align-items-center justify-content-center">
+                                            <Link to={service.link} className="text-decoration-none text-dark text-center">
+                                                <i 
+                                                    className={`fa-solid ${service.icon} d-block mb-2`} 
+                                                    style={{ fontSize: '2.5rem', color: '#14344a', transition: 'transform 0.3s ease' }}
+                                                    onMouseEnter={(e) => e.target.style.transform = 'scale(1.1)'}
+                                                    onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+                                                ></i>
+                                                <span className="fs-6 fw-medium d-block">{service.name}</span>
+                                                <small className="text-muted d-block mt-1">{service.description}</small>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
-                        ))}
+                        </div>
                     </div>
                 </div>
             </section>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Link } from 'react-router-dom';
 
 // 🔹 Blog Section Component
 const BlogSection = ({ items, settings }) => {
@@ -203,7 +204,7 @@ const ReviewSlider = () => {
                                 ))}
                             </div>
 
-                            <button
+                            <Link to='/reviews'
                                 style={{
                                     backgroundColor: "#000",
                                     color: "#fff",
@@ -213,12 +214,13 @@ const ReviewSlider = () => {
                                     cursor: "pointer",
                                     fontSize: "16px",
                                     transition: "all 0.3s ease",
+                                    textDecoration:'none'
                                 }}
                                 onMouseOver={(e) => (e.target.style.backgroundColor = "#333")}
                                 onMouseOut={(e) => (e.target.style.backgroundColor = "#000")}
                             >
                                 More Reviews
-                            </button>
+                            </Link>
                         </div>
                     ))}
                 </Slider>
@@ -309,34 +311,36 @@ const Affiliates = () => {
             <BlogSection items={engagementItems} settings={sliderSettings} />
 
             {/* Why Join Us Section */}
-            <section >
-                <div className="container" style={{ background: "#14344a", padding: "5%" }}>
-                    <div className="row text-center">
-                        <div className="col-md-3">
+
+            <section>
+                <div className="container" style={{ background: "#14344a", padding: '30px' }}>
+                    <div className="row">
+                        <div className="col-md-4 text-center">
                             <h1 className='text-white'>Why Join us?</h1>
                         </div>
-                        <div className="col-md-9">
+                        <div className="col-md-8 text-center">
                             <p style={{ fontSize: "16px", lineHeight: "1.6", color: '#fff', textAlign: 'center' }}>
                                 Award winning growth, stellar customer service and attention to quality have made us the fastest growing
                                 engagement ring company in the country. Rapidly expanding jewelry collections and transparency at our core.
                             </p>
-                            <button style={{
+                            <Link to='https://ui.awin.com/merchant-profile/89517' style={{
                                 background: 'none',
                                 color: '#fff',
                                 border: 'none',
                                 borderBottom: '2px solid #fff',
                                 fontSize: '16px',
                                 fontWeight: 700,
-                                padding: '5px 10px',
-                                cursor: 'pointer'
+
+                                cursor: 'pointer',
+                                textDecoration: 'none'
                             }}>
                                 Join now
-                            </button>
+                            </Link>
                         </div>
                     </div>
-
                 </div>
             </section>
+            
 
             <section>
                 <div className="container text-center p-3 p-md-4">
@@ -429,7 +433,8 @@ const Affiliates = () => {
                                 alt="HIGH AVERAGE ORDER VALUE"
                                 className="radiance-card-img mx-auto d-block" width={80}
                             />
-                            <h5 className="radiance-card-title mt-3">LEAVE A REVIEW</h5>
+                            <h5 className="radiance-card-title mt-3">HIGH AVERAGE ORDER VALUE
+                            </h5>
                             <p className="radiance-card-text">
                                 Average order value is over $5,000. One of the highest in the industry. Our product assortment also includes wedding bands, jewelry, lab and natual diamonds in all price points.
                             </p>
@@ -479,7 +484,7 @@ const Affiliates = () => {
                         ))}
                     </div>
                     <div
-                        className="mt-3 fs-6"
+                        className="mt-4 fs-6 text-center "
                         style={{
                             color: '#000',
                             transform: hoveredText ? 'translateY(0)' : 'translateY(10px)',
@@ -596,33 +601,41 @@ const Affiliates = () => {
 
                         <div className="col-lg-2 col-md-4 col-sm-4 mb-3">
                             <div className="reviews-link" style={{ borderRight: '1px solid #00000043' }}>
-                                <a href="#" style={{ textDecoration: 'none' }}>
+                                <Link to="" style={{ textDecoration: 'none' }}>
                                     <i style={{ fontSize: '30px', fontFamily: 'FontAwesome', color: '#00000043' }} className="fa-solid fa-comment-dots contact-icon"></i>
                                     <br />
                                     <span style={{ color: '#000' }}>Chat</span>
-                                </a>
+                                </Link>
                             </div>
                         </div>
 
                         <div className="col-lg-2 col-md-4 col-sm-4 mb-3">
                             <div className="reviews-link" style={{ borderRight: '1px solid #00000043' }}>
-                                <a href="#" style={{ textDecoration: 'none' }}>
-                                    <i className="fa-solid fa-envelope contact-icon" style={{ fontSize: '30px', fontFamily: 'FontAwesome', color: '#00000043' }}></i>
+                                <Link to="mailto:service@withclarity.com" style={{ textDecoration: 'none' }}>
+                                    <i
+                                        className="fa-solid fa-envelope contact-icon"
+                                        style={{ fontSize: '30px', fontFamily: 'FontAwesome', color: '#00000043' }}
+                                    ></i>
                                     <br />
                                     <span style={{ color: '#000' }}>Email</span>
-                                </a>
+                                </Link>
                             </div>
                         </div>
 
+
                         <div className="col-lg-2 col-md-4 col-sm-4 mb-3">
-                            <div className="reviews-link">
-                                <a href="#" style={{ textDecoration: 'none' }}>
-                                    <i className="fa-solid fa-phone contact-icon" style={{ fontSize: '30px', fontFamily: 'FontAwesome', color: '#00000043' }}></i>
+                            <div className="reviews-link" style={{ borderRight: '1px solid #00000043' }}>
+                                <Link to="tel:1-844-234-6463" style={{ textDecoration: 'none' }}>
+                                    <i
+                                        className="fa-solid fa-phone contact-icon"
+                                        style={{ fontSize: '30px', fontFamily: 'FontAwesome', color: '#00000043' }}
+                                    ></i>
                                     <br />
                                     <span style={{ color: '#000' }}>Phone</span>
-                                </a>
+                                </Link>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </section>

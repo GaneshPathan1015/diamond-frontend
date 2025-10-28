@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function Education() {
   const [activeRing, setActiveRing] = useState("Solitaire");
@@ -45,23 +46,23 @@ export default function Education() {
         <div className="text-center mb-4">
           <h2 className="section-header">DIAMOND EDUCATION</h2>
           <div className="d-flex justify-content-center gap-4 mt-3">
-            <button
+            <Link to=""
               className={`text-uppercase border-0 bg-transparent fw-bold ${
                 activeTab === "natural" ? "text-dark" : "text-muted"
               }`}
               onClick={() => handleTabChange("natural")}
             >
               NATURAL DIAMOND
-            </button>
+            </Link>
             <span className="text-muted">|</span>
-            <button
+            <Link to=""
               className={`text-uppercase border-0 bg-transparent fw-bold ${
                 activeTab === "lab" ? "text-dark" : "text-muted"
               }`}
               onClick={() => handleTabChange("lab")}
             >
               LAB DIAMOND
-            </button>
+            </Link>
           </div>
         </div>
 
@@ -79,12 +80,12 @@ export default function Education() {
                 and adorn yourself with a timeless testament of nature’s
                 brilliance.
               </p>
-              <a
-                href="#"
+              <Link
+                to="/diamond?menudiamond=natural-diamond"
                 className="btn border border-dark rounded-0 fw-bold mt-3 px-3 py-2"
               >
                 Shop Now
-              </a>
+              </Link>
             </div>
             <div className="col-md-6">
               <img
@@ -110,12 +111,12 @@ export default function Education() {
                 popular choice for conscious consumers seeking exquisite jewelry
                 without compromising on quality or environmental impact.
               </p>
-              <a
-                href="#"
+              <Link
+                to="/diamond?menudiamond=lab-diamond"
                 className="btn border border-dark rounded-0 fw-bold mt-3 px-3 py-2"
               >
                 Shop Now
-              </a>
+              </Link>
             </div>
             <div className="col-md-6">
               <img

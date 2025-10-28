@@ -29,7 +29,6 @@ export default function Weddingbrands() {
                   your love so easy. Elevate your story with the perfect wedding
                   band.
                 </p>
-                <button className="btn wedding-btn">SHOP WEDDING BANDS</button>
               </div>
             </div>
 

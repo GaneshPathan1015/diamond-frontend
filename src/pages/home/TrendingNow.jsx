@@ -1,26 +1,31 @@
-
 import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./TrendingNow.css"; // custom CSS
+import { Link } from "react-router-dom";
 
 const trendingItems = [
-  // { image: "/images/elements.webp", title: "PLATINUM ENGAGEMENT RINGS" },
-  // { image: "/images/elements.webp", title: "THE BOUQUET" },
-  // { image: "/images/elements.webp", title: "ELEMENTS" },
-  // { image: "/images/elements.webp", title: "CLASSIC SOLITAIRE" },
-
-    { title: "ELEMENTS", image: "/images/elements.webp" },
-  { title: "THE BOUQUET", image: "/images/THE-BOUQUET.webp" },
-  { title: "THE CERAMIC SERIES", image: "/images/ceremic_series.jpg" },
-  { title: "WEDDING BANDS", image: "/images/WEDDING-BANDS.webp" },
-  { title: "EARRINGS", image: "/images/EARRINGS.webp" },
-  { title: "ANNIVERSARY RINGS", image: "/images/ANNIVERSARY-RINGS.webp" },
-  { title: "ETERNITY RINGS", image: "/images/ETERNITY-RINGS.jpg" },
-  { title: "TENNIS NECKLACES", image: "/images/TENNIS-NECKLACES.webp" },
-  { title: "TENNIS BRACELETS", image: "/images/TENNIS-BRACELETS.jpg" },
-  { title: "FINE JEWELRY", image: "/images/Fine-Jewelry.jpg" },
+  {
+    title: "ELEMENTS",
+    image: "/images/elements.webp",
+    link: "/jewelry-list?menucollection=elements-54",
+  },
+  {
+    title: "THE BOUQUET",
+    image: "/images/THE-BOUQUET.webp",
+    link: "/jewelry-list?menucollection=bouquet-52",
+  },
+  {
+    title: "THE CERAMIC SERIES",
+    image: "/images/ceremic_series.jpg",
+    link: "/jewelry-list?menucollection=the-ceramic-series-53",
+  },
+  {
+    title: "EARRINGS",
+    image: "/images/EARRINGS.webp",
+    link: "/jewelry-list?menucollection=earrings-59",
+  }
 ];
 
 const TrendingNow = () => {
@@ -50,12 +55,12 @@ const TrendingNow = () => {
           {/* Left Title + Button */}
           <div className="col-12 col-md-3 mb-4 mb-md-0 text-center text-md-start">
             <h2 className="trending-title mb-3">Trending Now</h2>
-            <a
-              href="#"
+            <Link
+              to="/engagement-rings/preset-rings"
               className="btn explore-btn border rounded-0 fw-bold"
             >
               EXPLORE NOW
-            </a>
+            </Link>
           </div>
 
           {/* Slider */}
@@ -63,8 +68,16 @@ const TrendingNow = () => {
             <Slider {...settings}>
               {trendingItems.map((item, index) => (
                 <div key={index} className="trending-item text-center">
-                  <img src={item.image} alt={item.title} className="img-fluid" />
-                  <p className="item-label mt-2">{item.title}</p>
+                  <Link to={item.link} className="text-decoration-none">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="img-fluid"
+                    />
+                    <p className="item-label mt-2 text-dark fw-semibold">
+                      {item.title}
+                    </p>
+                  </Link>
                 </div>
               ))}
             </Slider>

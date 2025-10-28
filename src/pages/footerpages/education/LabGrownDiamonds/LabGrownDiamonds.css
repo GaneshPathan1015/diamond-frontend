@@ -132,7 +132,7 @@ a.hero_btn:hover {
 
 
 @media (max-width: 576px) {
-  .col-md-6 {
+  .LabGrownDiamonds-column {
     flex-direction: column;
     text-align: center;
   }
@@ -154,14 +154,5 @@ a.hero_btn:hover {
   .hero_btn {
     font-size: 11px;
     padding: 8px 12px;
-  }
-
-  .row .col-6 img {
-    width: 100px !important;
-  }
-
-  .row .col-6 p {
-    font-size: 13px;
-    margin-top: 5px;
   }
 }

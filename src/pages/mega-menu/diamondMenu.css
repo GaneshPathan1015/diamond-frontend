@@ -8,14 +8,14 @@
     margin-bottom: 0.5rem;
 }
 
-p {
+.diamond-menu-p {
     margin: 0.2rem 0;
     color: #222;
     cursor: pointer;
     transition: color 0.2s;
 }
 
-p:hover {
+.diamond-menu-p:hover {
     color: #8a8a8a;
 }
 

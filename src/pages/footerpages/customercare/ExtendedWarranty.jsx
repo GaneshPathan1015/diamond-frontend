@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 
 const ExtendedWarranty = () => {
     const [hover, setHover] = useState(false);
@@ -269,14 +270,14 @@ const ExtendedWarranty = () => {
                             </p>
 
                             {/* Styled Button */}
-                            <a
-                                href="#"
+                            {/* <Link
+                                to="#"
                                 style={buttonStyle}
                                 onMouseEnter={() => setHover(true)}
                                 onMouseLeave={() => setHover(false)}
                             >
                                 READ MORE DETAILS
-                            </a>
+                            </Link> */}
                         </div>
                         <div className="col-md-6">
                             <div>
@@ -364,7 +365,7 @@ const ExtendedWarranty = () => {
 
 
                     </div>
-                    <a href="" style={{
+                    <Link to="mailto:service@withclarity.com" style={{
                         display: "inline-block",
                         padding: "9px 25px",
                         border: "2px solid #000",
@@ -376,7 +377,7 @@ const ExtendedWarranty = () => {
                         transition: "all 0.3s ease",
                         letterSpacing: "1px",
                         color: '#000'
-                    }}>START A CLAIM</a>
+                    }}>START A CLAIM</Link>
                 </div>
             </section>
 
@@ -482,7 +483,7 @@ const ExtendedWarranty = () => {
                                     data-bs-parent="#faqAccordion"
                                 >
                                     <div className="accordion-body">
-                                        <img src="/images/extendedwarranty/3.png" alt="" />
+                                        <img src="/images/extendedwarranty/3.png" alt="" width="100%" />
                                     </div>
                                 </div>
                             </div>

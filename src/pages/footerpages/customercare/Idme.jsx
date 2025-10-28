@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Idme = () => {
     return (
@@ -108,28 +109,28 @@ const Idme = () => {
 
                     <div className='row text-center'>
                         <div className="col-md-3">
-                            <a href="">
+                            <Link to="/engagement-rings/rings">
                                 <img src="/images/idme/6.webp" alt="" />
                                 <label style={{ color: '#14344a', fontSize: '13px' }} htmlFor="">ENGAGEMENT RINGS</label>
-                            </a>
+                            </Link>
                         </div>
                         <div className="col-md-3">
-                            <a href="">
+                            <Link to="/wedding/womens-wedding-rings">
                                 <img src="/images/idme/7.webp" alt="" />
                                 <label style={{ color: '#14344a', fontSize: '13px' }} htmlFor="">WEDDING BANDS</label>
-                            </a>
+                            </Link>
                         </div>
                         <div className="col-md-3">
-                            <a href="">
+                            <Link to="/diamond?menudiamond=natural-diamond">
                                 <img src="/images/idme/8.webp" alt="" />
                                 <label style={{ color: '#14344a', fontSize: '13px' }} htmlFor="">LOOSE DIAMONDS</label>
-                            </a>
+                            </Link>
                         </div>
                         <div className="col-md-3">
-                            <a href="">
+                            <Link to="/jewelry-list">
                                 <img src="/images/idme/9.webp" alt="" />
                                 <label style={{ color: '#14344a', fontSize: '13px' }} htmlFor="">JEWELRY</label>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -236,31 +237,31 @@ const Idme = () => {
 
                         <div className="col-lg-2 col-md-4 col-sm-4 mb-3">
                             <div className="reviews-link" style={{ borderRight: '1px solid #00000043' }}>
-                                <a href="#" style={{ textDecoration: 'none' }}>
+                                <Link to="#" style={{ textDecoration: 'none' }}>
                                     <i style={{ fontSize: '30px', fontFamily: 'FontAwesome', color: '#00000043' }} className="fa-solid fa-comment-dots contact-icon"></i>
                                     <br />
                                     <span style={{ color: '#000' }}>Chat</span>
-                                </a>
+                                </Link>
                             </div>
                         </div>
 
                         <div className="col-lg-2 col-md-4 col-sm-4 mb-3">
                             <div className="reviews-link" style={{ borderRight: '1px solid #00000043' }}>
-                                <a href="#" style={{ textDecoration: 'none' }}>
+                                <Link to="mailto:service@withclarity.com" style={{ textDecoration: 'none' }}>
                                     <i className="fa-solid fa-envelope contact-icon" style={{ fontSize: '30px', fontFamily: 'FontAwesome', color: '#00000043' }}></i>
                                     <br />
                                     <span style={{ color: '#000' }}>Email</span>
-                                </a>
+                                </Link>
                             </div>
                         </div>
 
                         <div className="col-lg-2 col-md-4 col-sm-4 mb-3">
                             <div className="reviews-link">
-                                <a href="#" style={{ textDecoration: 'none' }}>
+                                <Link to="tel:1-844-234-6463" style={{ textDecoration: 'none' }}>
                                     <i className="fa-solid fa-phone contact-icon" style={{ fontSize: '30px', fontFamily: 'FontAwesome', color: '#00000043' }}></i>
                                     <br />
                                     <span style={{ color: '#000' }}>Phone</span>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>

@@ -20,7 +20,7 @@ const Footer = () => {
     { label: "Diamonds", to: "/diamonds" },
     { label: "Clarity Plus™ Diamonds", to: "/clarity-plus-diamonds" },
     { label: "Engagement", to: "/engagement" },
-    { label: "Wedding bands", to: "/wedding-brands" },
+    { label: "Wedding bands", to: "/wedding-band-styles" },
     { label: "Gemstones", to: "/gemstones-types-guide" },
     { label: "Jewelry", to: "/fine-jewelry-earrings" },
     { label: "Conflict diamond policy", to: "/our-policies" },
@@ -31,14 +31,14 @@ const Footer = () => {
 
   const shopLinks = [
     { label: "Diamonds", to: "/diamond" },
-    { label: "Engagement rings", to: "/engagement-ring-style" },
-    { label: "Bands for him", to: "#" },
-    { label: "Bands for her", to: "#" },
-    { label: "Home preview", to: "/home" },
-    { label: "Gemstone rings", to: "#" },
-    { label: "Preset rings", to: "#" },
-    { label: "Custom rings", to: "#" },
-    { label: "Fine jewelry", to: "#" },
+    { label: "Engagement rings", to: "/engagement-rings" },
+    { label: "Bands for him", to: "/mens-wedding-rings" },
+    { label: "Bands for her", to: "/womens-wedding-rings" },
+    { label: "Home preview", to: "/home-preview" },
+    { label: "Gemstone rings", to: "/jewelry-list?category=rings-22&subcategory=gemstone-27" },
+    { label: "Preset rings", to: "/engagement-rings" },
+    { label: "Custom rings", to: "/engagement-rings" },
+    { label: "Fine jewelry", to: "/jewelry-list" },
   ];
 
   const customerCareLinks = [

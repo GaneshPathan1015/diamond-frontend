@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Insurance = () => {
     return (
@@ -40,7 +41,7 @@ const Insurance = () => {
                         gap: "20px",
                         flexWrap: "wrap",
                     }}>
-                        <img src="/images/insurance/2.png" alt="" />
+                        <img src="/images/insurance/2.png" alt="" width="100%"/>
                     </div>
                     <p style={{
                         fontSize: '14px',
@@ -53,7 +54,7 @@ const Insurance = () => {
 
                         Protect your jewelry with personalized insurance. With Clarity understands the irreplaceable value and meaning your jewelry holds, so should something ever happen to your jewelry, take comfort in knowing that Jewelers Mutual® is here to help.</p>
 
-                    <a style={{ background: 'none', border: '2px solid #000', textDecoration: 'none', padding: '5px 10px', color: '#000' }} className='' href="">GET A QUOTE</a>
+                    {/* <Link style={{ background: 'none', border: '2px solid #000', textDecoration: 'none', padding: '5px 10px', color: '#000' }} className='' to="">GET A QUOTE</Link> */}
                 </div>
             </section>
 

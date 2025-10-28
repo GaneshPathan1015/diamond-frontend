@@ -16,65 +16,6 @@ const BestsellingRings = () => {
   const [activeTab, setActiveTab] = useState("ANNIVERSARY RINGS");
   const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   const fetchProducts = async () => {
-  //     try {
-  //       const response = await axiosClient.get("/api/get-all-products", {
-  //         params: {
-  //           page: 1,
-  //           perPage: 100,
-  //         },
-  //       });
-
-  //       const products = response.data?.data || [];
-
-  //       const updatedData = {
-  //         "ANNIVERSARY RINGS": [],
-  //         "ETERNITY RINGS": [],
-  //         "STACKABLE RINGS": [],
-  //       };
-
-  //       products.forEach((group) => {
-  //         const subCat = group.category?.name?.toUpperCase();
-  //         const parentCat = group.category?.parent?.name?.toUpperCase();
-
-  //         let tabKey = null;
-  //         if (parentCat === "RINGS") {
-  //           if (subCat === "ANNIVERSARY") tabKey = "ANNIVERSARY RINGS";
-  //           else if (subCat === "ETERNITY") tabKey = "ETERNITY RINGS";
-  //           else if (subCat === "STACKABLE") tabKey = "STACKABLE RINGS";
-  //         }
-
-  //         if (tabKey) {
-  //           const metalKeys = Object.keys(group.metal_variations || {});
-  //           const defaultMetal = metalKeys[0];
-  //           const variation = group.metal_variations[defaultMetal]?.[0];
-
-  //           if (!variation) return;
-
-  //           const image = variation?.images?.[0]
-  //             ? `${import.meta.env.VITE_BACKEND_URL}/storage/${variation.images[0]}`
-  //             : `${import.meta.env.VITE_BACKEND_URL}/storage/variation_images/No_Image_Available.jpg`;
-
-  //           updatedData[tabKey].push({
-  //             image,
-  //             title: group.product?.name || "Untitled",
-  //             sku: group.product?.master_sku,
-  //           });
-  //         }
-  //       });
-
-  //       setRingData(updatedData);
-  //     } catch (error) {
-  //       console.error("Error fetching ring data:", error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchProducts();
-  // }, []);
-
   useEffect(() => {
     const fetchRings = async () => {
       try {
@@ -165,7 +106,7 @@ const BestsellingRings = () => {
           ) : ringData[activeTab]?.length > 0 ? (
             ringData[activeTab].map((item, index) => (
               <div key={index} className="ring-card">
-                <Link to={`/jewellary-details/${item.product_id}`}>
+                <Link to={`/jewellary-details/${item.sku}`}>
                   <img src={item.image} alt={item.title} className="ring-img" />
                   <p className="ring-title">{item.title}</p>
                 </Link>
