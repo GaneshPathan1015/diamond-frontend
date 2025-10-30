@@ -38,28 +38,52 @@ import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import WhiteClarityNav from "./pages/header/WhiteClarityNav";
 import PrivateRoute from "./routes/PrivateRoute";
 import CollectionsRouter from "./pages/collectionsRouter/CollectionsRouter";
+import GiftList from "./pages/gift/GiftList";
+import GiftDetails from "./pages/giftDetails/giftDetails";
+import JewelryCollections from "./pages/highJewelry/JewelryCollections";
 
 // Footer pages
 import Press from "./pages/footerpages/Company/Press";
-import SiteMap  from "./pages/footerpages/Company/Sitemap";
+import SiteMap from "./pages/footerpages/Company/Sitemap";
 
 // Education
 import Jewelry from "./pages/footerpages/education/jewelry/jewelry";
 import OurPolicy from "./pages/footerpages/education/policy/OurPolicy";
-import Gemstones from "./pages/footerpages/education/Gemstones/Gemstones";
-import LabGrownDiamonds from "./pages/footerpages/education/LabGrownDiamonds/LabGrownDiamonds";
+import Gemstones from "./pages/footerpages/education/gemstones/Gemstones";
+import LabGrownDiamonds from "./pages/footerpages/education/labGrownDiamonds/LabGrownDiamonds";
 import Metal from "./pages/footerpages/education/Metal";
 import Blog from "./pages/footerpages/education/blog/Blog";
+import { useEffect, useState } from "react";
 
 export default function App() {
-  const location = useLocation();
-  const isHome = location.pathname === "/";
+  const [paddingTop, setPaddingTop] = useState("146px");
+  const isHome = window.location.pathname === "/"; // Adjust if your home path differs
+
+  useEffect(() => {
+    const updatePadding = () => {
+      const width = window.innerWidth;
+
+      if (isHome) {
+        setPaddingTop("0px");
+      } else if (width <= 1024) {
+        setPaddingTop("100px");
+      } else {
+        setPaddingTop("146px");
+      }
+    };
+
+    updatePadding(); // Set on mount
+    window.addEventListener("resize", updatePadding);
+
+    return () => window.removeEventListener("resize", updatePadding);
+  }, [isHome]);
+
   return (
     <>
       <ScrollToTop />
       {/* <HeaderWrapper /> */}
       <WhiteClarityNav />
-      <main style={{ paddingTop: isHome ? "0px" : "146px" }}>
+      <main style={{ paddingTop }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
@@ -96,6 +120,7 @@ export default function App() {
           <Route path="/engagement-rings/:slug?" element={<EngagementList />} />
           <Route path="/wedding/:slug?" element={<WeddingList />} />
           <Route path="/collections/:slug" element={<CollectionsRouter />} />
+          <Route path="/page/:slug" element={<JewelryCollections />} />
 
           <Route
             path="/jewellary-details/:id"
@@ -106,6 +131,7 @@ export default function App() {
             path="/engagment-details/:id"
             element={<EngagementDetails />}
           />
+          <Route path="/products/:productSlug" element={<GiftDetails />} />
           <Route path="/megamenu" element={<MegaMenu />} />
           <Route path="/luxe" element={<Luxe />} />
           <Route path="/reserve" element={<Reserve />} />

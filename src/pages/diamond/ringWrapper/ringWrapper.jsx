@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../index.css";
+import styles from "./RingWrapper.module.css"; // Import the CSS module
 import { useLocation, useNavigate } from "react-router-dom";
 
 const RingWrapper = ({ ringCartItem }) => {
@@ -41,42 +41,35 @@ const RingWrapper = ({ ringCartItem }) => {
     if (step.label === "CHOOSE A SETTING") {
       navigate("/engagement-rings");
     }
+    // Add navigation logic for other steps if needed
+    // Example:
+    // if (step.label === "CHOOSE A DIAMOND") {
+    //   navigate("/diamonds");
+    // }
   };
 
   return (
     <>
-      <div className="diamond-ring-wrapper">
-        <div className="step-container">
-          {steps.map((step, index) => (
-            <div
-              key={step.id}
-              className={`step ${currentStep === step.id ? "active" : ""} ${
-                step.id === 3 ? "disabled" : ""
-              }`}
-              onClick={() => step.id !== 3 && handleStepClick(step)} // 🚫 Prevent click for step 3
-            >
-              <div>
-                <span className="step-number">{step.id}</span>
-                <span className="step-divider"></span>
-                <span className="step-label">{step.label}</span>
-              </div>
-              <div>
-                {steps === diamondSteps &&
-                  index === 0 &&
-                  ringCartItem?.image && (
-                    <div className="ring-preview">
-                      <img
-                        src={ringCartItem.image}
-                        alt="Selected Ring"
-                        className="ring-preview-img"
-                      />
-                    </div>
-                  )}
-              </div>
-            </div>
-          ))}
+  
+        <div className={styles.diamondRingWrapper}>
+          <div className={styles.stepContainer}>
+            {steps.map((step, index) => (
+              <React.Fragment key={step.id}>
+                <div
+                  className={`${styles.step} ${
+                    currentStep === step.id ? styles.active : ""
+                  } ${step.id === 3 ? styles.disabled : ""}`}
+                  onClick={() => step.id !== 3 && handleStepClick(step)}
+                >
+                  <span className={styles.stepNumber}>{step.id}</span>
+                  <span className={styles.stepDivider}></span>
+                  <span className={styles.stepLabel}>{step.label}</span>
+                </div>
+              </React.Fragment>
+            ))}
+          </div>
         </div>
-      </div>
+    
     </>
   );
 };

@@ -1,18 +1,5 @@
-.filter-section {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-between;
-  width: 100%;
-  padding: 0 20px;
-  box-sizing: border-box;
-}
 
-.price-slider-container {
-  width: 30%;
-}
-
-.price-label {
+.priceLabel {
   font-weight: bold;
   margin-bottom: 10px;
   display: block;
@@ -20,13 +7,13 @@
   color: #00263a;
 }
 
-.slider-wrapper {
+.sliderWrapper {
   position: relative;
   height: 30px;
   margin: 10px 0;
 }
 
-.slider-wrapper input[type="range"] {
+.sliderWrapper input[type="range"] {
   position: absolute;
   width: 100%;
   height: 30px;
@@ -36,7 +23,7 @@
   z-index: 2;
 }
 
-.slider-wrapper input[type="range"]::-webkit-slider-thumb {
+.sliderWrapper input[type="range"]::-webkit-slider-thumb {
   pointer-events: all;
   width: 16px;
   height: 16px;
@@ -47,7 +34,7 @@
   cursor: pointer;
 }
 
-.slider-track {
+.sliderTrack {
   position: absolute;
   height: 4px;
   background: #d3d3d3;
@@ -58,7 +45,7 @@
   border-radius: 2px;
 }
 
-.slider-active {
+.sliderActive {
   position: absolute;
   height: 4px;
   background-color: #00263a;
@@ -68,14 +55,14 @@
   z-index: 1;
 }
 
-.price-inputs {
+.priceInputs {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 10px;
 }
 
-.price-inputs input {
+.priceInputs input {
   width: 100px;
   padding: 4px 8px;
   border: 1px solid #ccc;
@@ -83,11 +70,37 @@
   font-size: 14px;
 }
 
-.price-inputs span {
+.priceInputs span {
   font-size: 14px;
 }
 
-.cut-label-item {
+.cutLabels {
+  margin-top: 5px;
+}
+
+.cutLabelItem {
   flex: 1;
   text-align: center;
+  font-size: 13px;
+  color: #00263a;
+}
+
+/* ✅ Responsive adjustments */
+@media (max-width: 767px) {
+  .priceInputs input {
+    width: 80px;
+    font-size: 12px;
+  }
+
+  .priceLabel {
+    font-size: 13px;
+  }
+
+  .cutLabelItem {
+    font-size: 11px;
+  }
+
+  .filterSection {
+    padding: 0 10px;
+  }
 }

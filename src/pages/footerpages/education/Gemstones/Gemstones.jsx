@@ -18,10 +18,10 @@ const Gemstones = () => {
                 <div className="container">
                     {/* Top Navigation */}
                     <nav className="top-nav">
-                        <a href="#">ENGAGEMENT RINGS</a><span>|</span>
-                        <a href="#">DIAMONDS</a><span>|</span>
-                        <a href="#">WEDDING BANDS</a><span>|</span>
-                        <a href="#">FINE JEWELRY</a><span>|</span>
+                        <a href="/engagement-ring-style">ENGAGEMENT RINGS</a><span>|</span>
+                        <a href="/diamonds">DIAMONDS</a><span>|</span>
+                        <a href="/wedding-band-styles">WEDDING BANDS</a><span>|</span>
+                        <a href="/fine-jewelry-earrings">FINE JEWELRY</a><span>|</span>
                         <a href="#" className="active">GEMSTONE</a>
                     </nav>
 

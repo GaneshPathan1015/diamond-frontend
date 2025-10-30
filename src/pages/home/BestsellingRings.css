@@ -1,5 +1,4 @@
 .exclusive-wrapper {
-  padding: 60px 0;
   background-color: #fff;
   text-align: center;
 }
@@ -67,11 +66,6 @@
 
 /* new css */
 
-/* Wrapper */
-.exclusive-wrapper {
-  padding: 60px 0;
-  text-align: center;
-}
 
 /* Section title */
 .section-title {
@@ -195,13 +189,14 @@
 
 @media (max-width: 576px) {
   .exclusive-wrapper {
-    padding: 40px 15px;
+    padding: 5px 15px;
   }
   .section-title {
     font-size: 22px;
   }
   .tab-buttons {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: nowrap;
     gap: 12px;
   }
   .tab-btn {

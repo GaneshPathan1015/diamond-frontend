@@ -78,3 +78,10 @@
   background-color: #000;
   color: #fff;
 }
+
+
+.sticky-column {
+  position: sticky;
+  top: 80px; /* Try a larger number like 80px */
+  align-self: flex-start;
+}

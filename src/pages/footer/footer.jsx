@@ -1,23 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
+import "./footer.css";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [submitted, setSubmitted] = useState("");
+
   const companyLinks = [
     { label: "About", to: "/about" },
     { label: "Contact us", to: "/contact" },
     { label: "Press", to: "/press" },
-    { label: "Reviews", to: "#" },
-    { label: "Radiance Rewards", to: "#" },
-    { label: "Home Preview FAQs", to: "#" },
-    { label: "Monthly Payment Option", to: "#" },
-    { label: "Affiliate Program", to: "#" },
-    { label: "Terms of Use", to: "/terms" },
-    { label: "Privacy Policy", to: "/policy" },
-    { label: "Site Map", to: "/site-map" },
+    { label: "Reviews", to: "/reviews" },
+    { label: "Radiance Rewards", to: "/rewards" },
+    { label: "Home preview FAQ's", to: "/faqs" },
+    { label: "Monthly Payment Option", to: "/payment-options" },
+    { label: "Affiliate program", to: "/affiliate" },
+    { label: "Terms of use", to: "/terms" },
+    { label: "Privacy policy", to: "/policy" },
+    { label: "Site map", to: "/site-map" },
   ];
 
   const educationLinks = [
     { label: "Diamonds", to: "/diamond" },
+    { label: "Clarity Plus™ Diamonds", to: "/clarity-plus" },
     { label: "Engagement", to: "/engagement" },
     { label: "Wedding bands", to: "/wedding-brands" },
     { label: "Gemstones", to: "/gemstones-types-guide" },
@@ -31,107 +37,138 @@ const Footer = () => {
   const shopLinks = [
     { label: "Diamonds", to: "/diamond" },
     { label: "Engagement rings", to: "/engagement-ring-style" },
-    { label: "Bands for him", to: "#" },
-    { label: "Bands for her", to: "#" },
+    { label: "Bands for him", to: "/bands-him" },
+    { label: "Bands for her", to: "/bands-her" },
     { label: "Home preview", to: "/home" },
-    { label: "Gemstone rings", to: "#" },
-    { label: "Preset rings", to: "#" },
-    { label: "Custom rings", to: "#" },
-    { label: "Fine jewelry", to: "#" },
+    { label: "Gemstone rings", to: "/gemstone-rings" },
+    { label: "Preset rings", to: "/preset-rings" },
+    { label: "Custom rings", to: "/custom-rings" },
+    { label: "Fine jewelry", to: "/fine-jewelry" },
   ];
 
   const customerCareLinks = [
-    "Schedule an appointment",
-    "Free shipping",
-    "Free Returns",
-    "Extended warranty",
-    "Lifetime warranty",
-    "Financing",
-    "Insurance",
-    "ID.me",
-    "Accessibility",
+    { label: "Schedule an appointment", to: "/appointment" },
+    { label: "Free shipping", to: "/shipping" },
+    { label: "Free returns", to: "/returns" },
+    { label: "Extended warranty", to: "/warranty-extended" },
+    { label: "Lifetime warranty", to: "/warranty-lifetime" },
+    { label: "Financing", to: "/financing" },
+    { label: "Insurance", to: "/insurance" },
+    { label: "ID.me", to: "/idme" },
+    { label: "Accessibility", to: "/accessibility" },
   ];
 
   const socialLinks = [
-    { icon: "fa-instagram", href: "https://www.instagram.com/thecaratcasa/#" },
-    { icon: "fa-tiktok", href: "#" },
+    {
+      icon: "fa-instagram",
+      href: "https://www.instagram.com/thecaratcasa/",
+      label: "Instagram",
+    },
+    { icon: "fa-tiktok", href: "https://www.tiktok.com", label: "TikTok" },
     {
       icon: "fa-facebook-f",
-      href: "https://www.facebook.com/share/194gTHJY21/?mibextid=wwXIfr",
+      href: "https://www.facebook.com/share/194gTHJY21/",
+      label: "Facebook",
     },
-    { icon: "fa-twitter", href: "#" },
-    { icon: "fa-youtube", href: "#" },
-    { icon: "fa-pinterest-p", href: "#" },
+    { icon: "fa-twitter", href: "https://www.twitter.com", label: "Twitter" },
+    { icon: "fa-youtube", href: "https://www.youtube.com", label: "YouTube" },
+    {
+      icon: "fa-pinterest-p",
+      href: "https://www.pinterest.com",
+      label: "Pinterest",
+    },
   ];
+
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setEmailError("");
+
+    if (!email) {
+      setEmailError("Please enter your email address");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setEmailError("Please enter a valid email address");
+      return;
+    }
+
+    setSubmitted(true);
+    setEmail("");
+    setTimeout(() => setSubmitted(false), 3000);
+  };
 
   return (
     <>
-      <footer className="bg-dark text-white pt-5">
-        <div className="container">
+      <footer className="bg-black text-white pt-5 pb-4">
+        <div className="container-fluid px-4 px-md-5">
           <div className="row">
             {/* Company */}
-            <div className="col-6 col-md-2 mb-4 text-center text-md-start">
-              <h5>Company</h5>
+            <div className="col-6 col-lg-2 mb-4 footer-col">
+              <h5 className="footer-heading">COMPANY</h5>
               <ul className="list-unstyled">
                 {companyLinks.map((item, i) => (
                   <li key={i}>
-                    {item.to.startsWith("/") ? (
-                      <Link
-                        to={item.to}
-                        className="text-white text-decoration-none"
-                      >
-                        {item.label}
-                      </Link>
-                    ) : (
-                      <a
-                        href={item.to}
-                        className="text-white text-decoration-none"
-                      >
-                        {item.label}
-                      </a>
-                    )}
+                    {/* <a
+                      href={item.to}
+                      className="text-white text-decoration-none footer-link"
+                    >
+                      {item.label}
+                    </a> */}
+                    <Link
+                      to={item.to}
+                      className="text-white text-decoration-none footer-link"
+                    >
+                      {item.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
             </div>
 
             {/* Education */}
-            <div className="col-6 col-md-2 mb-4 text-center text-md-start">
-              <h5>Education</h5>
+            <div className="col-6 col-lg-2 mb-4 footer-col">
+              <h5 className="footer-heading">EDUCATION</h5>
               <ul className="list-unstyled">
                 {educationLinks.map((item, i) => (
                   <li key={i}>
-                    {item.to.startsWith("/") ? (
-                      <Link
-                        to={item.to}
-                        className="text-white text-decoration-none"
-                      >
-                        {item.label}
-                      </Link>
-                    ) : (
-                      <a
-                        href={item.to}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white text-decoration-none"
-                      >
-                        {item.label}
-                      </a>
-                    )}
+                    {/* <a
+                      href={item.to}
+                      className="text-white text-decoration-none footer-link"
+                    >
+                      {item.label}
+                    </a> */}
+                    <Link
+                      to={item.to}
+                      className="text-white text-decoration-none footer-link"
+                    >
+                      {item.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
             </div>
 
             {/* Shop */}
-            <div className="col-6 col-md-2 mb-4 text-center text-md-start">
-              <h5>Shop</h5>
+            <div className="col-6 col-lg-2 mb-4 footer-col">
+              <h5 className="footer-heading">SHOP</h5>
               <ul className="list-unstyled">
                 {shopLinks.map((item, i) => (
                   <li key={i}>
+                    {/* <a
+                      href={item.to}
+                      className="text-white text-decoration-none footer-link"
+                    >
+                      {item.label}
+                    </a> */}
                     <Link
                       to={item.to}
-                      className="text-white text-decoration-none"
+                      className="text-white text-decoration-none footer-link"
                     >
                       {item.label}
                     </Link>
@@ -141,62 +178,100 @@ const Footer = () => {
             </div>
 
             {/* Customer Care */}
-            <div className="col-6 col-md-2 mb-4 text-center text-md-start">
-              <h5>Customer Care</h5>
+            <div className="col-6 col-lg-2 mb-4 footer-col">
+              <h5 className="footer-heading">CUSTOMER CARE</h5>
               <ul className="list-unstyled">
                 {customerCareLinks.map((item, i) => (
                   <li key={i}>
-                    <a href="#" className="text-white text-decoration-none">
-                      {item}
-                    </a>
+                    {/* <a
+                      href={item.to}
+                      className="text-white text-decoration-none footer-link"
+                    >
+                      {item.label}
+                    </a> */}
+                    <Link
+                      to={item.to}
+                      className="text-white text-decoration-none footer-link"
+                    >
+                      {item.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
+              <div className="contact-info">
+                <a
+                  href="mailto:service@withclarity.com"
+                  className="text-white text-decoration-none"
+                >
+                  service@withclarity.com
+                </a>
+                <a
+                  href="tel:1.844.234.6463"
+                  className="text-white text-decoration-none"
+                >
+                  1.844.234.6463
+                </a>
+              </div>
             </div>
 
-            {/* Newsletter / Social */}
-            <div className="col-12 col-md-4 mb-4 text-center">
-              <a href="/" className="text-white fs-3 text-decoration-none">
-                AOD
-              </a>
-              <p className="mt-2 text-white">
-                Elevate Your <i>Everyday</i>
-              </p>
-              <p className="text-white">
-                Sign up for <strong>$100 OFF</strong> your first purchase
-              </p>
+            {/* Newsletter / Brand */}
+            <div className="col-12 col-lg-4 mb-4">
+              <div className="text-center text-lg-start">
+                <div className="brand-logo text-white text-uppercase mb-3">
+                  THE CARATCASA
+                </div>
+                <p className="tagline text-white mb-3">
+                  Luxury Made <span className="tagline-italic">Personal.</span>
+                </p>
+                <p className="discount-text text-white">
+                  Sign up for <strong>$100 OFF</strong> your first purchase
+                </p>
 
-              <form className="text-white d-flex mb-3 justify-content-center flex-wrap">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="form-control mb-2 me-2"
-                  style={{ maxWidth: "250px" }}
-                />
-                <button type="submit" className="btn btn-primary mb-2">
-                  Submit
-                </button>
-              </form>
+                <div className="d-flex gap-2 mb-3">
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="form-control footer-newsletter-input flex-grow-1"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    aria-label="Email address"
+                  />
+                  <button
+                    type="button"
+                    className="btn submit-btn"
+                    onClick={handleSubmit}
+                  >
+                    SUBMIT
+                  </button>
+                </div>
 
-              <ul className="list-inline d-flex justify-content-center gap-3 mt-3">
-                {socialLinks.map((social, i) => (
-                  <li key={i} className="list-inline-item">
+                {emailError && (
+                  <small className="text-danger d-block mb-2">
+                    {emailError}
+                  </small>
+                )}
+                {submitted && (
+                  <small className="success-message d-block mb-2">
+                    ✓ Thank you for subscribing!
+                  </small>
+                )}
+
+                <div className="d-flex gap-3 mt-4 justify-content-center justify-content-lg-start">
+                  {socialLinks.map((social, i) => (
                     <a
+                      key={i}
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-white fs-4"
+                      className="text-white social-icon"
+                      aria-label={social.label}
                     >
                       <i className={`fab ${social.icon}`}></i>
                     </a>
-                  </li>
-                ))}
-              </ul>
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
-
-          <div className="text-center py-3 border-top border-secondary mt-4">
-            &copy; {new Date().getFullYear()} AOD. All rights reserved.
           </div>
         </div>
       </footer>

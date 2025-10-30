@@ -286,8 +286,6 @@
 .shape-item {
   width: 60px;
   height: 60px;
-  border-radius: 50%;
-  border: 1px solid #ccc;
   padding: 5px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;

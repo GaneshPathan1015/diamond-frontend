@@ -186,7 +186,7 @@ const GiftList = () => {
     },
   };
 
-  const filtersSequence = slugFiltersConfig[slug];
+  const filtersSequence = slugFiltersConfig[slug] || [];
 
   const toggleFilterSection = (section) => {
     setActiveFilterSection((prev) => (prev === section ? "" : section));
@@ -309,7 +309,7 @@ const GiftList = () => {
       // -----------------------------
       // Update meta data and maps
       // -----------------------------
-      setShapeData(res.data.shapes || []);
+      setShapeData(data.shapes || []);
       setStyleData(data.style_data || []);
       setCollectionData(data.collection_data || []);
       setMetalTypes(data.metal_types || []);
@@ -610,7 +610,7 @@ const GiftList = () => {
         <img
           src={heroContent[slug]?.image}
           alt={heroContent[slug]?.title || "Wedding Bands"}
-          className="hero-img img-fluid"
+          className="hero-img"
         />
         <div className="hero-text text-center">
           <h1 className="fw-bold">
@@ -776,12 +776,19 @@ const GiftList = () => {
               const originalPrice = selectedVariation?.original_price || "NA";
               const sku = selectedVariation?.sku || "NA";
               const discount = selectedVariation?.discount || "";
-
+              // Create slug from product name
+              const productSlug = group.product?.name
+                ? group.product.name
+                    .toLowerCase()
+                    .replace(/\s+/g, "-")
+                    .replace(/[^a-z0-9-]/g, "")
+                : "product";
+              
               return (
                 <div className="col" key={group.id}>
-                  <div className="h-100 d-flex flex-column product-card shadow-sm rounded">
+                  <div className="h-100 d-flex flex-column list-product-card rounded">
                     <Link
-                      to={`/jewellary-details/${group.product?.id}`}
+                      to={`/products/${productSlug}?product=${group.product?.id}`}
                       className="text-decoration-none text-dark mt-2"
                     >
                       <div className="product-image-container position-relative">
@@ -849,7 +856,7 @@ const GiftList = () => {
                         {metalOptions.map((variation, index) => (
                           <button
                             key={index}
-                            className={`product-variation__carat-pill btn btn-outline-dark btn-sm ${
+                            className={`product-variation__carat-pill ${
                               selectedIndex === index ? "active" : ""
                             }`}
                             onClick={() =>

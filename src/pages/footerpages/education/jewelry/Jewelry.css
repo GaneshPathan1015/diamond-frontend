@@ -1,5 +1,5 @@
 /* Hero Section */
-.gemstones_hero {
+.jewelry_hero {
   background-image: url("/images/jewelry/edu-fine-jewelry-banner-desk_2x_ed5996f7-ea60-4273-a027-e7941cff0326_4096x.webp");
   background-size: cover;
   background-position: right center;
@@ -267,13 +267,9 @@
 }
 
 /* Additional Utilities */
-.container {
-  max-width: 1200px;
-}
-
-.row {
-  margin: 0 -15px;
-}
+/* .container { */
+  /* max-width: 1200px; */
+/* } */
 
 .col-md-3, .col-md-9 {
   padding: 0 15px;

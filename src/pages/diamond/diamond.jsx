@@ -2,8 +2,6 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import axiosClient from "../../api/axios";
 import debounce from "lodash.debounce";
 import Loader from "./loader/index";
-import Slider from "rc-slider";
-import "rc-slider/assets/index.css";
 import DiamondFilter from "./diamondFilter/DiamondFilter";
 import ColorSelect from "./colorSelect/ColorSelect";
 import ClaritySlider from "./claritySlider/ClaritySlider";
@@ -14,6 +12,7 @@ import DiamondTable from "./diamondTable/DiamondTable";
 import DiamondTabFilter from "./diamondTabFilter/DiamondTabFilter";
 import RingWrapper from "./ringWrapper/ringWrapper";
 import { useLocation } from "react-router-dom";
+import "rc-slider/assets/index.css";
 import "./index.css";
 
 export default function Diamond() {
@@ -31,6 +30,10 @@ export default function Diamond() {
   const searchParams = new URLSearchParams(location.search);
   const menuDiamondParam = searchParams.get("menudiamond");
   const selectedDiamondParam = searchParams.get("selecteddiamond");
+  const priceMinParam = searchParams.get("price_min");
+  const priceMaxParam = searchParams.get("price_max");
+  const caratMinParam = searchParams.get("carat_min");
+  const caratMaxParam = searchParams.get("carat_max");
   const ringCartItem = location.state?.ringCartItem;
 
   // diamond filter 2nd component
@@ -293,6 +296,26 @@ export default function Diamond() {
   }, [menuDiamondParam]);
 
   useEffect(() => {
+    if (priceMinParam && priceMaxParam) {
+      const min = parseInt(priceMinParam);
+      const max = parseInt(priceMaxParam);
+      if (!isNaN(min) && !isNaN(max)) {
+        setPrice([min, max]);
+      }
+    }
+  }, [priceMinParam, priceMaxParam]);
+
+  useEffect(() => {
+    if (caratMinParam && caratMaxParam) {
+      const min = parseFloat(caratMinParam);
+      const max = parseFloat(caratMaxParam);
+      if (!isNaN(min) && !isNaN(max)) {
+        setCarat([min, max]);
+      }
+    }
+  }, [caratMinParam, caratMaxParam]);
+
+  useEffect(() => {
     const fetchShapes = async () => {
       try {
         const response = await axiosClient.get("/api/diamond-shapes");
@@ -378,26 +401,21 @@ export default function Diamond() {
 
   return (
     <>
-      <section className="hero_section_wrapper">
-        <div className="container-fluid p-0 position-relative h-100">
-          {/* Hero image */}
-          <img
-            src="images/Header_Banner.jpg"
-            alt="Header Banner"
-            className="w-100 h-100 hero-img"
-          />
+      <section className="hero-wrapper">
+        <img
+          src="/images/Lab_Natural_Diamond.webp"
+          alt={"diamonds images "}
+          className="hero-img"
+        />
+        <div className="hero-text text-center">
+          <h1 className="fw-bold">{"Lab Grown Diamonds"}</h1>
+          <p>
+            {
+              "Shine brighter with no compromise on cost with our stunning collection of lab grown diamonds."
+            }
+          </p>
         </div>
       </section>
-
-      {/* <section className="hero_section_wrapper">
-        <div className="container-fluid p-0 position-relative">
-          <img
-            src="images/Header_Banner.jpg"
-            alt=""
-            className="img-fluid w-100"
-          />
-        </div>
-      </section> */}
 
       <RingWrapper ringCartItem={ringCartItem} />
 
@@ -473,8 +491,6 @@ export default function Diamond() {
         onToggleCheck={toggleDiamondCheck}
         ringCartItem={ringCartItem}
       />
-
-      {/* Pagination Controls */}
 
       {isFetchingMore && <Loader />}
       <div ref={loaderRef} style={{ height: 50 }} />

@@ -5,7 +5,7 @@ function Jewelry() {
   return (
     <>
       {/* Hero Section */}
-      <section className="gemstones_hero d-flex flex-column justify-content-center align-items-center text-center">
+      <section className="jewelry_hero d-flex flex-column justify-content-center align-items-center text-center">
         <h1>FINE JEWELRY EDUCATION</h1>
         <span>
           Information on the different styles of earrings, necklaces and bracelets. Learn about Gifting Occasions as well.
@@ -17,11 +17,11 @@ function Jewelry() {
         <div className="container">
           {/* Top Navigation */}
           <nav className="top-nav">
-            <a href="#">ENGAGEMENT RINGS</a><span>|</span>
-            <a href="#">DIAMONDS</a><span>|</span>
-            <a href="#">WEDDING BANDS</a><span>|</span>
-            <a href="#">FINE JEWELRY</a><span>|</span>
-            <a href="#" className="active">GEMSTONE</a>
+            <a href="/engagement-ring-style">ENGAGEMENT RINGS</a><span>|</span>
+            <a href="/diamonds">DIAMONDS</a><span>|</span>
+            <a href="/wedding-band-styles">WEDDING BANDS</a><span>|</span>
+            <a href="#" className="active">FINE JEWELRY</a><span>|</span>
+            <a href="/gemstones-types-guide">GEMSTONE</a>
           </nav>
 
           <div className="row">

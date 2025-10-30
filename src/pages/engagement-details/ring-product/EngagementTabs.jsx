@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "../../diamond/index.css";
+// import "../../diamond/index.css";
+import styles from "../../diamond/ringWrapper/RingWrapper.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const EngagementTabs = ({ diamond }) => {
@@ -38,7 +39,7 @@ const EngagementTabs = ({ diamond }) => {
 
   return (
     <>
-      <div className="diamond-ring-wrapper">
+      {/* <div className="diamond-ring-wrapper">
         <div className="step-container">
           {steps.map((step, index) => (
             <div
@@ -67,6 +68,24 @@ const EngagementTabs = ({ diamond }) => {
                 )}
               </div>
             </div>
+          ))}
+        </div>
+      </div> */}
+      <div className={`${styles.diamondRingWrapper} `}>
+        <div className={styles.stepContainer}>
+          {steps.map((step, index) => (
+            <React.Fragment key={step.id}>
+              <div
+                className={`${styles.step} ${
+                  currentStep === step.id ? styles.active : ""
+                } ${step.id === 3 ? styles.disabled : ""}`}
+                onClick={() => step.id !== 3 && handleStepClick(step)}
+              >
+                <span className={styles.stepNumber}>{step.id}</span>
+                <span className={styles.stepDivider}></span>
+                <span className={styles.stepLabel}>{step.label}</span>
+              </div>
+            </React.Fragment>
           ))}
         </div>
       </div>

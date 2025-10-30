@@ -3,7 +3,6 @@ import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 import { useNavigate, useParams } from "react-router-dom";
 import axiosClient from "../../api/axios";
-import "./JewellaryDetails.css";
 import { useCart } from "../../cart/CartContext";
 
 const protectionPlans = [
@@ -32,7 +31,6 @@ const getVideoUrl = (video) => {
   if (!video) return null;
   return `${import.meta.env.VITE_BACKEND_URL}${video}`;
 };
-
 const getShapeImageUrl = (img) => `${import.meta.env.VITE_BACKEND_URL}${img}`;
 
 const JewelryDetailsPage = () => {
@@ -72,29 +70,10 @@ const JewelryDetailsPage = () => {
             data.metal_variations[defaultMetalId][defaultShapeId][0];
 
           setMainImage(getImageUrl(defaultVariation?.images?.[0]));
-
-          /* const allImages = metalVariationKeys.flatMap((metalId) =>
-            Object.values(data.metal_variations[metalId]).flatMap(
-              (shapeArray) =>
-                shapeArray.flatMap((variation) =>
-                  (variation.images || []).map((img) => getImageUrl(img))
-                )
-            )
-          );
-
-          setThumbnails([...new Set(allImages)]); */
         } else {
           // CHANGE: keep your old (non-build) logic
           const defaultVariation = data.metal_variations[defaultMetalId][0];
           setMainImage(getImageUrl(defaultVariation?.images?.[0]));
-
-          /*  const allImages = metalVariationKeys.flatMap((metalId) =>
-            data.metal_variations[metalId].flatMap((variation) =>
-              (variation.images || []).map((img) => getImageUrl(img))
-            )
-          );
-
-          setThumbnails([...new Set(allImages)]); */
         }
       } catch (err) {
         console.error("Failed to fetch product", err);
@@ -139,7 +118,6 @@ const JewelryDetailsPage = () => {
   const handleCaratChange = (index) => {
     setSelectedVariationIndex(index);
     setIsVideo(false);
-    
     const isBuild = (product.product?.is_build ?? product.is_build) === 1;
     const variation = isBuild
       ? product.metal_variations[selectedMetalId][selectedShapeId][index] // CHANGE: read from shape for build
@@ -164,42 +142,6 @@ const JewelryDetailsPage = () => {
   return (
     <div className="container py-5">
       <div className="row">
-        {/* <div className="col-md-1 d-flex flex-column align-items-center gap-2 thumbs">
-          {selectedVariation?.video && (
-            <video
-              key="video-thumb"
-              src={getVideoUrl(selectedVariation.video)}
-              onClick={() => setMainImage(getVideoUrl(selectedVariation.video))}
-              className={
-                mainImage === getVideoUrl(selectedVariation.video)
-                  ? "selected"
-                  : ""
-              }
-            />
-          )}
-
-          {selectedVariation?.images?.map((img, i) => {
-            const src = getImageUrl(img);
-            return (
-              <img
-                key={i}
-                src={src}
-                alt={`Thumb ${i + 1}`}
-                onClick={() => setMainImage(src)}
-                style={{
-                  cursor: "pointer",
-                  border:
-                    mainImage === src ? "2px solid #000" : "1px solid #ccc",
-                  padding: "2px",
-                  width: "60px",
-                  height: "60px",
-                  objectFit: "scale-down",
-                  borderRadius: "4px",
-                }}
-              />
-            );
-          })}
-        </div> */}
         <div className="col-md-1 d-flex flex-column align-items-center gap-2 thumbs">
           {/* Video thumbnail */}
           {selectedVariation?.video && (
@@ -251,30 +193,7 @@ const JewelryDetailsPage = () => {
             );
           })}
         </div>
-
         {/* Main image */}
-        {/* <div className="col-12 col-md-6 d-flex flex-column align-items-center main-image mb-4">
-          <div className="zoom-container w-100">
-            <Zoom>
-              <img
-                src={mainImage}
-                alt="Main Product"
-                className="img-fluid zoomable-image"
-                style={{
-                  maxHeight: "500px",
-                  objectFit: "contain",
-                  width: "100%",
-                }}
-              />
-            </Zoom>
-          </div>
-          <button
-            className="btn btn-outline-dark mt-3 w-100 w-md-auto"
-            style={{ maxWidth: "250px" }}
-          >
-            📷 VIRTUAL TRY ON
-          </button>
-        </div> */}
         <div className="col-12 col-md-6 d-flex flex-column align-items-center main-image mb-4">
           <div className="zoom-container w-100">
             {isVideo ? (
@@ -621,50 +540,6 @@ const JewelryDetailsPage = () => {
             </div>
           </div>
         </div>
-
-        {/* <div className="container py-4">
-          <div className="related-products">
-            <h4>Related Products</h4>
-            <div className="d-flex flex-wrap">
-              {[...Array(4)].map((_, i) => (
-                <img
-                  key={i}
-                  src="/assets/images/main.png"
-                  className="product-thumb"
-                  alt="Related Product"
-                />
-              ))}
-            </div>
-          </div>
-
-          <div className="custom-slider-section">
-            <h4>Inspired By Your Browsing History</h4>
-            <div className="d-flex flex-wrap">
-              {[...Array(4)].map((_, i) => (
-                <img
-                  key={i}
-                  src="/assets/images/main.png"
-                  className="product-thumb"
-                  alt="Browsing History Product"
-                />
-              ))}
-            </div>
-          </div>
-
-          <div className="custom-slider-section">
-            <h4>Top Selling Products</h4>
-            <div className="d-flex flex-wrap">
-              {[...Array(4)].map((_, i) => (
-                <img
-                  key={i}
-                  src="/assets/images/main.png"
-                  className="product-thumb"
-                  alt="Top Selling Product"
-                />
-              ))}
-            </div>
-          </div>
-        </div> */}
       </div>
     </div>
   );

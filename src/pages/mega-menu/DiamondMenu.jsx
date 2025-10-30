@@ -1,7 +1,13 @@
 import React from "react";
 import "./diamondMenu.css";
 
-const DiamondMenu = () => {
+const DiamondMenu = ({
+  handleDiamondClick,
+  closeMegaMenu,
+  navigate,
+  handlePriceFilter,
+  handleCaratFilter,
+}) => {
   return (
     <section className="diamond-section py-3">
       <div className="container">
@@ -15,8 +21,22 @@ const DiamondMenu = () => {
                   {/* Categories col-3 */}
                   <div className="col-6">
                     <h6 className="menu-heading">Lab Diamonds</h6>
-                    <p>Explore Lab Diamonds</p>
-                    <p>Explore Colored Lab Diamonds</p>
+                    <p
+                      onClick={() => {
+                        handleDiamondClick({ name: "Lab Diamonds" });
+                        closeMegaMenu();
+                      }}
+                    >
+                      Explore Lab Diamonds
+                    </p>
+                    <p
+                      onClick={() => {
+                        handleDiamondClick({ name: "Colored Lab Diamond" });
+                        closeMegaMenu();
+                      }}
+                    >
+                      Explore Colored Lab Diamonds
+                    </p>
 
                     <h6 className="menu-heading mt-4">Fall Sale</h6>
 
@@ -27,30 +47,68 @@ const DiamondMenu = () => {
                     <h6 className="menu-heading mt-4">Natural Diamonds</h6>
 
                     <h6 className="menu-heading mt-4">Create Your Own Ring</h6>
-                    <p>Lab Diamond</p>
-                    <p>Natural Diamond</p>
-                    <p>Colored Lab Diamond</p>
-                    <p>Featured Deal Diamond</p>
+                    <p
+                      onClick={() => {
+                        handleDiamondClick({ name: "Lab Diamond" });
+                        closeMegaMenu();
+                      }}
+                    >
+                      Lab Diamond
+                    </p>
+                    <p
+                      onClick={() => {
+                        handleDiamondClick({ name: "Natural Diamond" });
+                        closeMegaMenu();
+                      }}
+                    >
+                      Natural Diamond
+                    </p>
+                    <p
+                      onClick={() => {
+                        handleDiamondClick({ name: "Colored Lab Diamond" });
+                        closeMegaMenu();
+                      }}
+                    >
+                      Colored Lab Diamond
+                    </p>
+                    <p
+                      onClick={() => {
+                        handleDiamondClick({ name: "Featured Deals" });
+                        closeMegaMenu();
+                      }}
+                    >
+                      Featured Deal Diamond
+                    </p>
                   </div>
 
                   {/* Price col-4 */}
                   <div className="col-4">
                     <h6 className="menu-heading">Price</h6>
-                    <p>Under $2000</p>
-                    <p>$2000 - $4000</p>
-                    <p>$4000 - $6000</p>
-                    <p>$6000 - $8000</p>
-                    <p>$8000+</p>
+                    <p onClick={() => handlePriceFilter(0, 2000)}>
+                      Under $2000
+                    </p>
+                    <p onClick={() => handlePriceFilter(2000, 4000)}>
+                      $2000 - $4000
+                    </p>
+                    <p onClick={() => handlePriceFilter(4000, 6000)}>
+                      $4000 - $6000
+                    </p>
+                    <p onClick={() => handlePriceFilter(6000, 8000)}>
+                      $6000 - $8000
+                    </p>
+                    <p onClick={() => handlePriceFilter(8000, 10000)}>
+                      $8000+
+                    </p>
                   </div>
 
                   {/* Carat col-5 */}
                   <div className="col-2">
                     <h6 className="menu-heading">Carat</h6>
-                    <p>1 to 2 ct.</p>
-                    <p>2 to 3 ct.</p>
-                    <p>3 to 4 ct.</p>
-                    <p>4 to 6 ct.</p>
-                    <p>6 ct. & above</p>
+                    <p onClick={() => handleCaratFilter(1, 2)}>1 to 2 ct.</p>
+                    <p onClick={() => handleCaratFilter(2, 3)}>2 to 3 ct.</p>
+                    <p onClick={() => handleCaratFilter(3, 4)}>3 to 4 ct.</p>
+                    <p onClick={() => handleCaratFilter(4, 6)}>4 to 6 ct.</p>
+                    <p onClick={() => handleCaratFilter(6, 20)}>6 ct. & above</p>
                   </div>
                 </div>
               </div>

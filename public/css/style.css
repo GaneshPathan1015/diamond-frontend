@@ -14,96 +14,13 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Playfair Display", serif;
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden; /* Prevent horizontal scroll */
-}
-
-.container-fluid, .row {
-  max-width: 100vw; /* Never exceed screen width */
-  overflow-x: hidden;
-}
-
-img, video {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-.slide-btn-wrapper {
-  flex-wrap: wrap; /* Prevent buttons from overflowing */
-}
-
 /* ---------------------- header styles ---------------------- */
-.header-wrapper .header-top-wrapper {
-  background-color: #06364c;
-}
-
-.header-wrapper svg,
-.header-wrapper i {
-  width: 20px;
-  height: 20px;
-}
-
-.header-wrapper {
-  position: absolute;
-  width: 100%;
-  z-index: 1;
-}
-
-.header-wrapper svg path,
-.header-wrapper i {
-  fill: #fff;
-  color: #fff;
-}
-
-.header-wrapper.position-realtive svg path,
-.header-wrapper.position-realtive i {
-  fill: #000;
-  color: #000;
-}
-
-.header-wrapper .btn-check:checked + .btn,
-.header-wrapper .btn.active,
-.btn.show,
-.header-wrapper .btn:first-child:active,
-.header-wrapper :not(.btn-check) + .btn:active {
-  color: #000 !important;
-  background-color: transparent !important;
-  border-color: #fff !important;
-}
-
-.header-wrapper .dropdown-toggle::after {
-  display: none;
-}
-
-.header-wrapper .dropdown {
-  position: unset;
-}
-
-.logo-wrapper a.navbar-brand img.img-fluid {
-  max-width: 300px;
-}
-
-header.header-wrapper.position-realtive {
-  position: relative;
-}
-
-header.header-wrapper.position-realtive .text-white {
-  color: #000 !important;
-}
-
-body header.header-wrapper.position-realtive .header-top-wrapper strong.text-white {
-  color: #FFF !important;
-}
 
 /* Accordion and slick styles */
 .accordion-button:not(.collapsed) {
   color: #000;
   background-color: #ccc;
 }
-
 
 /* Typography */
 .section-header-lg {
@@ -159,7 +76,6 @@ nav .nav-link.active {
 .accordion-button:focus {
   box-shadow: none;
 }
-
 
 .trending_noe_wrapper .trending_now p {
   color: #000;
@@ -305,7 +221,6 @@ footer .site-footer__item-inner a {
 }
 
 
-
 .customize-engagement-ring h2 {
   font-size: 55px;
   font-style: italic;
@@ -438,80 +353,17 @@ button.accordion-button {
   border-radius: 0 !important;
 }
 
-@media (min-width: 750px) {
-  .contact-form-section .form-wrapper {
-    max-width: 500px;
-    margin: 40px auto 0;
-  }
-}
+
 
 .terms-policy h2 {
   font-size: 25px;
 }
 
 /* Education page styles */
-.education-menu li:not(:last-child) {
-  border-right: 2px solid #707070;
-}
 
-.education-menu li,
-.education-sidebar li {
-  list-style: none;
-}
-
-.education-menu a {
-  font-size: 24px;
-  color: #a2a2a2;
-  font-weight: 500;
-  line-height: 1.43;
-  text-transform: uppercase;
-  text-decoration: none;
-}
-
-.education-detail .education-sidebar {
-  width: 225px;
-  flex: 0 0 225px;
-  position: sticky;
-  top: 35px;
-}
-
-.education-detail .page-content {
-  width: calc(100% - 225px);
-  flex: 0 0 calc(100% - 225px);
-  padding-left: 80px;
-}
-
-.education-sidebar li {
-  margin-bottom: 35px;
-}
-
-.education-sidebar a {
-  color: #bcbcbc;
-  font-size: 20px;
-  font-weight: 500;
-  text-decoration: none;
-  line-height: 1;
-}
-
-.education-menu li.active a,
-.education-sidebar li.active a {
-  color: #000;
-  font-weight: 600;
-  text-shadow: 0px 3px 6px #00000041;
-}
 
 /* ---------------------- MEDIA QUERIES ---------------------- */
 @media (max-width: 992px) {
-  .education-detail .education-sidebar {
-    width: 150px;
-    flex: 0 0 150px;
-  }
-
-  .education-detail .page-content {
-    width: calc(100% - 150px);
-    flex: 0 0 calc(100% - 150px);
-    padding-left: 20px;
-  }
 
   .help-grids {
     grid-template-columns: 1fr 1fr;
@@ -537,14 +389,6 @@ button.accordion-button {
     font-size: 12px;
   }
 
-  .education-menu a {
-    font-size: 18px;
-  }
-
-  .education-sidebar a {
-    font-size: 16px;
-  }
-
   .help-grids {
     grid-template-columns: 1fr;
     font-size: 18px;
@@ -566,23 +410,6 @@ button.accordion-button {
     font-size: 10px;
   }
 
-  .education-menu a {
-    font-size: 14px;
-  }
-
-  .education-sidebar {
-    position: relative;
-    top: 0;
-    width: 100%;
-    flex: 1 1 100%;
-  }
-
-  .education-detail .page-content {
-    width: 100%;
-    flex: 1 1 100%;
-    padding-left: 10px;
-  }
-
   .help-grids {
     grid-template-columns: 1fr;
     font-size: 16px;
@@ -592,3 +419,11 @@ button.accordion-button {
     font-size: 24px;
   }
 }
+@media (min-width: 750px) {
+  .contact-form-section .form-wrapper {
+    max-width: 500px;
+    margin: 40px auto 0;
+  }
+}
+
+

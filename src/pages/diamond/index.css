@@ -228,11 +228,17 @@
 
 .second-filter {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
-  gap: 20px;
-  padding: 0 20px;
-  margin-top: 20px;
+  align-items: flex-start;
+  gap: 20px; /* space between sliders */
+  width: 100%;
+  flex-wrap: wrap; /* allows stacking on smaller screens */
+}
+
+
+.second-filter > div {
+  flex: 1 1 48%; 
+  min-width: 320px; /* Prevent from shrinking too much */
 }
 
 .advanced-container {
@@ -282,4 +288,15 @@
   .step {
     flex-direction: column !important;
   }
+
+  .second-filter {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .second-filter > div {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+
 }

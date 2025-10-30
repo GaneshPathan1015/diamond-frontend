@@ -24,6 +24,9 @@ export const CartProvider = ({ children }) => {
     if (item.productType === "jewelry") {
       return `jewelry-${item.id}`;
     }
+    if (item.productType === "gift") {
+      return `gift-${item.id}`;
+    }
     if (item.productType === "build") {
       return `build-${item.id}-${item.size}-${item.diamondtype}`;
     }
@@ -71,21 +74,59 @@ export const CartProvider = ({ children }) => {
   };
 
   // Calculate subtotal
+  // const getSubTotal = () => {
+  //   return cartItems.reduce((total, item) => {
+  //     switch (item.productType) {
+  //       case "diamond":
+  //         return total + item.price * item.itemQuantity;
+  //       case "combo":
+  //         const comboPrice =
+  //           Number(item.ring.price) + Number(item.diamond.price);
+  //         return total + comboPrice * item.itemQuantity;
+  //       case "jewelry":
+  //       case "gift": {
+  //         const price = parseFloat(item.price) || 0;
+  //         const planPrice = parseFloat(item.selectedPlan?.price) || 0;
+  //         return total + (price + planPrice) * quantity;
+  //       }
+  //       case "build": // mean order like size
+  //         const buildPrice = Number(item.price) || 0;
+  //         return total + buildPrice * item.itemQuantity;
+  //       default:
+  //         return total;
+  //     }
+  //   }, 0);
+  // };
+
   const getSubTotal = () => {
     return cartItems.reduce((total, item) => {
+      const quantity = parseInt(item.itemQuantity) || 0;
+
       switch (item.productType) {
-        case "diamond":
-          return total + item.price * item.itemQuantity;
-        case "combo":
-          const comboPrice =
-            Number(item.ring.price) + Number(item.diamond.price);
-          return total + comboPrice * item.itemQuantity;
+        case "diamond": {
+          const price = parseFloat(item.price) || 0;
+          return total + price * quantity;
+        }
+
+        case "combo": {
+          const ringPrice = parseFloat(item.ring?.price) || 0;
+          const diamondPrice = parseFloat(item.diamond?.price) || 0;
+          const comboPrice = ringPrice + diamondPrice;
+          return total + comboPrice * quantity;
+        }
+
         case "jewelry":
-          const planPrice = item.selectedPlan?.price || 0;
-          return total + (item.price + planPrice) * item.itemQuantity;
-        case "build":
-          const buildPrice = Number(item.price) || 0;
-          return total + buildPrice * item.itemQuantity;
+        case "gift": {
+          const price = parseFloat(item.price) || 0;
+          const planPrice = parseFloat(item.selectedPlan?.price) || 0;
+          return total + (price + planPrice) * quantity;
+        }
+
+        case "build": {
+          const buildPrice = parseFloat(item.price) || 0;
+          return total + buildPrice * quantity;
+        }
+
         default:
           return total;
       }

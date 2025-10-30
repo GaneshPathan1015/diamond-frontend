@@ -2,7 +2,7 @@
 .custom-navbar {
     width: 100%;
     position: fixed;
-    top: 10;
+    /* top: 10; */
     z-index: 2000;
     font-family: Arial, sans-serif;
     transition: background 0.3s, color 0.3s;
@@ -17,7 +17,10 @@
     text-align: center;
     padding: 8px 0;
     font-size: 16px;
+    display: block !important;
+    visibility: visible !important;
 }
+
 .custom-navbar.fixed {
     position: fixed;
     top: 0;
@@ -41,13 +44,6 @@
     color: #222;
 }
 
-
-
-.main-content {
-    padding-top: 80px;
-    /* same height as navbar */
-}
-
 .nav-container {
     display: flex;
     justify-content: space-between;
@@ -69,6 +65,8 @@
 }
 
 .appointment-btn {
+    display: flex;
+    gap: 5px;
     background-color: transparent;
     border: 1px solid transparent;
     padding: 5px 10px;
@@ -99,7 +97,6 @@
     width: 100%;
     height: auto;
     min-height: 70vh;
-    /* max-height: calc(100vh - 40vh); */
     background: white;
     color: black;
     padding: 40px 80px;
@@ -156,20 +153,6 @@
     color: #222 !important;
 }
 
-/* Hero video */
-.hero-section {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-}
-
-.hero-section video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
 /* Hamburger Button */
 .hamburger-btn {
     color: #fafafa;
@@ -187,7 +170,7 @@
 }
 
 /* Sidebar */
-.sidebar {
+.sidebar-man {
     position: fixed;
     top: 0;
     left: -280px;
@@ -200,16 +183,10 @@
     transition: left 0.3s ease;
 }
 
-.sidebar.open {
+.sidebar-man.open {
     left: 0;
 }
 
-.sidebar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
 
 .sidebar-logo {
     font-weight: bold;
@@ -223,15 +200,165 @@
     cursor: pointer;
 }
 
-.submenu-item {
-    padding: 6px 0;
+/* Appointment button hover effect */
+.appointment-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: #fff;
+}
+
+.sidebar-menu {
+    padding: 1rem;
+}
+
+.sidebar-man {
+    overflow-y: auto;
+    /* allows scroll without showing scrollbar */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.sidebar-man::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera */
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid #e8e8e8;
+    background: white;
+    margin-bottom: 20px;
+}
+
+.sidebar-logo {
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #06374a;
     cursor: pointer;
+}
+
+.mobile-sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.mobile-menu-item {
+    width: 100%;
+    border-bottom: 1px solid #e8e8e8;
+    padding: 0;
+}
+
+.mobile-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    background: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.mobile-menu-header:hover {
+    background-color: #f5f5f5;
+}
+
+.mobile-menu-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    flex: 1;
+    user-select: none;
+}
+
+.mobile-menu-toggle {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #06374a;
+    cursor: pointer;
+    padding: 4px 8px;
+    font-weight: bold;
+    flex-shrink: 0;
+    user-select: none;
+    transition: color 0.2s ease;
+}
+
+.mobile-menu-toggle:hover {
+    color: #034563;
+}
+
+.sub-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    cursor: pointer;
+    margin: 8px 0px;
+    transition: background-color 0.2s ease;
+}
+
+.mobile-menu-submenu {
+    background-color: #ffffff;
+    padding: 0px 16px;
+    animation: expandSubmenu 2.1s ease;
+}
+
+@keyframes expandSubmenu {
+    from {
+        opacity: 0;
+        max-height: 0;
+    }
+
+    to {
+        opacity: 1;
+        max-height: 1000px;
+    }
+}
+
+.submenu-items {
+    padding: 4px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+}
+
+.mobile-submenu-item {
+    flex: 1 1 calc(33.33% - 10px);
+    text-align: start;
+    font-size: 12px;
+    color: #666;
+    padding: 2px 0;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 12px;
+    margin-bottom: 6px;
+    transition: color 0.2s ease;
+    user-select: none;
+}
+
+.mobile-submenu-item:hover {
+    color: #333;
 }
 
 
 /* Media Queries for Tablet/Mobile */
 @media (max-width: 992px) {
-    
+
     .menu-bar {
         display: none;
     }
@@ -294,33 +421,3 @@
         font-size: 14px;
     }
 }
-
-/* Appointment button hover effect */
-.appointment-btn:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: #fff;
-}
-
-/* @media (max-width: 768px) { */
-    /* .jwl-mega-menu-inner { */
-        /* display: grid; */
-        /* text-align: center; */
-    /* } */
-/*  */
-    /* .jwl-mega-col { */
-        /* width: 100%; */
-        /* padding: 10px 0; */
-    /* } */
-/*  */
-    /* .jwl-caption { */
-        /* text-align: center; */
-    /* } */
-/*  */
-    /* .jwl-caption h6 { */
-        /* font-size: 16px; */
-    /* } */
-/*  */
-    /* .jwl-caption a { */
-        /* font-size: 14px; */
-    /* } */
-/* } */

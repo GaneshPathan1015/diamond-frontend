@@ -3,7 +3,7 @@ import TrendingNow from "./TrendingNow";
 import BestsellingRings from "./BestsellingRings";
 import ExclusiveOffers from "./ExclusiveOffers";
 import "./home.css";
-
+import { Link } from "react-router-dom";
 export default function Home() {
   return (
     <>
@@ -24,18 +24,18 @@ export default function Home() {
               </p>
             </div>
             <div className="slide-btn-wrapper justify-content-center align-items-center gap-5">
-              <a
-                href="#"
+              <Link
+                to="/engagement-rings/engagement-rings"
                 className="text-white btn border-button border my-2 p-2 rounded-0 fw-bold border-white"
               >
                 SHOP ENGAGEMENT RINGS
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                to="/jewelry-list"
                 className="text-white btn border-button border my-2 p-2 rounded-0 fw-bold border-white"
               >
                 SHOP JEWELRY
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -59,12 +59,12 @@ export default function Home() {
                       Choose a setting, select a diamond, &amp; complete your
                       ring.
                     </p>
-                    <a
-                      href="#"
+                    <Link
+                      to="/engagement-rings/engagement-rings"
                       className="btn border-button border p-2 rounded-0 fw-bold border-dark"
                     >
                       START DESIGNING
-                    </a>
+                    </Link>
                   </div>
                 </div>
 
@@ -102,12 +102,12 @@ export default function Home() {
                       Find your perfect match with our assortment of ready to
                       purchase designs.
                     </p>
-                    <a
-                      href="#"
+                    <Link
+                      to="/engagement-rings/preset-rings"
                       className="btn border-button border p-2 rounded-0 fw-bold border-dark"
                     >
                       EXPLORE NOW
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -139,12 +139,12 @@ export default function Home() {
               of an everlasting bond.
             </p>
             <div className="button-wrapper flex flex-wrap justify-content_center">
-              <a
-                href="#"
+              <Link
+                to="/wedding/womens-diamond-wedding-rings"
                 className="btn border-button border p-2 rounded-0 fw-bold border-dark"
               >
                 EXPLORE THE COLLECTION
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -175,12 +175,12 @@ export default function Home() {
                   <li>CUSTOM REPLICA</li>
                   <li>COMPLIMENTARY CONSULTATION</li>
                 </ul>
-                <a
-                  href="#"
+                <Link
+                  to="/"
                   className="btn border-button border p-2 rounded-0 fw-bold border-dark"
                 >
                   LEARN MORE
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -190,7 +190,7 @@ export default function Home() {
                 <img
                   src="https://images.unsplash.com/photo-1559006864-38a01f201f95?w=1000&auto=format&fit=crop&q=80"
                   alt="Diamond Ring"
-                  className="img-fluid shadow-sm"
+                  className="img-fluid  shadow-sm"
                 />
               </div>
             </div>
@@ -230,12 +230,12 @@ export default function Home() {
                   SoHo showroom, for expert guidance on finding your perfect
                   engagement ring or gift.
                 </p>
-                <a
-                  href="#"
+                <Link
+                  to="/book-an-appointment"
                   className="btn border-button border my-3 p-2 rounded-0 fw-bold border-dark"
                 >
                   SCHEDULE YOUR APPOINTMENT
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -267,18 +267,18 @@ export default function Home() {
               yourself in brilliance.
             </p>
             <div className="button-wrapper flex flex-wrap justify-content_center">
-              <a
-                href="#"
+              <Link
+                to="/reserve"
                 className="btn border-button border mx-3 p-2 rounded-0 fw-bold border-dark"
               >
                 DISCOVER THE RESERVE
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                to="/luxe"
                 className="btn border-button border mx-3 p-2 rounded-0 fw-bold border-dark"
               >
                 EXPLORE LUXE
-              </a>
+              </Link>
             </div>
           </div>
         </div>

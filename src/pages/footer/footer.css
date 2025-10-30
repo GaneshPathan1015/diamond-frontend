@@ -1,0 +1,136 @@
+  body {
+      margin: 0;
+      padding: 0;
+  }
+
+  .footer-link {
+      transition: all 0.2s ease;
+      display: block;
+      padding: 0.4rem 0;
+      font-size: 0.95rem;
+      font-weight: 400;
+  }
+
+  .footer-link:hover {
+      color: #ddd !important;
+  }
+
+  .social-icon {
+      text-decoration: none;
+      transition: all 0.3s ease;
+      width:  36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+  }
+
+  .social-icon:hover {
+      opacity: 0.7;
+  }
+
+  .footer-heading {
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+  }
+
+  .footer-newsletter-input {
+      border: 1px solid #fff;
+      background: transparent;
+      color: white;
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+  }
+
+  .footer-newsletter-input:focus {
+      background: transparent;
+      border-color: #fff;
+      color: white;
+      outline: none;
+      box-shadow: none;
+  }
+
+  .footer-newsletter-input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+  }
+
+  .submit-btn {
+      background: #000;
+      border: 1px solid #fff;
+      color: #fff;
+      font-weight: 600;
+      padding: 0.75rem 2rem;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+  }
+
+  .submit-btn:hover {
+      background: #fff;
+      color: #000;
+  }
+
+  .brand-logo {
+      font-size: 1.5rem;
+      font-weight: 300;
+      letter-spacing: 3px;
+      margin-bottom: 1rem;
+  }
+
+  .tagline {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+  }
+
+  .tagline-italic {
+      font-style: italic;
+      font-family: 'Georgia', serif;
+  }
+
+  .discount-text {
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+  }
+
+  .contact-info {
+      margin-top: 2rem;
+  }
+
+  .contact-info a {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+  }
+
+  .contact-info a:hover {
+      color: #ddd !important;
+  }
+
+  .success-message {
+      animation: fadeIn 0.5s ease;
+      color: #28a745;
+  }
+
+  @keyframes fadeIn {
+      from {
+          opacity: 0;
+          transform: translateY(-10px);
+      }
+
+      to {
+          opacity: 1;
+          transform: translateY(0);
+      }
+  }
+
+  @media (max-width: 767px) {
+      .footer-col {
+          margin-bottom: 2.5rem;
+      }
+  }

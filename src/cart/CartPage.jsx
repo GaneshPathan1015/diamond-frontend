@@ -85,6 +85,7 @@ export default function CartPage() {
       case "diamond":
         return <DiamondCard key={index} {...cardProps} />;
       case "jewelry":
+      case "gift":
         return <JewelryCard key={index} {...cardProps} />;
       default:
         return <div key={index}>Unknown Item Type</div>;

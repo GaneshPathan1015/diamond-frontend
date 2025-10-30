@@ -8,15 +8,15 @@ function LabGrownDiamonds() {
         <div className="container">
           <div className="row pb-4">
             <div className="col-md-6">
-              <div className="hero-image">
+              <div className="hero-image-lab">
                 <img
-                  src="/images/LabGrownDiamonds/Diamond_Vid_990x.webp"
+                  src="/images/labGrownDiamonds/Diamond_Vid_990x.webp"
                   alt=""
                   width={650}
                 />
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-6 d-flex flex-column justify-content-center text-center">
               <div className="here-rightside">
                 <h1 className="heading-section">LAB GROWN DIAMONDS</h1>
                 <span className="heaing-para">
@@ -28,104 +28,37 @@ function LabGrownDiamonds() {
               </div>
             </div>
           </div>
-          <div className="row">
-            <div className="col-6 col-sm-4 col-md-2 text-center mb-3">
-              <a href="#" className="text-decoration-none">
+          <div className="shapes-container" style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: '30px'
+          }}>
+            {[
+              { src: "4.png", alt: "Round", label: "Round" },
+              { src: "5.png", alt: "Princess", label: "Princess" },
+              { src: "6.png", alt: "Cushion", label: "Cushion" },
+              { src: "7.png", alt: "Radiant", label: "Radiant" },
+              { src: "8.avif", alt: "Asscher", label: "Asscher" },
+              { src: "9.avif", alt: "Emerald", label: "Emerald" },
+              { src: "10.png", alt: "Oval", label: "Oval" },
+              { src: "11.avif", alt: "Pear", label: "Pear" },
+            ].map((item, index) => (
+              <div key={index} style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                textAlign: 'center'
+              }}>
                 <img
-                  src="images/LabGrownDiamonds/Round_Shape-icon_fb1f11ce-66d0-4f90-8478-d27cf9f40525.png"
-                  alt="Round"
-                  className="img-fluid"
-                  width={150}
+                  src={`/images/labGrownDiamonds/${item.src}`}
+                  alt={item.alt}
+                  style={{ width: '150px', height: 'auto', marginBottom: '10px' }}
                 />
-                <p>Round</p>
-              </a>
-            </div>
-
-            <div className="col-6 col-sm-4 col-md-2 text-center mb-3">
-              <a href="#" className="text-decoration-none">
-                <img
-                  src="images/LabGrownDiamonds/Princess_Shape-icion_86fa796c-38c5-4006-a5f0-180e1f1e7560.png"
-                  alt="Princess"
-                  className="img-fluid"
-                  width={150}
-                />
-                <p>Princess</p>
-              </a>
-            </div>
-
-            <div className="col-6 col-sm-4 col-md-2 text-center mb-3">
-              <a href="#" className="text-decoration-none">
-                <img
-                  src="images/LabGrownDiamonds/Cushion_Shape-icon_4a8377f1-e2bf-4068-8d98-8925167123ea.png"
-                  alt="Cushion"
-                  className="img-fluid"
-                  width={150}
-                />
-                <p>Cushion</p>
-              </a>
-            </div>
-
-            <div className="col-6 col-sm-4 col-md-2 text-center mb-3">
-              <a href="#" className="text-decoration-none">
-                <img
-                  src="images/LabGrownDiamonds/Radiant_Shape-icon_33a74998-113b-45da-8a0f-b3c08154ff81.png"
-                  alt="Radiant"
-                  className="img-fluid"
-                  width={150}
-                />
-                <p>Radiant</p>
-              </a>
-            </div>
-
-            <div className="col-6 col-sm-4 col-md-2 text-center mb-3">
-              <a href="#" className="text-decoration-none">
-                <img
-                  src="images/LabGrownDiamonds/Asscher_Shape-icon.avif"
-                  alt="Asscher"
-                  className="img-fluid"
-                  width={150}
-                />
-                <p>Asscher</p>
-              </a>
-            </div>
-
-            <div className="col-6 col-sm-4 col-md-2 text-center mb-3">
-              <a href="#" className="text-decoration-none">
-                <img
-                  src="images/LabGrownDiamonds/Emerald_Shape-icon.avif"
-                  alt="Emerald"
-                  className="img-fluid"
-                  width={150}
-                />
-                <p>Emerald</p>
-              </a>
-            </div>
-          </div>
-
-          <div className="row mt-3">
-            <div className="col-6 col-sm-6 col-md-6 text-right mb-3">
-              <a href="#" className="text-decoration-none">
-                <img
-                  src="images/LabGrownDiamonds/Oval_Shape-icon_7aee2647-81e1-40c1-a37c-392fcbe84a89.png"
-                  alt="Oval"
-                  className="img-fluid"
-                  width={150}
-                />
-                <p>Oval</p>
-              </a>
-            </div>
-
-            <div className="col-6 col-sm-6 col-md-6 text-left mb-3">
-              <a href="#" className="text-decoration-none">
-                <img
-                  src="images/LabGrownDiamonds/Pear_Shape-icon.avif"
-                  alt="Pear"
-                  className="img-fluid"
-                  width={150}
-                />
-                <p>Pear</p>
-              </a>
-            </div>
+                <p>{item.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -135,13 +68,13 @@ function LabGrownDiamonds() {
           <div className="container my-5">
             <div className="row g-4">
               {/* GIA */}
-              <div className="col-md-4">
+              <div className="col-md-4 d-flex justify-content-center">
                 <div className="text-center">
                   <img
-                    src="images/LabGrownDiamonds/01.avif"
+                    src="/images/labGrownDiamonds/01.avif"
                     alt="GIA"
                     width={100}
-                    className="mb-3"
+                    className="mb-3 mx-auto d-block"
                   />
                   <h5>01</h5>
                   <h5>VALUE</h5>
@@ -156,17 +89,16 @@ function LabGrownDiamonds() {
               </div>
 
               {/* AWDC */}
-              <div className="col-md-4">
+              <div className="col-md-4 d-flex justify-content-center">
                 <div className="text-center">
                   <img
-                    src="images/LabGrownDiamonds/03.avif"
+                    src="/images/labGrownDiamonds/03.avif"
                     alt="AWDC"
                     width={100}
-                    className="mb-3"
+                    className="mb-3 mx-auto d-block"
                   />
                   <h5>02</h5>
                   <h5>EXCEPTIONAL QUALITY & BEAUTY</h5>
-
                   <p>
                     Lab grown or man made diamonds are identical to their
                     naturally grown, and mined counterparts. They have the same
@@ -177,13 +109,13 @@ function LabGrownDiamonds() {
               </div>
 
               {/* AGS */}
-              <div className="col-md-4">
+              <div className="col-md-4 d-flex justify-content-center">
                 <div className="text-center">
                   <img
-                    src="images/LabGrownDiamonds/02.avif"
+                    src="/images/labGrownDiamonds/02.avif"
                     alt="AGS"
                     width={100}
-                    className="mb-3"
+                    className="mb-3 mx-auto d-block"
                   />
                   <h5>03</h5>
                   <h5>CONFLICT-FREE</h5>
@@ -198,6 +130,7 @@ function LabGrownDiamonds() {
                 </div>
               </div>
             </div>
+
 
             <div className="row pt-4">
               <div className="col-md-6">
@@ -217,7 +150,7 @@ function LabGrownDiamonds() {
               <div className="col-md-6">
                 <div className="hero-image">
                   <img
-                    src="images/LabGrownDiamonds/lab-created_990x.webp"
+                    src="/images/labGrownDiamonds/lab-created_990x.webp"
                     alt=""
                     width={650}
                   />
@@ -287,23 +220,16 @@ function LabGrownDiamonds() {
               <div className="col-md-4">
                 <div className="text-center">
                   <img
-                    src="images/LabGrownDiamonds/GIA-logo-2.png"
+                    src="/images/labGrownDiamonds/GIA-logo-2.png"
                     alt="GIA"
                     width={100}
-                    className="mb-3"
+                    className="mb-3 mx-auto d-block"
                   />
                   <h5>GIA</h5>
                   <p>
                     <strong>Gemological Institute of America</strong>
                     <br />
-                    The Gemological Institute of America is a nonprofit
-                    institute that has an international authority on diamonds,
-                    gemstones, and pearls. GIA was founded in 1931, and in the
-                    1940s, established the “4Cs” (Cut, Color, Clarity, and Carat
-                    Weight) or the “International Diamond Grading System.” The
-                    GIA is arguably the leading source of knowledge for all
-                    gemstones and jewelry, which is why all With Clarity Natural
-                    Diamonds are graded by GIA.
+                    The Gemological Institute of America is a nonprofit institute that has an international authority on diamonds, gemstones, and pearls. GIA was founded in 1931, and in the 1940s, established the “4Cs” (Cut, Color, Clarity, and Carat Weight) or the “International Diamond Grading System.” The GIA is arguably the leading source of knowledge for all gemstones and jewelry, which is why all With Clarity Natural Diamonds are graded by GIA.
                   </p>
                 </div>
               </div>
@@ -312,22 +238,16 @@ function LabGrownDiamonds() {
               <div className="col-md-4">
                 <div className="text-center">
                   <img
-                    src="images/LabGrownDiamonds/logo-AWDC-HR.png"
+                    src="/images/labGrownDiamonds/logo-AWDC-HR.png"
                     alt="AWDC"
                     width={100}
-                    className="mb-3"
+                    className="mb-3 mx-auto d-block"
                   />
                   <h5>AWDC</h5>
                   <p>
                     <strong>Antwerp World Diamond Center</strong>
                     <br />
-                    Antwerp World Diamond Center is recognized as one of the
-                    leaders in the diamond industry. For more than five
-                    centuries, Antwerp in the country of Belgium has been the
-                    capital for international diamond trade. They stand for
-                    transparency, integrity, quality, and sustainability. Their
-                    mission is to inspire current and future generations to keep
-                    Antwerp at the forefront of the diamond trade industry.
+                    Antwerp World Diamond Center is recognized as one of the leaders in the diamond industry. For more than five centuries, Antwerp in the country of Belgium has been the capital for international diamond trade. They stand for transparency, integrity, quality, and sustainability. Their mission is to inspire current and future generations to keep Antwerp at the forefront of the diamond trade industry.
                   </p>
                 </div>
               </div>
@@ -336,22 +256,16 @@ function LabGrownDiamonds() {
               <div className="col-md-4">
                 <div className="text-center">
                   <img
-                    src="images/LabGrownDiamonds/ags_logo.png"
+                    src="/images/labGrownDiamonds/ags_logo.png"
                     alt="AGS"
                     width={100}
-                    className="mb-3"
+                    className="mb-3 mx-auto d-block"
                   />
                   <h5>AGS</h5>
                   <p>
                     <strong>American Gem Society</strong>
                     <br />
-                    The American Gem Society started in 1943 to protect jewelry
-                    consumers. While the Gemological Institute of America (GIA)
-                    is the industry’s leading diamond lab, the AGS is not far
-                    behind. Like GIA, AGS is also a nonprofit organization. AGS
-                    stands out amongst other diamond grading systems because
-                    they use a 0 to 10 scale, with 0 as the best and 10 as the
-                    worst.
+                    The American Gem Society started in 1943 to protect jewelry consumers. While the Gemological Institute of America (GIA) is the industry’s leading diamond lab, the AGS is not far behind. Like GIA, AGS is also a nonprofit organization. AGS stands out amongst other diamond grading systems because they use a 0 to 10 scale, with 0 as the best and 10 as the worst.
                   </p>
                 </div>
               </div>
@@ -362,22 +276,16 @@ function LabGrownDiamonds() {
               <div className="col-md-6">
                 <div className="text-center">
                   <img
-                    src="images/LabGrownDiamonds/igi-logo-png-transparent.avif"
+                    src="/images/labGrownDiamonds/igi-logo-png-transparent.avif"
                     alt="IGI"
                     width={100}
-                    className="mb-3"
+                    className="mb-3 mx-auto d-block"
                   />
                   <h5>IGI</h5>
                   <p>
                     <strong>International Gemological Institute</strong>
                     <br />
-                    The International Gemological Institute is the world’s
-                    largest independent gemstone grading organization.
-                    Established in 1975, IGI now has offices all over the globe,
-                    with 18 lab locations. This laboratory carefully studies
-                    colored stones and jewelry, along with lab grown diamonds,
-                    to determine authenticity. They also have 14 schools of
-                    gemology.
+                    The International Gemological Institute is the world’s largest independent gemstone grading organization. Established in 1975, IGI now has offices all over the globe, with 18 lab locations. This laboratory carefully studies colored stones and jewelry, along with lab grown diamonds, to determine authenticity. They also have 14 schools of gemology.
                   </p>
                 </div>
               </div>
@@ -386,26 +294,22 @@ function LabGrownDiamonds() {
               <div className="col-md-6">
                 <div className="text-center">
                   <img
-                    src="images/LabGrownDiamonds/GSI_Logo.avif"
+                    src="./images/labGrownDiamonds/GSI_Logo.avif"
                     alt="GSI"
                     width={100}
-                    className="mb-3"
+                    className="mb-3 mx-auto d-block"
                   />
                   <h5>GSI</h5>
                   <p>
                     <strong>Gemological Science International</strong>
                     <br />
-                    At Gemological Science International, hundreds of
-                    researchers use advanced technology and intelligent software
-                    to automate the diamond grading process. GSI diamond grading
-                    reports stand for “innovation, integrity, and
-                    professionalism.” Their labs in the United States, India,
-                    Belgium, and Israel follow the alphabetical grading system.
+                    At Gemological Science International, hundreds of researchers use advanced technology and intelligent software to automate the diamond grading process. GSI diamond grading reports stand for “innovation, integrity, and professionalism.” Their labs in the United States, India, Belgium, and Israel follow the alphabetical grading system.
                   </p>
                 </div>
               </div>
             </div>
           </div>
+
 
           <div className="faq-section">
             <h2 className="text-center mb-4">FAQs</h2>

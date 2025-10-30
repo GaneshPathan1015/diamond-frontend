@@ -1,10 +1,11 @@
-.product-card {
-  border: 1px solid #eee;
+.list-product-card {
   transition: box-shadow 0.3s;
   position: relative;
+  padding: 10px;
+  background: #fff;
 }
 
-.product-card:hover {
+.list-product-card:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -28,7 +29,6 @@
 .metal-options span.active {
   background-color: #f4d160;
 }
-
 
 .discount {
   color: red;
@@ -61,7 +61,7 @@
   z-index: 10;
 }
 
-.product-card:hover .hover-thumbnails {
+.list-product-card:hover .hover-thumbnails {
   display: flex;
   gap: 5px;
 }
@@ -113,7 +113,6 @@
 
 .categories-bar::-webkit-scrollbar {
   display: none;
-  /* Hide scrollbar for cleaner look */
 }
 
 .cat-item {
@@ -253,8 +252,8 @@
   width: 100%;
   height: 279px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   /* smooth shadow */
+  position: relative;
 }
 
 
@@ -461,10 +460,6 @@
   text-decoration: underline;
 }
 
-.product-image-container {
-  position: relative;
-  overflow: hidden;
-}
 
 .product-image-full {
   width: 100%;
@@ -514,20 +509,9 @@
   color: #fff;
   border-color: #000;
 }
-/*  */
-
-
 
 /*  */
-.product-card {
-  padding: 10px;
-  background: #fff;
-}
 
-.product-image-container {
-  overflow: hidden;
-  border-radius: 8px;
-}
 
 .product-image-full {
   width: 100%;
@@ -551,7 +535,7 @@
 .hero-wrapper {
   position: relative;
   width: 100%;
-  height: 80vh;           
+  height: 80vh;
   overflow: hidden;
   margin-bottom: 30px;
 }
@@ -560,7 +544,7 @@
 .hero-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;         /* keeps aspect ratio but fills */
+  object-fit: cover;
   display: block;
 }
 
@@ -581,6 +565,7 @@
 .hero-text h1 {
   font-size: 2.5rem;
 }
+
 .hero-text p {
   color: white;
   font-size: 1.2rem;
@@ -590,11 +575,10 @@
 @media (max-width: 768px) {
   .hero-text {
     bottom: 8%;
-    max-width: 100%;    /* ✅ allow full width */
+    max-width: 100%;
     width: 100%;
-    padding: 0 10px;    /* just small padding on sides */
+    padding: 0 10px;
   }
-
 
   .hero-text h1 {
     font-size: 1.8rem;
@@ -602,5 +586,12 @@
 
   .hero-text p {
     font-size: 1rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .container>.row {
+    width: 100% !important;
+    margin-inline: auto;
   }
 }
