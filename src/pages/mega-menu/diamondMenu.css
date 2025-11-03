@@ -1,22 +1,15 @@
-.diamond-section {
-    background: #fff;
+.diamond-megamenu-container {
+    display: flex;
+    gap: 60px;
 }
 
-.menu-heading {
-    font-weight: 600;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
+.diamond-megamenu-text-section {
+    display: flex;
+    flex: 3;
 }
 
-p {
-    margin: 0.2rem 0;
-    color: #222;
-    cursor: pointer;
-    transition: color 0.2s;
-}
-
-p:hover {
-    color: #8a8a8a;
+.diamond-megamenu-img-section {
+    flex: 1;
 }
 
 .diamond-img {

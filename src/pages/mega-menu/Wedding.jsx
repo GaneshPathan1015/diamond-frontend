@@ -15,14 +15,14 @@ const Wedding = ({ handleStartWedding }) => {
   ];
 
   return (
-    <div className="bands-section">
+    <div className="jwl-mega-menu-inner">
       <div className="bands-container">
         {/* Left Section */}
         <div className="bands-links">
           {/* Women */}
           <div className="column">
             <h6
-              className="clickable-heading"
+              className="clickable-heading jwl-menu-title"
               onClick={() => handleStartWedding("womens-wedding-rings")}
             >
               Women’s Bands
@@ -49,7 +49,7 @@ const Wedding = ({ handleStartWedding }) => {
           {/* Men */}
           <div className="column">
             <h6
-              className="clickable-heading"
+              className="clickable-heading jwl-menu-title"
               onClick={() => handleStartWedding("mens-wedding-rings")}
             >
               Men’s Bands

@@ -7,6 +7,10 @@ import MegaMenu from "../mega-menu/megaMenu";
 import { Menu, X, ShoppingBag } from "lucide-react";
 import { useMegaMenu } from "../../context/MegaMenuContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import CallOutlinedIcon from "@mui/icons-material/CallOutlined";
+import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
+import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import "./whiteClarityNav.css";
 
 const slugify = (text = "") =>
@@ -28,7 +32,6 @@ const WhiteClarityNav = () => {
   const [scrolled, setScrolled] = useState(false);
   const [hoveredMenu, setHoveredMenu] = useState(null);
   const [hoveringMegaMenu, setHoveringMegaMenu] = useState(false);
-  const [enter, setEnter] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -313,20 +316,6 @@ const WhiteClarityNav = () => {
     SALE: "/collections/diamond-jewelry-sale",
   };
 
-  let headerClass = "custom-navbar";
-
-  if (scrolled || hoveredMenu || enter) {
-    headerClass += " scrolled";
-  }
-
-  if (!isHome) {
-    headerClass += " fixed scrolled"; // Always apply fixed on other pages
-  }
-
-  if (hoveringMegaMenu) {
-    headerClass += " hovering-menu"; // New class to prevent flicker on scroll
-  }
-
   const handleRedirect = () => {
     if (user) {
       navigate("/profile");
@@ -342,7 +331,6 @@ const WhiteClarityNav = () => {
   };
 
   // Engagement
-
   const handleMobileStartEngagement = (startType) => {
     setSidebarOpen(false);
     navigate(`/engagement-rings/${startType}`);
@@ -355,8 +343,6 @@ const WhiteClarityNav = () => {
     if (item.label.toLowerCase() === "ready to ship") {
       params.set("ready_to_ship", "true");
     }
-    // Add other 'featured' item logic here if needed
-    // e.g., if (item.label.toLowerCase() === "new arrivals") { ... }
 
     setSidebarOpen(false);
     navigate({
@@ -364,8 +350,6 @@ const WhiteClarityNav = () => {
       search: params.toString(),
     });
   };
-
-  // --- Ensure these handlers (from previous steps) are also present ---
 
   // For Engagement -> STYLE
   const handleMobileStyleClick = (style) => {
@@ -415,8 +399,6 @@ const WhiteClarityNav = () => {
   };
 
   // high jewellry
-
-  // --- Add this handler for High Jewelry ---
   const handleMobileHighJewelryClick = (itemLabel) => {
     setSidebarOpen(false);
     const normalizedLabel = itemLabel.toLowerCase();
@@ -473,7 +455,6 @@ const WhiteClarityNav = () => {
     navigate(`/diamond?carat_min=${min}&carat_max=${max}`);
   };
 
-  // --- This is a new "coordinator" function to keep the JSX clean ---
   // It will call the correct handler based on the item clicked
   const handleMobileDiamondMenuClick = (title, itemString) => {
     // --- Handle Price Filters ---
@@ -557,8 +538,6 @@ const WhiteClarityNav = () => {
   };
 
   // collection
-
-  // --- This map is from your CollectionMenu.js ---
   const staticCollectionRoutes = {
     "w signature": "/signature",
   };
@@ -587,16 +566,19 @@ const WhiteClarityNav = () => {
 
   return (
     <>
-      <header className={headerClass}>
-        <div className="top-bar ">
-          <strong>FREE INSURED SHIPPING & RETURNS | LIFETIME WARRANTY</strong>
-        </div>
-
-        <nav
-          className="nav-container"
-          onMouseEnter={() => setEnter(true)}
-          onMouseLeave={() => setEnter(false)}
-        >
+      <div className="top-bar">
+        <strong>FREE INSURED SHIPPING & RETURNS | LIFETIME WARRANTY</strong>
+      </div>
+      <header
+        className={`main-header ${
+          isHome
+            ? scrolled || hoveringMegaMenu
+              ? "fixed-header scrolled"
+              : "fixed-header"
+            : "sticky-header"
+        }`}
+      >
+        <nav className="nav-container">
           <div className="nav-left">
             <Button
               className="hamburger-btn custom-color-btn"
@@ -610,7 +592,11 @@ const WhiteClarityNav = () => {
               style={{ color: "inherit" }}
               onClick={() => setIsModalOpen(true)}
             >
-              <span className="material-symbols-outlined icon">calendar_clock</span>
+              {/* <span className="material-symbols-outlined icon">
+                calendar_clock
+              </span> */}
+              <CalendarMonthOutlinedIcon />
+
               <span className="text">Book an Appointment</span>
             </button>
           </div>
@@ -630,7 +616,8 @@ const WhiteClarityNav = () => {
           </div>
           <div className="nav-right d-flex align-items-center gap-3">
             <div className="icon-text d-flex align-items-center gap-1">
-              <span className="material-symbols-outlined">call</span>
+              {/* <span className="material-symbols-outlined">call</span> */}
+              <CallOutlinedIcon />
               <span className="text">1.844.234.6463</span>
             </div>
 
@@ -639,7 +626,8 @@ const WhiteClarityNav = () => {
               onClick={handleRedirect}
               style={{ cursor: "pointer" }}
             >
-              <span className="material-symbols-outlined">person</span>
+              {/* <span className="material-symbols-outlined">person</span> */}
+              <PersonOutlinedIcon />
               <span className="text">
                 {user ? `Hi, ${user.name || "User"}` : "SIGN IN / UP"}
               </span>
@@ -651,7 +639,8 @@ const WhiteClarityNav = () => {
                 className="text-decoration-none text-current d-flex align-items-center"
                 style={{ color: "inherit" }}
               >
-                <span className="material-symbols-outlined">local_mall</span>
+                {/* <span className="material-symbols-outlined">local_mall</span> */}
+                <LocalMallOutlinedIcon />
               </Link>
               {cartItems.length > 0 && (
                 <span
@@ -666,11 +655,7 @@ const WhiteClarityNav = () => {
         </nav>
 
         {/* Desktop Menu Bar */}
-        <div
-          className="menu-bar desktop-menu"
-          onMouseEnter={() => setEnter(true)}
-          onMouseLeave={() => setEnter(false)}
-        >
+        <div className="menu-bar desktop-menu">
           {menuItems.map((item, i) => (
             <div
               key={i}
@@ -683,8 +668,10 @@ const WhiteClarityNav = () => {
               }}
               onMouseLeave={() => {
                 setTimeout(() => {
-                  if (!hoveringMegaMenu) setHoveredMenu(null);
-                }, 50);
+                  if (!hoveringMegaMenu) {
+                    setHoveredMenu(null);
+                  }
+                }, 10);
               }}
               onClick={() => navigate(menuRoutes[item] || "/")}
               style={{ cursor: "pointer" }}
@@ -699,11 +686,13 @@ const WhiteClarityNav = () => {
       {hoveredMenu === "ENGAGEMENT" && (
         <div
           className={`mega-menu-overlay ${scrolled ? "scrolled-menu" : ""}`}
-          onMouseEnter={() => setHoveringMegaMenu(true)}
-          onMouseLeave={() => {
+          onMouseEnter={() => {
+            setHoveringMegaMenu(true);
+          }}
+         /*  onMouseLeave={() => {
             setHoveringMegaMenu(false);
             setHoveredMenu(null); // Close on mouse leave
-          }}
+          }} */
         >
           <MegaMenu
             type="engagement"
@@ -742,10 +731,10 @@ const WhiteClarityNav = () => {
         <div
           className={`mega-menu-overlay ${scrolled ? "scrolled-menu" : ""}`}
           onMouseEnter={() => setHoveringMegaMenu(true)}
-          onMouseLeave={() => {
+         /*  onMouseLeave={() => {
             setHoveringMegaMenu(false);
             setHoveredMenu(null); // Close on mouse leave
-          }}
+          }} */
         >
           <MegaMenu
             type="highJewelry"
@@ -758,10 +747,10 @@ const WhiteClarityNav = () => {
         <div
           className={`mega-menu-overlay ${scrolled ? "scrolled-menu" : ""}`}
           onMouseEnter={() => setHoveringMegaMenu(true)}
-          onMouseLeave={() => {
+          /* onMouseLeave={() => {
             setHoveringMegaMenu(false);
             setHoveredMenu(null); // Close on mouse leave
-          }}
+          }} */
         >
           <MegaMenu type="jewelry" closeMegaMenu={() => setHoveredMenu(null)} />
         </div>
@@ -771,10 +760,10 @@ const WhiteClarityNav = () => {
         <div
           className={`mega-menu-overlay ${scrolled ? "scrolled-menu" : ""}`}
           onMouseEnter={() => setHoveringMegaMenu(true)}
-          onMouseLeave={() => {
+          /* onMouseLeave={() => {
             setHoveringMegaMenu(false);
             setHoveredMenu(null); // Close on mouse leave
-          }}
+          }} */
         >
           <MegaMenu
             type="collection"
@@ -787,10 +776,10 @@ const WhiteClarityNav = () => {
         <div
           className={`mega-menu-overlay ${scrolled ? "scrolled-menu" : ""}`}
           onMouseEnter={() => setHoveringMegaMenu(true)}
-          onMouseLeave={() => {
+          /* onMouseLeave={() => {
             setHoveringMegaMenu(false);
             setHoveredMenu(null); // Close on mouse leave
-          }}
+          }} */
         >
           <MegaMenu type="gift" closeMegaMenu={() => setHoveredMenu(null)} />
         </div>

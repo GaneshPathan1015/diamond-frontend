@@ -1,23 +1,23 @@
 import React, { useEffect, useRef } from "react";
-import "./DiamondSelectionModal.css";
 import { useNavigate } from "react-router-dom";
+import "./DiamondSelectionModal.css";
 
 const DiamondSelectionModal = ({ onClose, ringCartItem }) => {
   const modalRef = useRef();
   const navigate = useNavigate();
 
   // Close modal on outside click
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        onClose();
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [onClose]);
+  // useEffect(() => {
+  //   const handleClickOutside = (event) => {
+  //     if (modalRef.current && !modalRef.current.contains(event.target)) {
+  //       onClose();
+  //     }
+  //   };
+  //   document.addEventListener("mousedown", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, [onClose]);
 
   const options = [
     { label: "LAB DIAMOND", name: "Lab Diamond", filled: true },
@@ -38,7 +38,7 @@ const DiamondSelectionModal = ({ onClose, ringCartItem }) => {
 
   return (
     <div className="modal-overlay">
-      <div className="modal-container" ref={modalRef}>
+      <div className="modal-container" ref={modalRef} onClick={(e) => e.stopPropagation()}>
         {/* Close button */}
 
         <span

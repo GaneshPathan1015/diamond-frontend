@@ -22,18 +22,19 @@ const RingSettingModal = ({ onClose, modalProductData }) => {
   const [errors, setErrors] = useState({});
 
   // Close on outside click
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        onClose();
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [onClose]);
+  // useEffect(() => {
+  //   const handleClickOutside = (event) => {
+  //     if (modalRef.current && !modalRef.current.contains(event.target)) {
+  //       onClose();
+  //     }
+  //   };
+  //   document.addEventListener("mousedown", handleClickOutside);
+  //   return () => document.removeEventListener("mousedown", handleClickOutside);
+  // }, [onClose]);
 
   // Handle input changes
   const handleChange = (e) => {
+    console.log(e.target.value);
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     setErrors((prev) => ({ ...prev, [name]: "" })); // Clear error
@@ -43,7 +44,6 @@ const RingSettingModal = ({ onClose, modalProductData }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let newErrors = {};
-
     if (!formData.size) newErrors.size = "Please select ring size";
     if (!formData.diamondtype) newErrors.diamondtype = "Please select type";
 
@@ -63,7 +63,7 @@ const RingSettingModal = ({ onClose, modalProductData }) => {
 
   return (
     <div className="modal-overlay-seting">
-      <div className="modal-container-seting" ref={modalRef}>
+      <div className="modal-container-seting" ref={modalRef} onClick={(e) => e.stopPropagation()}>
         {/* Close button */}
         <span
           className="material-symbols-outlined modal-close-seting"

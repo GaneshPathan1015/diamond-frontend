@@ -28,7 +28,6 @@ const GiftMenu = ({ handleStartGift }) => {
         { label: "Bouquet", slug: "bouquet" },
         { label: "Toi et Moi", slug: "toi-et-moi-collection" },
         { label: "Vine", slug: "vine-collection" },
-
       ],
     },
     {
@@ -44,46 +43,41 @@ const GiftMenu = ({ handleStartGift }) => {
   ];
 
   return (
-    <section className="gift-menu-section container-fluid py-2">
-      <div className="row justify-content-center">
-        {/* Centered col-9 */}
-        <div className="col-12 col-lg-9">
-          <div className="row">
-            {/* Left Section (Text) - 6 cols */}
-            <div className="col-lg-7 col-md-12 d-flex">
-              <div className="row w-100">
-                {menuData.map((menu, i) => (
-                  <div key={i} className="col-6 col-md-3">
-                    <h6 className="menu-title">{menu.title}</h6>
-                    <ul className="menu-list">
-                      {menu.items.map((item, idx) => (
-                        <li
-                          key={idx}
-                          className={item.className || ""}
-                          onClick={() => handleStartGift(item.slug)}
-                        >
-                          {item.label}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
+    <section className="jwl-mega-menu-inner">
+      <div className="gift-container">
+        {/* Left Section (Text) - 6 cols */}
+        <div className=" gift-left-section">
+         
+            {menuData.map((menu, i) => (
+              <div key={i} className="">
+                <h6 className="menu-title">{menu.title}</h6>
+                <ul className="menu-list">
+                  {menu.items.map((item, idx) => (
+                    <li
+                      key={idx}
+                      className={item.className || ""}
+                      onClick={() => handleStartGift(item.slug)}
+                    >
+                      {item.label}
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </div>
+            ))}
+          
+        </div>
 
-            {/* Right Section (Image + Text) - 3 cols */}
-            <div className="col-lg-3 col-md-12 text-center gift-image-box">
-              <img
-                src="/images/best-gifts.webp"
-                alt="Best Selling Gifts"
-                className="img-fluid mb-3"
-              />
-              <h5 className="fw-bold">Best-Selling Gifts</h5>
-              <a href="#" className="shop-now-link">
-                SHOP NOW
-              </a>
-            </div>
-          </div>
+        {/* Right Section (Image + Text) - 3 cols */}
+        <div className="gift-image-box">
+          <img
+            src="/images/best-gifts.webp"
+            alt="Best Selling Gifts"
+            className="img-fluid mb-3"
+          />
+          <h5 className="fw-bold">Best-Selling Gifts</h5>
+          <a href="#" className="shop-now-link">
+            SHOP NOW
+          </a>
         </div>
       </div>
     </section>

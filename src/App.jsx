@@ -1,7 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import ScrollToTop from "./pages/scrolltop/ScrollToTop";
 import Footer from "./pages/footer/footer";
-import HeaderWrapper from "./pages/header/HeaderWrapper";
 
 // All your page imports
 import Home from "./pages/home/home";
@@ -41,6 +40,7 @@ import CollectionsRouter from "./pages/collectionsRouter/CollectionsRouter";
 import GiftList from "./pages/gift/GiftList";
 import GiftDetails from "./pages/giftDetails/giftDetails";
 import JewelryCollections from "./pages/highJewelry/JewelryCollections";
+import BookAppointment from "./pages/appointmentModal/BookAppointment";
 
 // Footer pages
 import Press from "./pages/footerpages/Company/Press";
@@ -56,36 +56,16 @@ import Blog from "./pages/footerpages/education/blog/Blog";
 import { useEffect, useState } from "react";
 
 export default function App() {
-  const [paddingTop, setPaddingTop] = useState("146px");
-  const isHome = window.location.pathname === "/"; // Adjust if your home path differs
-
-  useEffect(() => {
-    const updatePadding = () => {
-      const width = window.innerWidth;
-
-      if (isHome) {
-        setPaddingTop("0px");
-      } else if (width <= 1024) {
-        setPaddingTop("100px");
-      } else {
-        setPaddingTop("146px");
-      }
-    };
-
-    updatePadding(); // Set on mount
-    window.addEventListener("resize", updatePadding);
-
-    return () => window.removeEventListener("resize", updatePadding);
-  }, [isHome]);
-
+ 
   return (
     <>
       <ScrollToTop />
       {/* <HeaderWrapper /> */}
       <WhiteClarityNav />
-      <main style={{ paddingTop }}>
+      <main>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/book-appointment" element={<BookAppointment />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/engagement" element={<Engagement />} />
           <Route path="/about" element={<About />} />

@@ -98,7 +98,7 @@ const GiftDetails = () => {
     setMainImage(getImageUrl(variation?.images?.[0]));
   };
 
-  // const { name, description } = product;
+
   if (!product) return <div className="container py-5">Loading...</div>;
   // Select the correct variation directly
   const selectedVariation =
@@ -458,16 +458,12 @@ const GiftDetails = () => {
                       }`}
                     >
                       <p className="detail-description">
-                        This classic tennis bracelet features a single row of
-                        sparkling brilliant cut diamonds
+                        {description || "NA"}
                       </p>
-                      <p className="detail-description">
-                        Set in gold four-prong baskets with a total diamond
-                        weight of 2Cts
-                      </p>
+                     
                       <div className="details-grid">
                         <span className="detail-label">Metal Details</span>
-                        <span className="detail-value">14KT White Gold</span>
+                        <span className="detail-value">{metalName}</span>
 
                         <span className="detail-label">Setting Type</span>
                         <span className="detail-value">Prong</span>
@@ -501,7 +497,7 @@ const GiftDetails = () => {
                         <span className="detail-value">Diamond</span>
 
                         <span className="detail-label">Total Carat Weight</span>
-                        <span className="detail-value">2.0 Cts</span>
+                        <span className="detail-value">{weight}</span>
 
                         <span className="detail-label">Cut</span>
                         <span className="detail-value">Brilliant</span>
@@ -805,16 +801,12 @@ const GiftDetails = () => {
                 }`}
               >
                 <p className="detail-description">
-                  This classic tennis bracelet features a single row of
-                  sparkling brilliant cut diamonds
+                  {description || "NA"}
                 </p>
-                <p className="detail-description">
-                  Set in gold four-prong baskets with a total diamond weight of
-                  2Cts
-                </p>
+                
                 <div className="details-grid">
                   <span className="detail-label">Metal Details</span>
-                  <span className="detail-value">14KT White Gold</span>
+                  <span className="detail-value">{metalName}</span>
 
                   <span className="detail-label">Setting Type</span>
                   <span className="detail-value">Prong</span>

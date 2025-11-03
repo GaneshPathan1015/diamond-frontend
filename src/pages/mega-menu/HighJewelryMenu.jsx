@@ -19,7 +19,7 @@ const HighJewelryMenu = ({navigate }) => {
 
   return (
     <div
-      className="collection-menu"
+      className="jwl-mega-menu-inner"
     >
       <div className="collection-grid">
         {collections.map((col, i) => (
@@ -28,7 +28,7 @@ const HighJewelryMenu = ({navigate }) => {
             className="collection-card"
             onClick={() => navigate(col.route)}
           >
-            <img src={col.image} alt={col.name} className="collection-image" />
+            <img src={col.image} alt={col.name} className="collection-image-high-jewelry" />
             <p className="collection-label">{col.name}</p>
           </div>
         ))}

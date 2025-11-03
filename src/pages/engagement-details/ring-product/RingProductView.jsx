@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import "../../jewellary-details/JewellaryDetails.css";
 import axiosClient from "../../../api/axios";
 import { useCart } from "../../../cart/CartContext";
 import Logosec from "../../w-signature/logosec";
 import NoDealbreakers from "../../diamond-detail/diamondDetails/nobrokrage/NoDealbreakers";
 import DiamondSelectionModal from "./DiamondSelectionModal";
 import RingSettingModal from "./RingSettingModal";
+import "../../jewellary-details/JewellaryDetails.css";
 import {
   ChevronLeft,
   ChevronRight,
@@ -54,6 +54,7 @@ const RingProductView = ({ diamond }) => {
   const toggleSection = (section) => {
     setOpenSection(openSection === section ? null : section);
   };
+
   useEffect(() => {
     const handleScroll = () => {
       setShowMobileCart(window.innerWidth < 768 && window.scrollY > 300);
@@ -148,6 +149,7 @@ const RingProductView = ({ diamond }) => {
         selectedVariationIndex
       ]
     : product.metal_variations?.[selectedMetalId]?.[selectedVariationIndex];
+
   const currentMedia = selectedVariation
     ? [
         // Add video first if it exists
@@ -169,6 +171,7 @@ const RingProductView = ({ diamond }) => {
     setCurrentImageIndex(
       (prev) => (prev - 1 + currentMedia.length) % currentMedia.length
     );
+
   const { name, description } = product.product;
   const {
     price,
@@ -584,7 +587,6 @@ const RingProductView = ({ diamond }) => {
                 </div>
               </div> */}
 
-                
                 <button className="btn btn-outline-dark w-100 py-3 fw-semibold mb-4">
                   VIRTUAL / SHOWROOM APPOINTMENT
                 </button>
@@ -660,16 +662,12 @@ const RingProductView = ({ diamond }) => {
                         }`}
                       >
                         <p className="detail-description">
-                          This classic tennis bracelet features a single row of
-                          sparkling brilliant cut diamonds
+                          {description}
                         </p>
-                        <p className="detail-description">
-                          Set in gold four-prong baskets with a total diamond
-                          weight of 2Cts
-                        </p>
+                        
                         <div className="details-grid">
                           <span className="detail-label">Metal Details</span>
-                          <span className="detail-value">14KT White Gold</span>
+                          <span className="detail-value">{metalName}</span>
 
                           <span className="detail-label">Setting Type</span>
                           <span className="detail-value">Prong</span>
@@ -939,7 +937,6 @@ const RingProductView = ({ diamond }) => {
                     );
                   })}
               </div>
-              
             </div>
 
             <p className="small fw-semibold mb-4">DIAMOND TYPE : LAB</p>
@@ -966,7 +963,6 @@ const RingProductView = ({ diamond }) => {
                     </button>
                   ))}
               </div>
-              
             </div>
 
             <div className="mb-4">
@@ -1080,16 +1076,12 @@ const RingProductView = ({ diamond }) => {
                   }`}
                 >
                   <p className="detail-description">
-                    This classic tennis bracelet features a single row of
-                    sparkling brilliant cut diamonds
+                    {description}
                   </p>
-                  <p className="detail-description">
-                    Set in gold four-prong baskets with a total diamond weight
-                    of 2Cts
-                  </p>
+                  
                   <div className="details-grid">
                     <span className="detail-label">Metal Details</span>
-                    <span className="detail-value">14KT White Gold</span>
+                    <span className="detail-value">{metalName}</span>
 
                     <span className="detail-label">Setting Type</span>
                     <span className="detail-value">Prong</span>
@@ -1123,7 +1115,7 @@ const RingProductView = ({ diamond }) => {
                     <span className="detail-value">Diamond</span>
 
                     <span className="detail-label">Total Carat Weight</span>
-                    <span className="detail-value">2.0 Cts</span>
+                    <span className="detail-value">{weight}</span>
 
                     <span className="detail-label">Cut</span>
                     <span className="detail-value">Brilliant</span>

@@ -31,7 +31,7 @@ const CollectionMenu = ({
 
   return (
     <div
-      className=" collection-menu"
+      className="jwl-mega-menu-inner"
     >
       {/* Left Menu */}
       <div className="menu-left">

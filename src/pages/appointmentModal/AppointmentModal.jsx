@@ -1,81 +1,56 @@
-import React, { useState } from "react";
-import VirtualAppointmentModal from "./VirtualAppointmentModal";
-import { X } from "lucide-react"; // Make sure you have lucide-react installed
+// AppointmentModal.jsx
+
+import React from "react";
+import { X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import styles from "./AppointmentModal.module.css";
-// import ShowroomModal from "./ShowroomModal";
 
 const AppointmentModal = ({ isOpen, onClose }) => {
-  const [showVirtualModal, setShowVirtualModal] = useState(false);
-  const [showShowroomModal, setShowShowroomModal] = useState(false);
-  if (!isOpen && !showVirtualModal && !showShowroomModal) {
+  const navigate = useNavigate();
+  if (!isOpen) {
     return null;
   }
 
-  const handleSelect = (type) => {
-    console.log(type);
-
-    // Close main modal
-    onClose();
-
-    // Open respective modal
-    if (type === "virtual") {
-      setShowVirtualModal(true);
-    } else if (type === "showroom") {
-      setShowShowroomModal(true);
-    }
+  const handleAppointmentType = (type) => {
+    onClose(); // Close modal first
+    navigate("/book-appointment", { state: { appointment_type: type } }); // Pass type to BookAppointment
   };
 
   return (
-    <>
-      {!showVirtualModal && !showShowroomModal && (
-        <div className={styles.overlay} onClick={onClose}>
-          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-            <div className={styles.overlay2} />
-            <div className={styles.content}>
-              <button
-                className={styles.closeButton}
-                onClick={onClose}
-                aria-label="Close modal"
-              >
-                <X size={28} />
-              </button>
+    <div className={styles.overlay} onClick={onClose}>
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+        <div className={styles.overlay2} />
+        <div className={styles.content}>
+          <button
+            className={styles.closeButton}
+            onClick={onClose}
+            aria-label="Close modal"
+          >
+            <X size={28} />
+          </button>
 
-              <div className={styles.subtitle}>Tailored to You</div>
+          <div className={styles.subtitle}>Tailored to You</div>
 
-              <h1 className={styles.title}>Virtual or In-Person</h1>
+          <h1 className={styles.title}>Virtual or In-Person</h1>
 
-              <div className={styles.buttonContainer}>
-                <button
-                  className={styles.button}
-                  onClick={() => {
-                    handleSelect("virtual");
-                  }}
-                >
-                  Virtual Appointment
-                </button>
+          <div className={styles.buttonContainer}>
+            <button
+              className={styles.button}
+              onClick={() => handleAppointmentType("virtual")}
+            >
+              Virtual Appointment
+            </button>
 
-                <button
-                  className={styles.button}
-                  onClick={() => {
-                    handleSelect("showroom");
-                  }}
-                >
-                  Showroom Appointment
-                </button>
-              </div>
-            </div>
+            <button
+              className={styles.button}
+              onClick={() => handleAppointmentType("showroom")}
+            >
+              Showroom Appointment
+            </button>
           </div>
         </div>
-      )}
-      {showVirtualModal && (
-        <VirtualAppointmentModal onClose={() => setShowVirtualModal(false)} />
-      )}
-
-      {/* Showroom Modal */}
-      {/*  {showShowroomModal && (
-        <ShowroomModal onClose={() => setShowShowroomModal(false)} />
-      )} */}
-    </>
+      </div>
+    </div>
   );
 };
 

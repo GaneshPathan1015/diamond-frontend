@@ -1,6 +1,6 @@
-/* Section styling */
-.gift-menu-section {
-  background: #fff;
+.gift-container{
+  display: flex;
+  gap: 50px;
 }
 
 /* Titles */
@@ -29,9 +29,12 @@
   color: #9b9b9b; /* blue hover */
 }
 
+.gift-left-section{
+  display: flex;
+  gap: 40px;
+}
 /* Right image + text */
 .gift-image-box img {
-
   max-height: 350px;
   object-fit: cover;
 }
@@ -43,6 +46,7 @@
 
 .shop-now-link {
   display: inline-block;
+  color: black;
   font-size: 0.9rem;
   font-weight: 600;
   text-decoration: none;
@@ -53,7 +57,7 @@
 
 .shop-now-link:hover {
   color: #868787;
-  border-color: #007bff;
+  border-color: #000000;
 }
 
 /* Responsive tweaks */

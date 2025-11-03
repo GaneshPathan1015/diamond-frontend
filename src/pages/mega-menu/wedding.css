@@ -1,13 +1,10 @@
-.bands-section {
-    background: #fff;
-}
+
 .clickable-link{
     cursor: pointer;
 }
 .bands-container {
     display: flex;
     flex-wrap: wrap;
-    max-width: 700px;
     width: 100%;
     margin: auto;
     gap: 15px;
@@ -41,7 +38,6 @@
 }
 
 .bands-links li {
-
     margin-bottom: 6px;
 }
 

@@ -514,6 +514,7 @@ const RingProductView = ({ diamond }) => {
                       </button>
                     ))}
                   </div> */}
+                  
                 </div>
                 <button
                   className="btn w-100 py-3 fw-semibold mb-3"
