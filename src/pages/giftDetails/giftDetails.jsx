@@ -14,6 +14,7 @@ import axiosClient from "../../api/axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Zoom from "react-medium-image-zoom";
 import { useCart } from "../../cart/CartContext";
+import LoadingDots from "./LoadingDots";
 import "./giftDetails.css"; // Import the custom CSS
 
 const getImageUrl = (img) => {
@@ -98,8 +99,7 @@ const GiftDetails = () => {
     setMainImage(getImageUrl(variation?.images?.[0]));
   };
 
-
-  if (!product) return <div className="container py-5">Loading...</div>;
+  if (!product) return <LoadingDots/> ;
   // Select the correct variation directly
   const selectedVariation =
     product.metal_variations?.[selectedMetalId]?.[selectedVariationIndex];
@@ -127,7 +127,7 @@ const GiftDetails = () => {
     );
 
   // Extract product details safely
-  const { name, description } = product.product || {};
+  const { name, description, delivery_days } = product.product || {};
 
   const {
     price,
@@ -138,6 +138,15 @@ const GiftDetails = () => {
   } = selectedVariation || {};
   const priceDifference = Math.max(original_price - price, 0).toFixed(2);
   const metalName = metal_color?.name || "-";
+  // Calculate the delivery date dynamically
+  const currentDate = new Date();
+  const estimatedDays = delivery_days + 1; // add 1 extra day
+  const deliveryDate = new Date(currentDate);
+  deliveryDate.setDate(currentDate.getDate() + estimatedDays);
+
+  // Format the date (e.g., "Wed, Oct 8")
+  const options = { weekday: "short", month: "short", day: "numeric" };
+  const formattedDate = deliveryDate.toLocaleDateString("en-US", options);
   // const { price, weight, sku: variationSku } = selectedVariation || {};
   return (
     <div className="bg-white min-vh-100">
@@ -390,7 +399,7 @@ const GiftDetails = () => {
               </button>
 
               <p className="small mb-2">
-                Ships by <strong>Wed, Oct 8</strong> | Track in real time before
+                Ships by <strong>{formattedDate}</strong> | Track in real time before
                 it ships
               </p>
               <p className="small mb-2">
@@ -460,7 +469,7 @@ const GiftDetails = () => {
                       <p className="detail-description">
                         {description || "NA"}
                       </p>
-                     
+
                       <div className="details-grid">
                         <span className="detail-label">Metal Details</span>
                         <span className="detail-value">{metalName}</span>
@@ -754,7 +763,7 @@ const GiftDetails = () => {
           </div> */}
 
           <p className="small mb-2">
-            Ships by <strong>Wed, Oct 8</strong> | Track in real time before it
+            Ships by <strong>{formattedDate}</strong> | Track in real time before it
             ships
           </p>
           <p className="small mb-4">
@@ -800,10 +809,8 @@ const GiftDetails = () => {
                   openSection === "product" ? "" : "collapsed"
                 }`}
               >
-                <p className="detail-description">
-                  {description || "NA"}
-                </p>
-                
+                <p className="detail-description">{description || "NA"}</p>
+
                 <div className="details-grid">
                   <span className="detail-label">Metal Details</span>
                   <span className="detail-value">{metalName}</span>

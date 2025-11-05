@@ -8,6 +8,7 @@ import Logosec from "../../w-signature/logosec";
 import NoDealbreakers from "../../diamond-detail/diamondDetails/nobrokrage/NoDealbreakers";
 import DiamondSelectionModal from "./DiamondSelectionModal";
 import RingSettingModal from "./RingSettingModal";
+import LoadingDots from "../../giftDetails/LoadingDots";
 import "../../jewellary-details/JewellaryDetails.css";
 import {
   ChevronLeft,
@@ -139,7 +140,7 @@ const RingProductView = ({ diamond }) => {
     setMainImage(getImageUrl(variation?.images?.[0]));
   };
 
-  if (!product) return <div className="container py-5">Loading...</div>;
+  if (!product) return <LoadingDots />;
 
   const isBuild = (product.product?.is_build ?? product.is_build) === 1;
 
@@ -172,7 +173,7 @@ const RingProductView = ({ diamond }) => {
       (prev) => (prev - 1 + currentMedia.length) % currentMedia.length
     );
 
-  const { name, description } = product.product;
+  const { name, description, delivery_days } = product.product;
   const {
     price,
     original_price,
@@ -186,6 +187,15 @@ const RingProductView = ({ diamond }) => {
     ? product.metal_variations?.[selectedMetalId]?.[selectedShapeId]?.[0]?.shape
         ?.name
     : null;
+
+  const currentDate = new Date();
+  const estimatedDays = delivery_days + 1; // add 1 extra day
+  const deliveryDate = new Date(currentDate);
+  deliveryDate.setDate(currentDate.getDate() + estimatedDays);
+
+  // Format the date (e.g., "Wed, Oct 8")
+  const options = { weekday: "short", month: "short", day: "numeric" };
+  const formattedDate = deliveryDate.toLocaleDateString("en-US", options);
 
   // Get selected carat weight
   const selectedCaratWeight = selectedVariation?.weight || null;
@@ -592,7 +602,7 @@ const RingProductView = ({ diamond }) => {
                 </button>
 
                 <p className="small mb-2">
-                  Ships by <strong>Wed, Oct 8</strong> | Track in real time
+                  Ships by <strong>{formattedDate}</strong> | Track in real time
                   before it ships
                 </p>
                 <p className="small mb-2">
@@ -661,10 +671,8 @@ const RingProductView = ({ diamond }) => {
                           openSection === "product" ? "" : "collapsed"
                         }`}
                       >
-                        <p className="detail-description">
-                          {description}
-                        </p>
-                        
+                        <p className="detail-description">{description}</p>
+
                         <div className="details-grid">
                           <span className="detail-label">Metal Details</span>
                           <span className="detail-value">{metalName}</span>
@@ -1029,8 +1037,8 @@ const RingProductView = ({ diamond }) => {
           </div> */}
 
             <p className="small mb-2">
-              Ships by <strong>Wed, Oct 8</strong> | Track in real time before
-              it ships
+              Ships by <strong>{formattedDate}</strong> | Track in real time
+              before it ships
             </p>
             <p className="small mb-4">
               Free Insured Shipping.{" "}
@@ -1075,10 +1083,8 @@ const RingProductView = ({ diamond }) => {
                     openSection === "product" ? "" : "collapsed"
                   }`}
                 >
-                  <p className="detail-description">
-                    {description}
-                  </p>
-                  
+                  <p className="detail-description">{description}</p>
+
                   <div className="details-grid">
                     <span className="detail-label">Metal Details</span>
                     <span className="detail-value">{metalName}</span>

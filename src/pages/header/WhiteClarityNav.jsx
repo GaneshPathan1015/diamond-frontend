@@ -607,12 +607,14 @@ const WhiteClarityNav = () => {
             onClose={() => setIsModalOpen(false)} // Pass the function to close it
           />
           <div className="nav-logo">
-            <img
-              src={isHome ? "/images/logo.png" : "/images/logo-23.png"}
-              alt="Logo"
-              className="img-fluid"
-              style={{ maxHeight: "50px" }}
-            />
+            <Link to={"/"}>
+              <img
+                src={isHome ? "/images/logo.png" : "/images/logo-23.png"}
+                alt="Logo"
+                className="img-fluid"
+                style={{ maxHeight: "50px" }}
+              />
+            </Link>
           </div>
           <div className="nav-right d-flex align-items-center gap-3">
             <div className="icon-text d-flex align-items-center gap-1">
@@ -689,10 +691,10 @@ const WhiteClarityNav = () => {
           onMouseEnter={() => {
             setHoveringMegaMenu(true);
           }}
-         /*  onMouseLeave={() => {
+          onMouseLeave={() => {
             setHoveringMegaMenu(false);
             setHoveredMenu(null); // Close on mouse leave
-          }} */
+          }}
         >
           <MegaMenu
             type="engagement"
@@ -731,10 +733,10 @@ const WhiteClarityNav = () => {
         <div
           className={`mega-menu-overlay ${scrolled ? "scrolled-menu" : ""}`}
           onMouseEnter={() => setHoveringMegaMenu(true)}
-         /*  onMouseLeave={() => {
+          onMouseLeave={() => {
             setHoveringMegaMenu(false);
             setHoveredMenu(null); // Close on mouse leave
-          }} */
+          }}
         >
           <MegaMenu
             type="highJewelry"
@@ -760,10 +762,10 @@ const WhiteClarityNav = () => {
         <div
           className={`mega-menu-overlay ${scrolled ? "scrolled-menu" : ""}`}
           onMouseEnter={() => setHoveringMegaMenu(true)}
-          /* onMouseLeave={() => {
+          onMouseLeave={() => {
             setHoveringMegaMenu(false);
             setHoveredMenu(null); // Close on mouse leave
-          }} */
+          }}
         >
           <MegaMenu
             type="collection"
@@ -776,10 +778,10 @@ const WhiteClarityNav = () => {
         <div
           className={`mega-menu-overlay ${scrolled ? "scrolled-menu" : ""}`}
           onMouseEnter={() => setHoveringMegaMenu(true)}
-          /* onMouseLeave={() => {
+          onMouseLeave={() => {
             setHoveringMegaMenu(false);
             setHoveredMenu(null); // Close on mouse leave
-          }} */
+          }}
         >
           <MegaMenu type="gift" closeMegaMenu={() => setHoveredMenu(null)} />
         </div>

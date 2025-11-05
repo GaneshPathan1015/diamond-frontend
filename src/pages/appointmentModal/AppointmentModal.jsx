@@ -1,22 +1,21 @@
-// AppointmentModal.jsx
-
 import React from "react";
+import ReactDOM from "react-dom";
 import { X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import styles from "./AppointmentModal.module.css";
 
 const AppointmentModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
-  if (!isOpen) {
-    return null;
-  }
+
+  // If modal not open, do not render anything
+  if (!isOpen) return null;
 
   const handleAppointmentType = (type) => {
-    onClose(); // Close modal first
-    navigate("/book-appointment", { state: { appointment_type: type } }); // Pass type to BookAppointment
+    onClose(); // Close modal
+    navigate("/book-appointment", { state: { appointment_type: type } }); // Navigate
   };
 
-  return (
+  const modalContent = (
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.overlay2} />
@@ -30,7 +29,6 @@ const AppointmentModal = ({ isOpen, onClose }) => {
           </button>
 
           <div className={styles.subtitle}>Tailored to You</div>
-
           <h1 className={styles.title}>Virtual or In-Person</h1>
 
           <div className={styles.buttonContainer}>
@@ -52,6 +50,9 @@ const AppointmentModal = ({ isOpen, onClose }) => {
       </div>
     </div>
   );
+
+  // Render modal into body to avoid z-index issues
+  return ReactDOM.createPortal(modalContent, document.body);
 };
 
 export default AppointmentModal;
