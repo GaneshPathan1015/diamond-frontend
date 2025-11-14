@@ -6,9 +6,13 @@
   .footer-link {
       transition: all 0.2s ease;
       display: block;
-      padding: 0.4rem 0;
-      font-size: 0.95rem;
+      margin-bottom: 15px;
+      font-size: 16px;
       font-weight: 400;
+  }
+
+  .footer-font {
+      font-family: "Figtree", sans-serif;
   }
 
   .footer-link:hover {
@@ -31,9 +35,10 @@
   }
 
   .footer-heading {
+      font-family: "Figtree", sans-serif;
       font-weight: 700;
       margin-bottom: 1.2rem;
-      font-size: 0.85rem;
+      font-size: 18px;
       letter-spacing: 1.5px;
       text-transform: uppercase;
   }
@@ -58,8 +63,12 @@
       color: rgba(255, 255, 255, 0.6);
   }
 
-  .submit-btn {
-      background: #000;
+  .footer-sub-btn{
+    background-color: white;
+  }
+
+  .f-submit-btn {
+      background-color: black ;
       border: 1px solid #fff;
       color: #fff;
       font-weight: 600;
@@ -70,10 +79,6 @@
       transition: all 0.3s ease;
   }
 
-  .submit-btn:hover {
-      background: #fff;
-      color: #000;
-  }
 
   .brand-logo {
       font-size: 1.5rem;

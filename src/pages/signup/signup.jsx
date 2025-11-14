@@ -77,58 +77,12 @@ const SignUp = () => {
     }
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   const formData = {
-  //     title,
-  //     name: `${firstName} ${lastName}`,
-  //     email,
-  //     birth_date: birthDate ? birthDate.toISOString().split("T")[0] : null,
-  //     anniversary_date: anniversaryDate
-  //       ? anniversaryDate.toISOString().split("T")[0]
-  //       : null,
-  //     password,
-  //   };
-
-  //   try {
-  //     const response = await axiosClient.post("api/register", formData);
-  //     if (response.status === 201) {
-  //       // setSuccessMessage("Registration successful!");
-  //       setSuccessMessage("Please check your email to verify your account.");
-  //       console.log("Server response:", response.data);
-
-  //       // setSuccessMessage("Registration successful!");
-  //       // Reset form fields
-  //       setTitle("");
-  //       setFirstName("");
-  //       setLastName("");
-  //       setEmail("");
-  //       setBirthDate(null);
-  //       setAnniversaryDate(null);
-  //       setPassword("");
-
-  //       // Optionally hide success message
-  //       setTimeout(() => setSuccessMessage(""), 3000);
-  //     } else {
-  //       alert(data.message || "Registration failed.");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error submitting form:", error);
-  //     if (error.response?.data?.message) {
-  //       alert(error.response.data.message);
-  //     } else {
-  //       alert("An error occurred. Please try again.");
-  //     }
-  //   }
-  // };
-
   return (
     <section className="sign_up">
       <div className="container">
         <div
           className="row align-items-center"
-          style={{ marginTop: "10%", marginBottom: "10%" }}
+          style={{ marginBottom: "1%" }}
         >
           <div className="col-xl-6">
             <img

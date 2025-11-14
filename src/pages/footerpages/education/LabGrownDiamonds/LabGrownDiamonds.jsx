@@ -171,7 +171,7 @@ function LabGrownDiamonds() {
           <h3 className="text-center pt-2">LAB DIAMONDS</h3>
           <h3 className="text-center pt-3">NATURAL DIAMONDS</h3>
 
-          <table className="diamond-table">
+          <table className="diamond-table-labgrow">
             <thead>
               <tr>
                 <th>Chemical Composition</th>

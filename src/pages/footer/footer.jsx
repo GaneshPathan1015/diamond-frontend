@@ -105,7 +105,7 @@ const Footer = () => {
 
   return (
     <>
-      <footer className="bg-black text-white pt-5 pb-4">
+      <footer className="bg-black text-white pt-5 pb-4 footer-font">
         <div className="container-fluid px-4 px-md-5">
           <div className="row">
             {/* Company */}
@@ -227,7 +227,7 @@ const Footer = () => {
                   Sign up for <strong>$100 OFF</strong> your first purchase
                 </p>
 
-                <div className="d-flex gap-2 mb-3">
+                <div className="d-flex gap-2 mb-3 footer-sub-btn">
                   <input
                     type="email"
                     placeholder="Enter your email"
@@ -238,7 +238,7 @@ const Footer = () => {
                   />
                   <button
                     type="button"
-                    className="btn submit-btn"
+                    className="f-submit-btn "
                     onClick={handleSubmit}
                   >
                     SUBMIT

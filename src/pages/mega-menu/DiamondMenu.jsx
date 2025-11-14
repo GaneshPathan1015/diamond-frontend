@@ -100,7 +100,7 @@ const DiamondMenu = ({
           <img
             src="/images/diamonds.webp"
             alt="Diamond"
-            className="diamond-img taller" // added custom class
+            className="diamond-menu-img taller" // added custom class
           />
           <h6 className="fw-bold mt-3 ">Clarity Plus™ Diamonds</h6>
           <a href="#" className="shop-now">

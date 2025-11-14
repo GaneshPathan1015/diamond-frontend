@@ -1,4 +1,3 @@
-
 .clickable-link{
     cursor: pointer;
 }
@@ -17,7 +16,6 @@
 
 .clickable-heading:hover {
     text-decoration: underline;
-
 }
 
 .bands-links {

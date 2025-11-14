@@ -46,8 +46,7 @@ const GiftMenu = ({ handleStartGift }) => {
     <section className="jwl-mega-menu-inner">
       <div className="gift-container">
         {/* Left Section (Text) - 6 cols */}
-        <div className=" gift-left-section">
-         
+        <div className=" gift-left-section">         
             {menuData.map((menu, i) => (
               <div key={i} className="">
                 <h6 className="menu-title">{menu.title}</h6>

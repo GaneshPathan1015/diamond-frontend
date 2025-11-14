@@ -5,6 +5,7 @@ import Footer from "./pages/footer/footer";
 // All your page imports
 import Home from "./pages/home/home";
 import Contact from "./pages/contact/contact";
+import EnquiryForm from "./pages/Enquiry/EnquiryForm";
 import Engagement from "./pages/engagement/engagement";
 import About from "./pages/about/about";
 import Diamond from "./pages/diamond/diamond";
@@ -26,7 +27,7 @@ import OrderDetails from "./pages/order_details/OrderDetails";
 import JewelryList from "./pages/jewellary_list/JewelryList";
 import JewelryDetailsPage from "./pages/jewellary-details/JewellaryDetails";
 import MegaMenu from "./pages/mega-menu/megaMenu";
-import Luxe from "./pages/Luxe/luxe";
+// import Luxe from "./pages/Luxe/luxe";
 import Reserve from "./pages/reserve-collections/reserve";
 import Signature from "./pages/w-signature/signature";
 import EngagementDetails from "./pages/engagement-details/engDetails";
@@ -37,6 +38,7 @@ import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import WhiteClarityNav from "./pages/header/WhiteClarityNav";
 import PrivateRoute from "./routes/PrivateRoute";
 import CollectionsRouter from "./pages/collectionsRouter/CollectionsRouter";
+import PageRouter from "./pages/collectionsRouter/PageRouter";
 import GiftList from "./pages/gift/GiftList";
 import GiftDetails from "./pages/giftDetails/giftDetails";
 import JewelryCollections from "./pages/highJewelry/JewelryCollections";
@@ -56,7 +58,6 @@ import Blog from "./pages/footerpages/education/blog/Blog";
 import { useEffect, useState } from "react";
 
 export default function App() {
- 
   return (
     <>
       <ScrollToTop />
@@ -66,6 +67,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/book-appointment" element={<BookAppointment />} />
+          <Route path="/inquiry" element={<EnquiryForm />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/engagement" element={<Engagement />} />
           <Route path="/about" element={<About />} />
@@ -100,7 +102,8 @@ export default function App() {
           <Route path="/engagement-rings/:slug?" element={<EngagementList />} />
           <Route path="/wedding/:slug?" element={<WeddingList />} />
           <Route path="/collections/:slug" element={<CollectionsRouter />} />
-          <Route path="/page/:slug" element={<JewelryCollections />} />
+          <Route path="/page/:slug" element={<PageRouter />} />
+          {/* <Route path="/page/:slug" element={<JewelryCollections />} /> */}
 
           <Route
             path="/jewellary-details/:id"
@@ -108,14 +111,15 @@ export default function App() {
           />
           <Route path="/product/:slug?" element={<CompleteRing />} />
           <Route
-            path="/engagment-details/:id"
+            path="/engagment-details/:productId"
             element={<EngagementDetails />}
           />
           <Route path="/products/:productSlug" element={<GiftDetails />} />
           <Route path="/megamenu" element={<MegaMenu />} />
-          <Route path="/luxe" element={<Luxe />} />
-          <Route path="/reserve" element={<Reserve />} />
-          <Route path="/signature" element={<Signature />} />
+          {/* <Route path="/luxe" element={<Luxe />} />
+          <Route path="/reserve" element={<Reserve />} /> */}
+          {/* <Route path="/signature" element={<Signature />} /> */}
+
           {/* 404 page */}
           <Route path="*" element={<PageNotFound />} />
           {/* Footer pages start*/}

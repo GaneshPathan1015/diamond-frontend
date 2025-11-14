@@ -76,7 +76,7 @@ const JewelryMenu = ({
               ))}
 
           {/* Collections */}
-          <div className="">
+          <div>
             <h6 className="jwl-menu-title">COLLECTIONS</h6>
             <ul className="jwl-list">
               {Array.isArray(collections) &&

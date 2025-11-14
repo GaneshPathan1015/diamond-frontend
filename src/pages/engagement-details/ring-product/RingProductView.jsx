@@ -7,8 +7,9 @@ import { useCart } from "../../../cart/CartContext";
 import Logosec from "../../w-signature/logosec";
 import NoDealbreakers from "../../diamond-detail/diamondDetails/nobrokrage/NoDealbreakers";
 import DiamondSelectionModal from "./DiamondSelectionModal";
-import RingSettingModal from "./RingSettingModal";
 import LoadingDots from "../../giftDetails/LoadingDots";
+import RingSettingModal from "./RingSettingModal";
+import SocialShare from "../../giftDetails/SocialShare";
 import "../../jewellary-details/JewellaryDetails.css";
 import {
   ChevronLeft,
@@ -36,7 +37,7 @@ const getVideoUrl = (video) => {
 const getShapeImageUrl = (img) => `${import.meta.env.VITE_BACKEND_URL}${img}`;
 
 const RingProductView = ({ diamond }) => {
-  const { id } = useParams();
+  const { productId } = useParams();
   const [product, setProduct] = useState(null);
   const [mainImage, setMainImage] = useState("");
   const [selectedMetalId, setSelectedMetalId] = useState(null);
@@ -47,6 +48,7 @@ const RingProductView = ({ diamond }) => {
   const [modalProductData, setModalProductData] = useState(null);
   const [isVideo, setIsVideo] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [selectedQuality, setSelectedQuality] = useState("f-g-si");
   const [showMobileCart, setShowMobileCart] = useState(false);
 
   const navigate = useNavigate();
@@ -67,7 +69,9 @@ const RingProductView = ({ diamond }) => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axiosClient.get(`/api/engagement-buildproduct/${id}`);
+        const res = await axiosClient.get(
+          `/api/engagement-buildproduct/${productId}`
+        );
         const data = res.data;
         const metalVariationKeys = Object.keys(data.metal_variations);
         const defaultMetalId = metalVariationKeys[0];
@@ -98,7 +102,7 @@ const RingProductView = ({ diamond }) => {
     };
 
     fetchProduct();
-  }, [id]);
+  }, [productId]);
 
   const handleMetalChange = (metalId) => {
     setSelectedMetalId(metalId);
@@ -136,11 +140,10 @@ const RingProductView = ({ diamond }) => {
     const variation = isBuild
       ? product.metal_variations[selectedMetalId][selectedShapeId][index] // CHANGE: read from shape for build
       : product.metal_variations[selectedMetalId][index];
-
     setMainImage(getImageUrl(variation?.images?.[0]));
   };
 
-  if (!product) return <LoadingDots />;
+  if (!product || !product.product) return <LoadingDots />;
 
   const isBuild = (product.product?.is_build ?? product.is_build) === 1;
 
@@ -150,7 +153,6 @@ const RingProductView = ({ diamond }) => {
         selectedVariationIndex
       ]
     : product.metal_variations?.[selectedMetalId]?.[selectedVariationIndex];
-
   const currentMedia = selectedVariation
     ? [
         // Add video first if it exists
@@ -168,13 +170,28 @@ const RingProductView = ({ diamond }) => {
   const nextImage = () =>
     setCurrentImageIndex((prev) => (prev + 1) % currentMedia.length);
 
+  const qualities = [
+    { id: "ef-vs", label: "EF VS+" },
+    { id: "f-g-si", label: "F/G SI+" },
+  ];
+
   const prevImage = () =>
     setCurrentImageIndex(
       (prev) => (prev - 1 + currentMedia.length) % currentMedia.length
     );
 
-  const { name, description, delivery_days } = product.product;
   const {
+    name,
+    description,
+    delivery_days,
+    product_clarity,
+    products_model,
+    cut,
+    stone_type,
+  } = product?.product ?? {};
+
+  const {
+    id,
     price,
     original_price,
     weight,
@@ -244,6 +261,30 @@ const RingProductView = ({ diamond }) => {
     }
   };
 
+  const actions = [
+    { icon: <Mail size={16} />, text: "DROP A HINT", path: "/inquiry" },
+    { icon: <Phone size={16} />, text: "CONTACT US", path: "/contact" },
+    {
+      icon: <Heart size={16} />,
+      text: "ADD TO WISHLIST",
+      path: "/drop-a-hint",
+    },
+    {
+      icon: <Calendar size={16} />,
+      text: "SCHEDULE APPOINTMENT",
+      path: "/book-appointment",
+    },
+  ];
+
+  const handleNavigation = (item) => {
+    // If it’s the inquiry page, add productId as a query param
+    if (item.path === "/inquiry") {
+      navigate(`${item.path}?productId=${productId}`);
+    } else {
+      navigate(item.path);
+    }
+  };
+  
   return (
     <>
       <div className="bg-white min-vh-100">
@@ -522,7 +563,7 @@ const RingProductView = ({ diamond }) => {
                     <Info size={16} className="text-secondary" />
                     <span className="small">: F/G SI+</span>
                   </div>
-                  {/* <div className="d-flex gap-2">
+                  <div className="d-flex gap-2">
                     {qualities.map((quality) => (
                       <button
                         key={quality.id}
@@ -534,7 +575,7 @@ const RingProductView = ({ diamond }) => {
                         {quality.label}
                       </button>
                     ))}
-                  </div> */}
+                  </div>
                 </div>
                 <button
                   className="btn w-100 py-3 fw-semibold mb-3"
@@ -621,34 +662,37 @@ const RingProductView = ({ diamond }) => {
 
                 <div className="border-top pt-4">
                   <div className="row row-cols-2 g-2 mb-4">
-                    {[
-                      { icon: <Mail size={16} />, text: "DROP A HINT" },
-                      { icon: <Phone size={16} />, text: "CONTACT US" },
-                      { icon: <Heart size={16} />, text: "ADD TO WISHLIST" },
-                      {
-                        icon: <Calendar size={16} />,
-                        text: "SCHEDULE APPOINTMENT",
-                      },
-                    ].map((item) => (
+                    {actions.map((item) => (
                       <div className="col" key={item.text}>
-                        <button className="btn btn-outline-secondary w-100 d-flex align-items-center justify-content-center gap-2 small py-2">
+                        <button
+                          className="btn btn-outline-secondary w-100 d-flex align-items-center justify-content-center gap-2 small py-2"
+                          onClick={() => handleNavigation(item)}
+                        >
                           {item.icon} {item.text}
                         </button>
                       </div>
                     ))}
                   </div>
-                  <div className="d-flex align-items-center gap-3 mb-4">
+
+                  <div className="d-flex align-items-center gap-3">
                     <span className="small fw-semibold">SHARE:</span>
-                    <button className="btn p-0">📌</button>
-                    <button className="btn p-0 fw-bold">f</button>
-                    <button className="btn p-0 fw-bold">𝕏</button>
+                    <SocialShare
+                      id={id}
+                      product={product.product}
+                      mainImage={mainImage}
+                      backendBaseUrl={
+                        import.meta.env.VITE_BACKEND_URL ||
+                        window.location.origin
+                      }
+                    />
                   </div>
-                  <div className="bg-light-gray p-3 rounded d-flex align-items-center gap-2">
+
+                  {/* <div className="bg-light-gray p-3 rounded d-flex align-items-center gap-2">
                     <Gift size={20} />
                     <span className="small">
                       Earn 847 Points when you buy this item.
                     </span>
-                  </div>
+                  </div> */}
 
                   <div className="product-details-container">
                     {/* Product Details Section */}
@@ -677,11 +721,15 @@ const RingProductView = ({ diamond }) => {
                           <span className="detail-label">Metal Details</span>
                           <span className="detail-value">{metalName}</span>
 
-                          <span className="detail-label">Setting Type</span>
-                          <span className="detail-value">Prong</span>
+                          <span className="detail-label">Product Model</span>
+                          <span className="detail-value">
+                            {products_model || "NA"}
+                          </span>
 
-                          <span className="detail-label">Clasp</span>
-                          <span className="detail-value">Box</span>
+                          <span className="detail-label">Clarity</span>
+                          <span className="detail-value">
+                            {product_clarity || "NA"}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -706,18 +754,20 @@ const RingProductView = ({ diamond }) => {
                       >
                         <div className="details-grid">
                           <span className="detail-label">Stone Type</span>
-                          <span className="detail-value">Diamond</span>
+                          <span className="detail-value">
+                            {stone_type || "NA"}
+                          </span>
 
                           <span className="detail-label">
                             Total Carat Weight
                           </span>
-                          <span className="detail-value">2.0 Cts</span>
+                          <span className="detail-value">{weight}</span>
 
                           <span className="detail-label">Cut</span>
-                          <span className="detail-value">Brilliant</span>
+                          <span className="detail-value">{cut || "NA"}</span>
 
-                          <span className="detail-label">Number of Stones</span>
-                          <span className="detail-value">Single Row</span>
+                          {/* <span className="detail-label">Number of Stones</span>
+                          <span className="detail-value">Single Row</span> */}
                         </div>
                       </div>
                     </div>
@@ -979,7 +1029,7 @@ const RingProductView = ({ diamond }) => {
                 <span className="small">F/G SI+</span>
               </div>
               <div className="d-flex gap-2">
-                {/* {qualities.map((quality) => (
+                {qualities.map((quality) => (
                   <button
                     key={quality.id}
                     onClick={() => setSelectedQuality(quality.id)}
@@ -989,7 +1039,7 @@ const RingProductView = ({ diamond }) => {
                   >
                     {quality.label}
                   </button>
-                ))} */}
+                ))}
               </div>
             </div>
 
@@ -1049,19 +1099,29 @@ const RingProductView = ({ diamond }) => {
 
             <div className="border-top pt-4">
               <div className="row row-cols-2 g-2">
-                {[
-                  { icon: <Mail size={14} />, text: "DROP A HINT" },
-                  { icon: <Phone size={14} />, text: "CONTACT US" },
-                  { icon: <Heart size={14} />, text: "ADD TO WISHLIST" },
-                  { icon: <Calendar size={14} />, text: "APPOINTMENT" },
-                ].map((item) => (
+                {actions.map((item) => (
                   <div className="col" key={item.text}>
-                    <button className="btn btn-outline-secondary w-100 d-flex align-items-center justify-content-center gap-2 small py-2">
+                    <button
+                      className="btn btn-outline-secondary w-100 d-flex align-items-center justify-content-center gap-2 small py-2"
+                      onClick={() => handleNavigation(item)}
+                    >
                       {item.icon} {item.text}
                     </button>
                   </div>
                 ))}
               </div>
+            </div>
+
+            <div className="d-flex align-items-center gap-3 pt-2">
+              <span className="small fw-semibold">SHARE:</span>
+              <SocialShare
+                id={id}
+                product={product.product}
+                mainImage={mainImage}
+                backendBaseUrl={
+                  import.meta.env.VITE_BACKEND_URL || window.location.origin
+                }
+              />
             </div>
 
             <div className="product-details-container">
@@ -1089,11 +1149,15 @@ const RingProductView = ({ diamond }) => {
                     <span className="detail-label">Metal Details</span>
                     <span className="detail-value">{metalName}</span>
 
-                    <span className="detail-label">Setting Type</span>
-                    <span className="detail-value">Prong</span>
+                    <span className="detail-label">Product Model</span>
+                    <span className="detail-value">
+                      {products_model || "NA"}
+                    </span>
 
-                    <span className="detail-label">Clasp</span>
-                    <span className="detail-value">Box</span>
+                    <span className="detail-label">Clarity</span>
+                    <span className="detail-value">
+                      {product_clarity || "NA"}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -1118,16 +1182,16 @@ const RingProductView = ({ diamond }) => {
                 >
                   <div className="details-grid">
                     <span className="detail-label">Stone Type</span>
-                    <span className="detail-value">Diamond</span>
+                    <span className="detail-value">{stone_type || "NA"}</span>
 
                     <span className="detail-label">Total Carat Weight</span>
                     <span className="detail-value">{weight}</span>
 
                     <span className="detail-label">Cut</span>
-                    <span className="detail-value">Brilliant</span>
+                    <span className="detail-value">{cut || "NA"}</span>
 
-                    <span className="detail-label">Number of Stones</span>
-                    <span className="detail-value">Single Row</span>
+                    {/* <span className="detail-label">Number of Stones</span>
+                    <span className="detail-value">Single Row</span> */}
                   </div>
                 </div>
               </div>

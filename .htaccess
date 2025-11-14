@@ -6,5 +6,9 @@
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
+  # ✅ Let Laravel handle all /share/... URLs
+  RewriteCond %{REQUEST_URI} ^/share/
+  RewriteRule ^share/(.*)$ /api/share/$1 [L]
+
   RewriteRule . /index.html [L]
 </IfModule>

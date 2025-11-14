@@ -12,20 +12,15 @@
     flex: 1;
 }
 
-.diamond-img {
+.diamond-menu-img {
     border-radius: 2px;
-    width: 100%;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.diamond-img {
     width: 100%;
     max-width: 320px;
     height: auto;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.diamond-img.taller {
+.diamond-menu-img.taller {
     width: 350px;
     height: 320px;
     object-fit: cover;

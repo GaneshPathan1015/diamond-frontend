@@ -14,6 +14,7 @@ import axiosClient from "../../api/axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Zoom from "react-medium-image-zoom";
 import { useCart } from "../../cart/CartContext";
+import SocialShare from "./SocialShare";
 import LoadingDots from "./LoadingDots";
 import "./giftDetails.css"; // Import the custom CSS
 
@@ -29,6 +30,7 @@ const getVideoUrl = (video) => {
   if (!video) return null;
   return `${import.meta.env.VITE_BACKEND_URL}${video}`;
 };
+
 const GiftDetails = () => {
   const [searchParams] = useSearchParams();
   const productId = searchParams.get("product");
@@ -64,7 +66,6 @@ const GiftDetails = () => {
       try {
         const res = await axiosClient.get(`/api/product-details/${productId}`);
         const data = res.data;
-
         const metalVariationKeys = Object.keys(data.metal_variations);
         const defaultMetalId = metalVariationKeys[0];
         setProduct(data);
@@ -99,7 +100,7 @@ const GiftDetails = () => {
     setMainImage(getImageUrl(variation?.images?.[0]));
   };
 
-  if (!product) return <LoadingDots/> ;
+  if (!product) return <LoadingDots />;
   // Select the correct variation directly
   const selectedVariation =
     product.metal_variations?.[selectedMetalId]?.[selectedVariationIndex];
@@ -127,15 +128,25 @@ const GiftDetails = () => {
     );
 
   // Extract product details safely
-  const { name, description, delivery_days } = product.product || {};
+  const {
+    name,
+    description,
+    delivery_days,
+    product_clarity,
+    products_model,
+    cut,
+    stone_type,
+  } = product.product || {};
 
   const {
+    id,
     price,
     original_price,
     weight,
     sku: variationSku,
     metal_color,
   } = selectedVariation || {};
+
   const priceDifference = Math.max(original_price - price, 0).toFixed(2);
   const metalName = metal_color?.name || "-";
   // Calculate the delivery date dynamically
@@ -148,6 +159,30 @@ const GiftDetails = () => {
   const options = { weekday: "short", month: "short", day: "numeric" };
   const formattedDate = deliveryDate.toLocaleDateString("en-US", options);
   // const { price, weight, sku: variationSku } = selectedVariation || {};
+  const actions = [
+    { icon: <Mail size={16} />, text: "DROP A HINT", path: "/inquiry" },
+    { icon: <Phone size={16} />, text: "CONTACT US", path: "/contact" },
+    {
+      icon: <Heart size={16} />,
+      text: "ADD TO WISHLIST",
+      path: "/drop-a-hint",
+    },
+    {
+      icon: <Calendar size={16} />,
+      text: "SCHEDULE APPOINTMENT",
+      path: "/book-appointment",
+    },
+  ];
+
+  const handleNavigation = (item) => {
+    // If it’s the inquiry page, add productId as a query param
+    if (item.path === "/inquiry") {
+      navigate(`${item.path}?productId=${productId}`);
+    } else {
+      navigate(item.path);
+    }
+  };
+
   return (
     <div className="bg-white min-vh-100">
       {/* =============================================================================== */}
@@ -394,21 +429,21 @@ const GiftDetails = () => {
               >
                 ADD TO CART
               </button>
-              <button className="btn btn-outline-dark w-100 py-3 fw-semibold mb-4">
+              {/*  <button className="btn btn-outline-dark w-100 py-3 fw-semibold mb-4">
                 VIRTUAL / SHOWROOM APPOINTMENT
-              </button>
+              </button> */}
 
               <p className="small mb-2">
-                Ships by <strong>{formattedDate}</strong> | Track in real time before
-                it ships
+                Ships by <strong>{formattedDate}</strong> | Track in real time
+                before it ships
               </p>
-              <p className="small mb-2">
+              {/* <p className="small mb-2">
                 <span className="text-blue-link">0% APR</span> or as low as
                 $53/mo with <strong>affirm</strong>.{" "}
                 <a href="#" className="text-decoration-underline">
                   See if you qualify
                 </a>
-              </p>
+              </p> */}
               <p className="small mb-4">
                 Free Insured Shipping.
                 <a href="#" className="text-decoration-underline">
@@ -418,34 +453,37 @@ const GiftDetails = () => {
 
               <div className="border-top pt-4">
                 <div className="row row-cols-2 g-2 mb-4">
-                  {[
-                    { icon: <Mail size={16} />, text: "DROP A HINT" },
-                    { icon: <Phone size={16} />, text: "CONTACT US" },
-                    { icon: <Heart size={16} />, text: "ADD TO WISHLIST" },
-                    {
-                      icon: <Calendar size={16} />,
-                      text: "SCHEDULE APPOINTMENT",
-                    },
-                  ].map((item) => (
+                  {actions.map((item) => (
                     <div className="col" key={item.text}>
-                      <button className="btn btn-outline-secondary w-100 d-flex align-items-center justify-content-center gap-2 small py-2">
+                      <button
+                        className="btn btn-outline-secondary w-100 d-flex align-items-center justify-content-center gap-2 small py-2"
+                        onClick={() => handleNavigation(item)}
+                      >
                         {item.icon} {item.text}
                       </button>
                     </div>
                   ))}
                 </div>
-                <div className="d-flex align-items-center gap-3 mb-4">
+                <div className="d-flex align-items-center gap-3">
                   <span className="small fw-semibold">SHARE:</span>
-                  <button className="btn p-0">📌</button>
+                  <SocialShare
+                    id={id}
+                    product={product.product}
+                    mainImage={mainImage}
+                    backendBaseUrl={
+                      import.meta.env.VITE_BACKEND_URL || window.location.origin
+                    }
+                  />
+                  {/* <button className="btn p-0">📌</button>
                   <button className="btn p-0 fw-bold">f</button>
-                  <button className="btn p-0 fw-bold">𝕏</button>
+                  <button className="btn p-0 fw-bold">𝕏</button> */}
                 </div>
-                <div className="bg-light-gray p-3 rounded d-flex align-items-center gap-2">
+                {/* <div className="bg-light-gray p-3 rounded d-flex align-items-center gap-2">
                   <Gift size={20} />
                   <span className="small">
                     Earn 847 Points when you buy this item.
                   </span>
-                </div>
+                </div> */}
 
                 <div className="product-details-container">
                   {/* Product Details Section */}
@@ -467,18 +505,22 @@ const GiftDetails = () => {
                       }`}
                     >
                       <p className="detail-description">
-                        {description || "NA"}
+                        {description || "NA "}
                       </p>
 
                       <div className="details-grid">
                         <span className="detail-label">Metal Details</span>
                         <span className="detail-value">{metalName}</span>
 
-                        <span className="detail-label">Setting Type</span>
-                        <span className="detail-value">Prong</span>
+                        <span className="detail-label">Product Model</span>
+                        <span className="detail-value">
+                          {products_model || "NA"}
+                        </span>
 
-                        <span className="detail-label">Clasp</span>
-                        <span className="detail-value">Box</span>
+                        <span className="detail-label">Clarity</span>
+                        <span className="detail-value">
+                          {product_clarity || "NA"}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -503,16 +545,18 @@ const GiftDetails = () => {
                     >
                       <div className="details-grid">
                         <span className="detail-label">Stone Type</span>
-                        <span className="detail-value">Diamond</span>
+                        <span className="detail-value">
+                          {stone_type || "NA"}
+                        </span>
 
                         <span className="detail-label">Total Carat Weight</span>
                         <span className="detail-value">{weight}</span>
 
                         <span className="detail-label">Cut</span>
-                        <span className="detail-value">Brilliant</span>
+                        <span className="detail-value">{cut || "NA"}</span>
 
-                        <span className="detail-label">Number of Stones</span>
-                        <span className="detail-value">Single Row</span>
+                        {/* <span className="detail-label">Number of Stones</span>
+                        <span className="detail-value">Single Row</span> */}
                       </div>
                     </div>
                   </div>
@@ -763,8 +807,8 @@ const GiftDetails = () => {
           </div> */}
 
           <p className="small mb-2">
-            Ships by <strong>{formattedDate}</strong> | Track in real time before it
-            ships
+            Ships by <strong>{formattedDate}</strong> | Track in real time
+            before it ships
           </p>
           <p className="small mb-4">
             Free Insured Shipping.{" "}
@@ -775,14 +819,12 @@ const GiftDetails = () => {
 
           <div className="border-top pt-4">
             <div className="row row-cols-2 g-2">
-              {[
-                { icon: <Mail size={14} />, text: "DROP A HINT" },
-                { icon: <Phone size={14} />, text: "CONTACT US" },
-                { icon: <Heart size={14} />, text: "ADD TO WISHLIST" },
-                { icon: <Calendar size={14} />, text: "APPOINTMENT" },
-              ].map((item) => (
+              {actions.map((item) => (
                 <div className="col" key={item.text}>
-                  <button className="btn btn-outline-secondary w-100 d-flex align-items-center justify-content-center gap-2 small py-2">
+                  <button
+                    className="btn btn-outline-secondary w-100 d-flex align-items-center justify-content-center gap-2 small py-2"
+                    onClick={() => handleNavigation(item)}
+                  >
                     {item.icon} {item.text}
                   </button>
                 </div>
@@ -844,16 +886,16 @@ const GiftDetails = () => {
               >
                 <div className="details-grid">
                   <span className="detail-label">Stone Type</span>
-                  <span className="detail-value">Diamond</span>
+                  <span className="detail-value">{stone_type || "NA"}</span>
 
                   <span className="detail-label">Total Carat Weight</span>
-                  <span className="detail-value">2.0 Cts</span>
+                  <span className="detail-value">{weight}</span>
 
                   <span className="detail-label">Cut</span>
-                  <span className="detail-value">Brilliant</span>
+                  <span className="detail-value">{cut || "NA"}</span>
 
-                  <span className="detail-label">Number of Stones</span>
-                  <span className="detail-value">Single Row</span>
+                  {/* <span className="detail-label">Number of Stones</span>
+                  <span className="detail-value">Single Row</span> */}
                 </div>
               </div>
             </div>

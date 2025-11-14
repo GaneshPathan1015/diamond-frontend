@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import GiftList from "../gift/GiftList";
 import SaleList from "../sale/SaleList";
+import CollectionList from "../collection/CollectionList";
 import PageNotFound from "../PageNotFound/PageNotFound";
 
 const giftSlugs = [
@@ -31,6 +32,17 @@ const saleSlugs = [
   // ... more sale slugs
 ];
 
+const collectionSlugs = [
+  "cassatt",
+  "the-fulton-collection",
+  "the-seraphine-collection",
+  "the-windsor-collection",
+  "the-bond-collection",
+  "bouquet",
+  "vine-collection",
+  // ... more sale slugs
+];
+
 const CollectionsRouter = () => {
   const { slug } = useParams();
 
@@ -40,6 +52,10 @@ const CollectionsRouter = () => {
 
   if (giftSlugs.includes(slug)) {
     return <GiftList />;
+  }
+
+  if (collectionSlugs.includes(slug)) {
+    return <CollectionList />;
   }
 
   // fallback if slug doesn't exist

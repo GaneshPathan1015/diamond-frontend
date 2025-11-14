@@ -658,7 +658,7 @@ const WhiteClarityNav = () => {
 
         {/* Desktop Menu Bar */}
         <div className="menu-bar desktop-menu">
-          {menuItems.map((item, i) => (
+          {/* {menuItems.map((item, i) => (
             <div
               key={i}
               className={`menu-item ${
@@ -680,7 +680,39 @@ const WhiteClarityNav = () => {
             >
               {item}
             </div>
-          ))}
+          ))} */}
+          {menuItems.map((item, i) => {
+            const isCollection = item === "COLLECTIONS";
+            const isActive = location.pathname === menuRoutes[item];
+
+            return (
+              <div
+                key={i}
+                className={`menu-item ${isActive ? "active" : ""}`}
+                onMouseEnter={() => {
+                  setHoveredMenu(item);
+                  setHoveringMegaMenu(true);
+                }}
+                onMouseLeave={() => {
+                  setTimeout(() => {
+                    if (!hoveringMegaMenu) {
+                      setHoveredMenu(null);
+                    }
+                  }, 10);
+                }}
+                onClick={() => {
+                  if (!isCollection) {
+                    navigate(menuRoutes[item] || "/");
+                  }
+                }}
+                style={{
+                  cursor: isCollection ? "default" : "pointer",
+                }}
+              >
+                {item}
+              </div>
+            );
+          })}
         </div>
       </header>
 
@@ -749,10 +781,10 @@ const WhiteClarityNav = () => {
         <div
           className={`mega-menu-overlay ${scrolled ? "scrolled-menu" : ""}`}
           onMouseEnter={() => setHoveringMegaMenu(true)}
-          /* onMouseLeave={() => {
+          onMouseLeave={() => {
             setHoveringMegaMenu(false);
             setHoveredMenu(null); // Close on mouse leave
-          }} */
+          }}
         >
           <MegaMenu type="jewelry" closeMegaMenu={() => setHoveredMenu(null)} />
         </div>
@@ -762,10 +794,10 @@ const WhiteClarityNav = () => {
         <div
           className={`mega-menu-overlay ${scrolled ? "scrolled-menu" : ""}`}
           onMouseEnter={() => setHoveringMegaMenu(true)}
-          onMouseLeave={() => {
+          /* onMouseLeave={() => {
             setHoveringMegaMenu(false);
             setHoveredMenu(null); // Close on mouse leave
-          }}
+          }} */
         >
           <MegaMenu
             type="collection"

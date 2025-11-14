@@ -6,7 +6,7 @@ const LoadingDots = () => {
   const styles = {
     container: {
       minHeight: '80vh',
-      background: 'linear-gradient(135deg, #1e3a8a 0%, #7c3aed 50%, #db2777 100%)',
+      // background: 'linear-gradient(135deg, #1e3a8a 0%, #7c3aed 50%, #db2777 100%)',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -96,9 +96,7 @@ const LoadingDots = () => {
       backdropFilter: 'blur(10px)',
     },
     loadingText: {
-      background: 'linear-gradient(135deg, #7c3aed, #db2777)',
       WebkitBackgroundClip: 'text',
-      WebkitTextFillColor: 'transparent',
       backgroundClip: 'text',
       fontSize: '1.2rem',
       fontWeight: '600',
@@ -147,7 +145,7 @@ const LoadingDots = () => {
         @keyframes pulse2 {
           0%, 100% {
             transform: scale(0.4);
-            box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.7);
+             box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.7);
           }
           50% {
             transform: scale(1.6);
@@ -176,7 +174,7 @@ const LoadingDots = () => {
         .dot-bounce {
           width: 20px;
           height: 20px;
-          background: linear-gradient(135deg, #7c3aed, #db2777);
+          background: linear-gradient(135deg, #0d1723ff, #192f59ff);
           border-radius: 50%;
           animation: bounce1 1.4s infinite ease-in-out both;
           box-shadow: 0 5px 15px rgba(124, 58, 237, 0.4);

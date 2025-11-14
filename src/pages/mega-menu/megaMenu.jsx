@@ -82,6 +82,11 @@ const MegaMenu = ({ type = "engagement", closeMegaMenu = () => {} }) => {
     navigate(`/wedding/${startType}`);
   };
 
+  const handleStartCollection = (startType) => {
+    closeMegaMenu();
+    navigate(`/collections/${startType}`);
+  };
+
   const handleStartGift = (startType) => {
     closeMegaMenu();
     navigate(`/collections/${startType}`);
@@ -163,7 +168,7 @@ const MegaMenu = ({ type = "engagement", closeMegaMenu = () => {} }) => {
           slugify={slugify}
         />
       )}
-      
+
       {type === "wedding" && (
         <Wedding
           closeMegaMenu={closeMegaMenu}
@@ -186,7 +191,6 @@ const MegaMenu = ({ type = "engagement", closeMegaMenu = () => {} }) => {
         <HighJewelryMenu
           closeMegaMenu={closeMegaMenu}
           navigate={navigate}
-          slugify={slugify}
         />
       )}
 
@@ -205,9 +209,9 @@ const MegaMenu = ({ type = "engagement", closeMegaMenu = () => {} }) => {
 
       {type === "collection" && (
         <CollectionMenu
+          handleStartCollection={handleStartCollection}
           closeMegaMenu={closeMegaMenu}
           navigate={navigate}
-          slugify={slugify}
         />
       )}
 
