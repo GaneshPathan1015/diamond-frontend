@@ -4,7 +4,7 @@ import axiosClient from "../../api/axios";
 import { Link } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./BestsellingRings.css"; // your custom styles
+import "./BestsellingRings.css";
 
 const BestsellingRings = () => {
   const [ringData, setRingData] = useState({
@@ -13,13 +13,19 @@ const BestsellingRings = () => {
     "STACKABLE RINGS": [],
   });
 
+  const makeSlug = (name) => {
+    return name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)+/g, "");
+  };
+
   const [activeTab, setActiveTab] = useState("ANNIVERSARY RINGS");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchRings = async () => {
       try {
-        // Map frontend keys to backend categoryType
         const categoryMap = {
           "ANNIVERSARY RINGS": "anniversary",
           "ETERNITY RINGS": "eternity",
@@ -31,20 +37,22 @@ const BestsellingRings = () => {
             const response = await axiosClient.get(
               `/api/best-selling-rings/${apiCategory}`
             );
+
             return { tabKey, data: response.data.data || [] };
           }
         );
 
         const results = await Promise.all(requests);
+        const updatedData = {};
 
-        const updatedData = { ...ringData };
         results.forEach(({ tabKey, data }) => {
           updatedData[tabKey] = data.map((item) => ({
+            productSlug: makeSlug(item.product_name),
+            product_id: item.product_id, // NEED THIS FOR URL
             image: item.images?.[0]
               ? `${import.meta.env.VITE_BACKEND_URL}${item.images[0]}`
-              : `${
-                  import.meta.env.VITE_BACKEND_URL
-                }/storage/variation_images/No_Image_Available.jpg`,
+              : `${import.meta.env.VITE_BACKEND_URL}/storage/variation_images/No_Image_Available.jpg`,
+
             title: item.product_name || "Untitled",
             sku: item.sku,
             price: item.price,
@@ -81,7 +89,9 @@ const BestsellingRings = () => {
   return (
     <section className="exclusive-wrapper">
       <div className="container">
-        <h2 className="section-title">Explore Our Bestselling Rings</h2>
+        <h2 className="bestseling-section-title" style={{ color: "#000" }}>
+          Explore Our Bestselling Rings
+        </h2>
 
         <div className="tab-buttons">
           {Object.keys(ringData).map((tab) => (
@@ -89,6 +99,7 @@ const BestsellingRings = () => {
               key={tab}
               className={`tab-btn ${tab === activeTab ? "active" : ""}`}
               onClick={() => setActiveTab(tab)}
+              style={{ color: "#000" }}
             >
               {tab}
             </button>
@@ -100,21 +111,37 @@ const BestsellingRings = () => {
             [...Array(6)].map((_, i) => (
               <div key={i} className="ring-card">
                 <div className="ring-img skeleton-box" />
-                <p className="ring-title">Loading...</p>
+                <p className="ring-title" style={{ color: "#000" }}>
+                  Loading...
+                </p>
               </div>
             ))
           ) : ringData[activeTab]?.length > 0 ? (
-            ringData[activeTab].map((item, index) => (
-              <div key={index} className="ring-card">
-                <Link to={`/jewellary-details/${item.product_id}`}>
-                  <img src={item.image} alt={item.title} className="ring-img" />
-                  <p className="ring-title">{item.title}</p>
-                </Link>
-              </div>
-            ))
+            ringData[activeTab].map((item, index) => {
+              console.log("PRODUCT ITEM =>", item); // 👈 LOG HERE
+
+              return (
+                <div key={index} className="ring-card">
+                  <Link
+                    to={`/products/${item.productSlug}?product=${item.product_id}`}
+                  >
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="ring-img"
+                    />
+                    <p className="ring-title" style={{ color: "#000" }}>
+                      {item.title}
+                    </p>
+                  </Link>
+                </div>
+              );
+            })
           ) : (
             <div className="ring-card">
-              <p className="ring-title">No products available</p>
+              <p className="ring-title" style={{ color: "#000" }}>
+                No products available
+              </p>
             </div>
           )}
         </Slider>

@@ -51,9 +51,6 @@ const CollectionList = () => {
   const [styleData, setStyleData] = useState([]);
   const [styleNameToIdMap, setStyleNameToIdMap] = useState({});
 
-  const [collectionData, setCollectionData] = useState([]);
-  const [collectionNameToIdMap, setCollectionNameToIdMap] = useState({});
-
   const [metalTypes, setMetalTypes] = useState([]);
   const [metalNameToId, setMetalNameToId] = useState({});
   const [metalIdToName, setMetalIdToName] = useState({});
@@ -64,10 +61,11 @@ const CollectionList = () => {
   const loaderRef = useRef(null);
   const location = useLocation();
   const { slug } = useParams();
+
   const navigate = useNavigate();
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-
+// for set moible screent to chnage the images basd on mobile
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener("resize", handleResize);
@@ -153,8 +151,6 @@ const CollectionList = () => {
     if (filters.price && priceSlugReverseMap[filters.price]) {
       params.set("price", priceSlugReverseMap[filters.price]);
     }
-    if (filters.collection)
-      params.set("collection", `collection-${filters.collection}`);
     if (filters.style) params.set("style", `style-${filters.style}`);
     if (filters.ready_to_ship) params.set("ready_to_ship", "true");
     if (filters.metal) params.set("metal", encodeURIComponent(filters.metal));
@@ -171,9 +167,6 @@ const CollectionList = () => {
       updatedFilters.price = updatedFilters.price === value ? undefined : value;
     } else if (styleNameToIdMap[value]) {
       updatedFilters.style = updatedFilters.style === value ? undefined : value;
-    } else if (collectionNameToIdMap[value]) {
-      updatedFilters.collection =
-        updatedFilters.collection === value ? undefined : value;
     } else {
       updatedFilters[value] = !updatedFilters[value];
     }
@@ -241,9 +234,7 @@ const CollectionList = () => {
       const apiFilters = {
         ...filters,
         style: filters.style ? styleNameToIdMap[filters.style] : undefined,
-        collection: filters.collection
-          ? collectionNameToIdMap[filters.collection]
-          : undefined,
+
         price: filters.price ? priceSlugReverseMap[filters.price] : undefined,
         metal_color_id: filters.metal
           ? metalNameToId[filters.metal]
@@ -253,7 +244,7 @@ const CollectionList = () => {
       // -----------------------------
       // Fetch products from API
       // -----------------------------
-      const { data } = await axiosClient.get(`/api/get-all-gift-data/${slug}`, {
+      const { data } = await axiosClient.get(`/api/get-all-collection-data/${slug}`, {
         params: { page, perPage: 20, ...apiFilters },
       });
 
@@ -266,15 +257,12 @@ const CollectionList = () => {
       // -----------------------------
       setShapeData(data.shapes || []);
       setStyleData(data.style_data || []);
-      setCollectionData(data.collection_data || []);
       setMetalTypes(data.metal_types || []);
 
       const styleMap = Object.fromEntries(
         (data.style_data || []).map((s) => [s.psc_name, s.psc_id])
       );
-      const collectionMap = Object.fromEntries(
-        (data.collection_data || []).map((c) => [c.name, c.id])
-      );
+
       const metalNameToIdMap = Object.fromEntries(
         (data.metal_types || []).map((m) => [m.dmt_name, m.dmt_id])
       );
@@ -283,7 +271,6 @@ const CollectionList = () => {
       );
 
       setStyleNameToIdMap(styleMap);
-      setCollectionNameToIdMap(collectionMap);
       setMetalNameToId(metalNameToIdMap);
       setMetalIdToName(metalIdToNameMap);
 
@@ -360,9 +347,6 @@ const CollectionList = () => {
       filters.price = priceSlugMap[priceParam];
     }
 
-    const collectionParam = params.get("collection");
-    if (collectionParam)
-      filters.collection = collectionParam.split("-").slice(1).join("-");
 
     const styleParam = params.get("style");
     if (styleParam) filters.style = styleParam.split("-").slice(1).join("-");
@@ -399,6 +383,7 @@ const CollectionList = () => {
   }, [slug]);
 
   const visibleFilters = Object.entries(appliedFilters);
+
   const renderFilterContent = (filterKey) => {
     switch (filterKey) {
       case "shape":
@@ -430,37 +415,7 @@ const CollectionList = () => {
           )
         );
 
-      case "collection":
-        return (
-          activeFilterSection === "collection" &&
-          collectionData.length > 0 && (
-            <div className="style-scroll-wrapper">
-              <div className="collection-icon-bar">
-                {collectionData.map((collection) => (
-                  <div
-                    key={collection.id}
-                    className={`collection-item ${
-                      appliedFilters.collection === collection.name
-                        ? "active-style"
-                        : ""
-                    }`}
-                    onClick={() => addFilter(collection.name)}
-                  >
-                    <img
-                      src={`${import.meta.env.VITE_BACKEND_URL}/storage/${
-                        collection.collection_image
-                      }`}
-                      alt={collection.name}
-                      className="style-img"
-                    />
-                    <div className="style-name">{collection.name}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )
-        );
-
+      
       case "style":
         return (
           activeFilterSection === "style" &&

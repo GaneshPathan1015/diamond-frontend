@@ -4,6 +4,7 @@
 }
 
 .hero_section_wrapper {
+  font-family: "Figtree", sans-serif;
   height: 85vh;
   /* full screen */
   overflow: hidden;

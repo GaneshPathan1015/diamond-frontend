@@ -37,7 +37,7 @@ const ExclusiveOffers = () => {
   ];
 
   return (
-    <section className="Exclusive_Offers_wrapper bg-secondary">
+    <section className="Exclusive_Offers_wrapper">
       <div className="container">
         <div className="row align-items-center">
           <div className="col-12">

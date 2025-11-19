@@ -3,6 +3,7 @@
 }
 
 .trending-title {
+  font-family: "Figtree", sans-serif;
   font-size: 2rem;
   font-weight: bold;
 }
@@ -56,6 +57,7 @@
 
 /* Ensure slider items stretch full width on mobile */
 .trending-item {
+  font-family: "Figtree", sans-serif;
   padding: 0 5px;
   /* small spacing between slides */
 }

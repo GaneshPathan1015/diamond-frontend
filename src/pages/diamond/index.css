@@ -1,6 +1,6 @@
 .diamond-ring-wrapper {
   padding: 30px 30px;
-  font-family: "Helvetica Neue", sans-serif;
+  font-family: "Figtree", sans-serif;
 }
 
 .title {
@@ -163,7 +163,7 @@
 }
 
 .diamond-filter {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Figtree", sans-serif;
   color: #2c3b5b;
   padding: 20px;
   max-width: 1000px;
@@ -253,7 +253,9 @@
   max-height: 1000px;
   opacity: 1;
 }
+
 .hero_section_wrapper {
+  font-family: "Figtree", sans-serif;
   height: 100vh;          /* full viewport */
   overflow: hidden;
 }

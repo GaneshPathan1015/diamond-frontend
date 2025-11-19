@@ -5,7 +5,7 @@ const Appointment = () => {
   const [hoveredBtn, setHoveredBtn] = useState(null);
   const [showVirtualModal, setShowVirtualModal] = useState(false);
   const [showShowroomModal, setShowShowroomModal] = useState(false);
-  
+
   const buttonStyle = (isHovered) => ({
     display: "block",
     fontSize: "14px",
@@ -348,7 +348,7 @@ const Appointment = () => {
           }
 
           .radiance-features-title {
-            font-family: "Avenir Next";
+            font-family: "Figtree";
             color: #000;
             font-size: 28px;
             line-height: 36px;

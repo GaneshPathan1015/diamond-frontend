@@ -16,101 +16,116 @@ import Zoom from "react-medium-image-zoom";
 import { useCart } from "../../cart/CartContext";
 import SocialShare from "./SocialShare";
 import LoadingDots from "./LoadingDots";
-import "./giftDetails.css"; // Import the custom CSS
+import ProductReviewSystem from "../review/ProductReviewSystem";
+import "./giftDetails.css";
 
 const getImageUrl = (img) => {
-  const fallback = `${
-    import.meta.env.VITE_BACKEND_URL
-  }/storage/variation_images/No_Image_Available.jpg`;
+  const fallback = `https://thecaratcasa.com/storage/variation_images/No_Image_Available.jpg`;
   if (!img) return fallback;
-  return `${import.meta.env.VITE_BACKEND_URL}${img}`;
+  return `https://thecaratcasa.com/api${img}`;
 };
 
 const getVideoUrl = (video) => {
   if (!video) return null;
-  return `${import.meta.env.VITE_BACKEND_URL}${video}`;
+  return `https://thecaratcasa.com/api${video}`;
 };
 
 const GiftDetails = () => {
   const [searchParams] = useSearchParams();
   const productId = searchParams.get("product");
+
   const [product, setProduct] = useState(null);
   const [mainImage, setMainImage] = useState("");
   const [selectedMetalId, setSelectedMetalId] = useState(null);
   const [selectedVariationIndex, setSelectedVariationIndex] = useState(0);
   const [isVideo, setIsVideo] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [selectedQuality, setSelectedQuality] = useState("f-g-si");
+  const [selectedQuality, setSelectedQuality] = useState(null);
   const [selectedPlan, setSelectedPlan] = useState("3-year");
   const [showMobileCart, setShowMobileCart] = useState(false);
+
   const { addToCart } = useCart();
   const navigate = useNavigate();
+
   const [openSection, setOpenSection] = useState("product");
+  const [reviewsRefreshed, setReviewsRefreshed] = useState(0);
 
   const toggleSection = (section) => {
     setOpenSection(openSection === section ? null : section);
   };
-  const qualities = [
-    { id: "ef-vs", label: "EF VS+" },
-    { id: "f-g-si", label: "F/G SI+" },
-  ];
-
-  const protectionPlans = [
-    { id: "1-year", label: "1 Year - $119", popular: false },
-    { id: "2-year", label: "2 Year - $159", popular: false },
-    { id: "3-year", label: "3 Year - $249", popular: true },
-  ];
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         const res = await axiosClient.get(`/api/product-details/${productId}`);
         const data = res.data;
-        const metalVariationKeys = Object.keys(data.metal_variations);
-        const defaultMetalId = metalVariationKeys[0];
+
+        if (!data || !data.metal_variations) return;
+
+        const metalKeys = Object.keys(data.metal_variations);
+        const firstMetal = metalKeys[0];
+
         setProduct(data);
-        setSelectedMetalId(defaultMetalId);
+        setSelectedMetalId(firstMetal);
         setSelectedVariationIndex(0);
 
-        // CHANGE: keep your old (non-build) logic
-        const defaultVariation = data.metal_variations[defaultMetalId][0];
-        setMainImage(getImageUrl(defaultVariation?.images?.[0]));
-      } catch (err) {
-        console.error("Failed to fetch product", err);
+        const firstVar = data.metal_variations[firstMetal][0];
+        setMainImage(getImageUrl(firstVar?.images?.[0]));
+      } catch (e) {
+        console.error("Product fetch failed", e);
       }
     };
 
     fetchProduct();
   }, [productId]);
 
+  const metalVariations = product?.metal_variations[selectedMetalId] || [];
+  const selectedVariation = metalVariations[selectedVariationIndex] || {};
+
   useEffect(() => {
-    const handleScroll = () => {
-      setShowMobileCart(window.innerWidth < 768 && window.scrollY > 300);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    if (selectedVariation?.diamond_quality_id && selectedQuality === null) {
+      setSelectedQuality(selectedVariation.diamond_quality_id);
+    }
+  }, [selectedVariation]);
+
+  if (!product || !product.metal_variations) {
+    return <LoadingDots />;
+  }
 
   const handleMetalChange = (metalId) => {
     setSelectedMetalId(metalId);
     setSelectedVariationIndex(0);
     setIsVideo(false);
 
-    const variation = product.metal_variations[metalId][0];
+    const variation = product.metal_variations[metalId]?.[0];
     setMainImage(getImageUrl(variation?.images?.[0]));
   };
 
-  if (!product) return <LoadingDots />;
-  // Select the correct variation directly
-  const selectedVariation =
-    product.metal_variations?.[selectedMetalId]?.[selectedVariationIndex];
+  const handleCaratChange = (index) => {
+    if (!metalVariations[index]) return;
+
+    setSelectedVariationIndex(index);
+    setIsVideo(false);
+    setMainImage(getImageUrl(metalVariations[index]?.images?.[0]));
+  };
+
+  const uniqueWeights = Array.from(
+    new Set(metalVariations.map((v) => v.weight))
+  );
+
+  const variationsForSelectedWeight = metalVariations.filter(
+    (v) => v.weight === selectedVariation.weight
+  );
+
+  const uniqueQualities = Array.from(
+    new Set(variationsForSelectedWeight.map((v) => v.diamond_quality_id))
+  );
+
   const currentMedia = selectedVariation
     ? [
-        // Add video first if it exists
         ...(selectedVariation.video
           ? [{ type: "video", src: getVideoUrl(selectedVariation.video) }]
           : []),
-        // Then add all images
         ...(selectedVariation.images?.map((img) => ({
           type: "image",
           src: getImageUrl(img),
@@ -118,20 +133,22 @@ const GiftDetails = () => {
       ]
     : [];
 
-  // Navigation functions for mobile carousel
-  const nextImage = () =>
+  const nextImage = () => {
+    if (currentMedia.length === 0) return;
     setCurrentImageIndex((prev) => (prev + 1) % currentMedia.length);
+  };
 
-  const prevImage = () =>
+  const prevImage = () => {
+    if (currentMedia.length === 0) return;
     setCurrentImageIndex(
       (prev) => (prev - 1 + currentMedia.length) % currentMedia.length
     );
+  };
 
-  // Extract product details safely
   const {
     name,
     description,
-    delivery_days,
+    delivery_days = 5,
     product_clarity,
     products_model,
     cut,
@@ -140,8 +157,8 @@ const GiftDetails = () => {
 
   const {
     id,
-    price,
-    original_price,
+    price = 0,
+    original_price = 0,
     weight,
     sku: variationSku,
     metal_color,
@@ -149,16 +166,39 @@ const GiftDetails = () => {
 
   const priceDifference = Math.max(original_price - price, 0).toFixed(2);
   const metalName = metal_color?.name || "-";
-  // Calculate the delivery date dynamically
-  const currentDate = new Date();
-  const estimatedDays = delivery_days + 1; // add 1 extra day
-  const deliveryDate = new Date(currentDate);
-  deliveryDate.setDate(currentDate.getDate() + estimatedDays);
 
-  // Format the date (e.g., "Wed, Oct 8")
-  const options = { weekday: "short", month: "short", day: "numeric" };
-  const formattedDate = deliveryDate.toLocaleDateString("en-US", options);
-  // const { price, weight, sku: variationSku } = selectedVariation || {};
+  const estimatedDays = (delivery_days || 5) + 1;
+  const deliveryDate = new Date(
+    Date.now() + estimatedDays * 24 * 60 * 60 * 1000
+  );
+  const formattedDate = deliveryDate.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+  });
+
+  const handleQualityChange = (qualityId) => {
+    setSelectedQuality(qualityId);
+
+    const currentWeight = selectedVariation.weight;
+    const newIndex = metalVariations.findIndex(
+      (v) => v.weight === currentWeight && v.diamond_quality_id == qualityId
+    );
+
+    if (newIndex !== -1) {
+      const v = metalVariations[newIndex];
+      setSelectedVariationIndex(newIndex);
+
+      if (v.video) {
+        setMainImage(getVideoUrl(v.video));
+        setIsVideo(true);
+      } else {
+        setMainImage(getImageUrl(v.images?.[0]));
+        setIsVideo(false);
+      }
+    }
+  };
+
   const actions = [
     { icon: <Mail size={16} />, text: "DROP A HINT", path: "/inquiry" },
     { icon: <Phone size={16} />, text: "CONTACT US", path: "/contact" },
@@ -175,7 +215,6 @@ const GiftDetails = () => {
   ];
 
   const handleNavigation = (item) => {
-    // If it’s the inquiry page, add productId as a query param
     if (item.path === "/inquiry") {
       navigate(`${item.path}?productId=${productId}`);
     } else {
@@ -184,14 +223,11 @@ const GiftDetails = () => {
   };
 
   return (
-    <div className="bg-white min-vh-100">
-      {/* =============================================================================== */}
-      {/* DESKTOP LAYOUT                                   */}
-      {/* =============================================================================== */}
+    <div className="bg-white min-vh-100 ft">
       <div className="d-none d-md-block">
         <div className="container">
           <div className="row" style={{ "--bs-gutter-x": "2.5rem" }}>
-            {/* Image Thumbnails */}
+            {/* THUMBNAILS */}
             <div className="col-1">
               <div className="thumbnail-container d-flex flex-column gap-2">
                 {selectedVariation?.video && (
@@ -202,47 +238,40 @@ const GiftDetails = () => {
                       setMainImage(getVideoUrl(selectedVariation.video));
                       setIsVideo(true);
                     }}
-                    disablePictureInPicture
-                    controls={false}
-                    controlsList="nodownload nofullscreen noremoteplayback noplaybackrate"
-                    tabIndex={-1}
-                    className={`rounded thumbnail-gallery ${
-                      isVideo ? "selected" : ""
-                    }`}
+                    className="rounded thumbnail-gallery"
                     style={{
-                      cursor: "pointer",
-                      border: isVideo ? "2px solid #000" : "1px solid #ccc",
-                      padding: "2px",
                       width: "60px",
                       height: "60px",
                       objectFit: "cover",
+                      cursor: "pointer",
+                      border: isVideo ? "2px solid #000" : "1px solid #ccc",
+                      padding: "2px",
                       borderRadius: "4px",
                     }}
+                    muted
                   />
                 )}
 
-                {/* Image thumbnails */}
                 {selectedVariation?.images?.map((img, i) => {
                   const src = getImageUrl(img);
                   return (
                     <img
                       key={i}
                       src={src}
-                      alt={`Thumb ${i + 1}`}
                       onClick={() => {
                         setMainImage(src);
                         setIsVideo(false);
                       }}
                       style={{
+                        width: "60px",
+                        height: "60px",
+                        objectFit: "contain",
                         cursor: "pointer",
                         border:
                           !isVideo && mainImage === src
-                            ? "2px solid #000"
+                            ? "2px solid black"
                             : "1px solid #ccc",
                         padding: "2px",
-                        width: "60px",
-                        height: "60px",
-                        objectFit: "scale-down",
                         borderRadius: "4px",
                       }}
                     />
@@ -251,7 +280,7 @@ const GiftDetails = () => {
               </div>
             </div>
 
-            {/* Main Image */}
+            {/* MAIN IMAGE */}
             <div className="col-6">
               <div className="main-image-container">
                 {isVideo ? (
@@ -282,17 +311,14 @@ const GiftDetails = () => {
               </div>
             </div>
 
-            {/* Product Details */}
+            {/* PRODUCT DETAILS */}
             <div className="col-5">
-              <div className="d-flex align-items-center gap-2 mb-2">
-                <div className="text-yellow-custom">★★★★★</div>
-                <span className="small text-muted">21 reviews</span>
-              </div>
               <h1 className="h3 font-serif mb-2">{name}</h1>
               <p className="small text-muted mb-4">SKU#{variationSku}</p>
+
               <div className="mb-4">
                 <span className="h3 fw-bold">${price}</span>
-                <span className="fs-5 text-secondary text-decoration-line-through ms-2">
+                <span className="fs-5 text-decoration-line-through ms-2">
                   ${original_price}
                 </span>
                 <span className="text-green-custom ms-2">
@@ -300,190 +326,159 @@ const GiftDetails = () => {
                 </span>
               </div>
 
+              {/* METAL COLOR */}
               <div className="mb-4">
                 <div className="d-flex align-items-center gap-2 mb-3">
-                  <span className="small fw-semibold">METAL COLOR</span>
-                  <Info size={16} className="text-secondary" />
-                  <span className="small">: {metalName}</span>
+                  <span className="small fw-semibold">METAL COLOR:</span>
+                  <span className="small">{metalName}</span>
                 </div>
+
                 <div className="d-flex gap-2">
                   {Object.entries(product.metal_variations)
                     .sort(([aKey, aGroup], [bKey, bGroup]) => {
-                      const aMetal = aGroup[0].metal_color;
-                      const bMetal = bGroup[0].metal_color;
-                      const order = ["14k", "18k", "PL"]; // Customize the order here
+                      const aMetal = aGroup[0]?.metal_color;
+                      const bMetal = bGroup[0]?.metal_color;
+                      const order = ["14k", "18k", "PL"]; // define your preferred order
                       return (
                         order.indexOf(aMetal?.quality) -
                         order.indexOf(bMetal?.quality)
                       );
                     })
                     .map(([metalId, group]) => {
-                      const metal = group[0].metal_color;
-
+                      const metal = group[0]?.metal_color;
                       return (
-                        <div
+                        <button
                           key={metalId}
-                          className={`btn rounded-circle d-flex align-items-center justify-content-center fw-semibold metal-btn ${
-                            selectedMetalId === metalId ? "active" : ""
-                          }`}
                           onClick={() => handleMetalChange(metalId)}
-                          title={metal?.name}
+                          className={`btn rounded-circle metal-btn ${
+                            metalId === selectedMetalId ? "active" : ""
+                          }`}
                           style={{ background: metal?.hex }}
+                          title={metal?.name}
                         >
                           {metal?.quality}
-                        </div>
+                        </button>
                       );
                     })}
                 </div>
               </div>
 
-              <p className="small fw-semibold mb-4">DIAMOND TYPE : LAB</p>
-
+              {/* CARAT */}
               <div className="mb-4">
                 <span className="small fw-semibold d-block mb-3">
-                  TOTAL CARAT WEIGHT : {weight}
+                  TOTAL CARAT WEIGHT: {weight}
                 </span>
-                <div className="d-flex flex-wrap gap-2">
-                  {(product.metal_variations?.[selectedMetalId] || []).map(
-                    (variation, index) => (
+
+                <div className="d-flex gap-2 flex-wrap">
+                  {uniqueWeights.map((w) => {
+                    const isActive = selectedVariation.weight === w;
+                    return (
                       <button
-                        key={index}
+                        key={w}
                         className={`product-variation__carat-pill ${
-                          selectedVariationIndex === index ? "active" : ""
+                          isActive ? "active" : ""
                         }`}
-                        onClick={() => handleCaratChange(index)}
+                        onClick={() => {
+                          const matchIndex = metalVariations.findIndex(
+                            (v) =>
+                              v.weight === w &&
+                              v.diamond_quality_id == selectedQuality
+                          );
+                          const fallbackIndex = metalVariations.findIndex(
+                            (v) => v.weight === w
+                          );
+
+                          const finalIndex =
+                            matchIndex !== -1 ? matchIndex : fallbackIndex;
+
+                          handleCaratChange(finalIndex);
+                        }}
                       >
-                        {variation.weight || "NA"}
+                        {w}
                       </button>
-                    )
-                  )}
+                    );
+                  })}
                 </div>
               </div>
 
+              {/* QUALITY */}
               <div className="mb-4">
-                <div className="d-flex align-items-center gap-2 mb-3">
-                  <span className="small fw-semibold">DIAMOND QUALITY</span>
-                  <Info size={16} className="text-secondary" />
-                  <span className="small">: F/G SI+</span>
-                </div>
+                <span className="small fw-semibold d-block mb-3">
+                  DIAMOND QUALITY
+                </span>
+
                 <div className="d-flex gap-2">
-                  {qualities.map((quality) => (
+                  {uniqueQualities.map((q) => (
                     <button
-                      key={quality.id}
-                      onClick={() => setSelectedQuality(quality.id)}
+                      key={q}
+                      onClick={() => handleQualityChange(q)}
                       className={`btn border quality-btn px-4 py-2 ${
-                        selectedQuality === quality.id ? "active" : ""
+                        selectedQuality == q ? "active" : ""
                       }`}
                     >
-                      {quality.label}
+                      QUALITY {q}
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* <div className="mb-4">
-                <h3 className="fw-semibold small mb-2">
-                  ADD CLARITY COMMITMENT PROTECTION PLAN
-                </h3>
-                <div className="d-flex align-items-center gap-2 mb-3">
-                  <p className="small text-muted mb-0">
-                    Ensure your jewelry lasts a lifetime.
-                  </p>
-                  <Info size={16} className="text-secondary" />
-                </div>
-                <div className="row row-cols-3 g-2 pt-2">
-                  {protectionPlans.map((plan) => (
-                    <div className="col" key={plan.id}>
-                      <button
-                        onClick={() => setSelectedPlan(plan.id)}
-                        className={`btn w-100 border text-center p-3 small plan-btn ${
-                          selectedPlan === plan.id ? "active" : ""
-                        }`}
-                      >
-                        {plan.popular && (
-                          <span className="popular-badge badge rounded-pill">
-                            MOST POPULAR
-                          </span>
-                        )}
-                        {plan.label}
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              </div> */}
-
+              {/* ADD TO CART */}
               <button
                 className="btn w-100 py-3 fw-semibold mb-3"
                 style={{ backgroundColor: "#06374a", color: "white" }}
                 onClick={() => {
-                  const cartItem = {
+                  addToCart({
                     ...selectedVariation,
+                    name,
                     productType: "gift",
-                    name: name,
                     itemQuantity: 1,
-                    selectedPlan: selectedPlan,
-                  };
-                  addToCart(cartItem);
+                    selectedPlan,
+                  });
                   navigate("/cart");
                 }}
               >
                 ADD TO CART
               </button>
-              {/*  <button className="btn btn-outline-dark w-100 py-3 fw-semibold mb-4">
-                VIRTUAL / SHOWROOM APPOINTMENT
-              </button> */}
 
               <p className="small mb-2">
-                Ships by <strong>{formattedDate}</strong> | Track in real time
-                before it ships
-              </p>
-              {/* <p className="small mb-2">
-                <span className="text-blue-link">0% APR</span> or as low as
-                $53/mo with <strong>affirm</strong>.{" "}
-                <a href="#" className="text-decoration-underline">
-                  See if you qualify
-                </a>
-              </p> */}
-              <p className="small mb-4">
-                Free Insured Shipping.
-                <a href="#" className="text-decoration-underline">
-                  30 Day Returns.
-                </a>
+                Ships by <b>{formattedDate}</b> | Track in real time before it
+                ships
               </p>
 
               <div className="border-top pt-4">
+                {/* ACTION BUTTONS */}
                 <div className="row row-cols-2 g-2 mb-4">
-                  {actions.map((item) => (
-                    <div className="col" key={item.text}>
+                  {actions.map((a) => (
+                    <div key={a.text} className="col">
                       <button
-                        className="btn btn-outline-secondary w-100 d-flex align-items-center justify-content-center gap-2 small py-2"
-                        onClick={() => handleNavigation(item)}
+                        className="btn btn-outline-secondary w-100 d-flex gap-2 justify-content-center"
+                        onClick={() => handleNavigation(a)}
                       >
-                        {item.icon} {item.text}
+                        {a.icon} {a.text}
                       </button>
                     </div>
                   ))}
                 </div>
-                <div className="d-flex align-items-center gap-3">
-                  <span className="small fw-semibold">SHARE:</span>
+
+                {/* SHARE */}
+                <div className="d-flex align-items-center gap-2 mb-4">
+                  <b className="small">SHARE:</b>
                   <SocialShare
                     id={id}
                     product={product.product}
                     mainImage={mainImage}
-                    backendBaseUrl={
-                      import.meta.env.VITE_BACKEND_URL || window.location.origin
-                    }
+                    backendBaseUrl={import.meta.env.VITE_BACKEND_URL}
                   />
-                  {/* <button className="btn p-0">📌</button>
-                  <button className="btn p-0 fw-bold">f</button>
-                  <button className="btn p-0 fw-bold">𝕏</button> */}
                 </div>
-                {/* <div className="bg-light-gray p-3 rounded d-flex align-items-center gap-2">
+
+                <div className="bg-light-gray p-3 rounded d-flex align-items-center gap-2">
                   <Gift size={20} />
                   <span className="small">
                     Earn 847 Points when you buy this item.
                   </span>
-                </div> */}
+                </div>
+
+                {/* ACCORDIONS */}
 
                 <div className="product-details-container">
                   {/* Product Details Section */}
@@ -504,9 +499,7 @@ const GiftDetails = () => {
                         openSection === "product" ? "" : "collapsed"
                       }`}
                     >
-                      <p className="detail-description">
-                        {description || "NA "}
-                      </p>
+                      <p className="detail-description">{description}</p>
 
                       <div className="details-grid">
                         <span className="detail-label">Metal Details</span>
@@ -556,7 +549,7 @@ const GiftDetails = () => {
                         <span className="detail-value">{cut || "NA"}</span>
 
                         {/* <span className="detail-label">Number of Stones</span>
-                        <span className="detail-value">Single Row</span> */}
+                                          <span className="detail-value">Single Row</span> */}
                       </div>
                     </div>
                   </div>
@@ -622,12 +615,6 @@ const GiftDetails = () => {
                       </p>
                     </div>
                   </div>
-
-                  {/* Need Help Button */}
-                  <button className="help-button">
-                    <MessageCircle size={20} />
-                    Need Help?
-                  </button>
                 </div>
               </div>
             </div>
@@ -635,9 +622,7 @@ const GiftDetails = () => {
         </div>
       </div>
 
-      {/* =============================================================================== */}
-      {/* MOBILE LAYOUT                                   */}
-      {/* =============================================================================== */}
+      {/* Mobile Layout */}
       <div className="d-block d-md-none">
         <div className="mobile-image-slider">
           {currentMedia[currentImageIndex]?.type === "video" ? (
@@ -716,7 +701,7 @@ const GiftDetails = () => {
                 .sort(([aKey, aGroup], [bKey, bGroup]) => {
                   const aMetal = aGroup[0].metal_color;
                   const bMetal = bGroup[0].metal_color;
-                  const order = ["14k", "18k", "PL"]; // Customize the order here
+                  const order = ["14k", "18k", "PL"];
                   return (
                     order.indexOf(aMetal?.quality) -
                     order.indexOf(bMetal?.quality)
@@ -741,14 +726,12 @@ const GiftDetails = () => {
             </div>
           </div>
 
-          <p className="small fw-semibold mb-4">DIAMOND TYPE : LAB</p>
-
           <div className="mb-4">
             <span className="small fw-semibold d-block mb-3">
               TOTAL CARAT WEIGHT : {weight}
             </span>
             <div className="d-flex flex-wrap gap-2">
-              {(product.metal_variations?.[selectedMetalId] || []).map(
+              {/* {(product.metal_variations?.[selectedMetalId] || []).map(
                 (variation, index) => (
                   <button
                     key={index}
@@ -760,51 +743,56 @@ const GiftDetails = () => {
                     {variation.weight || "NA"}
                   </button>
                 )
-              )}
+              )} */}
+              {uniqueWeights.map((w) => {
+                const isActive = selectedVariation.weight === w;
+                return (
+                  <button
+                    key={w}
+                    className={`product-variation__carat-pill ${
+                      isActive ? "active" : ""
+                    }`}
+                    onClick={() => {
+                      const matchIndex = metalVariations.findIndex(
+                        (v) =>
+                          v.weight === w &&
+                          v.diamond_quality_id == selectedQuality
+                      );
+                      const fallbackIndex = metalVariations.findIndex(
+                        (v) => v.weight === w
+                      );
+
+                      const finalIndex =
+                        matchIndex !== -1 ? matchIndex : fallbackIndex;
+
+                      handleCaratChange(finalIndex);
+                    }}
+                  >
+                    {w}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
           <div className="mb-4">
             <div className="d-flex align-items-center gap-2 mb-3">
               <span className="small fw-semibold">DIAMOND QUALITY:</span>
-              <span className="small">F/G SI+</span>
             </div>
             <div className="d-flex gap-2">
-              {qualities.map((quality) => (
+              {uniqueQualities.map((q) => (
                 <button
-                  key={quality.id}
-                  onClick={() => setSelectedQuality(quality.id)}
-                  className={`btn border quality-btn px-3 py-1 small ${
-                    selectedQuality === quality.id ? "active" : ""
+                  key={q}
+                  onClick={() => handleQualityChange(q)}
+                  className={`btn border quality-btn px-4 py-2 ${
+                    selectedQuality == q ? "active" : ""
                   }`}
                 >
-                  {quality.label}
+                  QUALITY {q}
                 </button>
               ))}
             </div>
           </div>
-
-          {/* <div className="mb-4">
-            <h3 className="fw-semibold small mb-2">ADD PROTECTION PLAN</h3>
-            <div className="d-flex flex-nowrap gap-2 overflow-x-auto pb-2">
-              {protectionPlans.map((plan) => (
-                <button
-                  key={plan.id}
-                  onClick={() => setSelectedPlan(plan.id)}
-                  className={`btn border text-center p-3 small plan-btn flex-shrink-0 ${
-                    selectedPlan === plan.id ? "active" : ""
-                  }`}
-                >
-                  {plan.popular && (
-                    <span className="popular-badge badge rounded-pill">
-                      MOST POPULAR
-                    </span>
-                  )}
-                  {plan.label}
-                </button>
-              ))}
-            </div>
-          </div> */}
 
           <p className="small mb-2">
             Ships by <strong>{formattedDate}</strong> | Track in real time
@@ -833,7 +821,6 @@ const GiftDetails = () => {
           </div>
 
           <div className="product-details-container">
-            {/* Product Details Section */}
             <div>
               <div
                 className="detail-section-header"
@@ -857,16 +844,17 @@ const GiftDetails = () => {
                   <span className="detail-label">Metal Details</span>
                   <span className="detail-value">{metalName}</span>
 
-                  <span className="detail-label">Setting Type</span>
-                  <span className="detail-value">Prong</span>
+                  <span className="detail-label">Product Model</span>
+                  <span className="detail-value">{products_model || "NA"}</span>
 
-                  <span className="detail-label">Clasp</span>
-                  <span className="detail-value">Box</span>
+                  <span className="detail-label">clarity</span>
+                  <span className="detail-value">
+                    {product_clarity || "NA"}
+                  </span>
                 </div>
               </div>
             </div>
 
-            {/* Stone Details Section */}
             <div>
               <div
                 className="detail-section-header"
@@ -892,15 +880,14 @@ const GiftDetails = () => {
                   <span className="detail-value">{weight}</span>
 
                   <span className="detail-label">Cut</span>
-                  <span className="detail-value">{cut || "NA"}</span>
+                  <span className="detail-value">Brilliant</span>
 
-                  {/* <span className="detail-label">Number of Stones</span>
-                  <span className="detail-value">Single Row</span> */}
+                  <span className="detail-label">Clarity</span>
+                  <span className="detail-value">Single Row</span>
                 </div>
               </div>
             </div>
 
-            {/* Shipping & Returns Section */}
             <div>
               <div
                 className="detail-section-header"
@@ -929,7 +916,6 @@ const GiftDetails = () => {
               </div>
             </div>
 
-            {/* Lifetime Warranty Section */}
             <div>
               <div
                 className="detail-section-header"
@@ -958,7 +944,6 @@ const GiftDetails = () => {
               </div>
             </div>
 
-            {/* Need Help Button */}
             <button className="help-button">
               <MessageCircle size={20} />
               Need Help?
@@ -966,7 +951,6 @@ const GiftDetails = () => {
           </div>
         </div>
 
-        {/* Sticky Add to Cart Bar */}
         {showMobileCart && (
           <div className=" bg-white p-3 pt-1 border-top">
             <div className="d-flex align-items-center justify-content-between gap-3">
@@ -996,6 +980,14 @@ const GiftDetails = () => {
             </div>
           </div>
         )}
+      </div>
+
+      {/* Review System */}
+      <div className="container mt-5">
+        <ProductReviewSystem
+          productId={productId}
+          refreshTrigger={reviewsRefreshed}
+        />
       </div>
     </div>
   );

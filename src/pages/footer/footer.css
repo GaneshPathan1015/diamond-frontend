@@ -14,6 +14,7 @@
   .footer-font {
       font-family: "Figtree", sans-serif;
   }
+  
 
   .footer-link:hover {
       color: #ddd !important;
@@ -63,12 +64,12 @@
       color: rgba(255, 255, 255, 0.6);
   }
 
-  .footer-sub-btn{
-    background-color: white;
+  .footer-sub-btn {
+      background-color: white;
   }
 
   .f-submit-btn {
-      background-color: black ;
+      background-color: black;
       border: 1px solid #fff;
       color: #fff;
       font-weight: 600;

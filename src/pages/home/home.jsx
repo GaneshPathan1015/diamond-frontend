@@ -43,7 +43,7 @@ export default function Home() {
 
       {/* Trending Now Section */}
       <TrendingNow />
-      <section className="build_engagement_wrapper py-5">
+      <section className="build_engagement_wrapper py-2">
         <div className="container">
           <div className="row align-items-center">
             {/* Left Side */}
@@ -55,7 +55,7 @@ export default function Home() {
                     <h2 className="section-header-lg section-header-md mb-3">
                       Build Your <br /> Engagement Ring
                     </h2>
-                    <p className="mb-4">
+                    <p className="mb-4 ff">
                       Choose a setting, select a diamond, &amp; complete your
                       ring.
                     </p>
@@ -116,7 +116,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bond_wrapper_block my-5">
+      <section className="bond_wrapper_block my-2">
         <div className="container">
           <div className="vedio_block">
             <video

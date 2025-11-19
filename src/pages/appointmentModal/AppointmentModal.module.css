@@ -36,6 +36,7 @@
 }
 
 .content {
+    font-family: "Figtree", sans-serif !important;
     position: relative;
     height: 100%;
     display: flex;
@@ -45,6 +46,10 @@
     padding: 40px;
     color: white;
     text-align: center;
+}
+
+.content>p {
+    font-family: "Figtree", sans-serif !important;
 }
 
 .closeButton {
