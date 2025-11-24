@@ -269,10 +269,17 @@
 }
 
 /* Additional Utilities */
-/* .container { */
-  /* max-width: 1200px; */
-/* } */
+.container {
+  max-width: 1200px;
+}
 
+.row {
+  margin: 0 -15px;
+}
+
+.col-md-3, .col-md-9 {
+  padding: 0 15px;
+}
 
 .pt-5 {
   padding-top: 3rem !important;

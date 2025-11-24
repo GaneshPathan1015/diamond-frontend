@@ -456,7 +456,7 @@ const ExtendedWarranty = () => {
                                     data-bs-parent="#faqAccordion"
                                 >
                                     <div className="accordion-body">
-                                        To check the status of your With Clarity Store Credit Card account, click here to learn more and manage your account on Synchrony Bank's website. After loging into your account, you will be able to:
+                                        To check the status of your Caratcasa Store Credit Card account, click here to learn more and manage your account on Synchrony Bank's website. After loging into your account, you will be able to:
                                         1. Make a payment
                                         2. View your balance
                                         3. Update your account information

@@ -1,5 +1,6 @@
 import React from "react";
 import "./LabGrownDiamonds.css";
+import { Link } from "react-router-dom";
 
 function LabGrownDiamonds() {
   return (
@@ -7,7 +8,7 @@ function LabGrownDiamonds() {
       <section>
         <div className="container">
           <div className="row pb-4">
-            <div className="col-md-6">
+            <div className="col-md-6 LabGrownDiamonds-column">
               <div className="hero-image-lab">
                 <img
                   src="/images/labGrownDiamonds/Diamond_Vid_990x.webp"
@@ -23,7 +24,7 @@ function LabGrownDiamonds() {
                   All about lab grown diamonds and rings.
                 </span>
                 <div className="hero-button pt-3">
-                  <a className="hero_btn btn">SHOP LAB-GROWN DIAMONDS</a>
+                  <Link to="/diamond?menudiamond=lab-diamonds" className="hero_btn btn">SHOP LAB-GROWN DIAMONDS</Link>
                 </div>
               </div>
             </div>
@@ -35,14 +36,14 @@ function LabGrownDiamonds() {
             gap: '30px'
           }}>
             {[
-              { src: "4.png", alt: "Round", label: "Round" },
-              { src: "5.png", alt: "Princess", label: "Princess" },
-              { src: "6.png", alt: "Cushion", label: "Cushion" },
-              { src: "7.png", alt: "Radiant", label: "Radiant" },
-              { src: "8.avif", alt: "Asscher", label: "Asscher" },
-              { src: "9.avif", alt: "Emerald", label: "Emerald" },
-              { src: "10.png", alt: "Oval", label: "Oval" },
-              { src: "11.avif", alt: "Pear", label: "Pear" },
+              { src: "Round_Shape-icon_fb1f11ce-66d0-4f90-8478-d27cf9f40525.png", alt: "Round", label: "Round" },
+              { src: "Princess_Shape-icion_86fa796c-38c5-4006-a5f0-180e1f1e7560.png", alt: "Princess", label: "Princess" },
+              { src: "Cushion_Shape-icon_4a8377f1-e2bf-4068-8d98-8925167123ea.png", alt: "Cushion", label: "Cushion" },
+              { src: "Radiant_Shape-icon_33a74998-113b-45da-8a0f-b3c08154ff81.png", alt: "Radiant", label: "Radiant" },
+              { src: "Asscher_Shape-icon.avif", alt: "Asscher", label: "Asscher" },
+              { src: "Emerald_Shape-icon.avif", alt: "Emerald", label: "Emerald" },
+              { src: "Oval_Shape-icon_7aee2647-81e1-40c1-a37c-392fcbe84a89.png", alt: "Oval", label: "Oval" },
+              { src: "Pear_Shape-icon.avif", alt: "Pear", label: "Pear" },
             ].map((item, index) => (
               <div key={index} style={{
                 display: 'flex',
@@ -200,7 +201,7 @@ function LabGrownDiamonds() {
                 <td>Earth (mining deposits)</td>
                 <td>Unknown. But can take millions of years.</td>
                 <td>
-                  Depending (With Clarity only sells conflict-free diamonds)
+                  Depending (Caratcasa only sells conflict-free diamonds)
                 </td>
                 <td>$$$ / $$$$</td>
                 <td>Yes</td>
@@ -229,7 +230,7 @@ function LabGrownDiamonds() {
                   <p>
                     <strong>Gemological Institute of America</strong>
                     <br />
-                    The Gemological Institute of America is a nonprofit institute that has an international authority on diamonds, gemstones, and pearls. GIA was founded in 1931, and in the 1940s, established the “4Cs” (Cut, Color, Clarity, and Carat Weight) or the “International Diamond Grading System.” The GIA is arguably the leading source of knowledge for all gemstones and jewelry, which is why all With Clarity Natural Diamonds are graded by GIA.
+                    The Gemological Institute of America is a nonprofit institute that has an international authority on diamonds, gemstones, and pearls. GIA was founded in 1931, and in the 1940s, established the “4Cs” (Cut, Color, Clarity, and Carat Weight) or the “International Diamond Grading System.” The GIA is arguably the leading source of knowledge for all gemstones and jewelry, which is why all Caratcasa Natural Diamonds are graded by GIA.
                   </p>
                 </div>
               </div>
@@ -294,7 +295,7 @@ function LabGrownDiamonds() {
               <div className="col-md-6">
                 <div className="text-center">
                   <img
-                    src="./images/labGrownDiamonds/GSI_Logo.avif"
+                    src="/images/labGrownDiamonds/GSI_Logo.avif"
                     alt="GSI"
                     width={100}
                     className="mb-3 mx-auto d-block"

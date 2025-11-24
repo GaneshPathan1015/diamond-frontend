@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const MonthlyPaymentOption = () => {
     const [activeOption, setActiveOption] = useState("split"); // default: Split Pay
@@ -239,7 +240,7 @@ const MonthlyPaymentOption = () => {
                     </div>
                 </div>
 
-                <p className="text-center pt-4 mt-4 text-dark">* Your rate will be 0-36% APR based on credit, and is subject to an eligibility check. For example, a $700<br /> purchase might cost $63.18/mo over 12 months at 15% APR. Payment options through Affirm are provided<br /> by these lending partners: <a style={{ textDecoration: "none" }} href="https://www.affirm.com/lenders">affirm.com/lenders</a> . Options depend on your purchase amount and a down<br /> payment may be required.</p>
+                <p className="text-center pt-4 mt-4 text-dark">* Your rate will be 0-36% APR based on credit, and is subject to an eligibility check. For example, a $700<br /> purchase might cost $63.18/mo over 12 months at 15% APR. Payment options through Affirm are provided<br /> by these lending partners: <Link style={{ textDecoration: "none" }} to="https://www.affirm.com/lenders">affirm.com/lenders</Link> . Options depend on your purchase amount and a down<br /> payment may be required.</p>
             </section>
 
             <section>
@@ -400,31 +401,31 @@ const MonthlyPaymentOption = () => {
 
                         <div className="col-lg-2 col-md-4 col-sm-4 mb-3">
                             <div className="reviews-link" style={{ borderRight: '1px solid #00000043' }}>
-                                <a href="#" style={{ textDecoration: 'none' }}>
+                                <Link to="#" style={{ textDecoration: 'none' }}>
                                     <i style={{ fontSize: '30px', fontFamily: 'FontAwesome', color: '#00000043' }} className="fa-solid fa-comment-dots contact-icon"></i>
                                     <br />
                                     <span style={{ color: '#000' }}>Chat</span>
-                                </a>
+                                </Link>
                             </div>
                         </div>
 
                         <div className="col-lg-2 col-md-4 col-sm-4 mb-3">
                             <div className="reviews-link" style={{ borderRight: '1px solid #00000043' }}>
-                                <a href="#" style={{ textDecoration: 'none' }}>
+                                <Link to="mailto:service@TheCaratecasa.com" style={{ textDecoration: 'none' }}>
                                     <i className="fa-solid fa-envelope contact-icon" style={{ fontSize: '30px', fontFamily: 'FontAwesome', color: '#00000043' }}></i>
                                     <br />
                                     <span style={{ color: '#000' }}>Email</span>
-                                </a>
+                                </Link>
                             </div>
                         </div>
 
                         <div className="col-lg-2 col-md-4 col-sm-4 mb-3">
                             <div className="reviews-link">
-                                <a href="#" style={{ textDecoration: 'none' }}>
+                                <Link to="tel:1-844-234-6463" style={{ textDecoration: 'none' }}>
                                     <i className="fa-solid fa-phone contact-icon" style={{ fontSize: '30px', fontFamily: 'FontAwesome', color: '#00000043' }}></i>
                                     <br />
                                     <span style={{ color: '#000' }}>Phone</span>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>

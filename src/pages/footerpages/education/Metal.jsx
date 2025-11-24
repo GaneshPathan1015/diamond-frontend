@@ -1,6 +1,7 @@
 import React from "react";
 import "./Metal.css";
 import "../../diamond-detail/diamondDetails/DiamondDetails.css";
+import { Link } from "react-router-dom";
 function Metal() {
   return (
     <>
@@ -12,7 +13,7 @@ function Metal() {
             precious metals. The metal you choose can depend on your preference
             in durability, look and cost. Factors that set different types of
             metals apart are also the luster (shine), weight and color of the
-            metal. With Clarity crafts jewelry using gold and platinum. We are
+            metal. Caratcasa crafts jewelry using gold and platinum. We are
             also committed to using eco-friendly sources of metal. These are
             among the most durable and visually appealing metals, and are most
             commonly used in crafting jewelry. These metals are classified as
@@ -232,9 +233,9 @@ function Metal() {
         </div>
 
         <div className="contact-btn text-center my-4">
-          <button className=" custom-btn outlined">
+          <Link to="/contact" style={{textDecoration:'none'}} className=" custom-btn outlined">
             CONTACT US
-          </button>
+          </Link>
         </div>
       </div>
     </>

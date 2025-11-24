@@ -117,8 +117,19 @@ const GiftDetails = () => {
     (v) => v.weight === selectedVariation.weight
   );
 
+  // const uniqueQualities = Array.from(
+  //   new Set(variationsForSelectedWeight.map((v) => v.diamond_quality_id))
+  // );
   const uniqueQualities = Array.from(
-    new Set(variationsForSelectedWeight.map((v) => v.diamond_quality_id))
+    new Map(
+      variationsForSelectedWeight.map((v) => [
+        v.diamond_quality_id,
+        {
+          id: v.diamond_quality_id,
+          name: v.diamond_quality_name,
+        },
+      ])
+    ).values()
   );
 
   const currentMedia = selectedVariation
@@ -171,6 +182,7 @@ const GiftDetails = () => {
   const deliveryDate = new Date(
     Date.now() + estimatedDays * 24 * 60 * 60 * 1000
   );
+
   const formattedDate = deliveryDate.toLocaleDateString("en-US", {
     weekday: "short",
     month: "short",
@@ -410,13 +422,13 @@ const GiftDetails = () => {
                 <div className="d-flex gap-2">
                   {uniqueQualities.map((q) => (
                     <button
-                      key={q}
-                      onClick={() => handleQualityChange(q)}
+                      key={q.id}
+                      onClick={() => handleQualityChange(q.id)}
                       className={`btn border quality-btn px-4 py-2 ${
-                        selectedQuality == q ? "active" : ""
+                        selectedQuality == q.id ? "active" : ""
                       }`}
                     >
-                      QUALITY {q}
+                      {q.name}
                     </button>
                   ))}
                 </div>
@@ -782,13 +794,13 @@ const GiftDetails = () => {
             <div className="d-flex gap-2">
               {uniqueQualities.map((q) => (
                 <button
-                  key={q}
-                  onClick={() => handleQualityChange(q)}
+                  key={q.id}
+                  onClick={() => handleQualityChange(q.id)}
                   className={`btn border quality-btn px-4 py-2 ${
-                    selectedQuality == q ? "active" : ""
+                    selectedQuality == q.id ? "active" : ""
                   }`}
                 >
-                  QUALITY {q}
+                  {q.name}
                 </button>
               ))}
             </div>

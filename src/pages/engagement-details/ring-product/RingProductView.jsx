@@ -43,12 +43,15 @@ const RingProductView = ({ diamond }) => {
   const [selectedMetalId, setSelectedMetalId] = useState(null);
   const [selectedShapeId, setSelectedShapeId] = useState(null);
   const [selectedVariationIndex, setSelectedVariationIndex] = useState(0);
+
+  const [selectedWeight, setSelectedWeight] = useState(null);
+  const [selectedQualityId, setSelectedQualityId] = useState(null);
+
   const [showModal, setShowModal] = useState(false);
   const [showSettingModal, setShowSettingModal] = useState(false);
   const [modalProductData, setModalProductData] = useState(null);
   const [isVideo, setIsVideo] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [selectedQuality, setSelectedQuality] = useState("f-g-si");
   const [showMobileCart, setShowMobileCart] = useState(false);
 
   const navigate = useNavigate();
@@ -108,6 +111,7 @@ const RingProductView = ({ diamond }) => {
     setSelectedMetalId(metalId);
     setSelectedVariationIndex(0);
     setIsVideo(false);
+
     const isBuild = (product.product?.is_build ?? product.is_build) === 1;
 
     if (isBuild) {
@@ -128,6 +132,7 @@ const RingProductView = ({ diamond }) => {
     setSelectedShapeId(shapeId);
     setSelectedVariationIndex(0);
     setIsVideo(false);
+
     const variation = product.metal_variations[selectedMetalId][shapeId][0];
     setMainImage(getImageUrl(variation?.images?.[0]));
   };
@@ -143,16 +148,68 @@ const RingProductView = ({ diamond }) => {
     setMainImage(getImageUrl(variation?.images?.[0]));
   };
 
+  const isBuild = (product?.product?.is_build ?? product?.is_build) === 1;
+  // --------------------
+  // Compute filtered variations (only current metal + shape)
+  // --------------------
+
+  const filteredVariations = isBuild
+    ? product?.metal_variations?.[selectedMetalId]?.[selectedShapeId] || []
+    : product?.metal_variations?.[selectedMetalId] || [];
+
+  useEffect(() => {
+    if (!filteredVariations || filteredVariations.length === 0) {
+      setSelectedWeight(null);
+      setSelectedQualityId(null);
+      setSelectedVariationIndex(0);
+      return;
+    }
+
+    // pick first weight in groupedByWeight order
+    const firstWeightKey = Object.keys(groupedByWeight)[0];
+
+    if (firstWeightKey) {
+      const firstVariationForWeight =
+        groupedByWeight[firstWeightKey].variations[0];
+      // set selected weight & quality to first ones
+      setSelectedWeight(firstWeightKey);
+      setSelectedQualityId(firstVariationForWeight?.diamond_quality_id ?? null);
+      // set selected variation index globally
+      const idx = filteredVariations.findIndex(
+        (fv) => fv.id === firstVariationForWeight.id
+      );
+      setSelectedVariationIndex(idx >= 0 ? idx : 0);
+      setMainImage(getImageUrl(firstVariationForWeight?.images?.[0]));
+    } else {
+      setSelectedWeight(null);
+      setSelectedQualityId(null);
+      setSelectedVariationIndex(0);
+    }
+    // We want this to run when selected metal/shape or product changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedMetalId, selectedShapeId, product?.id]);
+
   if (!product || !product.product) return <LoadingDots />;
 
-  const isBuild = (product.product?.is_build ?? product.is_build) === 1;
+  // Group by weight so each weight appears once and contains its variations (qualities)
+  const groupedByWeight = filteredVariations.reduce((acc, item) => {
+    const key = item.weight ?? "NA";
+    if (!acc[key]) {
+      acc[key] = { weight: key, variations: [] };
+    }
+    acc[key].variations.push(item);
+    return acc;
+  }, {});
+
+  // Keep weights in same order as filteredVariations by building ordered array
+  const weightOptions = Object.values(groupedByWeight);
 
   // CHANGE: figure selected variation with/without shape
-  const selectedVariation = isBuild
-    ? product.metal_variations?.[selectedMetalId]?.[selectedShapeId]?.[
-        selectedVariationIndex
-      ]
-    : product.metal_variations?.[selectedMetalId]?.[selectedVariationIndex];
+  const selectedVariation =
+    filteredVariations?.[selectedVariationIndex] ||
+    filteredVariations?.[0] ||
+    null;
+
   const currentMedia = selectedVariation
     ? [
         // Add video first if it exists
@@ -170,15 +227,15 @@ const RingProductView = ({ diamond }) => {
   const nextImage = () =>
     setCurrentImageIndex((prev) => (prev + 1) % currentMedia.length);
 
-  const qualities = [
-    { id: "ef-vs", label: "EF VS+" },
-    { id: "f-g-si", label: "F/G SI+" },
-  ];
-
   const prevImage = () =>
     setCurrentImageIndex(
       (prev) => (prev - 1 + currentMedia.length) % currentMedia.length
     );
+
+  const qualities = [
+    { id: "ef-vs", label: "EF VS+" },
+    { id: "f-g-si", label: "F/G SI+" },
+  ];
 
   const {
     name,
@@ -198,6 +255,7 @@ const RingProductView = ({ diamond }) => {
     metal_color,
     sku: variationSku,
   } = selectedVariation || {};
+
   const priceDifference = Math.max(original_price - price, 0).toFixed(2);
   const metalName = metal_color?.name || "-";
   const selectedShapeName = isBuild
@@ -284,7 +342,7 @@ const RingProductView = ({ diamond }) => {
       navigate(item.path);
     }
   };
-  
+
   return (
     <>
       <div className="bg-white min-vh-100">
@@ -485,98 +543,80 @@ const RingProductView = ({ diamond }) => {
                         );
                       })}
                   </div>
-                  {/* <div className="d-flex gap-2"> */}
-                  {/* 
-                    {Object.entries(product.metal_variations)
-                      .sort(([aKey, aGroup], [bKey, bGroup]) => {
-                        const aMetal = aGroup[0].metal_color;
-                        const bMetal = bGroup[0].metal_color;
-                        const order = ["14k", "18k", "PL"]; // Customize the order here
-                        return (
-                          order.indexOf(aMetal?.quality) -
-                          order.indexOf(bMetal?.quality)
-                        );
-                      })
-                      .map(([metalId, group]) => {
-                        const metal = group[0].metal_color;
-
-                        return (
-                          <div
-                            key={metalId}
-                            className={`btn rounded-circle d-flex align-items-center justify-content-center fw-semibold metal-btn ${
-                              selectedMetalId === metalId ? "active" : ""
-                            }`}
-                            onClick={() => handleMetalChange(metalId)}
-                            title={metal?.name}
-                            style={{ background: metal?.hex }}
-                          >
-                            {metal?.quality}
-                          </div>
-                        );
-                      })} */}
-                  {/* </div> */}
                 </div>
-
-                <p className="small fw-semibold mb-4">DIAMOND TYPE : LAB</p>
 
                 <div className="mb-4">
                   <span className="small fw-semibold d-block mb-3">
                     TOTAL CARAT WEIGHT : {weight}
                   </span>
-                  <div className="d-flex flex-wrap gap-2">
-                    {Object.values(
-                      product.metal_variations?.[selectedMetalId] || {}
-                    )
-                      .flat() // flatten all shape arrays
-                      .map((variation, index) => (
-                        <button
-                          key={index}
-                          className={`product-variation__carat-pill ${
-                            selectedVariationIndex === index ? "active" : ""
-                          }`}
-                          onClick={() => handleCaratChange(index)}
-                        >
-                          {variation.weight || "NA"}
-                        </button>
-                      ))}
-                  </div>
-                  {/* <div className="d-flex flex-wrap gap-2">
-                    {(product.metal_variations?.[selectedMetalId] || []).map(
-                      (variation, index) => (
-                        <button
-                          key={index}
-                          className={`product-variation__carat-pill ${
-                            selectedVariationIndex === index ? "active" : ""
-                          }`}
-                          onClick={() => handleCaratChange(index)}
-                        >
-                          {variation.weight || "NA"}
-                        </button>
-                      )
-                    )}
-                  </div> */}
-                </div>
 
-                <div className="mb-4">
-                  <div className="d-flex align-items-center gap-2 mb-3">
-                    <span className="small fw-semibold">DIAMOND QUALITY</span>
-                    <Info size={16} className="text-secondary" />
-                    <span className="small">: F/G SI+</span>
-                  </div>
-                  <div className="d-flex gap-2">
-                    {qualities.map((quality) => (
+                  {/* new chanes */}
+                  <div className="d-flex flex-wrap gap-2">
+                    {weightOptions.map((w, idx) => (
                       <button
-                        key={quality.id}
-                        onClick={() => setSelectedQuality(quality.id)}
-                        className={`btn border quality-btn px-4 py-2 ${
-                          selectedQuality === quality.id ? "active" : ""
+                        key={w.weight + "-" + idx}
+                        className={`product-variation__carat-pill ${
+                          selectedWeight === w.weight ? "active" : ""
                         }`}
+                        onClick={() => {
+                          // select weight -> pick first variation for that weight
+                          setSelectedWeight(w.weight);
+                          // pick first quality of this weight
+                          const firstVar = w.variations[0];
+                          setSelectedQualityId(
+                            firstVar?.diamond_quality_id ?? null
+                          );
+                          // set selected variation index globally
+                          const globalIndex = filteredVariations.findIndex(
+                            (fv) => fv.id === firstVar.id
+                          );
+                          setSelectedVariationIndex(
+                            globalIndex >= 0 ? globalIndex : 0
+                          );
+                          setMainImage(getImageUrl(firstVar?.images?.[0]));
+                        }}
                       >
-                        {quality.label}
+                        {w.weight || "NA"}
                       </button>
                     ))}
                   </div>
+
+                  {/* ====== QUALITY BUTTONS (shown when a weight selected) ====== */}
+                  {selectedWeight && (
+                    <div className="mt-2">
+                      <small className="text-muted">
+                        Available qualities for {selectedWeight}:
+                      </small>
+                      <div className="d-flex flex-wrap gap-2 mt-1">
+                        {(
+                          groupedByWeight[selectedWeight]?.variations || []
+                        ).map((v) => (
+                          <button
+                            key={v.id}
+                            className={`btn border quality-btn px-3 py-2 ${
+                              selectedQualityId === v.diamond_quality_id
+                                ? "active"
+                                : ""
+                            }`}
+                            onClick={() => {
+                              setSelectedQualityId(v.diamond_quality_id);
+                              const globalIndex = filteredVariations.findIndex(
+                                (fv) => fv.id === v.id
+                              );
+                              setSelectedVariationIndex(
+                                globalIndex >= 0 ? globalIndex : 0
+                              );
+                              setMainImage(getImageUrl(v.images?.[0]));
+                            }}
+                          >
+                            Quality {v.diamond_quality_id}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
+
                 <button
                   className="btn w-100 py-3 fw-semibold mb-3"
                   style={{ backgroundColor: "#06374a", color: "white" }}
@@ -638,9 +678,9 @@ const RingProductView = ({ diamond }) => {
                 </div>
               </div> */}
 
-                <button className="btn btn-outline-dark w-100 py-3 fw-semibold mb-4">
+                {/* <button className="btn btn-outline-dark w-100 py-3 fw-semibold mb-4">
                   VIRTUAL / SHOWROOM APPOINTMENT
-                </button>
+                </button> */}
 
                 <p className="small mb-2">
                   Ships by <strong>{formattedDate}</strong> | Track in real time
@@ -673,8 +713,7 @@ const RingProductView = ({ diamond }) => {
                       </div>
                     ))}
                   </div>
-
-                  <div className="d-flex align-items-center gap-3">
+                  <div className="d-flex align-items-center gap-3 mb-4">
                     <span className="small fw-semibold">SHARE:</span>
                     <SocialShare
                       id={id}
@@ -686,8 +725,7 @@ const RingProductView = ({ diamond }) => {
                       }
                     />
                   </div>
-
-                  {/* <div className="bg-light-gray p-3 rounded d-flex align-items-center gap-2">
+                  {/*  <div className="bg-light-gray p-3 rounded d-flex align-items-center gap-2">
                     <Gift size={20} />
                     <span className="small">
                       Earn 847 Points when you buy this item.
@@ -846,9 +884,10 @@ const RingProductView = ({ diamond }) => {
           </div>
         </div>
 
-        {/* =============================================================================== */}
-        {/* MOBILE LAYOUT                                   */}
-        {/* =============================================================================== */}
+        {/* ===============================================================================
+         /* MOBILE LAYOUT */
+        /* ===============================================================================
+         */}
         <div className="d-block d-md-none">
           <div className="mobile-image-slider">
             {currentMedia[currentImageIndex]?.type === "video" ? (
@@ -997,50 +1036,76 @@ const RingProductView = ({ diamond }) => {
               </div>
             </div>
 
-            <p className="small fw-semibold mb-4">DIAMOND TYPE : LAB</p>
-
             <div className="mb-4">
               <span className="small fw-semibold d-block mb-3">
                 TOTAL CARAT WEIGHT : {weight}
               </span>
 
+              {/* new chanes */}
               <div className="d-flex flex-wrap gap-2">
-                {Object.values(
-                  product.metal_variations?.[selectedMetalId] || {}
-                )
-                  .flat() // flatten all shape arrays
-                  .map((variation, index) => (
-                    <button
-                      key={index}
-                      className={`product-variation__carat-pill ${
-                        selectedVariationIndex === index ? "active" : ""
-                      }`}
-                      onClick={() => handleCaratChange(index)}
-                    >
-                      {variation.weight || "NA"}
-                    </button>
-                  ))}
-              </div>
-            </div>
-
-            <div className="mb-4">
-              <div className="d-flex align-items-center gap-2 mb-3">
-                <span className="small fw-semibold">DIAMOND QUALITY:</span>
-                <span className="small">F/G SI+</span>
-              </div>
-              <div className="d-flex gap-2">
-                {qualities.map((quality) => (
+                {weightOptions.map((w, idx) => (
                   <button
-                    key={quality.id}
-                    onClick={() => setSelectedQuality(quality.id)}
-                    className={`btn border quality-btn px-3 py-1 small ${
-                      selectedQuality === quality.id ? "active" : ""
+                    key={w.weight + "-" + idx}
+                    className={`product-variation__carat-pill ${
+                      selectedWeight === w.weight ? "active" : ""
                     }`}
+                    onClick={() => {
+                      // select weight -> pick first variation for that weight
+                      setSelectedWeight(w.weight);
+                      // pick first quality of this weight
+                      const firstVar = w.variations[0];
+                      setSelectedQualityId(
+                        firstVar?.diamond_quality_id ?? null
+                      );
+                      // set selected variation index globally
+                      const globalIndex = filteredVariations.findIndex(
+                        (fv) => fv.id === firstVar.id
+                      );
+                      setSelectedVariationIndex(
+                        globalIndex >= 0 ? globalIndex : 0
+                      );
+                      setMainImage(getImageUrl(firstVar?.images?.[0]));
+                    }}
                   >
-                    {quality.label}
+                    {w.weight || "NA"}
                   </button>
                 ))}
               </div>
+
+              {/* ====== QUALITY BUTTONS (shown when a weight selected) ====== */}
+              {selectedWeight && (
+                <div className="mt-2">
+                  <small className="text-muted">
+                    Available qualities for {selectedWeight}:
+                  </small>
+                  <div className="d-flex flex-wrap gap-2 mt-1">
+                    {(groupedByWeight[selectedWeight]?.variations || []).map(
+                      (v) => (
+                        <button
+                          key={v.id}
+                          className={`btn border quality-btn px-3 py-2 ${
+                            selectedQualityId === v.diamond_quality_id
+                              ? "active"
+                              : ""
+                          }`}
+                          onClick={() => {
+                            setSelectedQualityId(v.diamond_quality_id);
+                            const globalIndex = filteredVariations.findIndex(
+                              (fv) => fv.id === v.id
+                            );
+                            setSelectedVariationIndex(
+                              globalIndex >= 0 ? globalIndex : 0
+                            );
+                            setMainImage(getImageUrl(v.images?.[0]));
+                          }}
+                        >
+                          {v.diamond_quality_name}
+                        </button>
+                      )
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
 
             {showModal && (
@@ -1064,27 +1129,6 @@ const RingProductView = ({ diamond }) => {
                 modalProductData={modalProductData}
               />
             )}
-            {/* <div className="mb-4">
-            <h3 className="fw-semibold small mb-2">ADD PROTECTION PLAN</h3>
-            <div className="d-flex flex-nowrap gap-2 overflow-x-auto pb-2">
-              {protectionPlans.map((plan) => (
-                <button
-                  key={plan.id}
-                  onClick={() => setSelectedPlan(plan.id)}
-                  className={`btn border text-center p-3 small plan-btn flex-shrink-0 ${
-                    selectedPlan === plan.id ? "active" : ""
-                  }`}
-                >
-                  {plan.popular && (
-                    <span className="popular-badge badge rounded-pill">
-                      MOST POPULAR
-                    </span>
-                  )}
-                  {plan.label}
-                </button>
-              ))}
-            </div>
-          </div> */}
 
             <p className="small mb-2">
               Ships by <strong>{formattedDate}</strong> | Track in real time
@@ -1253,12 +1297,6 @@ const RingProductView = ({ diamond }) => {
                   </p>
                 </div>
               </div>
-
-              {/* Need Help Button */}
-              {/* <button className="help-button">
-                <MessageCircle size={20} />
-                Need Help?
-              </button> */}
             </div>
           </div>
 

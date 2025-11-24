@@ -77,8 +77,7 @@ const Checkout = () => {
       [name]: type === "checkbox" ? checked : value,
     }));
   };
-
-  // Validate form before submission
+  
   const validate = () => {
     const newErrors = {};
 
@@ -120,8 +119,8 @@ const Checkout = () => {
         return { productType: "diamond", ...item };
       } else if (item.productType === "build") {
         return { productType: "build", ...item };
-      } else if (item.productType === "jewelry") {
-        return { productType: "jewelry", ...item };
+      } else if (item.productType === "gift") {
+        return { productType: "gift", ...item };
       }
       return item;
     }),
@@ -210,7 +209,6 @@ const Checkout = () => {
         is_get_offer: formData.smsOffers ? 1 : 0,
       });
 
-
       // PayPal payment
       if (selectedMethod === "pay-paypal") {
         const orderResponse = await axiosClient.post("/api/store-order", {
@@ -276,9 +274,7 @@ const Checkout = () => {
     const fallback = `${
       import.meta.env.VITE_BACKEND_URL
     }/storage/variation_images/No_Image_Available.jpg`;
-    return img
-      ? `${import.meta.env.VITE_BACKEND_URL}${img}`
-      : fallback;
+    return img ? `${import.meta.env.VITE_BACKEND_URL}${img}` : fallback;
   };
 
   const diamondType = (type) =>
@@ -716,8 +712,9 @@ const Checkout = () => {
                           </>
                         )}
 
-                        {item.productType === "jewelry" && (
+                        {item.productType === "gift" && (
                           <>
+                            
                             <strong>{item.name || "Jewelry Product"}</strong>
                             <small>Weight: {item.weight || "N/A"}g</small>
                             <small>
@@ -733,7 +730,6 @@ const Checkout = () => {
                         {item.productType === "combo" && (
                           <>
                             <strong> {item.ring?.name}</strong>
-
                             <small>
                               Engagement Ring with {item.diamond?.carat_weight}
                               ct {item.diamond?.shape?.name}{" "}
@@ -750,6 +746,7 @@ const Checkout = () => {
 
                         {item.productType === "build" && (
                           <>
+                            {/* engagement orderd */}
                             <strong>{item.name || "Custom Jewelry"}</strong>
                             <small>Metal Color: {item.metal_color.name}</small>
                             <small>Shape: {item.shape}</small>

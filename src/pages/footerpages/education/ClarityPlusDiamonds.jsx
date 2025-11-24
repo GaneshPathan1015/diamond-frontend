@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const ClarityPlusDiamonds = () => {
     const [hoveredBtn, setHoveredBtn] = useState(null);
@@ -140,14 +141,14 @@ const ClarityPlusDiamonds = () => {
                         gap: "32px",
                     }}
                 >
-                    <a
-                        href="#"
+                    <Link
+                        to="/diamond?menudiamond=lab-diamonds"
                         style={buttonStyle(hoveredBtn === 1)}
                         onMouseEnter={() => setHoveredBtn(1)}
                         onMouseLeave={() => setHoveredBtn(null)}
                     >
                         EXPERIENCE THE EXTRAORDINARY
-                    </a>
+                    </Link>
                 </div>
             </section>
 
@@ -278,7 +279,7 @@ const ClarityPlusDiamonds = () => {
                                     >
                                         {tabs[activeIndex].description}
                                     </p>
-                                    <button
+                                    <Link to="/diamond?menudiamond=lab-diamonds"
                                         style={{
                                             display: "inline-block",
                                             padding: "10px 25px",
@@ -288,6 +289,7 @@ const ClarityPlusDiamonds = () => {
                                             fontWeight: "600",
                                             cursor: "pointer",
                                             transition: "all 0.3s ease",
+                                            textDecoration:'none'
                                         }}
                                         onMouseOver={(e) => {
                                             e.target.style.background = "#0d2235";
@@ -299,7 +301,7 @@ const ClarityPlusDiamonds = () => {
                                         }}
                                     >
                                         SHOP NOW
-                                    </button>
+                                    </Link>
                                 </div>
 
                                 {/* Image Box */}
@@ -375,14 +377,14 @@ const ClarityPlusDiamonds = () => {
                             gap: "32px",
                         }}
                     >
-                        <a
-                            href="#"
+                        <Link
+                            to="/diamond?menudiamond=lab-diamonds"
                             style={buttonStyle(hoveredBtn === 2)}
                             onMouseEnter={() => setHoveredBtn(2)}
                             onMouseLeave={() => setHoveredBtn(null)}
                         >
                             EXPERIENCE THE EXTRAORDINARY
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </section>
@@ -409,8 +411,8 @@ const ClarityPlusDiamonds = () => {
                                     color: "#000",
                                     fontSize: "18px",
                                 }}>Explore our trio of exquisite diamond shapes, each a unique reflection of your love story.</p>
-                                <a
-                                    href="#"
+                                <Link
+                                    to="/diamond?menudiamond=lab-diamonds"
                                     style={buttonStyle1(hoveredBtn1 === 3)}
                                     onMouseEnter={() => setHoveredBtn1(3)}
                                     onMouseLeave={() => setHoveredBtn1(null)}
@@ -418,13 +420,13 @@ const ClarityPlusDiamonds = () => {
 
                                     DESIGN YOUR CLARITY PLUS™ RING
 
-                                </a>
+                                </Link>
 
                             </div>
                         </div>
                         <div className="col-md-2 text-center">
                             <div>
-                                <img src="/images/clarityplusdiamonds/11.webp" alt="" />
+                                <img src="/images/clarityplusdiamonds/11.webp" alt="" width="100%"/>
                                 <span style={{
                                     color: "#14344a",
                                     fontSize: "18px",
@@ -438,7 +440,7 @@ const ClarityPlusDiamonds = () => {
                         </div>
                         <div className="col-md-2 text-center">
                             <div>
-                                <img src="/images/clarityplusdiamonds/12.webp" alt="" />
+                                <img src="/images/clarityplusdiamonds/12.webp" alt="" width="100%"/>
                                 <span style={{
                                     color: "#14344a",
                                     fontSize: "18px",
@@ -452,7 +454,7 @@ const ClarityPlusDiamonds = () => {
                         </div>
                         <div className="col-md-2 text-center">
                             <div>
-                                <img src="/images/clarityplusdiamonds/13.webp" alt="" />
+                                <img src="/images/clarityplusdiamonds/13.webp" alt="" width="100%"/>
                                 <span style={{
                                     color: "#14344a",
                                     fontSize: "18px",
@@ -527,11 +529,11 @@ const ClarityPlusDiamonds = () => {
                                 alt="Easy Financing Options"
                                 className="radiance-feature-img mx-auto"
                             />
-                            <a className="text-decoration-none" href="/our-policies">
+                            <Link className="text-decoration-none" to="/our-policies">
                                 <p className="radiance-feature-text mt-2">
                                     EASY FINANCING OPTIONS
                                 </p>
-                            </a>
+                            </Link>
                         </div>
 
                         {/* Item 2 */}
@@ -541,11 +543,11 @@ const ClarityPlusDiamonds = () => {
                                 alt="Lifetime Warranty"
                                 className="radiance-feature-img mx-auto"
                             />
-                            <a className="text-decoration-none" href="/our-policies">
+                            <Link className="text-decoration-none" to="/our-policies">
                                 <p className="radiance-feature-text mt-2">
                                     LIFETIME WARRANTY
                                 </p>
-                            </a>
+                            </Link>
                         </div>
 
                         {/* Item 3 */}
@@ -555,11 +557,11 @@ const ClarityPlusDiamonds = () => {
                                 alt="Hassle Free Returns"
                                 className="radiance-feature-img mx-auto"
                             />
-                            <a className="text-decoration-none" href="/our-policies">
+                            <Link className="text-decoration-none" to="/our-policies">
                                 <p className="radiance-feature-text mt-2">
                                     HASSLE FREE RETURNS
                                 </p>
-                            </a>
+                            </Link>
                         </div>
 
                         {/* Item 4 */}
@@ -569,11 +571,11 @@ const ClarityPlusDiamonds = () => {
                                 alt="Free Resizing"
                                 className="radiance-feature-img mx-auto"
                             />
-                            <a className="text-decoration-none" href="/our-policies">
+                            <Link className="text-decoration-none" to="/our-policies">
                                 <p className="radiance-feature-text mt-2">
                                     FREE RESIZING
                                 </p>
-                            </a>
+                            </Link>
                         </div>
 
                         {/* Item 5 */}
@@ -583,11 +585,11 @@ const ClarityPlusDiamonds = () => {
                                 alt="Conflict Free Diamonds"
                                 className="radiance-feature-img mx-auto"
                             />
-                            <a className="text-decoration-none" href="/our-policies">
+                            <Link className="text-decoration-none" to="/our-policies">
                                 <p className="radiance-feature-text mt-2">
                                     CONFLICT FREE DIAMONDS
                                 </p>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>

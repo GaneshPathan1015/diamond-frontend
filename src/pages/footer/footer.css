@@ -15,7 +15,6 @@
       font-family: "Figtree", sans-serif;
   }
   
-
   .footer-link:hover {
       color: #ddd !important;
   }
@@ -80,7 +79,6 @@
       transition: all 0.3s ease;
   }
 
-
   .brand-logo {
       font-size: 1.5rem;
       font-weight: 300;
@@ -96,7 +94,7 @@
 
   .tagline-italic {
       font-style: italic;
-      font-family: 'Georgia', serif;
+      font-family: "Figtree", sans-serif;
   }
 
   .discount-text {

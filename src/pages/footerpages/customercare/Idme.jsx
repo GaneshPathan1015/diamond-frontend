@@ -186,7 +186,7 @@ const Idme = () => {
                         color: '#213245',
                         fontSize: '12px',
                         lineHeight: '14px',
-                    }}>Simply sign up for a verified ID.me account to get access to the With Clarity discount. You can also complete this step in your With Clarity cart.</p>
+                    }}>Simply sign up for a verified ID.me account to get access to the Caratcasa discount. You can also complete this step in your Caratcasa cart.</p>
 
                     <h6 style={{
                         color: '#000',
@@ -247,7 +247,7 @@ const Idme = () => {
 
                         <div className="col-lg-2 col-md-4 col-sm-4 mb-3">
                             <div className="reviews-link" style={{ borderRight: '1px solid #00000043' }}>
-                                <Link to="mailto:service@withclarity.com" style={{ textDecoration: 'none' }}>
+                                <Link to="mailto:service@TheCaratecasa.com" style={{ textDecoration: 'none' }}>
                                     <i className="fa-solid fa-envelope contact-icon" style={{ fontSize: '30px', fontFamily: 'FontAwesome', color: '#00000043' }}></i>
                                     <br />
                                     <span style={{ color: '#000' }}>Email</span>
