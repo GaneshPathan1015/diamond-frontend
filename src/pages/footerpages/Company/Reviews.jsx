@@ -36,6 +36,7 @@ const Reviews = () => {
     };
   }, [categoryType, page]);
 
+
   const logos = [
     {
       id: 1,
@@ -98,8 +99,21 @@ const Reviews = () => {
       image: "/images/reviews/15.png",
     },
   ];
+  const bestsellingProducts = products.map((item) => ({
+    id: item.id,
+    name: item.product_name,
+    image: item.images?.[0]
+      ? `${import.meta.env.VITE_BACKEND_URL}${item.images[0]}`
+      : `${
+          import.meta.env.VITE_BACKEND_URL
+        }/storage/variation_images/No_Image_Available.jpg`,
+    link:
+      item.productSlug && item.product_id
+        ? `/products/${item.productSlug}?product=${item.product_id}`
+        : "#",
+  }));
 
-  const bestsellingProducts = [
+  /*  const bestsellingProducts = [
     {
       id: 1,
       name: "The Windsor Ring",
@@ -136,7 +150,7 @@ const Reviews = () => {
       image: "/images/reviews/6.webp",
       link: "https://thecaratcasa.com/jewellary-details/259",
     },
-  ];
+  ]; */
 
   const contactMethods = [
     {
@@ -484,6 +498,7 @@ const Reviews = () => {
                   <Link
                     to={product.link}
                     className="text-decoration-none text-dark"
+                    data-discover="false"
                   >
                     <img
                       src={product.image}

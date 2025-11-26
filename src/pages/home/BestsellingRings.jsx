@@ -118,7 +118,7 @@ const BestsellingRings = () => {
             ))
           ) : ringData[activeTab]?.length > 0 ? (
             ringData[activeTab].map((item, index) => {
-              console.log("PRODUCT ITEM =>", item); // 👈 LOG HERE
+              // console.log("PRODUCT ITEM =>", item); // 👈 LOG HERE
 
               return (
                 <div key={index} className="ring-card">
