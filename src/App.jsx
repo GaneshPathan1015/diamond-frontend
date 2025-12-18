@@ -48,6 +48,7 @@ import GiftDetails from "./pages/giftDetails/giftDetails";
 import JewelryCollections from "./pages/highJewelry/JewelryCollections";
 import BookAppointment from "./pages/appointmentModal/BookAppointment";
 import EnquiryForm from "./pages/Enquiry/EnquiryForm";
+import PaymentSuccess from "./pages/payment/PaymentSuccess";
 
 // Footer pages
 import RadianceRewards from "./pages/footerpages/company/RadianceRewards";
@@ -127,6 +128,7 @@ export default function App() {
           />
 
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/payment/success" element={<PaymentSuccess />} />
           <Route path="/thankyou" element={<ThankYou />} />
           <Route path="/paymnet-failed" element={<PaymentFailed />} />
           <Route path="/order-details/:orderId" element={<OrderDetails />} />

@@ -201,6 +201,10 @@ const RingProductView = ({ diamond }) => {
     return acc;
   }, {});
 
+  const hasQuality = groupedByWeight[selectedWeight]?.variations?.some(
+    (v) => v.diamond_quality_id && v.diamond_quality_name
+  );
+
   // Keep weights in same order as filteredVariations by building ordered array
   const weightOptions = Object.values(groupedByWeight);
 
@@ -547,7 +551,7 @@ const RingProductView = ({ diamond }) => {
 
                 <div className="mb-4">
                   <span className="small fw-semibold d-block mb-3">
-                    TOTAL CARAT WEIGHT : {weight}
+                    Metal WEIGHT : {weight}
                   </span>
 
                   {/* new chanes */}
@@ -582,36 +586,40 @@ const RingProductView = ({ diamond }) => {
                   </div>
 
                   {/* ====== QUALITY BUTTONS (shown when a weight selected) ====== */}
-                  {selectedWeight && (
+                  {selectedWeight && hasQuality && (
                     <div className="mt-2">
                       <small className="text-muted">
                         Available qualities for {selectedWeight}:
                       </small>
                       <div className="d-flex flex-wrap gap-2 mt-1">
-                        {(
-                          groupedByWeight[selectedWeight]?.variations || []
-                        ).map((v) => (
-                          <button
-                            key={v.id}
-                            className={`btn border quality-btn px-3 py-2 ${
-                              selectedQualityId === v.diamond_quality_id
-                                ? "active"
-                                : ""
-                            }`}
-                            onClick={() => {
-                              setSelectedQualityId(v.diamond_quality_id);
-                              const globalIndex = filteredVariations.findIndex(
-                                (fv) => fv.id === v.id
-                              );
-                              setSelectedVariationIndex(
-                                globalIndex >= 0 ? globalIndex : 0
-                              );
-                              setMainImage(getImageUrl(v.images?.[0]));
-                            }}
-                          >
-                            Quality {v.diamond_quality_id}
-                          </button>
-                        ))}
+                        {(groupedByWeight[selectedWeight]?.variations || [])
+                          .filter(
+                            (v) =>
+                              v.diamond_quality_id && v.diamond_quality_name
+                          )
+                          .map((v) => (
+                            <button
+                              key={v.id}
+                              className={`btn border quality-btn px-3 py-2 ${
+                                selectedQualityId === v.diamond_quality_id
+                                  ? "active"
+                                  : ""
+                              }`}
+                              onClick={() => {
+                                setSelectedQualityId(v.diamond_quality_id);
+                                const globalIndex =
+                                  filteredVariations.findIndex(
+                                    (fv) => fv.id === v.id
+                                  );
+                                setSelectedVariationIndex(
+                                  globalIndex >= 0 ? globalIndex : 0
+                                );
+                                setMainImage(getImageUrl(v.images?.[0]));
+                              }}
+                            >
+                              Quality {v.diamond_quality_id}
+                            </button>
+                          ))}
                       </div>
                     </div>
                   )}
@@ -1038,7 +1046,7 @@ const RingProductView = ({ diamond }) => {
 
             <div className="mb-4">
               <span className="small fw-semibold d-block mb-3">
-                TOTAL CARAT WEIGHT : {weight}
+                Metal WEIGHT : {weight}
               </span>
 
               {/* new chanes */}
@@ -1073,14 +1081,17 @@ const RingProductView = ({ diamond }) => {
               </div>
 
               {/* ====== QUALITY BUTTONS (shown when a weight selected) ====== */}
-              {selectedWeight && (
+              {selectedWeight && hasQuality && (
                 <div className="mt-2">
                   <small className="text-muted">
                     Available qualities for {selectedWeight}:
                   </small>
                   <div className="d-flex flex-wrap gap-2 mt-1">
-                    {(groupedByWeight[selectedWeight]?.variations || []).map(
-                      (v) => (
+                    {(groupedByWeight[selectedWeight]?.variations || [])
+                      .filter(
+                        (v) => v.diamond_quality_id && v.diamond_quality_name
+                      )
+                      .map((v) => (
                         <button
                           key={v.id}
                           className={`btn border quality-btn px-3 py-2 ${
@@ -1101,8 +1112,7 @@ const RingProductView = ({ diamond }) => {
                         >
                           {v.diamond_quality_name}
                         </button>
-                      )
-                    )}
+                      ))}
                   </div>
                 </div>
               )}

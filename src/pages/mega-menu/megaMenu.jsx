@@ -50,27 +50,55 @@ const MegaMenu = ({ type = "engagement", closeMegaMenu = () => {} }) => {
     const rawName = collection.name || "";
     const normalizedName = rawName.trim().toLowerCase();
 
-    // Define exact static collection routes
-    const staticCollectionRoutes = {
-      luxe: "/luxe",
-      "the reserve": "/reserve",
-      "w signature": "/signature",
+    // Match DB name → slug
+    const collectionSlugMap = {
+      luxe: "luxe-collection-engagement-rings-and-wedding-bands",
+      "the reserve": "the-reserve-collection",
+      "w signature": "the-w-signature-solitaire-engagement-rings",
     };
 
-    // Check for static route
-    if (staticCollectionRoutes[normalizedName]) {
+    if (collectionSlugMap[normalizedName]) {
       closeMegaMenu();
-      navigate(staticCollectionRoutes[normalizedName]);
-    } else {
-      // Fallback: dynamic logic
-      const slug = `${slugify(rawName)}-${collection.id}`;
-      const params = new URLSearchParams();
-      params.set("menucollection", slug);
-
-      closeMegaMenu();
-      navigate(`/jewelry-list?${params.toString()}`);
+      navigate(`/page/${collectionSlugMap[normalizedName]}`);
+      return;
     }
+
+    // Default fallback for other collections
+    const slug = `${slugify(rawName)}-${collection.id}`;
+    const params = new URLSearchParams();
+    params.set("menucollection", slug);
+
+    closeMegaMenu();
+    navigate(`/jewelry-list?${params.toString()}`);
   };
+
+  // const handleCollectionClick = (collection) => {
+  //   const rawName = collection.name || "";
+  //   const normalizedName = rawName.trim().toLowerCase();
+
+  //   // Define exact static collection routes
+  //   const staticCollectionRoutes = {
+  //     luxe: "luxe-collection-engagement-rings-and-wedding-bands",
+  //     reserve: "the-reserve-collection",
+  //     "w signature": "the-w-signature-solitaire-engagement-rings",
+  //   };
+
+  //   // Check for static route
+  //   if (staticCollectionRoutes[normalizedName]) {
+  //     closeMegaMenu();
+  //     // navigate(staticCollectionRoutes[normalizedName]);
+  //     navigate(`/page/${collectionSlugMap[normalizedName]}`);
+  //     return;
+  //   } else {
+  //     // Fallback: dynamic logic
+  //     const slug = `${slugify(rawName)}-${collection.id}`;
+  //     const params = new URLSearchParams();
+  //     params.set("menucollection", slug);
+
+  //     closeMegaMenu();
+  //     navigate(`/jewelry-list?${params.toString()}`);
+  //   }
+  // };
 
   const handleStartEngagement = (startType) => {
     closeMegaMenu();
@@ -188,10 +216,7 @@ const MegaMenu = ({ type = "engagement", closeMegaMenu = () => {} }) => {
       )}
 
       {type === "highJewelry" && (
-        <HighJewelryMenu
-          closeMegaMenu={closeMegaMenu}
-          navigate={navigate}
-        />
+        <HighJewelryMenu closeMegaMenu={closeMegaMenu} navigate={navigate} />
       )}
 
       {type === "jewelry" && (

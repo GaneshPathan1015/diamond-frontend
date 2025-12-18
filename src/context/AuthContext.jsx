@@ -56,7 +56,7 @@ export function AuthProvider({ children }) {
     delete axiosClient.defaults.headers.common["Authorization"];
     setUser(null);
   };
-
+  
   const value = {
     user,
     loading,

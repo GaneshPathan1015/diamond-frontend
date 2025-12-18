@@ -74,30 +74,6 @@ export const CartProvider = ({ children }) => {
   };
 
   // Calculate subtotal
-  // const getSubTotal = () => {
-  //   return cartItems.reduce((total, item) => {
-  //     switch (item.productType) {
-  //       case "diamond":
-  //         return total + item.price * item.itemQuantity;
-  //       case "combo":
-  //         const comboPrice =
-  //           Number(item.ring.price) + Number(item.diamond.price);
-  //         return total + comboPrice * item.itemQuantity;
-  //       case "jewelry":
-  //       case "gift": {
-  //         const price = parseFloat(item.price) || 0;
-  //         const planPrice = parseFloat(item.selectedPlan?.price) || 0;
-  //         return total + (price + planPrice) * quantity;
-  //       }
-  //       case "build": // mean order like size
-  //         const buildPrice = Number(item.price) || 0;
-  //         return total + buildPrice * item.itemQuantity;
-  //       default:
-  //         return total;
-  //     }
-  //   }, 0);
-  // };
-
   const getSubTotal = () => {
     return cartItems.reduce((total, item) => {
       const quantity = parseInt(item.itemQuantity) || 0;

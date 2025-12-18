@@ -22,7 +22,7 @@ const PageRouter = () => {
     return <Signature />;
   }
 
-  // 🔹 Fallback
+  //  Fallback
   return <PageNotFound />;
 };
 

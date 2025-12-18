@@ -117,9 +117,6 @@ const GiftDetails = () => {
     (v) => v.weight === selectedVariation.weight
   );
 
-  // const uniqueQualities = Array.from(
-  //   new Set(variationsForSelectedWeight.map((v) => v.diamond_quality_id))
-  // );
   const uniqueQualities = Array.from(
     new Map(
       variationsForSelectedWeight.map((v) => [
@@ -131,6 +128,10 @@ const GiftDetails = () => {
       ])
     ).values()
   );
+
+  const cleanedQualities = uniqueQualities.filter((q) => q.id && q.name);
+
+  const hasQuality = cleanedQualities.length > 0;
 
   const currentMedia = selectedVariation
     ? [
@@ -378,7 +379,7 @@ const GiftDetails = () => {
               {/* CARAT */}
               <div className="mb-4">
                 <span className="small fw-semibold d-block mb-3">
-                  TOTAL CARAT WEIGHT: {weight}
+                  METAL WEIGHT: {weight}
                 </span>
 
                 <div className="d-flex gap-2 flex-wrap">
@@ -414,7 +415,30 @@ const GiftDetails = () => {
               </div>
 
               {/* QUALITY */}
-              <div className="mb-4">
+
+              {hasQuality && (
+                <div className="mb-4">
+                  <span className="small fw-semibold d-block mb-3">
+                    DIAMOND QUALITY
+                  </span>
+
+                  <div className="d-flex gap-2">
+                    {cleanedQualities.map((q) => (
+                      <button
+                        key={q.id}
+                        onClick={() => handleQualityChange(q.id)}
+                        className={`btn border quality-btn px-4 py-2 ${
+                          selectedQuality == q.id ? "active" : ""
+                        }`}
+                      >
+                        {q.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {/* QUALITY */}
+              {/* <div className="mb-4">
                 <span className="small fw-semibold d-block mb-3">
                   DIAMOND QUALITY
                 </span>
@@ -432,7 +456,7 @@ const GiftDetails = () => {
                     </button>
                   ))}
                 </div>
-              </div>
+              </div> */}
 
               {/* ADD TO CART */}
               <button
@@ -740,7 +764,7 @@ const GiftDetails = () => {
 
           <div className="mb-4">
             <span className="small fw-semibold d-block mb-3">
-              TOTAL CARAT WEIGHT : {weight}
+              METAL WEIGHT : {weight}
             </span>
             <div className="d-flex flex-wrap gap-2">
               {/* {(product.metal_variations?.[selectedMetalId] || []).map(
@@ -787,7 +811,30 @@ const GiftDetails = () => {
             </div>
           </div>
 
-          <div className="mb-4">
+          {/* QUALITY */}
+          {hasQuality && (
+            <div className="mb-4">
+              <span className="small fw-semibold d-block mb-3">
+                DIAMOND QUALITY
+              </span>
+
+              <div className="d-flex gap-2">
+                {cleanedQualities.map((q) => (
+                  <button
+                    key={q.id}
+                    onClick={() => handleQualityChange(q.id)}
+                    className={`btn border quality-btn px-4 py-2 ${
+                      selectedQuality == q.id ? "active" : ""
+                    }`}
+                  >
+                    {q.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+         {/*  <div className="mb-4">
             <div className="d-flex align-items-center gap-2 mb-3">
               <span className="small fw-semibold">DIAMOND QUALITY:</span>
             </div>
@@ -804,7 +851,7 @@ const GiftDetails = () => {
                 </button>
               ))}
             </div>
-          </div>
+          </div> */}
 
           <p className="small mb-2">
             Ships by <strong>{formattedDate}</strong> | Track in real time

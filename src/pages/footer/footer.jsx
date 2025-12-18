@@ -37,8 +37,8 @@ const Footer = () => {
   const shopLinks = [
     { label: "Diamonds", to: "/diamond" },
     { label: "Engagement rings", to: "/engagement-rings" },
-    { label: "Bands for him", to: "/mens-wedding-rings" },
-    { label: "Bands for her", to: "/womens-wedding-rings" },
+    { label: "Bands for him", to: "/wedding/mens-wedding-rings" },
+    { label: "Bands for her", to: "/wedding/womens-wedding-rings" },
     { label: "Home preview", to: "/home-preview" },
     {
       label: "Gemstone rings",
